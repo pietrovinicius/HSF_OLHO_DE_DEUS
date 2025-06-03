@@ -210,7 +210,7 @@ def enviar_whatsapp(lista_exames):
                     current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
                     time.sleep(0.5)
 
-                    textinho2 = '*Valores críticos encontrados:*'
+                    textinho2 = '*Analista Plantonista confirmar ciência do(s) resultado(s) crítico(s) encontrado(s):*'
                     current_chat_box.send_keys(textinho2)
                     time.sleep(0.5)
                     current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
@@ -301,7 +301,7 @@ class AppGUI:
         master.resizable(False, False) # Impede que o usuário redimensione a janela
 
         self.label = tk.Label(master, text="Clique para começar...")
-        self.label.pack(pady=10)
+        self.label.pack(pady=100)
 
         self.start_button = tk.Button(master, text="LAB - Valores Críticos", command=self.iniciar_processo)
         self.start_button.pack(pady=10)

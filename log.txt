@@ -1596,3 +1596,163 @@ Stacktrace:
 2025-06-03 16-18-53 -  driver.quit() - Navegador fechado.
 2025-06-03 16-18-53 - enviar_whatsapp - FIM
 2025-06-03 16-18-53 - MAIN - FIM
+2025-06-03 16-24-20 - MAIN - INICIO
+2025-06-03 16-24-20 - def __init__ GUI - INICIO
+2025-06-03 16-24-20 - def __init__ GUI - FIM
+2025-06-03 16-24-24 - MAIN - FIM
+2025-06-03 16-24-32 - MAIN - INICIO
+2025-06-03 16-24-32 - def __init__ GUI - INICIO
+2025-06-03 16-24-32 - def __init__ GUI - FIM
+2025-06-03 16-24-52 - MAIN - INICIO
+2025-06-03 16-24-52 - def __init__ GUI - INICIO
+2025-06-03 16-24-52 - def __init__ GUI - FIM
+2025-06-03 16-24-56 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 16-24-56 - MAIN - INÍCIO
+2025-06-03 16-24-56 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 16-24-56 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 16-24-56 - encontrar_diretorio_instantclient - FIM
+2025-06-03 16-24-56 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 16-25-42 - Query executada. 0 linhas retornadas.
+2025-06-03 16-25-42 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 16-25-42 - enviar_whatsapp - INÍCIO
+2025-06-03 16-25-42 - Nenhum exame crítico para enviar via WhatsApp.
+2025-06-03 16-25-42 - enviar_whatsapp - FIM
+2025-06-03 16-25-42 - MAIN - FIM
+2025-06-03 16-26-23 - MAIN - INICIO
+2025-06-03 16-26-24 - def __init__ GUI - INICIO
+2025-06-03 16-26-24 - def __init__ GUI - FIM
+2025-06-03 16-26-24 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 16-26-25 - MAIN - INÍCIO
+2025-06-03 16-26-25 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 16-26-25 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 16-26-25 - encontrar_diretorio_instantclient - FIM
+2025-06-03 16-26-25 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 16-26-52 - Query executada. 1 linhas retornadas.
+2025-06-03 16-26-52 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 16-26-52 - enviar_whatsapp - INÍCIO
+2025-06-03 16-26-55 - driver.get("https://web.whatsapp.com")
+2025-06-03 16-26-56 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-03 16-27-00 - Campo de pesquisa encontrado e clicável.
+2025-06-03 16-27-00 - Clicado no campo de pesquisa.
+2025-06-03 16-27-00 - Campo de input de pesquisa ativo encontrado.
+2025-06-03 16-27-01 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-03 16-27-01 - time.sleep(0.5)
+2025-06-03 16-27-01 - time.sleep(0.5)
+2025-06-03 16-27-02 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-03 16-27-02 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-03 16-27-02 - time.sleep(0.5)
+2025-06-03 16-27-02 - Localizando a caixa de texto do chat...
+2025-06-03 16-27-02 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-03 16-27-02 - Cabeçalho da mensagem enviado.
+2025-06-03 16-27-03 - Separador entre exames enviado.
+2025-06-03 16-27-03 - data_hora_formatada: *03/06/2025 às 16h27m*
+2025-06-03 16-27-03 - textinho: *03/06/2025 às 16h27m*
+2025-06-03 16-27-06 - Linha enviada: *Prescrição: 5977032*
+2025-06-03 16-27-07 - Linha enviada: Paciente: M S C
+2025-06-03 16-27-08 - Linha enviada: Ex: TROPONINA I
+2025-06-03 16-27-09 - Linha enviada: Resultado: 36,45
+2025-06-03 16-27-11 - Linha enviada: Col: 13:25
+2025-06-03 16-27-12 - Linha enviada: Dig: 14:25
+2025-06-03 16-27-13 - Linha enviada: Apr: 14:47
+2025-06-03 16-27-14 - time.sleep(0.5)
+2025-06-03 16-27-14 - Localiza e clica no botão de enviar
+2025-06-03 16-27-15 - time.sleep(0.5)
+2025-06-03 16-27-15 - botao_enviar_element.click()
+2025-06-03 16-27-15 - Processo de envio de mensagens concluído.
+2025-06-03 16-27-15 - time.sleep(60)
+2025-06-03 16-30-29 - MAIN - INICIO
+2025-06-03 16-30-29 - def __init__ GUI - INICIO
+2025-06-03 16-30-29 - def __init__ GUI - FIM
+2025-06-03 16-30-31 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 16-30-31 - MAIN - INÍCIO
+2025-06-03 16-30-31 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 16-30-31 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 16-30-31 - encontrar_diretorio_instantclient - FIM
+2025-06-03 16-30-31 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 16-30-57 - Query executada. 2 linhas retornadas.
+2025-06-03 16-30-57 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 16-30-57 - enviar_whatsapp - INÍCIO
+2025-06-03 16-31-00 - driver.get("https://web.whatsapp.com")
+2025-06-03 16-31-01 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-03 16-31-05 - Campo de pesquisa encontrado e clicável.
+2025-06-03 16-31-05 - Clicado no campo de pesquisa.
+2025-06-03 16-31-05 - Campo de input de pesquisa ativo encontrado.
+2025-06-03 16-31-06 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-03 16-31-06 - time.sleep(0.5)
+2025-06-03 16-31-06 - time.sleep(0.5)
+2025-06-03 16-31-07 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-03 16-31-07 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-03 16-31-07 - time.sleep(0.5)
+2025-06-03 16-31-08 - Localizando a caixa de texto do chat...
+2025-06-03 16-31-08 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-03 16-31-08 - Cabeçalho da mensagem enviado.
+2025-06-03 16-31-08 - Separador entre exames enviado.
+2025-06-03 16-31-08 - data_hora_formatada: *03/06/2025 às 16h31m*
+2025-06-03 16-31-08 - textinho: *03/06/2025 às 16h31m*
+2025-06-03 16-31-11 - Linha enviada: *Prescrição: 5977032*
+2025-06-03 16-31-13 - Linha enviada: Paciente: M S C
+2025-06-03 16-31-14 - Linha enviada: Ex: TROPONINA I
+2025-06-03 16-31-15 - Linha enviada: Resultado: 36,45
+2025-06-03 16-31-16 - Linha enviada: Col: 13:25
+2025-06-03 16-31-17 - Linha enviada: Dig: 14:25
+2025-06-03 16-31-18 - Linha enviada: Apr: 14:47
+2025-06-03 16-31-19 - Envia uma "mensagem em branco" como separador
+2025-06-03 16-31-19 - time.sleep(0.5)
+2025-06-03 16-31-20 - Linha enviada: *Prescrição: 5977133*
+2025-06-03 16-31-21 - Linha enviada: Paciente: M B F
+2025-06-03 16-31-22 - Linha enviada: Ex: CÁLCIO 
+2025-06-03 16-31-23 - Linha enviada: Resultado: 0
+2025-06-03 16-31-24 - Linha enviada: Col: 14:46
+2025-06-03 16-31-26 - Linha enviada: Dig: 15:27
+2025-06-03 16-31-27 - Linha enviada: Apr:  - 
+2025-06-03 16-31-28 - time.sleep(0.5)
+2025-06-03 16-31-28 - Localiza e clica no botão de enviar
+2025-06-03 16-31-29 - time.sleep(0.5)
+2025-06-03 16-31-29 - botao_enviar_element.click()
+2025-06-03 16-31-29 - Processo de envio de mensagens concluído.
+2025-06-03 16-31-29 - time.sleep(60)
+2025-06-03 16-34-42 - MAIN - INICIO
+2025-06-03 16-34-42 - def __init__ GUI - INICIO
+2025-06-03 16-34-42 - def __init__ GUI - FIM
+2025-06-03 16-34-44 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 16-34-45 - MAIN - INÍCIO
+2025-06-03 16-34-45 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 16-34-45 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 16-34-45 - encontrar_diretorio_instantclient - FIM
+2025-06-03 16-34-45 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 16-35-17 - Query executada. 1 linhas retornadas.
+2025-06-03 16-35-17 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 16-35-17 - enviar_whatsapp - INÍCIO
+2025-06-03 16-35-21 - driver.get("https://web.whatsapp.com")
+2025-06-03 16-35-22 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-03 16-35-26 - Campo de pesquisa encontrado e clicável.
+2025-06-03 16-35-26 - Clicado no campo de pesquisa.
+2025-06-03 16-35-26 - Campo de input de pesquisa ativo encontrado.
+2025-06-03 16-35-27 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-03 16-35-27 - time.sleep(0.5)
+2025-06-03 16-35-27 - time.sleep(0.5)
+2025-06-03 16-35-28 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-03 16-35-28 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-03 16-35-28 - time.sleep(0.5)
+2025-06-03 16-35-28 - Localizando a caixa de texto do chat...
+2025-06-03 16-35-28 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-03 16-35-28 - Cabeçalho da mensagem enviado.
+2025-06-03 16-35-29 - Separador entre exames enviado.
+2025-06-03 16-35-29 - data_hora_formatada: *03/06/2025 às 16h35m*
+2025-06-03 16-35-29 - textinho: *03/06/2025 às 16h35m*
+2025-06-03 16-35-32 - Linha enviada: *Prescrição: 5977032*
+2025-06-03 16-35-33 - Linha enviada: Paciente: M S C
+2025-06-03 16-35-34 - Linha enviada: Ex: TROPONINA I
+2025-06-03 16-35-36 - Linha enviada: Resultado: 36,45
+2025-06-03 16-35-37 - Linha enviada: Col: 13:25
+2025-06-03 16-35-38 - Linha enviada: Dig: 14:25
+2025-06-03 16-35-39 - Linha enviada: Apr: 14:47
+2025-06-03 16-35-40 - time.sleep(0.5)
+2025-06-03 16-35-40 - Localiza e clica no botão de enviar
+2025-06-03 16-35-41 - time.sleep(0.5)
+2025-06-03 16-35-41 - botao_enviar_element.click()
+2025-06-03 16-35-42 - Processo de envio de mensagens concluído.
+2025-06-03 16-35-42 - time.sleep(60)
+2025-06-03 16-36-44 -  driver.quit() - Navegador fechado.
+2025-06-03 16-36-44 - enviar_whatsapp - FIM
+2025-06-03 16-36-44 - MAIN - FIM
