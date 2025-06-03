@@ -1,0 +1,82 @@
+2025-06-03 11-06-03 - MAIN - INICIO
+2025-06-03 11-06-03 - def __init__ - INICIO
+2025-06-03 11-06-03 - def __init__ - FIM
+2025-06-03 11-06-06 - MAIN - FIM
+2025-06-03 11-06-21 - MAIN - INICIO
+2025-06-03 11-06-21 - def __init__ - INICIO
+2025-06-03 11-06-21 - def __init__ - FIM
+2025-06-03 11-06-27 - MAIN - FIM
+2025-06-03 11-07-47 - MAIN - INICIO
+2025-06-03 11-07-47 - def __init__ GUI - INICIO
+2025-06-03 11-07-47 - def __init__ GUI - FIM
+2025-06-03 11-07-49 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 11-07-49 - MAIN - INÍCIO
+2025-06-03 11-07-49 - time.sleep(5)
+2025-06-03 11-07-54 - MAIN - FIM
+2025-06-03 11-08-26 - MAIN - FIM
+2025-06-03 11-09-02 - MAIN - INICIO
+2025-06-03 11-09-02 - def __init__ GUI - INICIO
+2025-06-03 11-09-02 - def __init__ GUI - FIM
+2025-06-03 11-09-22 - MAIN - FIM
+2025-06-03 11-09-53 - MAIN - INICIO
+2025-06-03 11-09-53 - def __init__ GUI - INICIO
+2025-06-03 11-09-53 - def __init__ GUI - FIM
+2025-06-03 11-10-02 - MAIN - FIM
+2025-06-03 11-10-21 - MAIN - INICIO
+2025-06-03 11-10-21 - def __init__ GUI - INICIO
+2025-06-03 11-10-21 - def __init__ GUI - FIM
+2025-06-03 11-10-23 - MAIN - FIM
+2025-06-03 11-10-44 - MAIN - INICIO
+2025-06-03 11-10-44 - def __init__ GUI - INICIO
+2025-06-03 11-10-44 - def __init__ GUI - FIM
+2025-06-03 11-10-46 - MAIN - FIM
+2025-06-03 11-23-09 - MAIN - INICIO
+2025-06-03 11-23-09 - def __init__ GUI - INICIO
+2025-06-03 11-23-09 - def __init__ GUI - FIM
+2025-06-03 11-23-11 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 11-23-11 - MAIN - INÍCIO
+2025-06-03 11-23-11 - time.sleep(5)
+2025-06-03 11-23-16 - MAIN - FIM
+2025-06-03 11-23-38 - MAIN - FIM
+2025-06-03 11-23-41 - MAIN - INICIO
+2025-06-03 11-23-41 - def __init__ GUI - INICIO
+2025-06-03 11-23-41 - def __init__ GUI - FIM
+2025-06-03 11-23-42 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 11-23-42 - MAIN - INÍCIO
+2025-06-03 11-23-42 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 11-23-42 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 11-23-42 - encontrar_diretorio_instantclient - FIM
+2025-06-03 11-23-42 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 11-24-25 - Query executada. 0 linhas retornadas.
+2025-06-03 11-24-25 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 11-24-25 - time.sleep(5)
+2025-06-03 11-24-30 - MAIN - FIM
+2025-06-03 11-25-23 - MAIN - FIM
+2025-06-03 11-27-56 - MAIN - INICIO
+2025-06-03 11-27-56 - def __init__ GUI - INICIO
+2025-06-03 11-27-56 - def __init__ GUI - FIM
+2025-06-03 11-28-01 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 11-28-01 - MAIN - INÍCIO
+2025-06-03 11-28-01 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 11-28-01 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 11-28-01 - encontrar_diretorio_instantclient - FIM
+2025-06-03 11-28-01 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 11-28-24 - Query executada. 27 linhas retornadas.
+2025-06-03 11-28-24 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 11-28-24 - time.sleep(5)
+2025-06-03 11-28-29 - MAIN - FIM
+2025-06-03 11-40-04 - MAIN - FIM
+2025-06-03 11-40-09 - MAIN - INICIO
+2025-06-03 11-40-09 - def __init__ GUI - INICIO
+2025-06-03 11-40-09 - def __init__ GUI - FIM
+2025-06-03 11-40-10 - iniciar_processo - Botão Iniciar clicado
+2025-06-03 11-40-10 - MAIN - INÍCIO
+2025-06-03 11-40-10 - resultados_exames_intervalo_5_min - INICIO
+2025-06-03 11-40-10 - encontrar_diretorio_instantclient - Inicio
+2025-06-03 11-40-10 - encontrar_diretorio_instantclient - FIM
+2025-06-03 11-40-11 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-03 11-40-54 - Query executada. 19 linhas retornadas.
+2025-06-03 11-40-54 - resultados_exames_intervalo_5_min - FIM
+2025-06-03 11-40-54 - time.sleep(5)
+2025-06-03 11-40-59 - MAIN - FIM
+2025-06-03 11-42-29 - MAIN - FIM
