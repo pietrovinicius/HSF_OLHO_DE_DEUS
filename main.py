@@ -15,6 +15,15 @@ from datetime import datetime
 import tkinter as tk
 from multiprocessing import Process
 import oracledb
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options # Para configurar opções do navegador
+from webdriver_manager.chrome import ChromeDriverManager # Para gerenciar o ChromeDriver
+# Imports para WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 def agora():
     agora = datetime.now()
@@ -48,7 +57,6 @@ def encontrar_diretorio_instantclient(nome_pasta="instantclient-basiclite-window
     registrar_log(f'encontrar_diretorio_instantclient - FIM')
     return None
   
-
 def resultados_exames_intervalo_5_min():
     try:
         registrar_log(f'resultados_exames_intervalo_5_min - INICIO')
@@ -80,28 +88,206 @@ def resultados_exames_intervalo_5_min():
                 resultados = cursor.fetchall()
                 registrar_log(f"Query executada. {len(resultados)} linhas retornadas.")
 
-                # Exibir resultados no console
-                for row in resultados:
-                    print(row) # Imprime cada linha retornada pela query
+                # Resultados são retornados para serem usados pela função de WhatsApp
+                # for row in resultados: print(row)
 
         registrar_log(f'resultados_exames_intervalo_5_min - FIM')
+        return resultados # Retorna a lista de resultados
 
     except oracledb.Error as erro:
         registrar_log(f"resultados_exames_intervalo_5_min - Erro no Oracle DB: {erro}")
+        return None # Retorna None em caso de erro
     except Exception as erro: # Captura outros erros que não sejam do DB
         registrar_log(f"resultados_exames_intervalo_5_min - Erro geral: {erro}")
+        return None # Retorna None em caso de erro
+
+def enviar_whatsapp(lista_exames):
+    """Abre o WhatsApp Web usando Selenium com perfil de usuário."""
+    registrar_log("enviar_whatsapp - INÍCIO")
+    if not lista_exames:
+        registrar_log("Nenhum exame crítico para enviar via WhatsApp.")
+        registrar_log("enviar_whatsapp - FIM")
+        return
+    
+    driver = None # Inicializa driver como None
+
+    try:        
+        # Configurações do Chrome
+        options = Options()
+        # Manter o navegador aberto após a execução do script (útil para depuração)
+        # options.add_experimental_option("detach", True)
+
+        # Configurar o perfil de usuário para manter o login
+        # O diretório "profile/wpp" será criado na pasta do seu projeto
+        dir_path = os.path.dirname(os.path.abspath(__file__))
+        profile_path = os.path.join(dir_path, "profile", "wpp")
+        options.add_argument(f"user-data-dir={profile_path}")
+
+        # Inicializa o driver usando ChromeDriverManager
+        # Isso baixa e gerencia o chromedriver automaticamente
+        service = ChromeService(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
+
+        registrar_log('driver.get("https://web.whatsapp.com")')
+        driver.get("https://web.whatsapp.com")
+
+        registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
+
+        # Espera explícita para o campo de pesquisa (ou o contêiner dele)
+        # O XPath fornecido parece ser para o placeholder do campo de pesquisa
+        xpath_campo_pesquisa = '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p'
+        # Um XPath mais robusto para o input de pesquisa pode ser: //div[@id='side']//div[@contenteditable='true'][@role='textbox']
+        # Por enquanto, usaremos o XPath fornecido.
+        
+        try:
+            wait = WebDriverWait(driver, 30) # Espera até 30 segundos
+            campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_campo_pesquisa)))
+            registrar_log("Campo de pesquisa encontrado e clicável.")
+            campo_pesquisa_element.click()
+            registrar_log("Clicado no campo de pesquisa.")
+
+            # Após clicar, o campo de pesquisa (ou um novo input) estará ativo.
+            # Localiza o campo de input de texto ativo para a pesquisa.
+            # Este XPath é comum para o campo de texto de pesquisa do WhatsApp Web.
+            xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
+            input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
+            registrar_log("Campo de input de pesquisa ativo encontrado.")
+            
+            nome_grupo = "LAB - VALORES CRÍTICOS"
+            input_pesquisa_ativo.send_keys(nome_grupo)
+            registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
+            registrar_log("time.sleep(0.5)")
+            time.sleep(0.5) 
+
+            # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
+            xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
+            registrar_log("time.sleep(0.5)")
+            time.sleep(0.5) 
+
+            resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
+            registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
+            resultado_grupo_element.click()
+            registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
+            registrar_log("time.sleep(0.5)")
+            time.sleep(0.5)
+
+            # Agora que a conversa está aberta, localize a caixa de texto do chat.
+            registrar_log('Localizando a caixa de texto do chat...')
+            # Usamos WebDriverWait para esperar que a caixa de texto esteja presente e clicável.
+            xpath_chat_caixa_de_texto = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p'
+            
+            try:
+                chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
+                registrar_log('Caixa de texto inicial localizada e clicável com sucesso!')
+                
+                # Opcional: Clicar na caixa de texto para garantir o foco (geralmente não é estritamente necessário para send_keys)
+                # chat_caixa_de_texto_element.click()
+                # registrar_log('Clicado na caixa de texto.')
+                
+                # Re-localiza a caixa de texto antes de cada envio principal
+                def get_chat_box():
+                    return wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
+
+                # Envia cada detalhe de cada exame como uma mensagem separada
+                if lista_exames:
+                    # Envia um cabeçalho inicial
+                    chat_caixa_de_texto_element.send_keys(" ")
+                    chat_caixa_de_texto_element.send_keys(Keys.ENTER)
+                    registrar_log("Cabeçalho da mensagem enviado.")
+                    time.sleep(0.5) # Pequena pausa
+
+                    registrar_log("Separador entre exames enviado.")
+                    current_chat_box = get_chat_box()
+
+                    agora_atual = datetime.now()
+                    data_hora_formatada = '*' + agora_atual.strftime("%d/%m/%Y às %Hh%Mm") + '*'
+                    registrar_log(f'data_hora_formatada: {data_hora_formatada}')
+
+                    textinho = f'{data_hora_formatada}'
+                    registrar_log(f'textinho: {textinho}')
+                    current_chat_box.send_keys(textinho)
+                    time.sleep(0.5)
+                    current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                    time.sleep(0.5)
+
+                    textinho2 = '*Valores críticos encontrados:*'
+                    current_chat_box.send_keys(textinho2)
+                    time.sleep(0.5)
+                    current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                    time.sleep(0.5)
+
+                    current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                    time.sleep(0.5)
+
+                    for i, exame in enumerate(lista_exames):
+                        if i > 0: # Adiciona uma linha em branco (enviando um Enter) entre exames
+                            registrar_log('Envia uma "mensagem em branco" como separador')
+                            #get_chat_box().send_keys(Keys.ENTER) 
+                            current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+
+                            registrar_log('time.sleep(0.5)')
+                            time.sleep(0.5) # Pequena pausa
+
+                        for item_exame in exame: # item_exame é uma string como 'PRESCRICAO: 5977045'
+                            if item_exame.strip(): # Garante que não estamos enviando strings vazias
+                                current_chat_box = get_chat_box()
+                                current_chat_box.send_keys(item_exame)
+                                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                                registrar_log(f"Linha enviada: {item_exame}")
+                                time.sleep(1) # Pequena pausa para não sobrecarregar
+                    
+                else:
+                    get_chat_box().send_keys("Nenhum exame crítico encontrado para reportar.")
+                    get_chat_box().send_keys(Keys.ENTER)
+                    registrar_log("Mensagem de 'nenhum exame' enviada.")
+                
+                registrar_log('time.sleep(0.5)')
+                time.sleep(0.5)
+
+                registrar_log('Localiza e clica no botão de enviar')
+                time.sleep(0.5)
+                # Localiza e clica no botão de enviar
+                xpath_botao_enviar = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[2]/button/span'
+                botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
+                
+                # Comentado pois cada linha é enviada com Keys.ENTER
+                # Se Keys.ENTER não funcionar para a última linha ou em geral, descomente.
+                registrar_log('time.sleep(0.5)')
+                time.sleep(0.5)
+
+                registrar_log('botao_enviar_element.click()')
+                botao_enviar_element.click()
+                # registrar_log("Botão de enviar clicado. Mensagem enviada.")
+                registrar_log("Processo de envio de mensagens concluído.")
+            except Exception as e_chatbox:
+                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")
+
+
+            # Removida a longa pausa daqui. Se precisar de uma pausa para observar,
+            # adicione-a intencionalmente e por um período menor.
+
+
+        except Exception as e_search:
+            registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
+        
+        registrar_log('time.sleep(60)')
+        time.sleep(60)
+        driver.quit() # Comentado para manter o navegador aberto para desenvolvimento/interação
+        registrar_log(" driver.quit() - Navegador fechado.")
+
+    except Exception as e:
+        registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp: {e}")
+    
+    registrar_log("enviar_whatsapp - FIM")
 
 
 def logica_principal_background():
     """Lógica principal que será executada em um processo separado."""
     registrar_log("MAIN - INÍCIO")
-
-    #TODO: executar todo o projeto no bloco abaixo
-
-    resultados_exames_intervalo_5_min()
-
-    registrar_log("time.sleep(5)")
-    time.sleep(5) # Simula uma tarefa demorada
+    
+    #TODO: criar um laço de repetição que rode a cada 5 minutos:
+    lista_de_resultados = resultados_exames_intervalo_5_min()
+    enviar_whatsapp(lista_de_resultados) 
 
     registrar_log("MAIN - FIM")
     print("Processo em background concluído.") # Feedback no console
@@ -117,7 +303,7 @@ class AppGUI:
         self.label = tk.Label(master, text="Clique para começar...")
         self.label.pack(pady=10)
 
-        self.start_button = tk.Button(master, text="Valores críticos", command=self.iniciar_processo)
+        self.start_button = tk.Button(master, text="LAB - Valores Críticos", command=self.iniciar_processo)
         self.start_button.pack(pady=10)
         registrar_log("def __init__ GUI - FIM")
 
