@@ -1756,3 +1756,33 @@ Stacktrace:
 2025-06-03 16-36-44 -  driver.quit() - Navegador fechado.
 2025-06-03 16-36-44 - enviar_whatsapp - FIM
 2025-06-03 16-36-44 - MAIN - FIM
+2025-06-04 09-51-33 - MAIN - INICIO
+2025-06-04 09-51-33 - def __init__ GUI - INICIO
+2025-06-04 09-51-33 - def __init__ GUI - FIM
+2025-06-04 09-51-48 - MAIN - INICIO
+2025-06-04 09-51-49 - def __init__ GUI - INICIO
+2025-06-04 09-51-49 - def __init__ GUI - FIM
+2025-06-04 09-51-50 - iniciar_processo - Botão Iniciar clicado
+2025-06-04 09-52-36 - MAIN - INICIO
+2025-06-04 09-52-36 - def __init__ GUI - INICIO
+2025-06-04 09-52-36 - def __init__ GUI - FIM
+2025-06-04 09-52-39 - iniciar_processo - Botão Iniciar clicado
+2025-06-04 09-52-39 - Processo background iniciado com PID: 16340
+2025-06-04 09-52-39 - MAIN - INÍCIO
+2025-06-04 09-52-39 - Executando ciclo da lógica principal...
+2025-06-04 09-52-39 - resultados_exames_intervalo_5_min - INICIO
+2025-06-04 09-52-39 - encontrar_diretorio_instantclient - Inicio
+2025-06-04 09-52-39 - encontrar_diretorio_instantclient - FIM
+2025-06-04 09-52-40 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 5 MINUTOS.sql
+2025-06-04 09-53-23 - Query executada. 0 linhas retornadas.
+2025-06-04 09-53-23 - resultados_exames_intervalo_5_min - FIM
+2025-06-04 09-53-23 - enviar_whatsapp - INÍCIO
+2025-06-04 09-53-23 - Nenhum exame crítico para enviar via WhatsApp.
+2025-06-04 09-53-23 - enviar_whatsapp - FIM
+2025-06-04 09-53-23 - Aguardando 5 minutos para o próximo ciclo...
+2025-06-04 09-59-13 - MAIN - INICIO
+2025-06-04 09-59-13 - def __init__ GUI - INICIO
+2025-06-04 09-59-13 - def __init__ GUI - FIM
+2025-06-04 09-59-19 - Fechando janela. Sinalizando processo background para parar...
+2025-06-04 09-59-19 - self.master.destroy()
+2025-06-04 09-59-19 - MAIN - FIM

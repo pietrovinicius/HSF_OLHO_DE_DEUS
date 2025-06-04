@@ -13,7 +13,7 @@ import os
 import time
 from datetime import datetime
 import tkinter as tk
-from multiprocessing import Process
+from multiprocessing import Process, Event # Importar Event
 import oracledb
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -281,15 +281,22 @@ def enviar_whatsapp(lista_exames):
     registrar_log("enviar_whatsapp - FIM")
 
 
-def logica_principal_background():
-    """Lógica principal que será executada em um processo separado."""
-    registrar_log("MAIN - INÍCIO")
+def logica_principal_background(stop_event):
+    """Lógica principal que será executada em um processo separado, repetidamente."""
+    registrar_log("logica_principal_background - INÍCIO")
     
-    #TODO: criar um laço de repetição que rode a cada 5 minutos:
-    lista_de_resultados = resultados_exames_intervalo_5_min()
-    enviar_whatsapp(lista_de_resultados) 
+    while not stop_event.is_set():
+        registrar_log("Executando ciclo da lógica principal...")
+        lista_de_resultados = resultados_exames_intervalo_5_min()
+        registrar_log(f"lista_de_resultados: {lista_de_resultados}")        
+        enviar_whatsapp(lista_de_resultados)
+        
+        # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
+        registrar_log("Aguardando 5 minutos para o próximo ciclo...")
+        registrar_log('stop_event.wait(300) - Espera por 300 segundos ou até stop_event ser setado')
+        stop_event.wait(300)
 
-    registrar_log("MAIN - FIM")
+    registrar_log("logica_principal_background - FIM")
     print("Processo em background concluído.") # Feedback no console
 
 class AppGUI:
@@ -299,6 +306,10 @@ class AppGUI:
         master.title("HSF Olho de Deus")
         master.geometry("600x400") # Define o tamanho inicial da janela para 600x400
         master.resizable(False, False) # Impede que o usuário redimensione a janela
+
+        self.process = None # Para armazenar a referência do processo
+        self.stop_event = None # Para armazenar o evento de parada
+        self.master.protocol("WM_DELETE_WINDOW", self.on_closing) # Captura o evento de fechar janela
 
         self.label = tk.Label(master, text="Clique para começar...")
         self.label.pack(pady=100)
@@ -310,19 +321,26 @@ class AppGUI:
     def iniciar_processo(self):
         registrar_log("iniciar_processo - Botão Iniciar clicado")
         # Desabilita o botão para evitar múltiplos cliques enquanto o processo está rodando
-        self.start_button.config(state=tk.DISABLED)
-        self.label.config(text="Processo em execução...")
+        if self.process is None or not self.process.is_alive():
+            self.start_button.config(state=tk.DISABLED)
+            self.label.config(text="Processo em execução (rodando a cada 5 min)...")
 
-        # Cria e inicia o processo
-        # É importante que o processo filho não tente modificar diretamente a GUI
-        # pois Tkinter não é thread-safe/process-safe entre processos diferentes.
-        processo = Process(target=logica_principal_background)
-        processo.start()
-        # Para reabilitar o botão, precisaríamos de um mecanismo de comunicação
-        # (ex: polling, Queue) para saber quando o processo terminou.
-        # Por simplicidade, ele permanecerá desabilitado nesta versão.
-        # Uma forma de reabilitar seria o processo filho sinalizar o FIM,
-        # ou a GUI verificar periodicamente se o processo ainda está vivo.
+            # Cria o evento de parada
+            registrar_log('Cria o evento de parada')
+            self.stop_event = Event()
+
+            # Cria e inicia o processo, passando o evento de parada
+            self.process = Process(target=logica_principal_background, args=(self.stop_event,))
+            registrar_log('self.process.start()')
+            self.process.start()
+            registrar_log(f"Processo background iniciado com PID: {self.process.pid}")
+        else:
+            registrar_log("Processo background já está rodando.")
+
+    def on_closing(self):
+        """Lida com o fechamento da janela, sinalizando o processo background para parar."""
+        registrar_log("Fechando janela. Sinalizando processo background para parar...")
+        if self.process and self.process.is_alive():
         # Exemplo simples para reabilitar após um tempo (não ideal para processos longos):
         # self.master.after(6000, self.reabilitar_botao) # 6000 ms = 6s
 
@@ -330,6 +348,13 @@ class AppGUI:
     #     self.start_button.config(state=tk.NORMAL)
     #     self.label.config(text="Processo concluído. Clique para iniciar novamente.")
 
+            self.stop_event.set() # Sinaliza o evento de parada
+            self.process.join(timeout=5) # Espera o processo terminar por até 5 segundos
+            if self.process.is_alive():
+                registrar_log("Processo background não terminou, encerrando...")
+                self.process.terminate() # Encerra o processo se ele não terminar sozinho
+        registrar_log('self.master.destroy()')
+        self.master.destroy() # Adicionar esta linha para fechar a janela
 
 def main():
     """Função principal que configura e inicia a GUI."""
