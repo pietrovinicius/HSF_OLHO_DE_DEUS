@@ -296,9 +296,9 @@ def logica_principal_background(stop_event):
         enviar_whatsapp(lista_de_resultados)
         
         # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
-        registrar_log("Aguardando 5 minutos para o próximo ciclo...")
-        registrar_log('stop_event.wait(300) - Espera por 300 segundos ou até stop_event ser setado')
-        stop_event.wait(300)
+        registrar_log("Aguardando 58 minutos para o próximo ciclo...")
+        registrar_log('stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado')
+        stop_event.wait(3480)
 
     registrar_log("logica_principal_background - FIM")
     print("Processo em background concluído.") # Feedback no console
@@ -327,7 +327,7 @@ class AppGUI:
         # Desabilita o botão para evitar múltiplos cliques enquanto o processo está rodando
         if self.process is None or not self.process.is_alive():
             self.start_button.config(state=tk.DISABLED)
-            self.label.config(text="Processo em execução (rodando a cada 5 min)...")
+            self.label.config(text="Processo em execução ...")
 
             # Cria o evento de parada
             registrar_log('Cria o evento de parada')
