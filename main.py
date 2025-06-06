@@ -4,6 +4,7 @@
 
 #cd c:\Pietro\Projetos\HSF_OLHO_DE_DEUS
 #python -m venv .venv
+#Set-ExecutionPolicy RemoteSigned
 #.venv\Scripts\activate
 #pip install -r requirements.txt
 #python main.py
@@ -130,6 +131,9 @@ def enviar_whatsapp(lista_exames):
 
         registrar_log('driver.get("https://web.whatsapp.com")')
         driver.get("https://web.whatsapp.com")
+
+        registrar_log("time.sleep(5)")
+        time.sleep(5) 
 
         registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
 
