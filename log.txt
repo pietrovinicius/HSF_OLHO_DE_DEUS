@@ -1786,3 +1786,496 @@ Stacktrace:
 2025-06-04 09-59-19 - Fechando janela. Sinalizando processo background para parar...
 2025-06-04 09-59-19 - self.master.destroy()
 2025-06-04 09-59-19 - MAIN - FIM
+2025-06-10 15-56-26 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 15-56-26 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 15-56-26 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 15-56-26 - encontrar_diretorio_instantclient - FIM
+2025-06-10 15-56-26 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 15-56-26 - Query executada. 1546 linhas retornadas.
+2025-06-10 15-56-26 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 15-56-26 - Resultados encontrados (1546 linhas):
+2025-06-10 15-56-30 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 15-58-27 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 15-58-27 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 15-58-27 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 15-58-27 - encontrar_diretorio_instantclient - FIM
+2025-06-10 15-58-27 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 15-58-27 - Query executada. 1545 linhas retornadas.
+2025-06-10 15-58-27 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 15-58-27 - Resultados encontrados (1545 linhas):
+2025-06-10 15-58-28 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-04-41 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-04-41 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-04-41 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-04-41 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-04-42 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-04-42 - Query executada. 1545 linhas retornadas.
+2025-06-10 16-04-42 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-04-42 - Resultados encontrados (1545 linhas):
+2025-06-10 16-04-42 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-07-31 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-07-31 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-07-31 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-07-31 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-07-31 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-07-31 - Query executada. 1545 linhas retornadas.
+2025-06-10 16-07-31 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-07-31 - Resultados encontrados (1545 linhas):
+2025-06-10 16-07-31 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-08-24 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-08-24 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-08-24 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-08-24 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-08-24 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-08-24 - Query executada. 1543 linhas retornadas.
+2025-06-10 16-08-24 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-08-24 - Resultados encontrados (1543 linhas):
+2025-06-10 16-08-25 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-09-18 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-09-18 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-09-18 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-09-18 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-09-19 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-09-19 - Query executada. 1544 linhas retornadas.
+2025-06-10 16-09-19 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-09-19 - Resultados encontrados (1544 linhas):
+2025-06-10 16-09-19 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-09-34 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-09-34 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-09-34 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-09-34 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-09-34 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-09-34 - Query executada. 1544 linhas retornadas.
+2025-06-10 16-09-34 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-09-34 - Resultados encontrados (1544 linhas):
+2025-06-10 16-09-34 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-09-50 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-09-50 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-09-50 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-09-50 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-09-50 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-09-50 - Query executada. 1545 linhas retornadas.
+2025-06-10 16-09-50 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-09-50 - Resultados encontrados (1545 linhas):
+2025-06-10 16-09-51 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-10-22 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-10-22 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-10-22 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-10-22 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-10-22 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-10-22 - Query executada. 1545 linhas retornadas.
+2025-06-10 16-10-22 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-10-22 - Resultados encontrados (1545 linhas):
+2025-06-10 16-10-23 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-10-38 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-10-38 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-10-38 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-10-38 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-10-38 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-10-38 - Query executada. 1545 linhas retornadas.
+2025-06-10 16-10-38 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-10-38 - Resultados encontrados (1545 linhas):
+2025-06-10 16-10-39 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-10-53 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-10-53 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-10-53 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-10-53 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-10-53 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-10-53 - Query executada. 1546 linhas retornadas.
+2025-06-10 16-10-53 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-10-53 - Resultados encontrados (1546 linhas):
+2025-06-10 16-10-54 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-11-28 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-11-28 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-11-28 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-11-28 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-11-28 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-11-29 - Query executada. 1546 linhas retornadas.
+2025-06-10 16-11-29 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-11-29 - Resultados encontrados (1546 linhas):
+2025-06-10 16-11-29 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-12-45 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-12-45 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-12-45 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-12-45 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-12-45 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-12-45 - Query executada. 1546 linhas retornadas.
+2025-06-10 16-12-45 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-12-45 - Resultados encontrados (1546 linhas):
+2025-06-10 16-12-46 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-16-52 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-16-52 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-16-52 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-16-52 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-16-52 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-16-52 - Query executada. 1537 linhas retornadas.
+2025-06-10 16-16-52 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-16-52 - Resultados encontrados (1537 linhas):
+2025-06-10 16-16-53 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-17-55 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-17-55 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-17-55 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-17-55 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-17-55 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-17-55 - Query executada. 1535 linhas retornadas.
+2025-06-10 16-17-55 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-17-55 - Resultados encontrados (1535 linhas):
+2025-06-10 16-17-55 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-18-16 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-18-16 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-18-16 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-18-16 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-18-16 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-18-16 - Query executada. 1535 linhas retornadas.
+2025-06-10 16-18-16 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-18-16 - Resultados encontrados (1535 linhas):
+2025-06-10 16-18-16 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-18-50 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-18-50 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-18-50 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-18-50 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-18-50 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-18-50 - Query executada. 1537 linhas retornadas.
+2025-06-10 16-18-50 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-18-50 - Resultados encontrados (1537 linhas):
+2025-06-10 16-18-50 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-18-57 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-18-57 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-18-57 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-18-57 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-18-57 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-18-57 - Query executada. 1539 linhas retornadas.
+2025-06-10 16-18-57 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-18-57 - Resultados encontrados (1539 linhas):
+2025-06-10 16-18-57 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-19-06 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-19-06 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-19-06 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-19-06 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-19-06 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-19-06 - Query executada. 1540 linhas retornadas.
+2025-06-10 16-19-06 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-19-06 - Resultados encontrados (1540 linhas):
+2025-06-10 16-19-06 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-19-43 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-19-43 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-19-43 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-19-43 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-19-43 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-19-43 - Query executada. 1541 linhas retornadas.
+2025-06-10 16-19-43 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-19-43 - Resultados encontrados (1541 linhas):
+2025-06-10 16-19-43 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-20-12 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-20-12 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-20-12 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-20-12 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-20-12 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-20-12 - Query executada. 1537 linhas retornadas.
+2025-06-10 16-20-12 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-20-12 - Resultados encontrados (1537 linhas):
+2025-06-10 16-20-12 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-25-33 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-25-33 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-25-33 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-25-33 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-25-33 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-25-33 - Query executada. 1515 linhas retornadas.
+2025-06-10 16-25-33 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-25-33 - Resultados encontrados (1515 linhas):
+2025-06-10 16-25-34 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-26-57 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-26-57 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-26-57 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-26-57 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-26-57 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-26-57 - Query executada. 1509 linhas retornadas.
+2025-06-10 16-26-57 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-26-57 - Resultados encontrados (1509 linhas):
+2025-06-10 16-26-57 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-28-52 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-28-52 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-28-52 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-28-52 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-28-52 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-28-52 - Query executada. 1513 linhas retornadas.
+2025-06-10 16-28-52 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-28-52 - Resultados encontrados (1513 linhas):
+2025-06-10 16-28-52 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-49-19 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-10 16-49-19 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-10 16-49-19 - encontrar_diretorio_instantclient - Inicio
+2025-06-10 16-49-19 - encontrar_diretorio_instantclient - FIM
+2025-06-10 16-49-19 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-10 16-49-19 - Query executada. 1525 linhas retornadas.
+2025-06-10 16-49-19 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-10 16-49-19 - Resultados encontrados (1525 linhas):
+2025-06-10 16-49-19 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-31-39 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-31-39 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-31-39 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-31-39 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-31-39 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-31-39 - Query executada. 1340 linhas retornadas.
+2025-06-11 15-31-39 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-31-39 - Resultados encontrados (1340 linhas):
+2025-06-11 15-31-40 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-35-58 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-35-58 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-35-58 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-35-58 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-35-58 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-35-59 - Query executada. 1338 linhas retornadas.
+2025-06-11 15-35-59 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-35-59 - Resultados encontrados (1338 linhas):
+2025-06-11 15-35-59 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-36-59 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-36-59 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-36-59 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-36-59 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-36-59 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-36-59 - Query executada. 1337 linhas retornadas.
+2025-06-11 15-36-59 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-36-59 - Resultados encontrados (1337 linhas):
+2025-06-11 15-36-59 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-39-50 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-39-50 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-39-50 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-39-50 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-39-50 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-39-50 - Query executada. 1339 linhas retornadas.
+2025-06-11 15-39-50 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-39-50 - Resultados encontrados (1339 linhas):
+2025-06-11 15-39-50 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-40-09 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-40-09 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-40-09 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-40-09 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-40-09 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-40-09 - Query executada. 1338 linhas retornadas.
+2025-06-11 15-40-09 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-40-09 - Resultados encontrados (1338 linhas):
+2025-06-11 15-40-10 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-41-15 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-41-15 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-41-15 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-41-15 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-41-15 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-41-15 - Query executada. 1337 linhas retornadas.
+2025-06-11 15-41-15 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-41-15 - Resultados encontrados (1337 linhas):
+2025-06-11 15-41-16 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-42-16 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-42-16 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-42-16 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-42-16 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-42-16 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-42-16 - resultados_exames_intervalo_58_min - Erro no Oracle DB: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+2025-06-11 15-42-16 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-42-42 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-42-42 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-42-42 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-42-42 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-42-42 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-42-43 - Query executada. 1 linhas retornadas.
+2025-06-11 15-42-43 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-42-43 - Resultados encontrados (1 linhas):
+2025-06-11 15-42-43 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-42-53 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-42-53 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-42-53 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-42-53 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-42-53 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-42-53 - Query executada. 1 linhas retornadas.
+2025-06-11 15-42-53 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-42-53 - Resultados encontrados (1 linhas):
+2025-06-11 15-42-53 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-43-13 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-43-13 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-43-13 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-43-13 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-43-13 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-43-13 - Query executada. 10 linhas retornadas.
+2025-06-11 15-43-13 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-43-13 - Resultados encontrados (10 linhas):
+2025-06-11 15-43-13 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-43-32 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-43-32 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-43-32 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-43-32 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-43-32 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-43-32 - Query executada. 1336 linhas retornadas.
+2025-06-11 15-43-32 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-43-32 - Resultados encontrados (1336 linhas):
+2025-06-11 15-43-32 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-44-04 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-44-04 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-44-04 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-44-04 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-44-04 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-44-04 - Query executada. 10 linhas retornadas.
+2025-06-11 15-44-04 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-44-04 - Resultados encontrados (10 linhas):
+2025-06-11 15-44-04 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-44-58 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-44-58 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-44-58 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-44-58 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-44-58 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-44-58 - Query executada. 1337 linhas retornadas.
+2025-06-11 15-44-58 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-44-58 - Resultados encontrados (1337 linhas):
+2025-06-11 15-44-59 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-48-58 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-48-58 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-48-58 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-48-58 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-48-58 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-48-58 - Query executada. 1329 linhas retornadas.
+2025-06-11 15-48-58 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-48-58 - Resultados encontrados (1329 linhas):
+2025-06-11 15-48-59 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-59-22 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 15-59-22 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 15-59-22 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 15-59-22 - encontrar_diretorio_instantclient - FIM
+2025-06-11 15-59-22 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 15-59-22 - Query executada. 1324 linhas retornadas.
+2025-06-11 15-59-22 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 15-59-22 - Resultados encontrados (1324 linhas):
+2025-06-11 15-59-22 - Erro durante o teste da função: name 'hemogramas_criticos' is not defined
+2025-06-11 15-59-22 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-00-07 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-00-07 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-00-07 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-00-07 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-00-07 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-00-07 - Query executada. 1323 linhas retornadas.
+2025-06-11 16-00-07 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-00-07 - Resultados encontrados (1323 linhas):
+2025-06-11 16-00-08 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-00-53 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-00-53 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-00-53 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-00-53 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-00-54 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-00-54 - Query executada. 1324 linhas retornadas.
+2025-06-11 16-00-54 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-00-54 - Resultados encontrados (1324 linhas):
+2025-06-11 16-00-54 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-02-48 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-02-48 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-02-48 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-02-48 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-02-48 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-02-48 - Query executada. 1323 linhas retornadas.
+2025-06-11 16-02-48 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-02-48 - Resultados encontrados (1323 linhas):
+2025-06-11 16-02-49 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-11-36 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-11-36 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-11-36 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-11-36 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-11-36 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-11-36 - Query executada. 1316 linhas retornadas.
+2025-06-11 16-11-36 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-11-36 - Resultados encontrados (1316 linhas):
+2025-06-11 16-11-36 - Erro durante o teste da função: 'parametro'
+2025-06-11 16-11-36 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-12-36 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-12-36 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-12-36 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-12-36 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-12-36 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-12-36 - Query executada. 1316 linhas retornadas.
+2025-06-11 16-12-36 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-12-36 - Resultados encontrados (1316 linhas):
+2025-06-11 16-12-37 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-16-30 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-16-30 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-16-30 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-16-30 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-16-30 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-16-30 - Query executada. 1316 linhas retornadas.
+2025-06-11 16-16-30 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-16-30 - Resultados encontrados (1316 linhas):
+2025-06-11 16-16-31 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-18-00 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-18-00 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-18-00 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-18-00 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-18-00 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-18-00 - Query executada. 1313 linhas retornadas.
+2025-06-11 16-18-00 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-18-00 - Resultados encontrados (1313 linhas):
+2025-06-11 16-18-01 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-18-33 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-18-33 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-18-33 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-18-33 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-18-33 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-18-33 - Query executada. 45 linhas retornadas.
+2025-06-11 16-18-33 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-18-33 - Resultados encontrados (45 linhas):
+2025-06-11 16-18-33 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-19-12 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-19-12 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-19-12 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-19-12 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-19-12 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-19-12 - Query executada. 43 linhas retornadas.
+2025-06-11 16-19-12 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-19-12 - Resultados encontrados (43 linhas):
+2025-06-11 16-19-12 - 
+Nenhum hemograma com valor crítico de Hemoglobina encontrado nos critérios especificados.
+2025-06-11 16-19-12 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-27-21 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-27-21 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-27-21 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-27-21 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-27-21 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-27-21 - Query executada. 29 linhas retornadas.
+2025-06-11 16-27-21 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-27-21 - Resultados encontrados (29 linhas):
+2025-06-11 16-27-21 - 
+Nenhum hemograma com valor crítico de Hemoglobina encontrado nos critérios especificados.
+2025-06-11 16-27-21 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-27-39 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-27-39 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-27-39 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-27-39 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-27-39 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-27-39 - Query executada. 1291 linhas retornadas.
+2025-06-11 16-27-39 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-27-39 - Resultados encontrados (1291 linhas):
+2025-06-11 16-27-39 - 
+--- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---
+2025-06-11 16-27-39 - ----------------------------------------
+2025-06-11 16-27-39 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-29-52 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-29-52 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-29-52 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-29-52 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-29-52 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-29-52 - Query executada. 1284 linhas retornadas.
+2025-06-11 16-29-52 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-29-52 - Resultados encontrados (1284 linhas):
+2025-06-11 16-29-52 - 
+--- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---
+2025-06-11 16-29-52 - ----------------------------------------
+2025-06-11 16-29-52 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-32-55 - --- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-11 16-32-55 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-11 16-32-55 - encontrar_diretorio_instantclient - Inicio
+2025-06-11 16-32-55 - encontrar_diretorio_instantclient - FIM
+2025-06-11 16-32-55 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-11 16-32-55 - Query executada. 1281 linhas retornadas.
+2025-06-11 16-32-55 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-11 16-32-55 - Resultados encontrados (1281 linhas):
+2025-06-11 16-32-55 - 
+--- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---
+2025-06-11 16-32-55 - ----------------------------------------
+2025-06-11 16-32-55 - Preparando para enviar hemogramas críticos via WhatsApp (Modo Teste: True)...
+2025-06-11 16-32-55 - Erro durante o teste da função: enviar_whatsapp() got an unexpected keyword argument 'modo_teste'
+2025-06-11 16-32-55 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
