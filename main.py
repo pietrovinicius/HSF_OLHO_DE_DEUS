@@ -428,7 +428,8 @@ def logica_principal_background(stop_event):
         registrar_log("Iniciando processamento de hemogramas críticos...")
         resultados_hemogramas = resultados_hemogramas_intervalo_58_min()
         mensagens_hemogramas_criticos_whatsapp = []
-
+###################################################################################################
+#VERIFICACOES DOS EXAMES DE DENTRO D HEMOGRAMA:
         if resultados_hemogramas is not None and resultados_hemogramas:
             hemogramas_criticos_encontrados = [] # Lista para dados brutos dos críticos
             for i, linha_completa in enumerate(resultados_hemogramas):
@@ -464,6 +465,7 @@ def logica_principal_background(stop_event):
                         if hemoglobina_valor_str and hemoglobina_valor_str != "Não encontrado":
                             try:
                                 hemoglobina_valor_float = float(hemoglobina_valor_str.replace(",", "."))
+                                registrar_log(f"Prescricao {nr_prescricao} (Hemograma): Valor de Hemoglobina: {hemoglobina_valor_float}")   
                                 if hemoglobina_valor_float < 6.6 or hemoglobina_valor_float > 19.9:
                                     hemogramas_criticos_encontrados.append({
                                         "prescricao": nr_prescricao,
@@ -479,6 +481,7 @@ def logica_principal_background(stop_event):
                         if hematocrito_valor_str and hematocrito_valor_str != "Não encontrado":
                             try:
                                 hematocrito_valor_float = float(hematocrito_valor_str.replace(",", "."))
+                                registrar_log(f"Prescricao {nr_prescricao} (Hemograma): Valor de Hematócrito: {hematocrito_valor_float}")
                                 if hematocrito_valor_float < 18.0 or hematocrito_valor_float > 60.0: # vol%
                                     hemogramas_criticos_encontrados.append({
                                         "prescricao": nr_prescricao,
@@ -498,9 +501,10 @@ def logica_principal_background(stop_event):
                                 # e isso representa 15.520/µL, então multiplique por 1000.
                                 # Se a regex já captura o valor na escala correta (ex: 15520), não multiplique.
                                 leucocitos_valor_float = float(leucocitos_valor_str.replace(",", "."))
+                                registrar_log(f"Prescricao {nr_prescricao} (Hemograma): Valor de Leucócitos: {leucocitos_valor_float}")
                                 # leucocitos_valor_float = float(leucocitos_valor_str.replace(",", ".")) * 1000 # Ajuste se necessário
 
-                                if leucocitos_valor_float < 2000.0 or leucocitos_valor_float > 50000.0: # /µL
+                                if leucocitos_valor_float > 2000.0 or leucocitos_valor_float > 50000.0: # /µL
                                     hemogramas_criticos_encontrados.append({
                                         "prescricao": nr_prescricao,
                                         "parametro": "Leucócitos",
@@ -515,6 +519,7 @@ def logica_principal_background(stop_event):
                         if plaquetas_valor_str and plaquetas_valor_str != "Não encontrado":
                             try:
                                 plaquetas_valor_float = float(plaquetas_valor_str.replace(",", ".")) * 1000 # Valor extraído é em "mil/mmb3"
+                                registrar_log(f"Prescricao {nr_prescricao} (Hemograma): Valor de Plaquetas: {plaquetas_valor_float}")
                                 if plaquetas_valor_float < 20000.0 or plaquetas_valor_float > 1000000.0: # /uL
                                     hemogramas_criticos_encontrados.append({
                                         "prescricao": nr_prescricao,

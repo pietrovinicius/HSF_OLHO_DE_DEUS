@@ -2279,3 +2279,695 @@ Nenhum hemograma com valor crítico de Hemoglobina encontrado nos critérios esp
 2025-06-11 16-32-55 - Preparando para enviar hemogramas críticos via WhatsApp (Modo Teste: True)...
 2025-06-11 16-32-55 - Erro durante o teste da função: enviar_whatsapp() got an unexpected keyword argument 'modo_teste'
 2025-06-11 16-32-55 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-12 08-20-40 - MAIN - INICIO
+2025-06-12 08-20-41 - def __init__ GUI - INICIO
+2025-06-12 08-20-41 - def __init__ GUI - FIM
+2025-06-12 08-20-46 - iniciar_processo - Botão Iniciar clicado
+2025-06-12 08-20-46 - Cria o evento de parada
+2025-06-12 08-20-46 - self.process.start()
+2025-06-12 08-20-46 - Processo background iniciado com PID: 6900
+2025-06-12 08-20-48 - logica_principal_background - INÍCIO
+2025-06-12 08-20-48 - Executando ciclo da lógica principal...
+2025-06-12 08-20-48 - resultados_exames_intervalo_58_min - INICIO
+2025-06-12 08-20-48 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 08-20-48 - encontrar_diretorio_instantclient - FIM
+2025-06-12 08-20-51 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 08-21-19 - Query executada. 0 linhas retornadas.
+2025-06-12 08-21-19 - resultados_exames_intervalo_58_min - FIM
+2025-06-12 08-21-19 - lista_de_resultados: []
+2025-06-12 08-21-19 - enviar_whatsapp - INÍCIO
+2025-06-12 08-21-19 - Nenhum exame crítico para enviar via WhatsApp.
+2025-06-12 08-21-19 - enviar_whatsapp - FIM
+2025-06-12 08-21-19 - Iniciando processamento de hemogramas críticos...
+2025-06-12 08-21-19 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-12 08-21-19 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 08-21-19 - encontrar_diretorio_instantclient - FIM
+2025-06-12 08-21-19 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 08-21-19 - Query executada. 2 linhas retornadas.
+2025-06-12 08-21-19 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-12 08-21-19 - Nenhum hemograma crítico encontrado para enviar.
+2025-06-12 08-21-19 - Aguardando 58 minutos para o próximo ciclo...
+2025-06-12 08-21-19 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado
+2025-06-12 09-19-19 - Executando ciclo da lógica principal...
+2025-06-12 09-19-19 - resultados_exames_intervalo_58_min - INICIO
+2025-06-12 09-19-19 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 09-19-19 - encontrar_diretorio_instantclient - FIM
+2025-06-12 09-19-19 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 09-19-50 - Query executada. 12 linhas retornadas.
+2025-06-12 09-19-50 - resultados_exames_intervalo_58_min - FIM
+2025-06-12 09-19-50 - lista_de_resultados: [('*Prescrição: 6009712*', 'Paciente: L M E S', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 08:19', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009712*', 'Paciente: L M E S', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 08:19', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009712*', 'Paciente: L M E S', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 08:19', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009705*', 'Paciente: G A M S', 'Ex: CÁLCIO ', 'Resultado: 0', 'Col: 08:18', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009703*', 'Paciente: R F T M', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 08:18', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009703*', 'Paciente: R F T M', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 08:18', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009705*', 'Paciente: G A M S', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 08:18', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009703*', 'Paciente: R F T M', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 08:18', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009705*', 'Paciente: G A M S', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 08:18', 'Dig: 08:53', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - ')]
+2025-06-12 09-19-50 - enviar_whatsapp - INÍCIO
+2025-06-12 09-19-54 - driver.get("https://web.whatsapp.com")
+2025-06-12 09-19-56 - time.sleep(5)
+2025-06-12 09-20-01 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-12 09-20-06 - Campo de pesquisa encontrado e clicável.
+2025-06-12 09-20-07 - Clicado no campo de pesquisa.
+2025-06-12 09-20-07 - Campo de input de pesquisa ativo encontrado.
+2025-06-12 09-20-10 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-12 09-20-10 - time.sleep(0.5)
+2025-06-12 09-20-10 - time.sleep(0.5)
+2025-06-12 09-20-11 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-12 09-20-12 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-12 09-20-12 - time.sleep(0.5)
+2025-06-12 09-20-12 - Localizando a caixa de texto do chat...
+2025-06-12 09-20-13 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-12 09-20-14 - Cabeçalho da mensagem enviado.
+2025-06-12 09-20-14 - Separador entre exames enviado.
+2025-06-12 09-20-15 - data_hora_formatada: *12/06/2025 às 09h20m*
+2025-06-12 09-20-15 - textinho: *12/06/2025 às 09h20m*
+2025-06-12 09-20-22 - Linha enviada: *Prescrição: 6009712*
+2025-06-12 09-20-24 - Linha enviada: Paciente: L M E S
+2025-06-12 09-20-25 - Linha enviada: Ex: SÓDIO
+2025-06-12 09-20-27 - Linha enviada: Resultado: 0
+2025-06-12 09-20-28 - Linha enviada: Col: 08:19
+2025-06-12 09-20-29 - Linha enviada: Dig: 08:53
+2025-06-12 09-20-31 - Linha enviada: Apr:  - 
+2025-06-12 09-20-32 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-20-32 - time.sleep(0.5)
+2025-06-12 09-20-33 - Linha enviada: *Prescrição: 6009712*
+2025-06-12 09-20-34 - Linha enviada: Paciente: L M E S
+2025-06-12 09-20-36 - Linha enviada: Ex: GLICOSE
+2025-06-12 09-20-37 - Linha enviada: Resultado: 0
+2025-06-12 09-20-38 - Linha enviada: Col: 08:19
+2025-06-12 09-20-40 - Linha enviada: Dig: 08:53
+2025-06-12 09-20-41 - Linha enviada: Apr:  - 
+2025-06-12 09-20-42 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-20-42 - time.sleep(0.5)
+2025-06-12 09-20-43 - Linha enviada: *Prescrição: 6009712*
+2025-06-12 09-20-45 - Linha enviada: Paciente: L M E S
+2025-06-12 09-20-47 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-20-48 - Linha enviada: Resultado: 0
+2025-06-12 09-20-49 - Linha enviada: Col: 08:19
+2025-06-12 09-20-51 - Linha enviada: Dig: 08:53
+2025-06-12 09-20-52 - Linha enviada: Apr:  - 
+2025-06-12 09-20-53 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-20-53 - time.sleep(0.5)
+2025-06-12 09-20-54 - Linha enviada: *Prescrição: 6009705*
+2025-06-12 09-20-55 - Linha enviada: Paciente: G A M S
+2025-06-12 09-20-57 - Linha enviada: Ex: CÁLCIO 
+2025-06-12 09-20-58 - Linha enviada: Resultado: 0
+2025-06-12 09-21-00 - Linha enviada: Col: 08:18
+2025-06-12 09-21-01 - Linha enviada: Dig: 08:53
+2025-06-12 09-21-02 - Linha enviada: Apr:  - 
+2025-06-12 09-21-03 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-21-03 - time.sleep(0.5)
+2025-06-12 09-21-04 - Linha enviada: *Prescrição: 6009703*
+2025-06-12 09-21-06 - Linha enviada: Paciente: R F T M
+2025-06-12 09-21-07 - Linha enviada: Ex: GLICOSE
+2025-06-12 09-21-09 - Linha enviada: Resultado: 0
+2025-06-12 09-21-11 - Linha enviada: Col: 08:18
+2025-06-12 09-21-12 - Linha enviada: Dig: 08:53
+2025-06-12 09-21-13 - Linha enviada: Apr:  - 
+2025-06-12 09-21-14 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-21-15 - time.sleep(0.5)
+2025-06-12 09-21-16 - Linha enviada: *Prescrição: 6009703*
+2025-06-12 09-21-17 - Linha enviada: Paciente: R F T M
+2025-06-12 09-21-19 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-21-20 - Linha enviada: Resultado: 0
+2025-06-12 09-21-21 - Linha enviada: Col: 08:18
+2025-06-12 09-21-23 - Linha enviada: Dig: 08:53
+2025-06-12 09-21-24 - Linha enviada: Apr:  - 
+2025-06-12 09-21-25 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-21-25 - time.sleep(0.5)
+2025-06-12 09-21-26 - Linha enviada: *Prescrição: 6009705*
+2025-06-12 09-21-28 - Linha enviada: Paciente: G A M S
+2025-06-12 09-21-29 - Linha enviada: Ex: GLICOSE
+2025-06-12 09-21-31 - Linha enviada: Resultado: 0
+2025-06-12 09-21-33 - Linha enviada: Col: 08:18
+2025-06-12 09-21-34 - Linha enviada: Dig: 08:53
+2025-06-12 09-21-36 - Linha enviada: Apr:  - 
+2025-06-12 09-21-37 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-21-38 - time.sleep(0.5)
+2025-06-12 09-21-39 - Linha enviada: *Prescrição: 6009703*
+2025-06-12 09-21-41 - Linha enviada: Paciente: R F T M
+2025-06-12 09-21-42 - Linha enviada: Ex: SÓDIO
+2025-06-12 09-21-43 - Linha enviada: Resultado: 0
+2025-06-12 09-21-45 - Linha enviada: Col: 08:18
+2025-06-12 09-21-46 - Linha enviada: Dig: 08:53
+2025-06-12 09-21-48 - Linha enviada: Apr:  - 
+2025-06-12 09-21-49 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-21-49 - time.sleep(0.5)
+2025-06-12 09-21-50 - Linha enviada: *Prescrição: 6009705*
+2025-06-12 09-21-51 - Linha enviada: Paciente: G A M S
+2025-06-12 09-21-53 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-21-55 - Linha enviada: Resultado: 0
+2025-06-12 09-21-56 - Linha enviada: Col: 08:18
+2025-06-12 09-21-58 - Linha enviada: Dig: 08:53
+2025-06-12 09-21-59 - Linha enviada: Apr:  - 
+2025-06-12 09-22-00 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-22-01 - time.sleep(0.5)
+2025-06-12 09-22-02 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 09-22-03 - Linha enviada: Paciente: S L C
+2025-06-12 09-22-05 - Linha enviada: Ex: SÓDIO
+2025-06-12 09-22-06 - Linha enviada: Resultado: 0
+2025-06-12 09-22-08 - Linha enviada: Col: 09:06
+2025-06-12 09-22-09 - Linha enviada: Dig: 09:18
+2025-06-12 09-22-11 - Linha enviada: Apr:  - 
+2025-06-12 09-22-12 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-22-12 - time.sleep(0.5)
+2025-06-12 09-22-13 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 09-22-15 - Linha enviada: Paciente: S L C
+2025-06-12 09-22-16 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-22-18 - Linha enviada: Resultado: 0
+2025-06-12 09-22-19 - Linha enviada: Col: 09:06
+2025-06-12 09-22-21 - Linha enviada: Dig: 09:18
+2025-06-12 09-22-22 - Linha enviada: Apr:  - 
+2025-06-12 09-22-23 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-22-23 - time.sleep(0.5)
+2025-06-12 09-22-25 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 09-22-26 - Linha enviada: Paciente: S L C
+2025-06-12 09-22-28 - Linha enviada: Ex: GLICOSE
+2025-06-12 09-22-29 - Linha enviada: Resultado: 0
+2025-06-12 09-22-31 - Linha enviada: Col: 09:06
+2025-06-12 09-22-32 - Linha enviada: Dig: 09:18
+2025-06-12 09-22-34 - Linha enviada: Apr:  - 
+2025-06-12 09-22-35 - time.sleep(0.5)
+2025-06-12 09-22-35 - Localiza e clica no botão de enviar
+2025-06-12 09-22-36 - time.sleep(0.5)
+2025-06-12 09-22-36 - botao_enviar_element.click()
+2025-06-12 09-22-36 - Processo de envio de mensagens concluído.
+2025-06-12 09-22-36 - time.sleep(60)
+2025-06-12 09-23-39 -  driver.quit() - Navegador fechado.
+2025-06-12 09-23-39 - enviar_whatsapp - FIM
+2025-06-12 09-23-39 - Iniciando processamento de hemogramas críticos...
+2025-06-12 09-23-39 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-12 09-23-39 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 09-23-39 - encontrar_diretorio_instantclient - FIM
+2025-06-12 09-23-39 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 09-23-39 - Query executada. 77 linhas retornadas.
+2025-06-12 09-23-39 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-12 09-23-39 - Nenhum hemograma crítico encontrado para enviar.
+2025-06-12 09-23-39 - Aguardando 58 minutos para o próximo ciclo...
+2025-06-12 09-23-39 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado
+2025-06-12 09-35-54 - MAIN - INICIO
+2025-06-12 09-35-55 - def __init__ GUI - INICIO
+2025-06-12 09-35-55 - def __init__ GUI - FIM
+2025-06-12 09-36-09 - iniciar_processo - Botão Iniciar clicado
+2025-06-12 09-36-09 - Cria o evento de parada
+2025-06-12 09-36-09 - self.process.start()
+2025-06-12 09-36-09 - Processo background iniciado com PID: 2164
+2025-06-12 09-36-12 - logica_principal_background - INÍCIO
+2025-06-12 09-36-12 - Executando ciclo da lógica principal...
+2025-06-12 09-36-12 - resultados_exames_intervalo_58_min - INICIO
+2025-06-12 09-36-12 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 09-36-12 - encontrar_diretorio_instantclient - FIM
+2025-06-12 09-36-12 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 09-36-45 - Query executada. 10 linhas retornadas.
+2025-06-12 09-36-45 - resultados_exames_intervalo_58_min - FIM
+2025-06-12 09-36-45 - lista_de_resultados: [('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: FOSFORO ', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: CLORO (CL)', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6010296*', 'Paciente: N J N G', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 09:16', 'Dig: 09:22', 'Apr:  - '), ('*Prescrição: 6010296*', 'Paciente: N J N G', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:16', 'Dig: 09:22', 'Apr:  - '), ('*Prescrição: 6010296*', 'Paciente: N J N G', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:16', 'Dig: 09:22', 'Apr:  - ')]
+2025-06-12 09-36-45 - enviar_whatsapp - INÍCIO
+2025-06-12 09-36-49 - driver.get("https://web.whatsapp.com")
+2025-06-12 09-36-51 - time.sleep(5)
+2025-06-12 09-36-56 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-12 09-37-01 - Campo de pesquisa encontrado e clicável.
+2025-06-12 09-37-02 - Clicado no campo de pesquisa.
+2025-06-12 09-37-02 - Campo de input de pesquisa ativo encontrado.
+2025-06-12 09-37-05 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-12 09-37-05 - time.sleep(0.5)
+2025-06-12 09-37-05 - time.sleep(0.5)
+2025-06-12 09-37-06 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-12 09-37-07 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-12 09-37-07 - time.sleep(0.5)
+2025-06-12 09-37-08 - Localizando a caixa de texto do chat...
+2025-06-12 09-37-08 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-12 09-37-08 - Cabeçalho da mensagem enviado.
+2025-06-12 09-37-09 - Separador entre exames enviado.
+2025-06-12 09-37-09 - data_hora_formatada: *12/06/2025 às 09h37m*
+2025-06-12 09-37-09 - textinho: *12/06/2025 às 09h37m*
+2025-06-12 09-37-13 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 09-37-15 - Linha enviada: Paciente: S L C
+2025-06-12 09-37-16 - Linha enviada: Ex: GLICOSE
+2025-06-12 09-37-18 - Linha enviada: Resultado: 0
+2025-06-12 09-37-19 - Linha enviada: Col: 09:06
+2025-06-12 09-37-21 - Linha enviada: Dig: 09:18
+2025-06-12 09-37-22 - Linha enviada: Apr:  - 
+2025-06-12 09-37-23 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-37-23 - time.sleep(0.5)
+2025-06-12 09-37-24 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 09-37-26 - Linha enviada: Paciente: S L C
+2025-06-12 09-37-27 - Linha enviada: Ex: SÓDIO
+2025-06-12 09-37-29 - Linha enviada: Resultado: 0
+2025-06-12 09-37-30 - Linha enviada: Col: 09:06
+2025-06-12 09-37-32 - Linha enviada: Dig: 09:18
+2025-06-12 09-37-33 - Linha enviada: Apr:  - 
+2025-06-12 09-37-34 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-37-34 - time.sleep(0.5)
+2025-06-12 09-37-35 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 09-37-37 - Linha enviada: Paciente: S L C
+2025-06-12 09-37-38 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-37-39 - Linha enviada: Resultado: 0
+2025-06-12 09-37-41 - Linha enviada: Col: 09:06
+2025-06-12 09-37-42 - Linha enviada: Dig: 09:18
+2025-06-12 09-37-43 - Linha enviada: Apr:  - 
+2025-06-12 09-37-44 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-37-44 - time.sleep(0.5)
+2025-06-12 09-37-45 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 09-37-47 - Linha enviada: Paciente: F A S
+2025-06-12 09-37-48 - Linha enviada: Ex: SÓDIO
+2025-06-12 09-37-49 - Linha enviada: Resultado: 0
+2025-06-12 09-37-51 - Linha enviada: Col: 09:03
+2025-06-12 09-37-52 - Linha enviada: Dig: 09:20
+2025-06-12 09-37-54 - Linha enviada: Apr:  - 
+2025-06-12 09-37-55 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-37-55 - time.sleep(0.5)
+2025-06-12 09-37-56 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 09-37-57 - Linha enviada: Paciente: F A S
+2025-06-12 09-37-58 - Linha enviada: Ex: FOSFORO 
+2025-06-12 09-38-00 - Linha enviada: Resultado: 0
+2025-06-12 09-38-01 - Linha enviada: Col: 09:03
+2025-06-12 09-38-03 - Linha enviada: Dig: 09:20
+2025-06-12 09-38-04 - Linha enviada: Apr:  - 
+2025-06-12 09-38-05 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-38-05 - time.sleep(0.5)
+2025-06-12 09-38-06 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 09-38-07 - Linha enviada: Paciente: F A S
+2025-06-12 09-38-09 - Linha enviada: Ex: CLORO (CL)
+2025-06-12 09-38-10 - Linha enviada: Resultado: 0
+2025-06-12 09-38-12 - Linha enviada: Col: 09:03
+2025-06-12 09-38-13 - Linha enviada: Dig: 09:20
+2025-06-12 09-38-14 - Linha enviada: Apr:  - 
+2025-06-12 09-38-15 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-38-16 - time.sleep(0.5)
+2025-06-12 09-38-17 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 09-38-18 - Linha enviada: Paciente: F A S
+2025-06-12 09-38-20 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-38-21 - Linha enviada: Resultado: 0
+2025-06-12 09-38-22 - Linha enviada: Col: 09:03
+2025-06-12 09-38-24 - Linha enviada: Dig: 09:20
+2025-06-12 09-38-25 - Linha enviada: Apr:  - 
+2025-06-12 09-38-26 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-38-26 - time.sleep(0.5)
+2025-06-12 09-38-27 - Linha enviada: *Prescrição: 6010296*
+2025-06-12 09-38-29 - Linha enviada: Paciente: N J N G
+2025-06-12 09-38-30 - Linha enviada: Ex: GLICOSE
+2025-06-12 09-38-31 - Linha enviada: Resultado: 0
+2025-06-12 09-38-33 - Linha enviada: Col: 09:16
+2025-06-12 09-38-35 - Linha enviada: Dig: 09:22
+2025-06-12 09-38-36 - Linha enviada: Apr:  - 
+2025-06-12 09-38-37 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-38-37 - time.sleep(0.5)
+2025-06-12 09-38-38 - Linha enviada: *Prescrição: 6010296*
+2025-06-12 09-38-40 - Linha enviada: Paciente: N J N G
+2025-06-12 09-38-41 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 09-38-43 - Linha enviada: Resultado: 0
+2025-06-12 09-38-44 - Linha enviada: Col: 09:16
+2025-06-12 09-38-45 - Linha enviada: Dig: 09:22
+2025-06-12 09-38-47 - Linha enviada: Apr:  - 
+2025-06-12 09-38-48 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-38-48 - time.sleep(0.5)
+2025-06-12 09-38-49 - Linha enviada: *Prescrição: 6010296*
+2025-06-12 09-38-50 - Linha enviada: Paciente: N J N G
+2025-06-12 09-38-52 - Linha enviada: Ex: SÓDIO
+2025-06-12 09-38-53 - Linha enviada: Resultado: 0
+2025-06-12 09-38-55 - Linha enviada: Col: 09:16
+2025-06-12 09-38-56 - Linha enviada: Dig: 09:22
+2025-06-12 09-38-58 - Linha enviada: Apr:  - 
+2025-06-12 09-38-59 - time.sleep(0.5)
+2025-06-12 09-38-59 - Localiza e clica no botão de enviar
+2025-06-12 09-39-00 - time.sleep(0.5)
+2025-06-12 09-39-00 - botao_enviar_element.click()
+2025-06-12 09-39-01 - Processo de envio de mensagens concluído.
+2025-06-12 09-39-01 - time.sleep(60)
+2025-06-12 09-40-03 -  driver.quit() - Navegador fechado.
+2025-06-12 09-40-03 - enviar_whatsapp - FIM
+2025-06-12 09-40-03 - Iniciando processamento de hemogramas críticos...
+2025-06-12 09-40-03 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-12 09-40-03 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 09-40-03 - encontrar_diretorio_instantclient - FIM
+2025-06-12 09-40-03 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 09-40-03 - Query executada. 103 linhas retornadas.
+2025-06-12 09-40-03 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-12 09-40-03 - enviar_whatsapp - INÍCIO
+2025-06-12 09-40-07 - driver.get("https://web.whatsapp.com")
+2025-06-12 09-40-09 - time.sleep(5)
+2025-06-12 09-40-14 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-12 09-40-19 - Campo de pesquisa encontrado e clicável.
+2025-06-12 09-40-20 - Clicado no campo de pesquisa.
+2025-06-12 09-40-20 - Campo de input de pesquisa ativo encontrado.
+2025-06-12 09-40-23 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-12 09-40-23 - time.sleep(0.5)
+2025-06-12 09-40-24 - time.sleep(0.5)
+2025-06-12 09-40-25 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-12 09-40-25 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-12 09-40-25 - time.sleep(0.5)
+2025-06-12 09-40-26 - Localizando a caixa de texto do chat...
+2025-06-12 09-40-26 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-12 09-40-26 - Cabeçalho da mensagem enviado.
+2025-06-12 09-40-27 - Separador entre exames enviado.
+2025-06-12 09-40-27 - data_hora_formatada: *12/06/2025 às 09h40m*
+2025-06-12 09-40-27 - textinho: *12/06/2025 às 09h40m*
+2025-06-12 09-40-31 - Linha enviada: --- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---
+2025-06-12 09-40-32 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-32 - time.sleep(0.5)
+2025-06-12 09-40-33 - Linha enviada: Prescrição 6006996: Leucócitos com valor crítico de 9.2 /µL.
+2025-06-12 09-40-34 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-35 - time.sleep(0.5)
+2025-06-12 09-40-36 - Linha enviada: Prescrição 6007066: Leucócitos com valor crítico de 7.0 /µL.
+2025-06-12 09-40-37 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-37 - time.sleep(0.5)
+2025-06-12 09-40-38 - Linha enviada: Prescrição 6007310: Leucócitos com valor crítico de 5.1 /µL.
+2025-06-12 09-40-39 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-39 - time.sleep(0.5)
+2025-06-12 09-40-41 - Linha enviada: Prescrição 6007910: Leucócitos com valor crítico de 9.3 /µL.
+2025-06-12 09-40-42 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-42 - time.sleep(0.5)
+2025-06-12 09-40-43 - Linha enviada: Prescrição 6007818: Leucócitos com valor crítico de 5.6 /µL.
+2025-06-12 09-40-44 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-44 - time.sleep(0.5)
+2025-06-12 09-40-45 - Linha enviada: Prescrição 6005943: Leucócitos com valor crítico de 13.4 /µL.
+2025-06-12 09-40-46 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-46 - time.sleep(0.5)
+2025-06-12 09-40-48 - Linha enviada: Prescrição 6006982: Leucócitos com valor crítico de 15.7 /µL.
+2025-06-12 09-40-49 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-49 - time.sleep(0.5)
+2025-06-12 09-40-51 - Linha enviada: Prescrição 6006003: Leucócitos com valor crítico de 3.7 /µL.
+2025-06-12 09-40-52 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-52 - time.sleep(0.5)
+2025-06-12 09-40-53 - Linha enviada: Prescrição 6005985: Leucócitos com valor crítico de 8.6 /µL.
+2025-06-12 09-40-54 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-54 - time.sleep(0.5)
+2025-06-12 09-40-56 - Linha enviada: Prescrição 6009854: Leucócitos com valor crítico de 7.5 /µL.
+2025-06-12 09-40-57 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-57 - time.sleep(0.5)
+2025-06-12 09-40-58 - Linha enviada: Prescrição 6009843: Leucócitos com valor crítico de 5.0 /µL.
+2025-06-12 09-40-59 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-40-59 - time.sleep(0.5)
+2025-06-12 09-41-01 - Linha enviada: Prescrição 6010296: Leucócitos com valor crítico de 8.0 /µL.
+2025-06-12 09-41-02 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-02 - time.sleep(0.5)
+2025-06-12 09-41-03 - Linha enviada: Prescrição 6005880: Leucócitos com valor crítico de 12.9 /µL.
+2025-06-12 09-41-04 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-04 - time.sleep(0.5)
+2025-06-12 09-41-06 - Linha enviada: Prescrição 6007030: Leucócitos com valor crítico de 6.3 /µL.
+2025-06-12 09-41-07 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-07 - time.sleep(0.5)
+2025-06-12 09-41-09 - Linha enviada: Prescrição 6005937: Leucócitos com valor crítico de 15.9 /µL.
+2025-06-12 09-41-10 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-10 - time.sleep(0.5)
+2025-06-12 09-41-11 - Linha enviada: Prescrição 6007072: Leucócitos com valor crítico de 7.8 /µL.
+2025-06-12 09-41-12 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-12 - time.sleep(0.5)
+2025-06-12 09-41-14 - Linha enviada: Prescrição 6005965: Leucócitos com valor crítico de 8.8 /µL.
+2025-06-12 09-41-15 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-15 - time.sleep(0.5)
+2025-06-12 09-41-16 - Linha enviada: Prescrição 6007148: Leucócitos com valor crítico de 5.0 /µL.
+2025-06-12 09-41-17 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-17 - time.sleep(0.5)
+2025-06-12 09-41-19 - Linha enviada: Prescrição 6005903: Hemoglobina com valor crítico de 6.4 g/dL.
+2025-06-12 09-41-20 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-20 - time.sleep(0.5)
+2025-06-12 09-41-22 - Linha enviada: Prescrição 6005903: Leucócitos com valor crítico de 8.9 /µL.
+2025-06-12 09-41-23 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-23 - time.sleep(0.5)
+2025-06-12 09-41-24 - Linha enviada: Prescrição 6006059: Leucócitos com valor crítico de 3.4 /µL.
+2025-06-12 09-41-25 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-25 - time.sleep(0.5)
+2025-06-12 09-41-27 - Linha enviada: Prescrição 6005951: Leucócitos com valor crítico de 4.3 /µL.
+2025-06-12 09-41-28 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-28 - time.sleep(0.5)
+2025-06-12 09-41-29 - Linha enviada: Prescrição 6007160: Leucócitos com valor crítico de 5.8 /µL.
+2025-06-12 09-41-30 - Envia uma "mensagem em branco" como separador
+2025-06-12 09-41-31 - time.sleep(0.5)
+2025-06-12 09-41-33 - Linha enviada: Prescrição 6007110: Leucócitos com valor crítico de 7.9 /µL.
+2025-06-12 09-41-34 - time.sleep(0.5)
+2025-06-12 09-41-34 - Localiza e clica no botão de enviar
+2025-06-12 09-41-35 - time.sleep(0.5)
+2025-06-12 09-41-35 - botao_enviar_element.click()
+2025-06-12 09-41-35 - Processo de envio de mensagens concluído.
+2025-06-12 09-41-35 - time.sleep(60)
+2025-06-12 09-42-38 -  driver.quit() - Navegador fechado.
+2025-06-12 09-42-38 - enviar_whatsapp - FIM
+2025-06-12 09-42-38 - Aguardando 58 minutos para o próximo ciclo...
+2025-06-12 09-42-38 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado
+2025-06-12 09-58-43 - Fechando janela. Sinalizando processo background para parar...
+2025-06-12 09-58-43 - logica_principal_background - FIM
+2025-06-12 09-58-43 - self.master.destroy()
+2025-06-12 09-58-43 - MAIN - FIM
+2025-06-12 10-03-15 - MAIN - INICIO
+2025-06-12 10-03-16 - def __init__ GUI - INICIO
+2025-06-12 10-03-16 - def __init__ GUI - FIM
+2025-06-12 10-03-22 - iniciar_processo - Botão Iniciar clicado
+2025-06-12 10-03-22 - Cria o evento de parada
+2025-06-12 10-03-22 - self.process.start()
+2025-06-12 10-03-22 - Processo background iniciado com PID: 11464
+2025-06-12 10-03-24 - logica_principal_background - INÍCIO
+2025-06-12 10-03-24 - Executando ciclo da lógica principal...
+2025-06-12 10-03-24 - resultados_exames_intervalo_58_min - INICIO
+2025-06-12 10-03-24 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 10-03-24 - encontrar_diretorio_instantclient - FIM
+2025-06-12 10-03-25 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 10-03-52 - Query executada. 11 linhas retornadas.
+2025-06-12 10-03-52 - resultados_exames_intervalo_58_min - FIM
+2025-06-12 10-03-52 - lista_de_resultados: [('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009854*', 'Paciente: S L C', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:06', 'Dig: 09:18', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: FOSFORO ', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6009843*', 'Paciente: F A S', 'Ex: CLORO (CL)', 'Resultado: 0', 'Col: 09:03', 'Dig: 09:20', 'Apr:  - '), ('*Prescrição: 6010296*', 'Paciente: N J N G', 'Ex: GLICOSE', 'Resultado: 0', 'Col: 09:16', 'Dig: 09:22', 'Apr:  - '), ('*Prescrição: 6010296*', 'Paciente: N J N G', 'Ex: POTÁSSIO ( K )', 'Resultado: 0', 'Col: 09:16', 'Dig: 09:22', 'Apr:  - '), ('*Prescrição: 6010296*', 'Paciente: N J N G', 'Ex: SÓDIO', 'Resultado: 0', 'Col: 09:16', 'Dig: 09:22', 'Apr:  - '), ('*Prescrição: 6007185*', 'Paciente: I G S', 'Ex: CÁLCIO IÔNICO ', 'Resultado: 23,1', 'Col: 06:01', 'Dig: 09:45', 'Apr: 09:50')]
+2025-06-12 10-03-52 - enviar_whatsapp - INÍCIO
+2025-06-12 10-03-59 - driver.get("https://web.whatsapp.com")
+2025-06-12 10-04-01 - time.sleep(5)
+2025-06-12 10-04-06 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-12 10-04-10 - Campo de pesquisa encontrado e clicável.
+2025-06-12 10-04-11 - Clicado no campo de pesquisa.
+2025-06-12 10-04-12 - Campo de input de pesquisa ativo encontrado.
+2025-06-12 10-04-14 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-12 10-04-14 - time.sleep(0.5)
+2025-06-12 10-04-14 - time.sleep(0.5)
+2025-06-12 10-04-15 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-12 10-04-17 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-12 10-04-17 - time.sleep(0.5)
+2025-06-12 10-04-17 - Localizando a caixa de texto do chat...
+2025-06-12 10-04-18 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-12 10-04-21 - Cabeçalho da mensagem enviado.
+2025-06-12 10-04-21 - Separador entre exames enviado.
+2025-06-12 10-04-21 - data_hora_formatada: *12/06/2025 às 10h04m*
+2025-06-12 10-04-21 - textinho: *12/06/2025 às 10h04m*
+2025-06-12 10-04-29 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 10-04-31 - Linha enviada: Paciente: S L C
+2025-06-12 10-04-32 - Linha enviada: Ex: GLICOSE
+2025-06-12 10-04-34 - Linha enviada: Resultado: 0
+2025-06-12 10-04-35 - Linha enviada: Col: 09:06
+2025-06-12 10-04-37 - Linha enviada: Dig: 09:18
+2025-06-12 10-04-38 - Linha enviada: Apr:  - 
+2025-06-12 10-04-39 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-04-39 - time.sleep(0.5)
+2025-06-12 10-04-40 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 10-04-41 - Linha enviada: Paciente: S L C
+2025-06-12 10-04-43 - Linha enviada: Ex: SÓDIO
+2025-06-12 10-04-44 - Linha enviada: Resultado: 0
+2025-06-12 10-04-45 - Linha enviada: Col: 09:06
+2025-06-12 10-04-47 - Linha enviada: Dig: 09:18
+2025-06-12 10-04-48 - Linha enviada: Apr:  - 
+2025-06-12 10-04-49 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-04-49 - time.sleep(0.5)
+2025-06-12 10-04-50 - Linha enviada: *Prescrição: 6009854*
+2025-06-12 10-04-52 - Linha enviada: Paciente: S L C
+2025-06-12 10-04-53 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 10-04-54 - Linha enviada: Resultado: 0
+2025-06-12 10-04-56 - Linha enviada: Col: 09:06
+2025-06-12 10-04-57 - Linha enviada: Dig: 09:18
+2025-06-12 10-04-58 - Linha enviada: Apr:  - 
+2025-06-12 10-04-59 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-04-59 - time.sleep(0.5)
+2025-06-12 10-05-00 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 10-05-02 - Linha enviada: Paciente: F A S
+2025-06-12 10-05-03 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 10-05-04 - Linha enviada: Resultado: 0
+2025-06-12 10-05-06 - Linha enviada: Col: 09:03
+2025-06-12 10-05-07 - Linha enviada: Dig: 09:20
+2025-06-12 10-05-09 - Linha enviada: Apr:  - 
+2025-06-12 10-05-10 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-05-10 - time.sleep(0.5)
+2025-06-12 10-05-11 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 10-05-12 - Linha enviada: Paciente: F A S
+2025-06-12 10-05-14 - Linha enviada: Ex: SÓDIO
+2025-06-12 10-05-15 - Linha enviada: Resultado: 0
+2025-06-12 10-05-16 - Linha enviada: Col: 09:03
+2025-06-12 10-05-18 - Linha enviada: Dig: 09:20
+2025-06-12 10-05-19 - Linha enviada: Apr:  - 
+2025-06-12 10-05-20 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-05-20 - time.sleep(0.5)
+2025-06-12 10-05-21 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 10-05-23 - Linha enviada: Paciente: F A S
+2025-06-12 10-05-24 - Linha enviada: Ex: FOSFORO 
+2025-06-12 10-05-26 - Linha enviada: Resultado: 0
+2025-06-12 10-05-27 - Linha enviada: Col: 09:03
+2025-06-12 10-05-28 - Linha enviada: Dig: 09:20
+2025-06-12 10-05-30 - Linha enviada: Apr:  - 
+2025-06-12 10-05-31 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-05-31 - time.sleep(0.5)
+2025-06-12 10-05-32 - Linha enviada: *Prescrição: 6009843*
+2025-06-12 10-05-33 - Linha enviada: Paciente: F A S
+2025-06-12 10-05-35 - Linha enviada: Ex: CLORO (CL)
+2025-06-12 10-05-36 - Linha enviada: Resultado: 0
+2025-06-12 10-05-37 - Linha enviada: Col: 09:03
+2025-06-12 10-05-39 - Linha enviada: Dig: 09:20
+2025-06-12 10-05-40 - Linha enviada: Apr:  - 
+2025-06-12 10-05-41 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-05-41 - time.sleep(0.5)
+2025-06-12 10-05-43 - Linha enviada: *Prescrição: 6010296*
+2025-06-12 10-05-44 - Linha enviada: Paciente: N J N G
+2025-06-12 10-05-45 - Linha enviada: Ex: GLICOSE
+2025-06-12 10-05-47 - Linha enviada: Resultado: 0
+2025-06-12 10-05-48 - Linha enviada: Col: 09:16
+2025-06-12 10-05-50 - Linha enviada: Dig: 09:22
+2025-06-12 10-05-51 - Linha enviada: Apr:  - 
+2025-06-12 10-05-52 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-05-52 - time.sleep(0.5)
+2025-06-12 10-05-53 - Linha enviada: *Prescrição: 6010296*
+2025-06-12 10-05-55 - Linha enviada: Paciente: N J N G
+2025-06-12 10-05-56 - Linha enviada: Ex: POTÁSSIO ( K )
+2025-06-12 10-05-58 - Linha enviada: Resultado: 0
+2025-06-12 10-05-59 - Linha enviada: Col: 09:16
+2025-06-12 10-06-01 - Linha enviada: Dig: 09:22
+2025-06-12 10-06-02 - Linha enviada: Apr:  - 
+2025-06-12 10-06-03 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-06-03 - time.sleep(0.5)
+2025-06-12 10-06-04 - Linha enviada: *Prescrição: 6010296*
+2025-06-12 10-06-06 - Linha enviada: Paciente: N J N G
+2025-06-12 10-06-07 - Linha enviada: Ex: SÓDIO
+2025-06-12 10-06-09 - Linha enviada: Resultado: 0
+2025-06-12 10-06-10 - Linha enviada: Col: 09:16
+2025-06-12 10-06-12 - Linha enviada: Dig: 09:22
+2025-06-12 10-06-13 - Linha enviada: Apr:  - 
+2025-06-12 10-06-14 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-06-14 - time.sleep(0.5)
+2025-06-12 10-06-15 - Linha enviada: *Prescrição: 6007185*
+2025-06-12 10-06-17 - Linha enviada: Paciente: I G S
+2025-06-12 10-06-18 - Linha enviada: Ex: CÁLCIO IÔNICO 
+2025-06-12 10-06-20 - Linha enviada: Resultado: 23,1
+2025-06-12 10-06-21 - Linha enviada: Col: 06:01
+2025-06-12 10-06-23 - Linha enviada: Dig: 09:45
+2025-06-12 10-06-24 - Linha enviada: Apr: 09:50
+2025-06-12 10-06-25 - time.sleep(0.5)
+2025-06-12 10-06-25 - Localiza e clica no botão de enviar
+2025-06-12 10-06-26 - time.sleep(0.5)
+2025-06-12 10-06-27 - botao_enviar_element.click()
+2025-06-12 10-06-27 - Processo de envio de mensagens concluído.
+2025-06-12 10-06-27 - time.sleep(60)
+2025-06-12 10-07-30 -  driver.quit() - Navegador fechado.
+2025-06-12 10-07-30 - enviar_whatsapp - FIM
+2025-06-12 10-07-30 - Iniciando processamento de hemogramas críticos...
+2025-06-12 10-07-30 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-12 10-07-30 - encontrar_diretorio_instantclient - Inicio
+2025-06-12 10-07-30 - encontrar_diretorio_instantclient - FIM
+2025-06-12 10-07-30 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-12 10-07-30 - Query executada. 135 linhas retornadas.
+2025-06-12 10-07-30 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-12 10-07-30 - Prescricao 6006003 (Hemograma): Valor de Hemoglobina: 7.6
+2025-06-12 10-07-30 - Prescricao 6006003 (Hemograma): Valor de Hematócrito: 22.7
+2025-06-12 10-07-30 - Prescricao 6006003 (Hemograma): Valor de Leucócitos: 3.71
+2025-06-12 10-07-30 - Prescricao 6006003 (Hemograma): Valor de Plaquetas: 673000.0
+2025-06-12 10-07-30 - Prescricao 6005985 (Hemograma): Valor de Hemoglobina: 7.2
+2025-06-12 10-07-30 - Prescricao 6005985 (Hemograma): Valor de Hematócrito: 21.7
+2025-06-12 10-07-30 - Prescricao 6005985 (Hemograma): Valor de Leucócitos: 8.62
+2025-06-12 10-07-30 - Prescricao 6005985 (Hemograma): Valor de Plaquetas: 164000.0
+2025-06-12 10-07-30 - Prescricao 6009843 (Hemograma): Valor de Hemoglobina: 7.7
+2025-06-12 10-07-30 - Prescricao 6009843 (Hemograma): Valor de Hematócrito: 22.3
+2025-06-12 10-07-30 - Prescricao 6009843 (Hemograma): Valor de Leucócitos: 5.05
+2025-06-12 10-07-30 - Prescricao 6009843 (Hemograma): Valor de Plaquetas: 157000.0
+2025-06-12 10-07-30 - Prescricao 6005937 (Hemograma): Valor de Hemoglobina: 11.1
+2025-06-12 10-07-30 - Prescricao 6005937 (Hemograma): Valor de Hematócrito: 31.9
+2025-06-12 10-07-30 - Prescricao 6005937 (Hemograma): Valor de Leucócitos: 15.91
+2025-06-12 10-07-30 - Prescricao 6005937 (Hemograma): Valor de Plaquetas: 183000.0
+2025-06-12 10-07-30 - Prescricao 6005965 (Hemograma): Valor de Hemoglobina: 8.2
+2025-06-12 10-07-30 - Prescricao 6005965 (Hemograma): Valor de Hematócrito: 24.3
+2025-06-12 10-07-30 - Prescricao 6005965 (Hemograma): Valor de Leucócitos: 8.79
+2025-06-12 10-07-30 - Prescricao 6005965 (Hemograma): Valor de Plaquetas: 253000.0
+2025-06-12 10-07-30 - Prescricao 6007148 (Hemograma): Valor de Hemoglobina: 8.7
+2025-06-12 10-07-30 - Prescricao 6007148 (Hemograma): Valor de Hematócrito: 24.6
+2025-06-12 10-07-30 - Prescricao 6007148 (Hemograma): Valor de Leucócitos: 4.97
+2025-06-12 10-07-30 - Prescricao 6007148 (Hemograma): Valor de Plaquetas: 101000.0
+2025-06-12 10-07-30 - Prescricao 6009703 (Hemograma): Valor de Hemoglobina: 9.1
+2025-06-12 10-07-30 - Prescricao 6009703 (Hemograma): Valor de Hematócrito: 28.2
+2025-06-12 10-07-30 - Prescricao 6009703 (Hemograma): Valor de Leucócitos: 4.5
+2025-06-12 10-07-30 - Prescricao 6009703 (Hemograma): Valor de Plaquetas: 175000.0
+2025-06-12 10-07-30 - Prescricao 6009854 (Hemograma): Valor de Hemoglobina: 13.3
+2025-06-12 10-07-30 - Prescricao 6009854 (Hemograma): Valor de Hematócrito: 38.6
+2025-06-12 10-07-30 - Prescricao 6009854 (Hemograma): Valor de Leucócitos: 7.45
+2025-06-12 10-07-30 - Prescricao 6009854 (Hemograma): Valor de Plaquetas: 160000.0
+2025-06-12 10-07-30 - Prescricao 6010296 (Hemograma): Valor de Hemoglobina: 12.7
+2025-06-12 10-07-30 - Prescricao 6010296 (Hemograma): Valor de Hematócrito: 36.3
+2025-06-12 10-07-30 - Prescricao 6010296 (Hemograma): Valor de Leucócitos: 7.98
+2025-06-12 10-07-30 - Prescricao 6010296 (Hemograma): Valor de Plaquetas: 244000.0
+2025-06-12 10-07-30 - Prescricao 6005880 (Hemograma): Valor de Hemoglobina: 12.1
+2025-06-12 10-07-30 - Prescricao 6005880 (Hemograma): Valor de Hematócrito: 37.2
+2025-06-12 10-07-30 - Prescricao 6005880 (Hemograma): Valor de Leucócitos: 12.91
+2025-06-12 10-07-30 - Prescricao 6005880 (Hemograma): Valor de Plaquetas: 478000.0
+2025-06-12 10-07-30 - Prescricao 6007030 (Hemograma): Valor de Hemoglobina: 9.1
+2025-06-12 10-07-30 - Prescricao 6007030 (Hemograma): Valor de Hematócrito: 25.9
+2025-06-12 10-07-30 - Prescricao 6007030 (Hemograma): Valor de Leucócitos: 6.33
+2025-06-12 10-07-30 - Prescricao 6007030 (Hemograma): Valor de Plaquetas: 101000.0
+2025-06-12 10-07-30 - Prescricao 6007072 (Hemograma): Valor de Hemoglobina: 8.4
+2025-06-12 10-07-30 - Prescricao 6007072 (Hemograma): Valor de Hematócrito: 23.7
+2025-06-12 10-07-30 - Prescricao 6007072 (Hemograma): Valor de Leucócitos: 7.83
+2025-06-12 10-07-30 - Prescricao 6007072 (Hemograma): Valor de Plaquetas: 201000.0
+2025-06-12 10-07-30 - Prescricao 6005903 (Hemograma): Valor de Hemoglobina: 6.4
+2025-06-12 10-07-30 - Prescricao 6005903 (Hemograma): Valor de Hematócrito: 18.7
+2025-06-12 10-07-30 - Prescricao 6005903 (Hemograma): Valor de Leucócitos: 8.87
+2025-06-12 10-07-30 - Prescricao 6005903 (Hemograma): Valor de Plaquetas: 254000.0
+2025-06-12 10-07-30 - Prescricao 6006059 (Hemograma): Valor de Hemoglobina: 8.0
+2025-06-12 10-07-30 - Prescricao 6006059 (Hemograma): Valor de Hematócrito: 22.9
+2025-06-12 10-07-30 - Prescricao 6006059 (Hemograma): Valor de Leucócitos: 3.43
+2025-06-12 10-07-30 - Prescricao 6006059 (Hemograma): Valor de Plaquetas: 180000.0
+2025-06-12 10-07-30 - Prescricao 6005951 (Hemograma): Valor de Hemoglobina: 8.9
+2025-06-12 10-07-30 - Prescricao 6005951 (Hemograma): Valor de Hematócrito: 25.3
+2025-06-12 10-07-30 - Prescricao 6005951 (Hemograma): Valor de Leucócitos: 4.29
+2025-06-12 10-07-30 - Prescricao 6005951 (Hemograma): Valor de Plaquetas: 165000.0
+2025-06-12 10-07-30 - Prescricao 6007160 (Hemograma): Valor de Hemoglobina: 10.0
+2025-06-12 10-07-30 - Prescricao 6007160 (Hemograma): Valor de Hematócrito: 29.1
+2025-06-12 10-07-30 - Prescricao 6007160 (Hemograma): Valor de Leucócitos: 5.77
+2025-06-12 10-07-30 - Prescricao 6007160 (Hemograma): Valor de Plaquetas: 133000.0
+2025-06-12 10-07-30 - Prescricao 6007110 (Hemograma): Valor de Hemoglobina: 6.6
+2025-06-12 10-07-30 - Prescricao 6007110 (Hemograma): Valor de Hematócrito: 19.6
+2025-06-12 10-07-30 - Prescricao 6007110 (Hemograma): Valor de Leucócitos: 7.89
+2025-06-12 10-07-30 - Prescricao 6007110 (Hemograma): Valor de Plaquetas: 50000.0
+2025-06-12 10-07-30 - Prescricao 6006949 (Hemograma): Valor de Hemoglobina: 10.7
+2025-06-12 10-07-30 - Prescricao 6006949 (Hemograma): Valor de Hematócrito: 31.3
+2025-06-12 10-07-30 - Prescricao 6006949 (Hemograma): Valor de Leucócitos: 13.18
+2025-06-12 10-07-30 - Prescricao 6006949 (Hemograma): Valor de Plaquetas: 390000.0
+2025-06-12 10-07-30 - Prescricao 6007355 (Hemograma): Valor de Hemoglobina: 10.2
+2025-06-12 10-07-30 - Prescricao 6007355 (Hemograma): Valor de Hematócrito: 32.2
+2025-06-12 10-07-30 - Prescricao 6007355 (Hemograma): Valor de Leucócitos: 9.54
+2025-06-12 10-07-30 - Prescricao 6007355 (Hemograma): Valor de Plaquetas: 224000.0
+2025-06-12 10-07-30 - Prescricao 6007856 (Hemograma): Valor de Hemoglobina: 12.2
+2025-06-12 10-07-30 - Prescricao 6007856 (Hemograma): Valor de Hematócrito: 34.4
+2025-06-12 10-07-30 - Prescricao 6007856 (Hemograma): Valor de Leucócitos: 7.94
+2025-06-12 10-07-30 - Prescricao 6007856 (Hemograma): Valor de Plaquetas: 182000.0
+2025-06-12 10-07-30 - Prescricao 6008636 (Hemograma): Valor de Hemoglobina: 13.5
+2025-06-12 10-07-30 - Prescricao 6008636 (Hemograma): Valor de Hematócrito: 39.6
+2025-06-12 10-07-30 - Prescricao 6008636 (Hemograma): Valor de Leucócitos: 13.84
+2025-06-12 10-07-30 - Prescricao 6008636 (Hemograma): Valor de Plaquetas: 382000.0
+2025-06-12 10-07-30 - Prescricao 6007273 (Hemograma): Valor de Hemoglobina: 10.6
+2025-06-12 10-07-30 - Prescricao 6007273 (Hemograma): Valor de Hematócrito: 32.1
+2025-06-12 10-07-30 - Prescricao 6007273 (Hemograma): Valor de Leucócitos: 4.0
+2025-06-12 10-07-30 - Prescricao 6007273 (Hemograma): Valor de Plaquetas: 203000.0
+2025-06-12 10-07-30 - enviar_whatsapp - INÍCIO
+2025-06-12 10-07-34 - driver.get("https://web.whatsapp.com")
+2025-06-12 10-07-36 - time.sleep(5)
+2025-06-12 10-07-41 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-06-12 10-07-46 - Campo de pesquisa encontrado e clicável.
+2025-06-12 10-07-47 - Clicado no campo de pesquisa.
+2025-06-12 10-07-48 - Campo de input de pesquisa ativo encontrado.
+2025-06-12 10-07-51 - Texto 'LAB - VALORES CRÍTICOS' enviado para o campo de pesquisa.
+2025-06-12 10-07-51 - time.sleep(0.5)
+2025-06-12 10-07-51 - time.sleep(0.5)
+2025-06-12 10-07-52 - Resultado da pesquisa para 'LAB - VALORES CRÍTICOS' encontrado e clicável.
+2025-06-12 10-07-52 - Clicado no grupo 'LAB - VALORES CRÍTICOS' na lista de resultados.
+2025-06-12 10-07-52 - time.sleep(0.5)
+2025-06-12 10-07-53 - Localizando a caixa de texto do chat...
+2025-06-12 10-07-53 - Caixa de texto inicial localizada e clicável com sucesso!
+2025-06-12 10-07-53 - Cabeçalho da mensagem enviado.
+2025-06-12 10-07-54 - Separador entre exames enviado.
+2025-06-12 10-07-54 - data_hora_formatada: *12/06/2025 às 10h07m*
+2025-06-12 10-07-54 - textinho: *12/06/2025 às 10h07m*
+2025-06-12 10-07-58 - Linha enviada: --- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---
+2025-06-12 10-07-59 - Envia uma "mensagem em branco" como separador
+2025-06-12 10-07-59 - time.sleep(0.5)
+2025-06-12 10-08-00 - Linha enviada: Prescrição 6005903: Hemoglobina com valor crítico de 6.4 g/dL.
+2025-06-12 10-08-01 - time.sleep(0.5)
+2025-06-12 10-08-02 - Localiza e clica no botão de enviar
+2025-06-12 10-08-02 - time.sleep(0.5)
+2025-06-12 10-08-03 - botao_enviar_element.click()
+2025-06-12 10-08-03 - Processo de envio de mensagens concluído.
+2025-06-12 10-08-03 - time.sleep(60)
+2025-06-12 10-09-05 -  driver.quit() - Navegador fechado.
+2025-06-12 10-09-05 - enviar_whatsapp - FIM
+2025-06-12 10-09-05 - Aguardando 58 minutos para o próximo ciclo...
+2025-06-12 10-09-05 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado
