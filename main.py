@@ -395,22 +395,71 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
                 registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")
 
 
-            # Removida a longa pausa daqui. Se precisar de uma pausa para observar,
-            # adicione-a intencionalmente e por um período menor.
+            # Pausa breve para garantir que a mensagem seja processada antes de fechar o navegador
+            time.sleep(5) # Ajuste conforme necessário para garantir o envio
 
 
         except Exception as e_search:
             registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
         
-        registrar_log('time.sleep(60)')
-        time.sleep(60)
-        driver.quit() # Comentado para manter o navegador aberto para desenvolvimento/interação
+        # Fechar o navegador após o envio para liberar recursos
+        if driver: # Garante que o driver foi inicializado antes de tentar fechar
+            driver.quit() 
         registrar_log(" driver.quit() - Navegador fechado.")
 
     except Exception as e:
         registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp: {e}")
     
     registrar_log("enviar_whatsapp - FIM")
+
+def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
+    """
+    Processa os resultados brutos de exames (incluindo RTF) para identificar
+    coagulogramas com valores críticos de INR.
+    Retorna uma lista de dicionários com os detalhes dos coagulogramas críticos.
+    """
+    registrar_log('processar_coagulogramas_criticos - INÍCIO')
+    coagulogramas_criticos_encontrados = []
+
+    if not resultados_hemogramas_brutos:
+        registrar_log("Nenhum resultado bruto de hemogramas/exames para processar coagulogramas.")
+        return coagulogramas_criticos_encontrados
+
+    for linha_completa in resultados_hemogramas_brutos:
+        if len(linha_completa) > 2:
+            nr_prescricao = linha_completa[0]
+            ds_resultado_valor_rtf = linha_completa[2]
+            # NM_PACIENTE não está disponível diretamente aqui, então não será incluído
+            # DT_EXAME também não está disponível
+
+            if ds_resultado_valor_rtf and "COAGULOGRAMA" in str(ds_resultado_valor_rtf).upper():
+                texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
+                
+                # Regex para extrair INR: Procura "INR", seguido por espaços/pontos e ":", depois o valor.
+                match_inr = re.search(r"INR\s*\.*\s*:\s*([0-9,.]+)", texto_limpo, re.IGNORECASE)
+                
+                if match_inr:
+                    try:
+                        inr_str = match_inr.group(1).strip().replace(",", ".")
+                        inr_val = float(inr_str)
+                        
+                        # Critério de criticidade para INR: > 6.00
+                        if inr_val > 6.00:
+                            coagulogramas_criticos_encontrados.append({
+                                "prescricao": nr_prescricao,
+                                # "paciente": nm_paciente, # Não disponível
+                                "parametro": "INR",
+                                "valor": inr_val,
+                                "unidade": "", # INR não tem unidade explícita comum
+                                "criterio": "> 6.00"
+                            })
+                            registrar_log(f"Coagulograma crítico encontrado: Prescrição {nr_prescricao}, INR: {inr_val}")
+                    except ValueError:
+                        registrar_log(f"Prescricao {nr_prescricao} (Coagulograma): Valor de INR '{inr_str}' não é numérico.")
+
+    registrar_log('processar_coagulogramas_criticos - FIM')
+    return coagulogramas_criticos_encontrados
+
 
 def logica_principal_background(stop_event):
     """Lógica principal que será executada em um processo separado, repetidamente."""
@@ -537,6 +586,20 @@ def logica_principal_background(stop_event):
                 registrar_log("Nenhum hemograma crítico encontrado para enviar.")
         else:
             registrar_log("Nenhum resultado de hemograma encontrado na query para processamento.")
+
+        # --- INÍCIO DO PROCESSAMENTO DE COAGULOGRAMAS CRÍTICOS ---
+        registrar_log("Iniciando processamento de coagulogramas críticos...")
+        coagulogramas_criticos = processar_coagulogramas_criticos(resultados_hemogramas) # Reutiliza os mesmos resultados brutos
+        mensagens_coagulogramas_criticos_whatsapp = []
+
+        if coagulogramas_criticos:
+            mensagens_coagulogramas_criticos_whatsapp.append(["--- COAGULOGRAMAS CRÍTICOS ENCONTRADOS ---"])
+            for critico in coagulogramas_criticos:
+                linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f}."
+                mensagens_coagulogramas_criticos_whatsapp.append([linha_mensagem])
+            enviar_whatsapp(mensagens_coagulogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+        else:
+            registrar_log("Nenhum coagulograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
         
         # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
@@ -612,163 +675,6 @@ def main():
     root.mainloop()
     registrar_log("MAIN - FIM")
 
-"""
-
-if __name__ == "__main__":
-    # ... (início do seu bloco de teste) ...
-    registrar_log("--- INICIANDO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---")
-    try:
-        resultados_teste = resultados_hemogramas_intervalo_58_min()
-
-        hemogramas_criticos = [] # Lista para armazenar os hemogramas críticos
-        if resultados_teste is not None:
-            if resultados_teste:
-                registrar_log(f"Resultados encontrados ({len(resultados_teste)} linhas):")
-                for i, linha_completa in enumerate(resultados_teste):
-                    if len(linha_completa) > 2:
-                        nr_prescricao = linha_completa[0] # Captura o número da prescrição
-                        ds_resultado_valor_rtf = linha_completa[2]
-
-                        if ds_resultado_valor_rtf and "HEMOGRAMA" in str(ds_resultado_valor_rtf).upper():
-                            # print(f"\n--- Linha {i+1} | Prescrição: {nr_prescricao} ---") # Comentado para não exibir
-                            # print(f"Conteúdo RTF Original:\n{ds_resultado_valor_rtf}") # Se quiser ver o original
-                            texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
-                            # print(f"\n{texto_limpo}\n") # Comentado para não exibir
-                            # Agora, vamos extrair os dados específicos do texto_limpo
-                            # Padrões regex para cada item do hemograma
-                            # Ajuste os '.{10,25}' para a quantidade de pontos ou espaços esperados
-                            padroes_extracao = {
-                                "Hemácias": r"Hemácias[\s\.]*:\s*([0-9,.]+)\s*Milhões/mmb3",
-                                "Hemoglobina": r"Hemoglobina[\s\.]*:\s*([0-9,.]+)\s*g/dL",
-                                "Hematocrito": r"Hematócrito[\s\.]*:\s*([0-9,.]+)\s*%",
-                                "VCM": r"VCM[\s\.]*:\s*([0-9,.]+)\s*fl",
-                                "HCM": r"HCM[\s\.]*:\s*([0-9,.]+)\s*pg",
-                                "CHCM": r"CHCM[\s\.]*:\s*([0-9,.]+)\s*g/dL",
-                                "RDW": r"RDW[\s\.]*:\s*([0-9,.]+)\s*%",
-                                "Eritroblastos": r"Eritroblastos[\s\.]*:\s*([0-9,.]+)" # Ajustar se tiver unidade
-                                # Adicione outros padrões conforme necessário (Leucócitos, Plaquetas, etc.)
-                            }
-
-                            dados_extraidos = {}
-                            for nome_campo, padrao in padroes_extracao.items():
-                                match = re.search(padrao, texto_limpo, re.IGNORECASE)
-                                if match:
-                                    dados_extraidos[nome_campo] = match.group(1).strip()
-                                else:
-                                    dados_extraidos[nome_campo] = "Não encontrado"
-
-                            # print("Dados Extraídos do Hemograma:") # Comentado para não exibir
-                            # for campo, valor in dados_extraidos.items():
-                            #     print(f"  {campo}: {valor}")
-                            # print("-" * 30) # Comentado para não exibir
-
-                            # Verificar criticidade da Hemoglobina
-                            hemoglobina_valor_str = dados_extraidos.get("Hemoglobina")
-                            if hemoglobina_valor_str and hemoglobina_valor_str != "Não encontrado":
-                                try:
-                                    # Substitui vírgula por ponto para converter para float
-                                    hemoglobina_valor_float = float(hemoglobina_valor_str.replace(",", "."))
-                                    # Aplica seus critérios de criticidade
-                                    if hemoglobina_valor_float < 6.6 or hemoglobina_valor_float > 19.9:
-                                        hemogramas_criticos.append({
-                                            "prescricao": nr_prescricao,
-                                            "parametro": "Hemoglobina",
-                                            "valor": hemoglobina_valor_float,
-                                            "unidade": "g/dL",
-                                            "todos_dados": dados_extraidos.copy() # Opcional: guardar todos os dados extraídos
-                                        })
-                                except ValueError:
-                                    registrar_log(f"Prescrição {nr_prescricao}: Valor de Hemoglobina '{hemoglobina_valor_str}' não é numérico.")
-
-                            # Verificar criticidade do Hematócrito
-                            hematocrito_valor_str = dados_extraidos.get("Hematocrito")
-                            if hematocrito_valor_str and hematocrito_valor_str != "Não encontrado":
-                                try:
-                                    hematocrito_valor_float = float(hematocrito_valor_str.replace(",", "."))
-                                    if hematocrito_valor_float < 18.0 or hematocrito_valor_float > 60.0: # vol%
-                                        hemogramas_criticos.append({
-                                            "prescricao": nr_prescricao,
-                                            "parametro": "Hematócrito",
-                                            "valor": hematocrito_valor_float,
-                                            "unidade": "vol%",
-                                            "todos_dados": dados_extraidos.copy()
-                                        })
-                                except ValueError:
-                                    registrar_log(f"Prescrição {nr_prescricao}: Valor de Hematócrito '{hematocrito_valor_str}' não é numérico.")
-
-                            # Verificar criticidade dos Leucócitos
-                            # Regra: < 2.000/µL ou > 50.000/µL
-                            # Valor extraído é em mmb3 (que é µL), então a conversão é direta.
-                            leucocitos_valor_str = dados_extraidos.get("Leucocitos")
-                            if leucocitos_valor_str and leucocitos_valor_str != "Não encontrado":
-                                try:
-                                    # O valor de leucócitos já é o número total (ex: 15.52, que seria 15520 se a unidade fosse x10³/µL)
-                                    # Se a regex captura "15,52" e a unidade é "mmb3" (que é /µL), então o valor é 15520.
-                                    # A sua regra é < 2.000/µL ou > 50.000/µL.
-                                    # Se o valor extraído for "15.52" e isso representa 15520, então a comparação é direta.
-                                    # Se o valor extraído for "15,52" e isso representa 15.52 (e não 15520), você precisa ajustar a conversão.
-                                    # Assumindo que a regex captura o valor que já está na escala correta (ex: 15520, ou 1.5 se for 1500)
-                                    leucocitos_valor_float = float(leucocitos_valor_str.replace(",", "."))
-                                    # Se o valor extraído for algo como "15.52" e isso significa 15.52 x 10^3 /uL, então multiplique por 1000
-                                    # leucocitos_valor_float = float(leucocitos_valor_str.replace(",", ".")) * 1000 # Descomente se necessário
-
-                                    if leucocitos_valor_float < 2000.0 or leucocitos_valor_float > 50000.0: # /µL
-                                        hemogramas_criticos.append({
-                                            "prescricao": nr_prescricao,
-                                            "parametro": "Leucócitos",
-                                            "valor": leucocitos_valor_float,
-                                            "unidade": "/µL", # ou mmb3
-                                            "todos_dados": dados_extraidos.copy()
-                                        })
-                                except ValueError:
-                                    registrar_log(f"Prescrição {nr_prescricao}: Valor de Leucócitos '{leucocitos_valor_str}' não é numérico.")
-
-                            # Verificar criticidade das Plaquetas
-                            # Regra: < 20.000/uL ou > 1.000.000/uL
-                            # Valor extraído é em "mil/mmb3", então precisa multiplicar por 1000.
-                            plaquetas_valor_str = dados_extraidos.get("Plaquetas")
-                            if plaquetas_valor_str and plaquetas_valor_str != "Não encontrado":
-                                try:
-                                    plaquetas_valor_float = float(plaquetas_valor_str.replace(",", ".")) * 1000 # Conversão para /uL
-                                    if plaquetas_valor_float < 20000.0 or plaquetas_valor_float > 1000000.0: # /uL
-                                        hemogramas_criticos.append({
-                                            "prescricao": nr_prescricao,
-                                            "parametro": "Plaquetas",
-                                            "valor": plaquetas_valor_float, # Armazena o valor já convertido para /uL
-                                            "unidade": "/uL",
-                                            "todos_dados": dados_extraidos.copy()
-                                        })
-                                except ValueError:
-                                    registrar_log(f"Prescrição {nr_prescricao}: Valor de Plaquetas '{plaquetas_valor_str}' não é numérico.")
-                    # else: (seu código else anterior)
-            # else: (seu código else anterior)
-        else:
-            registrar_log("A query de teste de hemogramas não retornou resultados ou houve um erro.")
-
-        # Exibir os hemogramas críticos encontrados
-        if hemogramas_criticos:
-            registrar_log("\n--- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---")
-            mensagens_para_whatsapp = [["--- HEMOGRAMAS CRÍTICOS ENCONTRADOS ---"]] # Cabeçalho para WhatsApp
-
-            for critico in hemogramas_criticos:
-                linha_console = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.1f} {critico['unidade']}."
-                print(linha_console) # Mantém a impressão no console para seu log de teste
-                mensagens_para_whatsapp.append([linha_console]) # Adiciona a linha formatada para o WhatsApp
-            
-            registrar_log("-" * 40)
-
-            # Enviar para o WhatsApp (respeitando o modo de teste)
-            # Defina MODO_TESTE_WHATSAPP_PARA_HEMOGRAMAS como True para simular, False para enviar de verdade.
-            MODO_TESTE_WHATSAPP_PARA_HEMOGRAMAS = True # Mude para False para envio real
-            registrar_log(f"Preparando para enviar hemogramas críticos via WhatsApp (Modo Teste: {MODO_TESTE_WHATSAPP_PARA_HEMOGRAMAS})...")
-            enviar_whatsapp(mensagens_para_whatsapp, modo_teste=MODO_TESTE_WHATSAPP_PARA_HEMOGRAMAS)
-        else:
-            registrar_log("\nNenhum hemograma com valor crítico de Hemoglobina encontrado nos critérios especificados.")
-    except Exception as e_teste:
-        registrar_log(f"Erro durante o teste da função: {e_teste}")
-    
-    registrar_log("--- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---")
-"""
 if __name__ == "__main__":
     # Este bloco é crucial para o multiprocessing funcionar corretamente no Windows.
     # Ele garante que o código de criação de processos só seja executado

@@ -2279,3 +2279,36 @@ Nenhum hemograma com valor crítico de Hemoglobina encontrado nos critérios esp
 2025-06-11 16-32-55 - Preparando para enviar hemogramas críticos via WhatsApp (Modo Teste: True)...
 2025-06-11 16-32-55 - Erro durante o teste da função: enviar_whatsapp() got an unexpected keyword argument 'modo_teste'
 2025-06-11 16-32-55 - --- FIM DO TESTE DA FUNÇÃO resultados_hemogramas_intervalo_58_min ---
+2025-06-23 17-26-32 - MAIN - INICIO
+2025-06-23 17-26-32 - def __init__ GUI - INICIO
+2025-06-23 17-26-32 - def __init__ GUI - FIM
+2025-06-23 17-26-35 - iniciar_processo - Botão Iniciar clicado
+2025-06-23 17-26-35 - Cria o evento de parada
+2025-06-23 17-26-35 - self.process.start()
+2025-06-23 17-26-35 - Processo background iniciado com PID: 18700
+2025-06-23 17-26-36 - logica_principal_background - INÍCIO
+2025-06-23 17-26-36 - Executando ciclo da lógica principal...
+2025-06-23 17-26-36 - resultados_exames_intervalo_58_min - INICIO
+2025-06-23 17-26-36 - encontrar_diretorio_instantclient - Inicio
+2025-06-23 17-26-36 - encontrar_diretorio_instantclient - FIM
+2025-06-23 17-26-36 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+2025-06-23 17-27-24 - Query executada. 0 linhas retornadas.
+2025-06-23 17-27-24 - resultados_exames_intervalo_58_min - FIM
+2025-06-23 17-27-24 - lista_de_resultados: []
+2025-06-23 17-27-24 - enviar_whatsapp - INÍCIO
+2025-06-23 17-27-24 - Nenhum exame crítico para enviar via WhatsApp.
+2025-06-23 17-27-24 - enviar_whatsapp - FIM
+2025-06-23 17-27-24 - Iniciando processamento de hemogramas críticos...
+2025-06-23 17-27-24 - resultados_hemogramas_intervalo_58_min - INICIO
+2025-06-23 17-27-24 - encontrar_diretorio_instantclient - Inicio
+2025-06-23 17-27-24 - encontrar_diretorio_instantclient - FIM
+2025-06-23 17-27-24 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2025-06-23 17-27-24 - Query executada. 16 linhas retornadas.
+2025-06-23 17-27-24 - resultados_hemogramas_intervalo_58_min - FIM
+2025-06-23 17-27-24 - Nenhum hemograma crítico encontrado para enviar.
+2025-06-23 17-27-24 - Iniciando processamento de coagulogramas críticos...
+2025-06-23 17-27-24 - processar_coagulogramas_criticos - INÍCIO
+2025-06-23 17-27-24 - processar_coagulogramas_criticos - FIM
+2025-06-23 17-27-24 - Nenhum coagulograma crítico encontrado para enviar.
+2025-06-23 17-27-24 - Aguardando 58 minutos para o próximo ciclo...
+2025-06-23 17-27-24 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado
