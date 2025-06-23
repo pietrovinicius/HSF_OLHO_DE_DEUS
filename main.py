@@ -169,18 +169,6 @@ def limpar_rtf_para_texto(rtf_text):
     # 2. Converter entidades de caracteres RTF comuns
     # Adicione mais conforme necessário
 
-    """
-    TODO: Adicione os textos abaixo no replacements, sem separa-los para não dar erro:
-    4,4 a 5,9 3,8 a 5,2 Milhões/mmb3
-    13,0 a 18,0 12,0 a 16,0 g/dL
-    40,0 a 53,0 35,0 a 47,0 %
-    80,0 a 100,0 fl
-    26,0 a 34 pg
-    32,0 a 36,0 g/dL
-    11,5 a 16,0 %
-
-    """
-
     replacements = {
         "\\'e1": "á", "\\'E1": "Á",
         "\\'e9": "é", "\\'E9": "É",
@@ -208,6 +196,15 @@ def limpar_rtf_para_texto(rtf_text):
         #"5,2 Milhões/mmb3" : "",
         #"4,4 a 5,9" : "",
         #"3,8 a " : "",
+        
+        # Valores de referência a serem removidos
+        "4,4 a 5,9 3,8 a 5,2 Milhões/mmb3": "",
+        "13,0 a 18,0 12,0 a 16,0 g/dL": "",
+        "40,0 a 53,0 35,0 a 47,0 %": "",
+        "80,0 a 100,0 fl": "",
+        "26,0 a 34 pg": "",
+        "32,0 a 36,0 g/dL": "",
+        "11,5 a 16,0 %": "",
         
         # Adicione outras entidades comuns que você encontrar
     }
@@ -608,9 +605,9 @@ def logica_principal_background(stop_event):
         # --- FIM DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
         
         # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
-        registrar_log("Aguardando 58 minutos para o próximo ciclo...")
-        registrar_log('stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado')
-        stop_event.wait(3480)
+        registrar_log("Aguardando 60 minutos para o próximo ciclo...")
+        registrar_log('stop_event.wait(3600) - Espera por 3480 segundos ou até stop_event ser setado')
+        stop_event.wait(3600)
 
     registrar_log("logica_principal_background - FIM")
     print("Processo em background concluído.") # Feedback no console
