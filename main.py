@@ -465,6 +465,78 @@ def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
     registrar_log('processar_coagulogramas_criticos - FIM')
     return coagulogramas_criticos_encontrados
 
+def processar_hepatogramas_criticos(resultados_exames_brutos):
+    """
+    Processa os resultados brutos de exames (incluindo RTF) para identificar
+    hepatogramas com valores críticos de Plaquetas e Bilirrubina.
+    Retorna uma lista de dicionários com os detalhes dos hepatogramas críticos.
+    """
+    registrar_log('processar_hepatogramas_criticos - INÍCIO')
+    hepatogramas_criticos_encontrados = []
+
+    if not resultados_exames_brutos:
+        registrar_log("Nenhum resultado bruto de exames para processar hepatogramas.")
+        return hepatogramas_criticos_encontrados
+
+    for linha_completa in resultados_exames_brutos:
+        if len(linha_completa) > 2:
+            nr_prescricao = linha_completa[0]
+            # nm_paciente = linha_completa[1] # Não usado no dicionário crítico, mas bom para log
+            ds_resultado_valor_rtf = linha_completa[2]
+
+            # Filtrar preliminarmente por RTFs que contêm "HEPATOGRAMA"
+            if ds_resultado_valor_rtf and "HEPATOGRAMA" in str(ds_resultado_valor_rtf).upper():
+                texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
+
+                # Regex para extrair "Contagem de plaquetas"
+                # Procura "Contagem de plaquetas" ou "Plaquetas", seguido por espaços/pontos e ":", depois o valor.
+                # Captura opcionalmente "mil" para ajustar a escala.
+                match_plaquetas = re.search(r"(?:Contagem de plaquetas|Plaquetas)\s*[:\s]*\s*([0-9,.]+)\s*(mil)?(?:/uL|/mm3|/\xb5L)?", texto_limpo, re.IGNORECASE)
+
+                if match_plaquetas:
+                    try:
+                        plaquetas_str = match_plaquetas.group(1).strip().replace(",", ".")
+                        plaquetas_val = float(plaquetas_str)
+                        unidade_mil = match_plaquetas.group(2)
+                        if unidade_mil and unidade_mil.lower() == 'mil':
+                            plaquetas_val *= 1000 # Converte de "mil" para o valor absoluto
+
+                        # Critério de criticidade: < 20.000/uL ou > 1.000.000/uL
+                        if plaquetas_val < 20000.0 or plaquetas_val > 1000000.0:
+                            hepatogramas_criticos_encontrados.append({
+                                "prescricao": nr_prescricao,
+                                "parametro": "Plaquetas (Hepatograma)",
+                                "valor": plaquetas_val,
+                                "unidade": "/uL"
+                            })
+                            registrar_log(f"Hepatograma crítico (Plaquetas) encontrado: Prescrição {nr_prescricao}, Valor: {plaquetas_val}")
+                    except ValueError:
+                        registrar_log(f"Prescricao {nr_prescricao} (Hepatograma): Valor de Plaquetas '{plaquetas_str}' não é numérico.")
+
+                # Regex para extrair Bilirrubina (Total)
+                # Procura "Bilirrubina Total" ou apenas "Bilirrubina", seguido por espaços/pontos e ":", depois o valor.
+                match_bilirrubina = re.search(r"(Bilirrubina\s*(?:Total)?)\s*[:\s]*\s*([0-9,.]+)\s*(?:mg/dL)?", texto_limpo, re.IGNORECASE)
+
+                if match_bilirrubina:
+                    try:
+                        bilirrubina_str = match_bilirrubina.group(2).strip().replace(",", ".")
+                        bilirrubina_val = float(bilirrubina_str)
+
+                        # Critério de criticidade: Bilirrubina > 15 mg/dL
+                        if bilirrubina_val > 15.0:
+                            hepatogramas_criticos_encontrados.append({
+                                "prescricao": nr_prescricao,
+                                "parametro": "Bilirrubina (Hepatograma)",
+                                "valor": bilirrubina_val,
+                                "unidade": "mg/dL"
+                            })
+                            registrar_log(f"Hepatograma crítico (Bilirrubina) encontrado: Prescrição {nr_prescricao}, Valor: {bilirrubina_val}")
+                    except ValueError:
+                        registrar_log(f"Prescricao {nr_prescricao} (Hepatograma): Valor de Bilirrubina '{bilirrubina_str}' não é numérico.")
+
+    registrar_log('processar_hepatogramas_criticos - FIM')
+    return hepatogramas_criticos_encontrados
+
 def processar_lipidogramas_criticos(resultados_exames_brutos):
     """
     Processa os resultados brutos de exames (incluindo RTF) para identificar
@@ -659,6 +731,21 @@ def logica_principal_background(stop_event):
         else:
             registrar_log("Nenhum coagulograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
+
+        # --- INÍCIO DO PROCESSAMENTO DE HEPATOGRAMAS CRÍTICOS ---
+        registrar_log("Iniciando processamento de hepatogramas críticos...")
+        hepatogramas_criticos = processar_hepatogramas_criticos(resultados_hemogramas) # Reutiliza os mesmos resultados brutos
+        mensagens_hepatogramas_criticos_whatsapp = []
+
+        if hepatogramas_criticos:
+            mensagens_hepatogramas_criticos_whatsapp.append(["--- HEPATOGRAMAS CRÍTICOS ENCONTRADOS ---"])
+            for critico in hepatogramas_criticos:
+                linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f} {critico['unidade']}."
+                mensagens_hepatogramas_criticos_whatsapp.append([linha_mensagem])
+            enviar_whatsapp(mensagens_hepatogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+        else:
+            registrar_log("Nenhum hepatograma crítico encontrado para enviar.")
+        # --- FIM DO PROCESSAMENTO DE HEPATOGRAMAS CRÍTICOS ---
 
         # --- INÍCIO DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
         registrar_log("Iniciando processamento de lipidogramas críticos...")
