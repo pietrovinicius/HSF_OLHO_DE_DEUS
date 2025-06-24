@@ -157,13 +157,12 @@ def limpar_rtf_para_texto(rtf_text):
     text = str(rtf_text) # Garantir que é uma string
 
     # 1. Remover blocos de controle RTF e tags comuns
-    # Remove comandos como \par, \b, \f0, etc.
-    text = re.sub(r'\\[a-z0-9*]+(-?\d+)? ?', '', text)
-    # Remove grupos como {\fonttbl...} ou {\stylesheet...} ou {\*\generator...}
-    # Esta regex é um pouco mais complexa para tentar lidar com grupos aninhados de forma simples.
-    # Para RTFs muito complexos, um parser dedicado seria melhor.
-    # Tentativa de remover grupos RTF (pode não ser perfeita para todos os casos)
-    text = re.sub(r'\{\\[^{}]+\}|{\*\[^{}]*}', '', text) # Remove grupos de controle específicos
+    # Regex mais robusta para remover control words RTF (ex: \b, \par, \fs22)
+    text = re.sub(r'\\[a-zA-Z0-9*]+(-?\d+)? ?', '', text)
+    # Remover grupos RTF complexos, incluindo aqueles com informações de fonte, cor, etc.
+    # Esta regex tenta ser mais abrangente.
+    text = re.sub(r'\{\*?\\[^{}]+;\}|\{\*?(\\[a-zA-Z0-9]+)+\s*\}', '', text)
+    # Remover chaves restantes que podem não ter sido pegas
     text = re.sub(r'[{}]', '', text) # Remove chaves restantes
 
     # 2. Converter entidades de caracteres RTF comuns
@@ -182,21 +181,15 @@ def limpar_rtf_para_texto(rtf_text):
         "\\~": "~", # Tilde
         "\\^": "^", # Caret
         "." : "", # Ponto
-        ";" : "", # Ponto e vírgula
+        ";" : "",
         "default" : "",
         "Valores de Refer" : "",
         "eancia" : "",
         "\\'": "",
-        #"Homens" : "",
-        #"Mulheres" : "",
-        "Courier" : "", 
-        "NewMicrosoft" : "", 
-        "Sans" : "", 
+        "Courier" : "",
+        "NewMicrosoft" : "",
+        "Sans" : "",
         "Serif" : "",
-        #"5,2 Milhões/mmb3" : "",
-        #"4,4 a 5,9" : "",
-        #"3,8 a " : "",
-        
         # Valores de referência a serem removidos
         "4,4 a 5,9 3,8 a 5,2 Milhões/mmb3": "",
         "13,0 a 18,0 12,0 a 16,0 g/dL": "",
@@ -472,6 +465,54 @@ def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
     registrar_log('processar_coagulogramas_criticos - FIM')
     return coagulogramas_criticos_encontrados
 
+def processar_lipidogramas_criticos(resultados_exames_brutos):
+    """
+    Processa os resultados brutos de exames (incluindo RTF) para identificar
+    lipidogramas com valores críticos de Colesterol Total.
+    Retorna uma lista de dicionários com os detalhes dos lipidogramas críticos.
+    """
+    registrar_log('processar_lipidogramas_criticos - INÍCIO')
+    lipidogramas_criticos_encontrados = []
+
+    if not resultados_exames_brutos:
+        registrar_log("Nenhum resultado bruto de exames para processar lipidogramas.")
+        return lipidogramas_criticos_encontrados
+
+    for linha_completa in resultados_exames_brutos:
+        if len(linha_completa) > 2:
+            nr_prescricao = linha_completa[0]
+            ds_resultado_valor_rtf = linha_completa[2]
+
+            # Filtrar preliminarmente por RTFs que contêm "LIPIDOGRAMA" ou "COLESTEROL"
+            if ds_resultado_valor_rtf and \
+               ("LIPIDOGRAMA" in str(ds_resultado_valor_rtf).upper() or \
+                "COLESTEROL" in str(ds_resultado_valor_rtf).upper()):
+                
+                texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
+                
+                # Regex para extrair "COLESTEROL TOTAL"
+                # Procura "COLESTEROL TOTAL", seguido opcionalmente por espaços/pontos e ":", depois o valor.
+                match_colesterol = re.search(r"COLESTEROL\s*TOTAL\s*\.*\s*:?\s*([0-9,.]+)", texto_limpo, re.IGNORECASE)
+                
+                if match_colesterol:
+                    try:
+                        colesterol_str = match_colesterol.group(1).strip().replace(",", ".")
+                        colesterol_val = float(colesterol_str)
+                        
+                        # Critério de criticidade: Colesterol Total > 0 (conforme Valores Criticos.py)
+                        if colesterol_val > 0:
+                            lipidogramas_criticos_encontrados.append({
+                                "prescricao": nr_prescricao,
+                                "parametro": "Colesterol Total",
+                                "valor": colesterol_val,
+                                "unidade": "mg/dL"
+                            })
+                            registrar_log(f"Lipidograma crítico encontrado: Prescrição {nr_prescricao}, Colesterol Total: {colesterol_val}")
+                    except ValueError:
+                        registrar_log(f"Prescricao {nr_prescricao} (Lipidograma): Valor de Colesterol Total '{colesterol_str}' não é numérico.")
+
+    registrar_log('processar_lipidogramas_criticos - FIM')
+    return lipidogramas_criticos_encontrados
 
 def logica_principal_background(stop_event):
     """Lógica principal que será executada em um processo separado, repetidamente."""
@@ -618,6 +659,21 @@ def logica_principal_background(stop_event):
         else:
             registrar_log("Nenhum coagulograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
+
+        # --- INÍCIO DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
+        registrar_log("Iniciando processamento de lipidogramas críticos...")
+        lipidogramas_criticos = processar_lipidogramas_criticos(resultados_hemogramas) # Reutiliza os mesmos resultados brutos
+        mensagens_lipidogramas_criticos_whatsapp = []
+
+        if lipidogramas_criticos:
+            mensagens_lipidogramas_criticos_whatsapp.append(["--- LIPIDOGRAMAS CRÍTICOS ENCONTRADOS ---"])
+            for critico in lipidogramas_criticos:
+                linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f} {critico['unidade']}."
+                mensagens_lipidogramas_criticos_whatsapp.append([linha_mensagem])
+            enviar_whatsapp(mensagens_lipidogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+        else:
+            registrar_log("Nenhum lipidograma crítico encontrado para enviar.")
+        # --- FIM DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
         
         # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
         registrar_log("Aguardando 60 minutos para o próximo ciclo...")
