@@ -257,8 +257,8 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
         registrar_log('driver.get("https://web.whatsapp.com")')
         driver.get("https://web.whatsapp.com")
 
-        registrar_log("time.sleep(5)")
-        time.sleep(5) 
+        registrar_log("time.sleep(15)")
+        time.sleep(15) 
 
         registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
 
@@ -270,6 +270,8 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
         
         try:
             wait = WebDriverWait(driver, 30) # Espera até 30 segundos
+            registrar_log("time.sleep(3)")
+            time.sleep(3)
             campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_campo_pesquisa)))
             registrar_log("Campo de pesquisa encontrado e clicável.")
             campo_pesquisa_element.click()
@@ -303,11 +305,18 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
             # Agora que a conversa está aberta, localize a caixa de texto do chat.
             registrar_log('Localizando a caixa de texto do chat...')
             # Usamos WebDriverWait para esperar que a caixa de texto esteja presente e clicável.
-            xpath_chat_caixa_de_texto = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p'
-            
+
+            # O seletor abaixo é mais robusto para encontrar a caixa de texto do chat.
+            # Ele busca por um elemento <div> que seja editável (contenteditable="true")
+            # e tenha a função de uma caixa de texto (role="textbox"), dentro da área principal do chat (div com id="main").
+            # Este tipo de seletor é muito mais estável que um "Full XPath", pois não depende da estrutura exata da página.
+            # A linha que você adicionou com `driver.find_element` foi removida, pois o `wait.until` já faz a busca
+            # e precisa receber a string do XPath, não o elemento já encontrado.
+            xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
+
             try:
                 chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-                registrar_log('Caixa de texto inicial localizada e clicável com sucesso!')
+                registrar_log('Caixa de texto localizada e clicável com sucesso!')
                 
                 # Opcional: Clicar na caixa de texto para garantir o foco (geralmente não é estritamente necessário para send_keys)
                 # chat_caixa_de_texto_element.click()
@@ -373,23 +382,25 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
                 registrar_log('time.sleep(0.5)')
                 time.sleep(0.5)
 
-                registrar_log('Localiza e clica no botão de enviar')
-                time.sleep(0.5)
-                # Localiza e clica no botão de enviar
-                xpath_botao_enviar = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[2]/button/span'
+                registrar_log('Localizando e clicando no botão de enviar...')
+                # O seletor abaixo é mais robusto para encontrar o botão de enviar.
+                # Ele busca pelo atributo 'aria-label', que descreve a função do botão ("Enviar").
+                # Isso é muito mais estável do que um XPath completo ou um seletor de classe.
+                # A espera explícita (wait.until) já aguarda o botão ficar clicável,
+                # tornando pausas com time.sleep() desnecessárias e ineficientes.
+                xpath_botao_enviar = "//button[@aria-label='Enviar']"
                 botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
-                
-                # Comentado pois cada linha é enviada com Keys.ENTER
-                # Se Keys.ENTER não funcionar para a última linha ou em geral, descomente.
-                registrar_log('time.sleep(0.5)')
-                time.sleep(0.5)
 
                 registrar_log('botao_enviar_element.click()')
                 botao_enviar_element.click()
-                # registrar_log("Botão de enviar clicado. Mensagem enviada.")
                 registrar_log("Processo de envio de mensagens concluído.")
+                registrar_log('time.sleep(5)')
+                time.sleep(5)
             except Exception as e_chatbox:
-                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")
+                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
+                registrar_log("time.sleep(5)")
+                time.sleep(5)
+
 
 
             # Pausa breve para garantir que a mensagem seja processada antes de fechar o navegador
@@ -401,6 +412,9 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
         
         # Fechar o navegador após o envio para liberar recursos
         if driver: # Garante que o driver foi inicializado antes de tentar fechar
+            registrar_log("time.sleep(60)")
+            time.sleep(60)            
+            registrar_log("driver.quit()")
             driver.quit() 
         registrar_log(" driver.quit() - Navegador fechado.")
 
@@ -431,7 +445,7 @@ def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
 
             if ds_resultado_valor_rtf and "COAGULOGRAMA" in str(ds_resultado_valor_rtf).upper():
                 texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
-                
+                registrar_log(f'texto_limpo: {texto_limpo}')
                 # Regex para extrair INR: Procura "INR", seguido por espaços/pontos e ":", depois o valor.
                 match_inr = re.search(r"INR\s*\.*\s*:\s*([0-9,.]+)", texto_limpo, re.IGNORECASE)
                 
@@ -606,8 +620,8 @@ def logica_principal_background(stop_event):
         
         # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
         registrar_log("Aguardando 60 minutos para o próximo ciclo...")
-        registrar_log('stop_event.wait(3600) - Espera por 3480 segundos ou até stop_event ser setado')
-        stop_event.wait(3600)
+        registrar_log('stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado')
+        stop_event.wait(3480)
 
     registrar_log("logica_principal_background - FIM")
     print("Processo em background concluído.") # Feedback no console
