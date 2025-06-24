@@ -465,6 +465,7 @@ def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
                                 "criterio": "> 6.00"
                             })
                             registrar_log(f"Coagulograma crítico encontrado: Prescrição {nr_prescricao}, INR: {inr_val}")
+                            registrar_log(f"coagulogramas_criticos_encontrados: {coagulogramas_criticos_encontrados}\n")
                     except ValueError:
                         registrar_log(f"Prescricao {nr_prescricao} (Coagulograma): Valor de INR '{inr_str}' não é numérico.")
 
