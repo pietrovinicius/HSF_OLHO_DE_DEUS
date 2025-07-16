@@ -487,6 +487,7 @@ def processar_hepatogramas_criticos(resultados_exames_brutos):
             # Filtrar preliminarmente por RTFs que contêm "HEPATOGRAMA"
             if ds_resultado_valor_rtf and "HEPATOGRAMA" in str(ds_resultado_valor_rtf).upper():
                 texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
+                registrar_log(f'texto_limpo: {texto_limpo}')
 
                 # Regex para extrair "Contagem de plaquetas"
                 # Procura "Contagem de plaquetas" ou "Plaquetas", seguido por espaços/pontos e ":", depois o valor.
@@ -561,6 +562,7 @@ def processar_lipidogramas_criticos(resultados_exames_brutos):
                 "COLESTEROL" in str(ds_resultado_valor_rtf).upper()):
                 
                 texto_limpo = limpar_rtf_para_texto(ds_resultado_valor_rtf)
+                registrar_log(f'texto_limpo: {texto_limpo}')
                 
                 # Regex para extrair "COLESTEROL TOTAL"
                 # Procura "COLESTEROL TOTAL", seguido opcionalmente por espaços/pontos e ":", depois o valor.
