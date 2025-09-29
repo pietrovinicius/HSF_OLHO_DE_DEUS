@@ -1842,7 +1842,23 @@ def exibir_colunas_especificas_tempo_espera(df):
 # A execução agora é automática através da função main()
 
 def main():
-    """Função principal que executa as funções de WhatsApp em fila a cada hora."""
+    """
+    Função principal que executa as funções de WhatsApp em fila a cada hora.
+    
+    NOVA FUNCIONALIDADE - EXECUÇÃO AUTOMÁTICA:
+    - Removida interface gráfica (tkinter) - sistema roda em background
+    - Execução sequencial automática:
+      1. enviar_whatsapp_emergencia() - Processa tempos de espera da emergência
+      2. enviar_whatsapp() - Processa exames críticos do laboratório
+    - Loop infinito com ciclo de 1 hora (3600 segundos)
+    - Tratamento robusto de erros com fallback de 5 minutos
+    - Logs detalhados de cada ciclo de execução
+    - Interrupção segura via Ctrl+C (KeyboardInterrupt)
+    
+    Queries otimizadas para tempo real:
+    - Emergência: última hora (sysdate - 1/24)
+    - Laboratório: últimos 60 minutos (INTERVAL '60' MINUTE)
+    """
     registrar_log("MAIN - INICIO - Execução automática iniciada")
     
     while True:
@@ -1887,6 +1903,21 @@ def main():
     registrar_log("MAIN - FIM - Execução automática finalizada")
 
 if __name__ == "__main__":
+    """
+    Ponto de entrada do sistema HSF Olho de Deus.
+    
+    MUDANÇA IMPORTANTE - EXECUÇÃO AUTOMÁTICA:
+    - Sistema convertido de interface gráfica para execução automática
+    - Não há mais botões ou janelas - tudo roda automaticamente
+    - Execução contínua em background com ciclos de 1 hora
+    - Para interromper: use Ctrl+C no terminal
+    - Logs detalhados salvos em log.txt para monitoramento
+    
+    Funcionalidades executadas automaticamente:
+    1. Monitoramento de tempos de espera da emergência
+    2. Monitoramento de exames críticos do laboratório
+    3. Envio automático de alertas via WhatsApp
+    """
     # Este bloco é crucial para o multiprocessing funcionar corretamente no Windows.
     # Ele garante que o código de criação de processos só seja executado
     # quando o script é o principal, e não quando é importado por um processo filho.

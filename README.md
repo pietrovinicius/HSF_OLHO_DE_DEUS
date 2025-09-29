@@ -1,16 +1,30 @@
 # HSF Olho de Deus 👁️‍🗨️
 
-Sistema de monitoramento em tempo real para valores críticos de exames laboratoriais e indicadores de emergência do Hospital São Francisco.
+Sistema de monitoramento automatizado em tempo real para valores críticos de exames laboratoriais e indicadores de emergência do Hospital São Francisco.
 
 ## 📋 Descrição
 
-O **HSF Olho de Deus** é um sistema de monitoramento que acompanha continuamente:
+O **HSF Olho de Deus** é um sistema de monitoramento automatizado que executa continuamente:
 
 - **Valores críticos de exames laboratoriais** (Hemograma, Coagulograma, etc.)
 - **Tempos de espera na emergência** com alertas automáticos
 - **Indicadores de performance** do pronto atendimento
 
 ## 🚀 Funcionalidades
+
+### 🔄 **NOVO: Execução Automática em Fila**
+- **Execução Contínua**: Sistema roda automaticamente sem interface gráfica
+- **Fila de Execução**: Processa sequencialmente:
+  1. **Primeiro**: `enviar_whatsapp_emergencia()` - Tempos de espera da emergência
+  2. **Segundo**: `enviar_whatsapp()` - Exames críticos do laboratório
+- **Ciclo de 1 hora**: Executa automaticamente a cada 60 minutos
+- **Tratamento de Erros**: Sistema robusto com fallback em caso de falhas
+- **Logs Detalhados**: Monitoramento completo de cada ciclo de execução
+
+### ⏰ **Queries Otimizadas para Tempo Real**
+- **Emergência**: Busca atendimentos da **última hora** (`sysdate - 1/24`)
+- **Laboratório**: Busca exames digitados nos **últimos 60 minutos** (`INTERVAL '60' MINUTE`)
+- **Sincronização Perfeita**: Dados sempre atualizados para o período mais recente
 
 ### 🔬 Monitoramento de Exames Críticos
 - Monitoramento automático de resultados de hemograma
@@ -88,10 +102,11 @@ Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na
 - **Logs Detalhados**: Sistema completo de rastreamento para debugging e monitoramento
 - **Tratamento de Erros**: Captura e tratamento robusto de exceções durante o envio
 
-### 🖥️ Interface Gráfica
-- Interface moderna desenvolvida em Tkinter
-- Logs detalhados de todas as operações
-- Sistema de notificações visuais
+### 🖥️ **Execução Sem Interface Gráfica**
+- **Modo Servidor**: Sistema roda em background sem janelas ou botões
+- **Execução por Linha de Comando**: Simples comando `python main.py`
+- **Controle via Logs**: Monitoramento através de arquivos de log detalhados
+- **Interrupção Segura**: Ctrl+C para parar o sistema com cleanup adequado
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -99,8 +114,8 @@ Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na
 - **Oracle Database** (conexão via oracledb)
 - **Pandas** para manipulação de dados
 - **Selenium** para automação web
-- **Tkinter** para interface gráfica
 - **Oracle Instant Client** para conectividade
+- **Sistema de Logs** para monitoramento contínuo
 
 ## 📦 Instalação
 
@@ -128,10 +143,16 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-4. **Execute o sistema:**
+4. **Execute o sistema (modo automático):**
 ```bash
 python main.py
 ```
+
+O sistema iniciará automaticamente e executará em loop contínuo:
+- ✅ **Primeira execução**: Processa emergência e laboratório imediatamente
+- ⏰ **Ciclo contínuo**: Repete a cada 1 hora automaticamente
+- 📝 **Logs detalhados**: Acompanhe o progresso no arquivo `log.txt`
+- 🛑 **Para interromper**: Use Ctrl+C no terminal
 
 ## 📁 Estrutura do Projeto
 
@@ -148,6 +169,16 @@ HSF_OLHO_DE_DEUS/
 ```
 
 ## 🔧 Configuração
+
+### Execução Automática
+O sistema foi projetado para execução contínua e automática:
+
+- **Sem Interface**: Não há janelas ou botões - tudo é automático
+- **Ciclo de 1 hora**: Executa as funções a cada 60 minutos
+- **Ordem de Execução**:
+  1. `enviar_whatsapp_emergencia()` - Tempos de espera
+  2. `enviar_whatsapp()` - Exames críticos
+- **Recuperação de Erros**: Em caso de falha, aguarda 5 minutos e tenta novamente
 
 ### Banco de Dados
 O sistema se conecta automaticamente ao banco TASY usando as configurações padrão do hospital. Certifique-se de que:
