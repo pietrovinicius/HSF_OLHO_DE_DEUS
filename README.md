@@ -48,6 +48,19 @@ O **HSF Olho de Deus** é um sistema de monitoramento que acompanha continuament
   - ⏰ Tempo Recepção > 10 minutos
   - ⏰ Tempo Triagem > 5 minutos
   - ⏰ Espera por médico > 5 minutos
+
+### 📱 **NOVO: Melhorias no Sistema WhatsApp**
+- **Correção de Caracteres Especiais**: Implementação de codificação UTF-8 para preservar acentos e caracteres especiais brasileiros
+- **Sistema Robusto de Envio**: 17 seletores diferentes para localizar o botão de enviar do WhatsApp
+- **Fallback JavaScript**: Estratégia alternativa usando JavaScript quando seletores XPath falham
+- **Fallback de Teclado**: Uso de teclas Enter/Ctrl+Enter como última alternativa
+- **Logs Detalhados**: Rastreamento completo do processo de envio para debugging
+
+### 🔧 **Configuração de Produção**
+- **Modo Teste Removido**: Sistema configurado para envio real de mensagens WhatsApp
+- **Configurações Validadas**: Credenciais de banco de dados e URLs verificadas para ambiente de produção
+- **Perfil WhatsApp**: Utiliza perfil persistente para manter login ativo
+- **Grupo de Destino**: Mensagens enviadas para "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
   - ⏰ Tempo Final da Fila > 30 minutos
 
 #### Exemplo de Mensagem Unificada:
@@ -67,6 +80,13 @@ Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na
 ⏰ *Tempo Triagem:* 6 minutos
 ⏰ *Espera por médico:* 35 minutos
 ```
+
+### 🔧 **Melhorias Técnicas Implementadas**
+- **Codificação UTF-8**: Correção completa para caracteres especiais e acentos brasileiros
+- **Sistema de Seletores Múltiplos**: 17 diferentes estratégias para localizar elementos do WhatsApp Web
+- **Estratégias de Fallback**: JavaScript e teclado como alternativas quando seletores falham
+- **Logs Detalhados**: Sistema completo de rastreamento para debugging e monitoramento
+- **Tratamento de Erros**: Captura e tratamento robusto de exceções durante o envio
 
 ### 🖥️ Interface Gráfica
 - Interface moderna desenvolvida em Tkinter

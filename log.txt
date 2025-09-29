@@ -2351,3 +2351,2295 @@ Help: https://docs.oracle.com/error-help/db/ora-12541/
 2025-09-29 11-55-30 - exibir_colunas_especificas_tempo_espera - INICIO
 2025-09-29 11-55-30 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 19 registros
 2025-09-29 11-55-30 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-04-34 - tempo_espera_emergencia - INICIO
+2025-09-29 12-04-34 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-04-34 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-04-34 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-04-34 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-04-34 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-04-36 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-04-36 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-04-36 - tempo_espera_emergencia - FIM
+2025-09-29 12-04-36 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-04-36 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-04-36 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-04-36 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-04-37 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-04-37 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-07-13 - tempo_espera_emergencia - INICIO
+2025-09-29 12-07-13 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-07-13 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-07-13 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-07-13 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-07-13 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-07-16 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-07-16 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-07-16 - tempo_espera_emergencia - FIM
+2025-09-29 12-07-16 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-07-16 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-07-16 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-07-16 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-07-16 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-07-16 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-07-47 - tempo_espera_emergencia - INICIO
+2025-09-29 12-07-47 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-07-47 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-07-47 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-07-47 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-07-47 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-07-48 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-07-48 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-07-48 - tempo_espera_emergencia - FIM
+2025-09-29 12-07-48 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-07-48 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-07-48 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-07-48 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-07-48 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-07-48 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-10-42 - tempo_espera_emergencia - INICIO
+2025-09-29 12-10-42 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-10-42 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-10-42 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-10-42 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-10-42 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-10-44 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-10-44 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-10-44 - tempo_espera_emergencia - FIM
+2025-09-29 12-10-44 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-10-44 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-10-44 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-10-44 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-10-44 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-10-44 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-18-13 - tempo_espera_emergencia - INICIO
+2025-09-29 12-18-13 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-18-13 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-18-13 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-18-13 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-18-13 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-18-14 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-18-14 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-18-14 - tempo_espera_emergencia - FIM
+2025-09-29 12-18-14 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-18-14 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-18-14 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-19-52 - tempo_espera_emergencia - INICIO
+2025-09-29 12-19-52 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-19-52 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-19-52 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-19-52 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-19-52 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-19-53 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-19-53 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-19-53 - tempo_espera_emergencia - FIM
+2025-09-29 12-19-53 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-19-53 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-19-53 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-19-53 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-19-53 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-19-53 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-19-53 - exibir_registros_filtrados_tempo_espera - INICIO
+2025-09-29 12-19-53 - exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros
+2025-09-29 12-25-54 - tempo_espera_emergencia - INICIO
+2025-09-29 12-25-54 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-25-54 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-25-54 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-25-54 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-25-54 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-25-55 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-25-55 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-25-55 - tempo_espera_emergencia - FIM
+2025-09-29 12-25-55 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-25-55 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-25-55 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-25-55 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-25-55 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-25-55 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-25-55 - exibir_registros_filtrados_tempo_espera - INICIO
+2025-09-29 12-25-55 - exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros
+2025-09-29 12-25-55 - exibir_filtros_individuais_tempo_espera - INICIO
+2025-09-29 12-25-55 - exibir_filtros_individuais_tempo_espera - Filtros individuais exibidos
+2025-09-29 12-25-55 - exibir_filtros_individuais_tempo_espera - FIM
+2025-09-29 12-26-20 - tempo_espera_emergencia - INICIO
+2025-09-29 12-26-20 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-26-20 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-26-20 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-26-20 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-26-20 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-26-22 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-26-22 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-26-22 - tempo_espera_emergencia - FIM
+2025-09-29 12-26-22 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-26-22 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-26-22 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-26-22 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-26-22 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-26-22 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-26-22 - exibir_registros_filtrados_tempo_espera - INICIO
+2025-09-29 12-26-22 - exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros
+2025-09-29 12-26-22 - exibir_filtros_individuais_tempo_espera - INICIO
+2025-09-29 12-26-22 - exibir_filtros_individuais_tempo_espera - Filtros individuais exibidos
+2025-09-29 12-26-22 - exibir_filtros_individuais_tempo_espera - FIM
+2025-09-29 12-32-00 - tempo_espera_emergencia - INICIO
+2025-09-29 12-32-00 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 12-32-00 - encontrar_diretorio_instantclient - FIM
+2025-09-29 12-32-00 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 12-32-00 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 12-32-00 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 12-32-01 - tempo_espera_emergencia - Query executada. Linhas retornadas: 20
+2025-09-29 12-32-01 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 12-32-01 - tempo_espera_emergencia - FIM
+2025-09-29 12-32-01 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 12-32-01 - exibir_dataframe_tempo_espera - DataFrame exibido com 20 registros
+2025-09-29 12-32-01 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 12-32-01 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 12-32-01 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 20 registros
+2025-09-29 12-32-01 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 12-32-01 - exibir_registros_filtrados_tempo_espera - INICIO
+2025-09-29 12-32-01 - exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros
+2025-09-29 12-32-01 - exibir_filtros_individuais_tempo_espera - INICIO
+2025-09-29 12-32-01 - exibir_filtros_individuais_tempo_espera - Filtros individuais exibidos
+2025-09-29 12-32-01 - exibir_filtros_individuais_tempo_espera - FIM
+2025-09-29 14-37-41 - tempo_espera_emergencia - INICIO
+2025-09-29 14-37-41 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 14-37-41 - encontrar_diretorio_instantclient - FIM
+2025-09-29 14-37-41 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 14-37-41 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 14-37-42 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 14-37-43 - tempo_espera_emergencia - Query executada. Linhas retornadas: 27
+2025-09-29 14-37-43 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 14-37-43 - tempo_espera_emergencia - FIM
+2025-09-29 14-37-43 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 14-37-43 - exibir_dataframe_tempo_espera - DataFrame exibido com 27 registros
+2025-09-29 14-37-43 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 14-37-43 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 14-37-43 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 27 registros
+2025-09-29 14-37-43 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 14-37-43 - exibir_registros_filtrados_tempo_espera - INICIO
+2025-09-29 14-37-43 - exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros
+2025-09-29 14-37-43 - exibir_filtros_individuais_tempo_espera - INICIO
+2025-09-29 14-37-43 - exibir_filtros_individuais_tempo_espera - Filtros individuais exibidos
+2025-09-29 14-37-43 - exibir_filtros_individuais_tempo_espera - FIM
+2025-09-29 14-37-53 - tempo_espera_emergencia - INICIO
+2025-09-29 14-37-54 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 14-37-54 - encontrar_diretorio_instantclient - FIM
+2025-09-29 14-37-54 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 14-37-54 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 14-37-54 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 14-37-55 - tempo_espera_emergencia - Query executada. Linhas retornadas: 27
+2025-09-29 14-37-55 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 14-37-55 - tempo_espera_emergencia - FIM
+2025-09-29 14-37-55 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 14-37-55 - exibir_dataframe_tempo_espera - DataFrame exibido com 27 registros
+2025-09-29 14-37-55 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 14-37-55 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 14-37-55 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 27 registros
+2025-09-29 14-37-55 - exibir_colunas_especificas_tempo_espera - FIM
+2025-09-29 14-37-55 - exibir_registros_filtrados_tempo_espera - INICIO
+2025-09-29 14-37-55 - exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros
+2025-09-29 14-37-55 - exibir_filtros_individuais_tempo_espera - INICIO
+2025-09-29 14-37-55 - exibir_filtros_individuais_tempo_espera - Filtros individuais exibidos
+2025-09-29 14-37-55 - exibir_filtros_individuais_tempo_espera - FIM
+2025-09-29 14-38-54 - MAIN - INICIO
+2025-09-29 14-38-55 - def __init__ GUI - INICIO
+2025-09-29 14-38-55 - def __init__ GUI - FIM
+2025-09-29 14-44-02 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 14-44-03 - self.master.destroy()
+2025-09-29 14-44-03 - MAIN - FIM
+2025-09-29 14-47-14 - MAIN - INICIO
+2025-09-29 14-47-14 - def __init__ GUI - INICIO
+2025-09-29 14-47-14 - def __init__ GUI - FIM
+2025-09-29 14-47-40 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 14-47-40 - Iniciando análise dos tempos da emergência
+2025-09-29 14-47-40 - tempo_espera_emergencia - INICIO
+2025-09-29 14-47-40 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 14-47-40 - encontrar_diretorio_instantclient - FIM
+2025-09-29 14-47-40 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 14-47-40 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 14-47-40 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 14-47-41 - tempo_espera_emergencia - Query executada. Linhas retornadas: 28
+2025-09-29 14-47-41 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 14-47-41 - tempo_espera_emergencia - FIM
+2025-09-29 14-47-41 - DataFrame obtido com sucesso, processando alertas
+2025-09-29 14-47-41 - processar_alertas_tempo_recepcao - INÍCIO
+2025-09-29 14-47-41 - Erro ao processar alertas de Tempo Recepção: 'Tempo Recepcao'
+2025-09-29 14-47-41 - processar_alertas_tempo_recepcao - FIM
+2025-09-29 14-47-41 - processar_alertas_tempo_triagem - INÍCIO
+2025-09-29 14-47-41 - Erro ao processar alertas de Tempo Triagem: 'Tempo Triagem'
+2025-09-29 14-47-41 - processar_alertas_tempo_triagem - FIM
+2025-09-29 14-47-41 - processar_alertas_espera_medico - INÍCIO
+2025-09-29 14-47-41 - Erro ao processar alertas de Espera por Médico: 'Espera por Medico'
+2025-09-29 14-47-41 - processar_alertas_espera_medico - FIM
+2025-09-29 14-47-41 - processar_alertas_tempo_final_fila - INÍCIO
+2025-09-29 14-47-41 - Erro ao processar alertas de Tempo Final da Fila: 'Tempo Final da Fila'
+2025-09-29 14-47-41 - processar_alertas_tempo_final_fila - FIM
+2025-09-29 14-47-41 - Alertas de emergência processados com sucesso
+2025-09-29 14-47-41 - iniciar_alertas_emergencia - FIM
+2025-09-29 14-49-37 - MAIN - INICIO
+2025-09-29 14-49-37 - def __init__ GUI - INICIO
+2025-09-29 14-49-37 - def __init__ GUI - FIM
+2025-09-29 14-56-45 - MAIN - INICIO
+2025-09-29 14-56-45 - def __init__ GUI - INICIO
+2025-09-29 14-56-45 - def __init__ GUI - FIM
+2025-09-29 15-10-13 - MAIN - INICIO
+2025-09-29 15-10-13 - def __init__ GUI - INICIO
+2025-09-29 15-10-13 - def __init__ GUI - FIM
+2025-09-29 15-10-15 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-10-15 - Iniciando análise dos tempos da emergência
+2025-09-29 15-10-15 - tempo_espera_emergencia - INICIO
+2025-09-29 15-10-15 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-10-15 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-10-15 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-10-15 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-10-15 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-10-16 - tempo_espera_emergencia - Query executada. Linhas retornadas: 30
+2025-09-29 15-10-16 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-10-16 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-10-16 - tempo_espera_emergencia - FIM
+2025-09-29 15-10-16 - DataFrame obtido com sucesso, processando alertas
+2025-09-29 15-10-16 - processar_alertas_tempo_recepcao - INÍCIO
+2025-09-29 15-10-16 - Encontrados 11 registros com Tempo Recepção > 10 minutos
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-10-16 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-10-16 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-10-16 - [MODO DE TESTE] Mensagem: 🔴 *EMERGÊNCIA - ALERTA TEMPO DE RECEPÇÃO*
+
+⚠️ *11 paciente(s) com tempo de recepção crítico*
+
+🏥 *Atendimento:* 757805
+📅 *Início Atendimento:* 29/09/2025 13:57:31
+🔍 *Classificação:* Emergência (vermelho)
+⏰ *Tempo Recepção:* 00:28:38
+📅 *Data/Hora Chegada:* 29/09/2025 14:01:55
+─────────────────────
+🏥 *Atendimento:* 757755
+📅 *Início Atendimento:* 29/09/2025 12:41:28
+🔍 *Classificação:* Muito Urgência (Laranja)
+⏰ *Tempo Recepção:* 00:25:25
+📅 *Data/Hora Chegada:* 29/09/2025 12:44:51
+─────────────────────
+🏥 *Atendimento:* 757748
+📅 *Início Atendimento:* 29/09/2025 12:32:49
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:27:25
+📅 *Data/Hora Chegada:* 29/09/2025 12:36:47
+─────────────────────
+🏥 *Atendimento:* 757724
+📅 *Início Atendimento:* 29/09/2025 11:53:25
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:20:39
+📅 *Data/Hora Chegada:* 29/09/2025 11:55:52
+─────────────────────
+🏥 *Atendimento:* 757667
+📅 *Início Atendimento:* 29/09/2025 10:30:39
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:25:05
+📅 *Data/Hora Chegada:* 29/09/2025 10:32:28
+─────────────────────
+🏥 *Atendimento:* 757627
+📅 *Início Atendimento:* 29/09/2025 09:45:54
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:20:23
+📅 *Data/Hora Chegada:* 29/09/2025 09:48:09
+─────────────────────
+🏥 *Atendimento:* 757589
+📅 *Início Atendimento:* 29/09/2025 09:08:54
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:19:14
+📅 *Data/Hora Chegada:* 29/09/2025 09:12:21
+─────────────────────
+🏥 *Atendimento:* 757573
+📅 *Início Atendimento:* 29/09/2025 09:01:14
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:10:44
+📅 *Data/Hora Chegada:* 29/09/2025 09:02:05
+─────────────────────
+🏥 *Atendimento:* 757563
+📅 *Início Atendimento:* 29/09/2025 08:50:29
+🔍 *Classificação:* Não Urgência (Azul)
+⏰ *Tempo Recepção:* 00:10:27
+📅 *Data/Hora Chegada:* 29/09/2025 08:55:00
+─────────────────────
+🏥 *Atendimento:* 757557
+📅 *Início Atendimento:* 29/09/2025 08:38:24
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:15:31
+📅 *Data/Hora Chegada:* 29/09/2025 08:42:55
+─────────────────────
+🏥 *Atendimento:* 757499
+📅 *Início Atendimento:* 29/09/2025 08:08:34
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 00:13:45
+📅 *Data/Hora Chegada:* 29/09/2025 08:10:01
+─────────────────────
+
+🕐 Alerta gerado em: 29/09/2025 às 15:10
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-10-16 - Alerta de Tempo Recepção processado e enviado
+2025-09-29 15-10-16 - processar_alertas_tempo_recepcao - FIM
+2025-09-29 15-10-16 - processar_alertas_tempo_triagem - INÍCIO
+2025-09-29 15-10-16 - Encontrados 8 registros com Tempo Triagem > 5 minutos
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-10-16 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-10-16 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-10-16 - [MODO DE TESTE] Mensagem: 🟡 *EMERGÊNCIA - ALERTA TEMPO DE TRIAGEM*
+
+⚠️ *8 paciente(s) com tempo de triagem crítico*
+
+🏥 *Atendimento:* 757765
+📅 *Início Atendimento:* 29/09/2025 13:02:10
+🔍 *Classificação:* Urgência (Amarelo)
+⏰ *Tempo Triagem:* 01:12:11
+📅 *Data/Hora Chegada:* None
+─────────────────────
+🏥 *Atendimento:* 757818
+📅 *Início Atendimento:* 29/09/2025 14:30:17
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Triagem:* 00:06:28
+📅 *Data/Hora Chegada:* None
+─────────────────────
+🏥 *Atendimento:* 757666
+📅 *Início Atendimento:* 29/09/2025 10:20:48
+🔍 *Classificação:* Não Urgência (Azul)
+⏰ *Tempo Triagem:* 00:05:45
+📅 *Data/Hora Chegada:* None
+─────────────────────
+🏥 *Atendimento:* 757805
+📅 *Início Atendimento:* 29/09/2025 13:57:31
+🔍 *Classificação:* Emergência (vermelho)
+⏰ *Tempo Triagem:* 00:06:50
+📅 *Data/Hora Chegada:* 29/09/2025 14:01:55
+─────────────────────
+🏥 *Atendimento:* 757755
+📅 *Início Atendimento:* 29/09/2025 12:41:28
+🔍 *Classificação:* Muito Urgência (Laranja)
+⏰ *Tempo Triagem:* 00:05:32
+📅 *Data/Hora Chegada:* 29/09/2025 12:44:51
+─────────────────────
+🏥 *Atendimento:* 757748
+📅 *Início Atendimento:* 29/09/2025 12:32:49
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Triagem:* 00:06:59
+📅 *Data/Hora Chegada:* 29/09/2025 12:36:47
+─────────────────────
+🏥 *Atendimento:* 757563
+📅 *Início Atendimento:* 29/09/2025 08:50:29
+🔍 *Classificação:* Não Urgência (Azul)
+⏰ *Tempo Triagem:* 00:05:18
+📅 *Data/Hora Chegada:* 29/09/2025 08:55:00
+─────────────────────
+🏥 *Atendimento:* 757557
+📅 *Início Atendimento:* 29/09/2025 08:38:24
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Triagem:* 00:06:40
+📅 *Data/Hora Chegada:* 29/09/2025 08:42:55
+─────────────────────
+
+🕐 Alerta gerado em: 29/09/2025 às 15:10
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-10-16 - Alerta de Tempo Triagem processado e enviado
+2025-09-29 15-10-16 - processar_alertas_tempo_triagem - FIM
+2025-09-29 15-10-16 - processar_alertas_espera_medico - INÍCIO
+2025-09-29 15-10-16 - Encontrados 2 registros com Espera por Médico > 5 minutos
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-10-16 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-10-16 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-10-16 - [MODO DE TESTE] Mensagem: 🟠 *EMERGÊNCIA - ALERTA ESPERA POR MÉDICO*
+
+⚠️ *2 paciente(s) aguardando médico há mais de 5 minutos*
+
+🏥 *Atendimento:* 757381
+📅 *Início Atendimento:* 29/09/2025 06:19:10
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Espera por Médico:* 00:06:22
+📅 *Data/Hora Chegada:* 29/09/2025 06:07:14
+─────────────────────
+🏥 *Atendimento:* 757370
+📅 *Início Atendimento:* 29/09/2025 02:54:17
+🔍 *Classificação:* Urgência (Amarelo)
+⏰ *Espera por Médico:* 00:06:07
+📅 *Data/Hora Chegada:* 29/09/2025 02:45:20
+─────────────────────
+
+🕐 Alerta gerado em: 29/09/2025 às 15:10
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-10-16 - Alerta de Espera por Médico processado e enviado
+2025-09-29 15-10-16 - processar_alertas_espera_medico - FIM
+2025-09-29 15-10-16 - processar_alertas_tempo_final_fila - INÍCIO
+2025-09-29 15-10-16 - Nenhum registro encontrado com Tempo Final da Fila > 30 minutos
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-10-16 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-10-16 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-10-16 - [MODO DE TESTE] Mensagem: 🟢 *EMERGÊNCIA - TEMPO FINAL DA FILA*
+
+✅ *Situação Normal*
+📊 Nenhum paciente com tempo final da fila superior a 30 minutos
+
+🕐 Verificação realizada em: 29/09/2025 às 15:10
+2025-09-29 15-10-16 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-10-16 - Alerta de Tempo Final da Fila processado e enviado
+2025-09-29 15-10-16 - processar_alertas_tempo_final_fila - FIM
+2025-09-29 15-10-16 - Alertas de emergência processados com sucesso
+2025-09-29 15-10-16 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-14-58 - MAIN - INICIO
+2025-09-29 15-14-58 - def __init__ GUI - INICIO
+2025-09-29 15-14-58 - def __init__ GUI - FIM
+2025-09-29 15-15-37 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-15-37 - Iniciando análise dos tempos da emergência
+2025-09-29 15-15-37 - tempo_espera_emergencia - INICIO
+2025-09-29 15-15-37 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-15-37 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-15-37 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-15-37 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-15-37 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-15-38 - tempo_espera_emergencia - Query executada. Linhas retornadas: 30
+2025-09-29 15-15-38 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-15-38 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-15-38 - tempo_espera_emergencia - FIM
+2025-09-29 15-15-38 - DataFrame obtido com sucesso, processando alertas
+2025-09-29 15-15-38 - processar_alertas_tempo_recepcao - INÍCIO
+2025-09-29 15-15-38 - Encontrados 11 registros com Tempo Recepção > 10 minutos
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-15-38 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-15-38 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-15-38 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h15m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Stefhani D F
+Triagem Classificação: Emergência (vermelho)
+Tempo Recepção: 28.633333333333333 minutos
+
+Paciente: Norma B
+Triagem Classificação: Muito Urgência (Laranja)
+Tempo Recepção: 25.416666666666668 minutos
+
+Paciente: Fatima L C V
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 27.416666666666668 minutos
+
+Paciente: Jose M S C
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 20.65 minutos
+
+Paciente: Daniele C N
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 25.083333333333332 minutos
+
+Paciente: Maria F A G
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 20.383333333333333 minutos
+
+Paciente: Luiz P B G
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 19.233333333333334 minutos
+
+Paciente: Eduardo R S
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 10.733333333333333 minutos
+
+Paciente: Allan M M
+Triagem Classificação: Não Urgência (Azul)
+Tempo Recepção: 10.45 minutos
+
+Paciente: Jose W M O
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 15.516666666666667 minutos
+
+Paciente: Andreia C V N
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 13.75 minutos
+
+
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-15-38 - Alerta de Tempo Recepção processado e enviado
+2025-09-29 15-15-38 - processar_alertas_tempo_recepcao - FIM
+2025-09-29 15-15-38 - processar_alertas_tempo_triagem - INÍCIO
+2025-09-29 15-15-38 - Encontrados 8 registros com Tempo Triagem > 5 minutos
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-15-38 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-15-38 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-15-38 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h15m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Ermelinda F G
+Triagem Classificação: Urgência (Amarelo)
+Tempo Triagem: 72 minutos
+
+Paciente: Larissa R S S
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+Paciente: Lucia M C B
+Triagem Classificação: Não Urgência (Azul)
+Tempo Triagem: 5 minutos
+
+Paciente: Stefhani D F
+Triagem Classificação: Emergência (vermelho)
+Tempo Triagem: 6 minutos
+
+Paciente: Norma B
+Triagem Classificação: Muito Urgência (Laranja)
+Tempo Triagem: 5 minutos
+
+Paciente: Fatima L C V
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+Paciente: Allan M M
+Triagem Classificação: Não Urgência (Azul)
+Tempo Triagem: 5 minutos
+
+Paciente: Jose W M O
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-15-38 - Alerta de Tempo Triagem processado e enviado
+2025-09-29 15-15-38 - processar_alertas_tempo_triagem - FIM
+2025-09-29 15-15-38 - processar_alertas_espera_medico - INÍCIO
+2025-09-29 15-15-38 - Encontrados 2 registros com Espera por Médico > 5 minutos
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-15-38 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-15-38 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-15-38 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h15m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Luziney O R
+Triagem Classificação: Pouca Urgência (Verde)
+Espera por médico: 6.366666666666666 minutos
+
+Paciente: Sylvio J P H
+Triagem Classificação: Urgência (Amarelo)
+Espera por médico: 6.116666666666666 minutos
+
+
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-15-38 - Alerta de Espera por Médico processado e enviado
+2025-09-29 15-15-38 - processar_alertas_espera_medico - FIM
+2025-09-29 15-15-38 - processar_alertas_tempo_final_fila - INÍCIO
+2025-09-29 15-15-38 - Nenhum registro encontrado com Tempo Final da Fila > 30 minutos
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-15-38 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-15-38 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-15-38 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h15m
+
+Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Tempo Final da Fila.
+
+✅ Situação Normal - Nenhum paciente com tempo final da fila superior a 30 minutos
+2025-09-29 15-15-38 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-15-38 - Alerta de Tempo Final da Fila processado e enviado
+2025-09-29 15-15-38 - processar_alertas_tempo_final_fila - FIM
+2025-09-29 15-15-38 - Alertas de emergência processados com sucesso
+2025-09-29 15-15-38 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-17-39 - MAIN - INICIO
+2025-09-29 15-17-39 - def __init__ GUI - INICIO
+2025-09-29 15-17-39 - def __init__ GUI - FIM
+2025-09-29 15-18-21 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-18-21 - self.master.destroy()
+2025-09-29 15-18-21 - MAIN - FIM
+2025-09-29 15-18-22 - MAIN - INICIO
+2025-09-29 15-18-22 - def __init__ GUI - INICIO
+2025-09-29 15-18-22 - def __init__ GUI - FIM
+2025-09-29 15-18-23 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-18-23 - Iniciando análise dos tempos da emergência
+2025-09-29 15-18-23 - tempo_espera_emergencia - INICIO
+2025-09-29 15-18-23 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-18-23 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-18-23 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-18-23 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-18-23 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-18-24 - tempo_espera_emergencia - Query executada. Linhas retornadas: 30
+2025-09-29 15-18-24 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-18-24 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-18-25 - tempo_espera_emergencia - FIM
+2025-09-29 15-18-25 - DataFrame obtido com sucesso, processando alertas
+2025-09-29 15-18-25 - processar_alertas_tempo_recepcao - INÍCIO
+2025-09-29 15-18-25 - Encontrados 10 registros com Tempo Recepção > 10 minutos
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-18-25 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-18-25 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-18-25 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h18m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Stefhani D F
+Triagem Classificação: Emergência (vermelho)
+Tempo Recepção: 29 minutos
+
+Paciente: Norma B
+Triagem Classificação: Muito Urgência (Laranja)
+Tempo Recepção: 25 minutos
+
+Paciente: Fatima L C V
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 27 minutos
+
+Paciente: Jose M S C
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 21 minutos
+
+Paciente: Daniele C N
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 25 minutos
+
+Paciente: Maria F A G
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 20 minutos
+
+Paciente: Luiz P B G
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 19 minutos
+
+Paciente: Eduardo R S
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 11 minutos
+
+Paciente: Jose W M O
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 16 minutos
+
+Paciente: Andreia C V N
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 14 minutos
+
+
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-18-25 - Alerta de Tempo Recepção processado e enviado
+2025-09-29 15-18-25 - processar_alertas_tempo_recepcao - FIM
+2025-09-29 15-18-25 - processar_alertas_tempo_triagem - INÍCIO
+2025-09-29 15-18-25 - Encontrados 8 registros com Tempo Triagem > 5 minutos
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-18-25 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-18-25 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-18-25 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h18m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Ermelinda F G
+Triagem Classificação: Urgência (Amarelo)
+Tempo Triagem: 72 minutos
+
+Paciente: Larissa R S S
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+Paciente: Lucia M C B
+Triagem Classificação: Não Urgência (Azul)
+Tempo Triagem: 5 minutos
+
+Paciente: Stefhani D F
+Triagem Classificação: Emergência (vermelho)
+Tempo Triagem: 6 minutos
+
+Paciente: Norma B
+Triagem Classificação: Muito Urgência (Laranja)
+Tempo Triagem: 5 minutos
+
+Paciente: Fatima L C V
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+Paciente: Allan M M
+Triagem Classificação: Não Urgência (Azul)
+Tempo Triagem: 5 minutos
+
+Paciente: Jose W M O
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-18-25 - Alerta de Tempo Triagem processado e enviado
+2025-09-29 15-18-25 - processar_alertas_tempo_triagem - FIM
+2025-09-29 15-18-25 - processar_alertas_espera_medico - INÍCIO
+2025-09-29 15-18-25 - Encontrados 2 registros com Espera por Médico > 5 minutos
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-18-25 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-18-25 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-18-25 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h18m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Luziney O R
+Triagem Classificação: Pouca Urgência (Verde)
+Espera por médico: 6 minutos
+
+Paciente: Sylvio J P H
+Triagem Classificação: Urgência (Amarelo)
+Espera por médico: 6 minutos
+
+
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-18-25 - Alerta de Espera por Médico processado e enviado
+2025-09-29 15-18-25 - processar_alertas_espera_medico - FIM
+2025-09-29 15-18-25 - processar_alertas_tempo_final_fila - INÍCIO
+2025-09-29 15-18-25 - Nenhum registro encontrado com Tempo Final da Fila > 30 minutos
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-18-25 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-18-25 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-18-25 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h18m
+
+Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Tempo Final da Fila.
+
+✅ Situação Normal - Nenhum paciente com tempo final da fila superior a 30 minutos
+2025-09-29 15-18-25 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-18-25 - Alerta de Tempo Final da Fila processado e enviado
+2025-09-29 15-18-25 - processar_alertas_tempo_final_fila - FIM
+2025-09-29 15-18-25 - Alertas de emergência processados com sucesso
+2025-09-29 15-18-25 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-18-56 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-18-56 - self.master.destroy()
+2025-09-29 15-18-56 - MAIN - FIM
+2025-09-29 15-18-57 - MAIN - INICIO
+2025-09-29 15-18-57 - def __init__ GUI - INICIO
+2025-09-29 15-18-57 - def __init__ GUI - FIM
+2025-09-29 15-19-02 - MAIN - INICIO
+2025-09-29 15-19-02 - def __init__ GUI - INICIO
+2025-09-29 15-19-02 - def __init__ GUI - FIM
+2025-09-29 15-19-04 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-19-04 - Iniciando análise dos tempos da emergência
+2025-09-29 15-19-04 - tempo_espera_emergencia - INICIO
+2025-09-29 15-19-04 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-19-04 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-19-04 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-19-04 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-19-04 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-19-05 - tempo_espera_emergencia - Query executada. Linhas retornadas: 30
+2025-09-29 15-19-05 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-19-05 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-19-05 - tempo_espera_emergencia - FIM
+2025-09-29 15-19-05 - DataFrame obtido com sucesso, processando alertas
+2025-09-29 15-19-05 - processar_alertas_tempo_recepcao - INÍCIO
+2025-09-29 15-19-05 - Encontrados 10 registros com Tempo Recepção > 10 minutos
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-19-05 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-19-05 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-19-05 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h19m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Stefhani D F
+Triagem Classificação: Emergência (vermelho)
+Tempo Recepção: 29 minutos
+
+Paciente: Norma B
+Triagem Classificação: Muito Urgência (Laranja)
+Tempo Recepção: 25 minutos
+
+Paciente: Fatima L C V
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 27 minutos
+
+Paciente: Jose M S C
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 21 minutos
+
+Paciente: Daniele C N
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 25 minutos
+
+Paciente: Maria F A G
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 20 minutos
+
+Paciente: Luiz P B G
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 19 minutos
+
+Paciente: Eduardo R S
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 11 minutos
+
+Paciente: Jose W M O
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 16 minutos
+
+Paciente: Andreia C V N
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Recepção: 14 minutos
+
+
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-19-05 - Alerta de Tempo Recepção processado e enviado
+2025-09-29 15-19-05 - processar_alertas_tempo_recepcao - FIM
+2025-09-29 15-19-05 - processar_alertas_tempo_triagem - INÍCIO
+2025-09-29 15-19-05 - Encontrados 8 registros com Tempo Triagem > 5 minutos
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-19-05 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-19-05 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-19-05 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h19m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Ermelinda F G
+Triagem Classificação: Urgência (Amarelo)
+Tempo Triagem: 72 minutos
+
+Paciente: Larissa R S S
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+Paciente: Lucia M C B
+Triagem Classificação: Não Urgência (Azul)
+Tempo Triagem: 5 minutos
+
+Paciente: Stefhani D F
+Triagem Classificação: Emergência (vermelho)
+Tempo Triagem: 6 minutos
+
+Paciente: Norma B
+Triagem Classificação: Muito Urgência (Laranja)
+Tempo Triagem: 5 minutos
+
+Paciente: Fatima L C V
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+Paciente: Allan M M
+Triagem Classificação: Não Urgência (Azul)
+Tempo Triagem: 5 minutos
+
+Paciente: Jose W M O
+Triagem Classificação: Pouca Urgência (Verde)
+Tempo Triagem: 6 minutos
+
+
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-19-05 - Alerta de Tempo Triagem processado e enviado
+2025-09-29 15-19-05 - processar_alertas_tempo_triagem - FIM
+2025-09-29 15-19-05 - processar_alertas_espera_medico - INÍCIO
+2025-09-29 15-19-05 - Encontrados 2 registros com Espera por Médico > 5 minutos
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-19-05 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-19-05 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-19-05 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h19m
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:
+
+--- TEMPOS ENCONTRADOS ---
+Paciente: Luziney O R
+Triagem Classificação: Pouca Urgência (Verde)
+Espera por médico: 6 minutos
+
+Paciente: Sylvio J P H
+Triagem Classificação: Urgência (Amarelo)
+Espera por médico: 6 minutos
+
+
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-19-05 - Alerta de Espera por Médico processado e enviado
+2025-09-29 15-19-05 - processar_alertas_espera_medico - FIM
+2025-09-29 15-19-05 - processar_alertas_tempo_final_fila - INÍCIO
+2025-09-29 15-19-05 - Nenhum registro encontrado com Tempo Final da Fila > 30 minutos
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-19-05 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-19-05 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-19-05 - [MODO DE TESTE] Mensagem: 29/09/2025 às 15h19m
+
+Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Tempo Final da Fila.
+
+✅ Situação Normal - Nenhum paciente com tempo final da fila superior a 30 minutos
+2025-09-29 15-19-05 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-19-05 - Alerta de Tempo Final da Fila processado e enviado
+2025-09-29 15-19-05 - processar_alertas_tempo_final_fila - FIM
+2025-09-29 15-19-05 - Alertas de emergência processados com sucesso
+2025-09-29 15-19-05 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-29-14 - MAIN - INICIO
+2025-09-29 15-29-14 - def __init__ GUI - INICIO
+2025-09-29 15-29-14 - def __init__ GUI - FIM
+2025-09-29 15-30-28 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-30-28 - Iniciando análise dos tempos da emergência
+2025-09-29 15-30-28 - tempo_espera_emergencia - INICIO
+2025-09-29 15-30-28 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-30-28 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-30-28 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-30-28 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-30-28 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-30-30 - tempo_espera_emergencia - Query executada. Linhas retornadas: 30
+2025-09-29 15-30-30 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-30-30 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-30-30 - tempo_espera_emergencia - FIM
+2025-09-29 15-30-30 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-30-30 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-30-30 - Encontrados 14 pacientes com tempos críticos
+2025-09-29 15-30-30 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-30-30 - [MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:
+2025-09-29 15-30-30 - [MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA
+2025-09-29 15-30-30 - [MODO DE TESTE] Mensagem: 🔴 *ALERTA TEMPO DE EMERGÊNCIA*
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA
+
+29/09/2025 às 15h30m
+
+⚠️ TEMPOS ENCONTRADOS ⚠️
+🏥 *Atendimento:* 757765
+✅ *Paciente:* Ermelinda F G
+📅 *Início Atendimento:* 29/09/2025 13:02:10
+🔍 *Classificação:* Urgência (Amarelo)
+⏰ *Tempo Triagem:* 72 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757818
+✅ *Paciente:* Larissa R S S
+📅 *Início Atendimento:* 29/09/2025 14:30:17
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Triagem:* 6 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757805
+✅ *Paciente:* Stefhani D F
+📅 *Início Atendimento:* 29/09/2025 13:57:31
+🔍 *Classificação:* Emergência (vermelho)
+⏰ *Tempo Recepção:* 29 minutos
+⏰ *Tempo Triagem:* 6 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757755
+✅ *Paciente:* Norma B
+📅 *Início Atendimento:* 29/09/2025 12:41:28
+🔍 *Classificação:* Muito Urgência (Laranja)
+⏰ *Tempo Recepção:* 25 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757748
+✅ *Paciente:* Fatima L C V
+📅 *Início Atendimento:* 29/09/2025 12:32:49
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 27 minutos
+⏰ *Tempo Triagem:* 6 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757724
+✅ *Paciente:* Jose M S C
+📅 *Início Atendimento:* 29/09/2025 11:53:25
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 21 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757667
+✅ *Paciente:* Daniele C N
+📅 *Início Atendimento:* 29/09/2025 10:30:39
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 25 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757627
+✅ *Paciente:* Maria F A G
+📅 *Início Atendimento:* 29/09/2025 09:45:54
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 20 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757589
+✅ *Paciente:* Luiz P B G
+📅 *Início Atendimento:* 29/09/2025 09:08:54
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 19 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757573
+✅ *Paciente:* Eduardo R S
+📅 *Início Atendimento:* 29/09/2025 09:01:14
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 11 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757557
+✅ *Paciente:* Jose W M O
+📅 *Início Atendimento:* 29/09/2025 08:38:24
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 16 minutos
+⏰ *Tempo Triagem:* 6 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757499
+✅ *Paciente:* Andreia C V N
+📅 *Início Atendimento:* 29/09/2025 08:08:34
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 14 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757381
+✅ *Paciente:* Luziney O R
+📅 *Início Atendimento:* 29/09/2025 06:19:10
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Espera por médico:* 6 minutos
+
+────────────────────────────────────────
+
+🏥 *Atendimento:* 757370
+✅ *Paciente:* Sylvio J P H
+📅 *Início Atendimento:* 29/09/2025 02:54:17
+🔍 *Classificação:* Urgência (Amarelo)
+⏰ *Espera por médico:* 6 minutos
+
+────────────────────────────────────────
+
+
+2025-09-29 15-30-30 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-30-30 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-30-30 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-30-30 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-30-30 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-30-52 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-30-52 - self.master.destroy()
+2025-09-29 15-30-52 - MAIN - FIM
+2025-09-29 15-39-59 - MAIN - INICIO
+2025-09-29 15-39-59 - def __init__ GUI - INICIO
+2025-09-29 15-39-59 - def __init__ GUI - FIM
+2025-09-29 15-40-15 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-40-15 - Iniciando análise dos tempos da emergência
+2025-09-29 15-40-15 - tempo_espera_emergencia - INICIO
+2025-09-29 15-40-15 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-40-15 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-40-15 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-40-15 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-40-15 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-40-17 - tempo_espera_emergencia - Query executada. Linhas retornadas: 32
+2025-09-29 15-40-17 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-40-17 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-40-17 - tempo_espera_emergencia - FIM
+2025-09-29 15-40-17 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-40-17 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-40-17 - Encontrados 15 pacientes com tempos críticos
+2025-09-29 15-40-17 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-40-24 - driver.get("https://web.whatsapp.com")
+2025-09-29 15-40-25 - time.sleep(15)
+2025-09-29 15-40-40 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 15-40-40 - time.sleep(3)
+2025-09-29 15-40-51 - Campo de pesquisa encontrado e clicável.
+2025-09-29 15-40-51 - Clicado no campo de pesquisa.
+2025-09-29 15-40-51 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 15-40-52 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 15-40-52 - time.sleep(0.5)
+2025-09-29 15-40-53 - time.sleep(0.5)
+2025-09-29 15-40-54 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 15-40-54 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 15-40-54 - time.sleep(0.5)
+2025-09-29 15-40-54 - Localizando a caixa de texto do chat...
+2025-09-29 15-40-54 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 15-40-55 - Erro ao localizar ou interagir com a caixa de texto do chat: Message: unknown error: ChromeDriver only supports characters in the BMP
+  (Session info: chrome=140.0.7339.208)
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1f1272]
+	(No symbol) [0x0x1b1f0b]
+	(No symbol) [0x0x1b14aa]
+	(No symbol) [0x0x1d9dfc]
+	(No symbol) [0x0x1acbf4]
+	(No symbol) [0x0x1d9fb4]
+	(No symbol) [0x0x1fb606]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-40-55 - time.sleep(5)
+2025-09-29 15-41-05 - time.sleep(60)
+2025-09-29 15-41-29 - MAIN - INICIO
+2025-09-29 15-41-29 - def __init__ GUI - INICIO
+2025-09-29 15-41-29 - def __init__ GUI - FIM
+2025-09-29 15-41-31 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-41-31 - Iniciando análise dos tempos da emergência
+2025-09-29 15-41-31 - tempo_espera_emergencia - INICIO
+2025-09-29 15-41-31 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-41-31 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-41-31 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-41-31 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-41-31 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-41-33 - tempo_espera_emergencia - Query executada. Linhas retornadas: 32
+2025-09-29 15-41-33 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-41-33 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-41-33 - tempo_espera_emergencia - FIM
+2025-09-29 15-41-33 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-41-33 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-41-33 - Encontrados 15 pacientes com tempos críticos
+2025-09-29 15-41-33 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-41-37 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6c5f]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-41-37 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-41-37 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-41-37 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-41-38 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-41-38 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-41-53 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-41-53 - self.master.destroy()
+2025-09-29 15-41-53 - MAIN - FIM
+2025-09-29 15-43-14 - MAIN - INICIO
+2025-09-29 15-43-14 - def __init__ GUI - INICIO
+2025-09-29 15-43-14 - def __init__ GUI - FIM
+2025-09-29 15-43-17 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-43-17 - Iniciando análise dos tempos da emergência
+2025-09-29 15-43-17 - tempo_espera_emergencia - INICIO
+2025-09-29 15-43-17 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-43-17 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-43-17 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-43-17 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-43-17 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-43-18 - tempo_espera_emergencia - Query executada. Linhas retornadas: 32
+2025-09-29 15-43-18 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-43-18 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-43-18 - tempo_espera_emergencia - FIM
+2025-09-29 15-43-18 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-43-18 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-43-18 - Encontrados 15 pacientes com tempos críticos
+2025-09-29 15-43-18 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-43-18 - time.sleep(10)
+2025-09-29 15-43-31 - driver.get("https://web.whatsapp.com")
+2025-09-29 15-43-32 - time.sleep(15)
+2025-09-29 15-43-47 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 15-43-47 - time.sleep(3)
+2025-09-29 15-43-50 - Campo de pesquisa encontrado e clicável.
+2025-09-29 15-43-50 - Clicado no campo de pesquisa.
+2025-09-29 15-43-50 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 15-43-51 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 15-43-51 - time.sleep(0.5)
+2025-09-29 15-43-51 - time.sleep(0.5)
+2025-09-29 15-43-52 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 15-43-52 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 15-43-52 - time.sleep(0.5)
+2025-09-29 15-43-52 - Localizando a caixa de texto do chat...
+2025-09-29 15-43-52 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 15-43-52 - Erro ao localizar ou interagir com a caixa de texto do chat: Message: unknown error: ChromeDriver only supports characters in the BMP
+  (Session info: chrome=140.0.7339.208)
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1f1272]
+	(No symbol) [0x0x1b1f0b]
+	(No symbol) [0x0x1b14aa]
+	(No symbol) [0x0x1d9dfc]
+	(No symbol) [0x0x1acbf4]
+	(No symbol) [0x0x1d9fb4]
+	(No symbol) [0x0x1fb606]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-43-52 - time.sleep(5)
+2025-09-29 15-44-02 - time.sleep(60)
+2025-09-29 15-44-11 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-46-57 - MAIN - INICIO
+2025-09-29 15-46-57 - def __init__ GUI - INICIO
+2025-09-29 15-46-57 - def __init__ GUI - FIM
+2025-09-29 15-47-01 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-47-01 - Iniciando análise dos tempos da emergência
+2025-09-29 15-47-01 - tempo_espera_emergencia - INICIO
+2025-09-29 15-47-01 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-47-01 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-47-01 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-47-01 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-47-01 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-47-02 - tempo_espera_emergencia - Query executada. Linhas retornadas: 32
+2025-09-29 15-47-02 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-47-02 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-47-02 - tempo_espera_emergencia - FIM
+2025-09-29 15-47-02 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-47-02 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-47-02 - Encontrados 15 pacientes com tempos críticos
+2025-09-29 15-47-02 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-47-02 - time.sleep(10)
+2025-09-29 15-47-14 - driver.get("https://web.whatsapp.com")
+2025-09-29 15-47-15 - time.sleep(15)
+2025-09-29 15-47-30 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 15-47-30 - time.sleep(3)
+2025-09-29 15-47-33 - Campo de pesquisa encontrado e clicável.
+2025-09-29 15-47-33 - Clicado no campo de pesquisa.
+2025-09-29 15-47-33 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 15-47-34 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 15-47-34 - time.sleep(0.5)
+2025-09-29 15-47-34 - time.sleep(0.5)
+2025-09-29 15-47-35 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 15-47-35 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 15-47-35 - time.sleep(0.5)
+2025-09-29 15-47-36 - Localizando a caixa de texto do chat...
+2025-09-29 15-47-36 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 15-47-36 - Erro ao localizar ou interagir com a caixa de texto do chat: Message: unknown error: ChromeDriver only supports characters in the BMP
+  (Session info: chrome=140.0.7339.208)
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1f1272]
+	(No symbol) [0x0x1b1f0b]
+	(No symbol) [0x0x1b14aa]
+	(No symbol) [0x0x1d9dfc]
+	(No symbol) [0x0x1acbf4]
+	(No symbol) [0x0x1d9fb4]
+	(No symbol) [0x0x1fb606]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-47-36 - time.sleep(5)
+2025-09-29 15-47-46 - time.sleep(60)
+2025-09-29 15-48-23 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-49-02 - MAIN - INICIO
+2025-09-29 15-49-02 - def __init__ GUI - INICIO
+2025-09-29 15-49-02 - def __init__ GUI - FIM
+2025-09-29 15-49-04 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-49-04 - Iniciando análise dos tempos da emergência
+2025-09-29 15-49-04 - tempo_espera_emergencia - INICIO
+2025-09-29 15-49-04 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-49-04 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-49-04 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-49-04 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-49-04 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-49-05 - tempo_espera_emergencia - Query executada. Linhas retornadas: 33
+2025-09-29 15-49-05 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-49-05 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-49-05 - tempo_espera_emergencia - FIM
+2025-09-29 15-49-05 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-49-05 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-49-05 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-49-05 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-49-05 - time.sleep(10)
+2025-09-29 15-49-19 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6dc0]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-49-19 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-49-19 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-49-19 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-49-19 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-49-19 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-49-31 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-49-31 - self.master.destroy()
+2025-09-29 15-49-31 - MAIN - FIM
+2025-09-29 15-49-37 - MAIN - INICIO
+2025-09-29 15-49-37 - def __init__ GUI - INICIO
+2025-09-29 15-49-37 - def __init__ GUI - FIM
+2025-09-29 15-49-39 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-49-39 - Iniciando análise dos tempos da emergência
+2025-09-29 15-49-39 - tempo_espera_emergencia - INICIO
+2025-09-29 15-49-39 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-49-39 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-49-39 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-49-39 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-49-39 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-49-40 - tempo_espera_emergencia - Query executada. Linhas retornadas: 33
+2025-09-29 15-49-40 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-49-40 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-49-40 - tempo_espera_emergencia - FIM
+2025-09-29 15-49-40 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-49-40 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-49-40 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-49-40 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-49-40 - time.sleep(10)
+2025-09-29 15-49-54 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6dc0]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-49-54 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-49-54 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-49-54 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-49-54 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-49-54 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-49-57 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-49-57 - self.master.destroy()
+2025-09-29 15-49-57 - MAIN - FIM
+2025-09-29 15-50-17 - MAIN - INICIO
+2025-09-29 15-50-17 - def __init__ GUI - INICIO
+2025-09-29 15-50-17 - def __init__ GUI - FIM
+2025-09-29 15-50-19 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-50-19 - Iniciando análise dos tempos da emergência
+2025-09-29 15-50-19 - tempo_espera_emergencia - INICIO
+2025-09-29 15-50-19 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-50-19 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-50-19 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-50-19 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-50-19 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-50-20 - tempo_espera_emergencia - Query executada. Linhas retornadas: 33
+2025-09-29 15-50-20 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-50-20 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-50-20 - tempo_espera_emergencia - FIM
+2025-09-29 15-50-20 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-50-20 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-50-20 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-50-20 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-50-20 - time.sleep(4)
+2025-09-29 15-50-28 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6c5f]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-50-28 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-50-28 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-50-28 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-50-28 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-50-28 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-53-03 - MAIN - INICIO
+2025-09-29 15-53-03 - def __init__ GUI - INICIO
+2025-09-29 15-53-03 - def __init__ GUI - FIM
+2025-09-29 15-53-04 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-53-04 - Iniciando análise dos tempos da emergência
+2025-09-29 15-53-04 - tempo_espera_emergencia - INICIO
+2025-09-29 15-53-04 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-53-04 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-53-04 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-53-04 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-53-04 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-53-05 - tempo_espera_emergencia - Query executada. Linhas retornadas: 34
+2025-09-29 15-53-05 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-53-05 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-53-05 - tempo_espera_emergencia - FIM
+2025-09-29 15-53-05 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-53-05 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-53-05 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-53-05 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-53-05 - time.sleep(4)
+2025-09-29 15-53-12 - driver.get("https://web.whatsapp.com")
+2025-09-29 15-53-13 - time.sleep(15)
+2025-09-29 15-53-28 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 15-53-28 - time.sleep(3)
+2025-09-29 15-53-36 - Campo de pesquisa encontrado e clicável.
+2025-09-29 15-53-37 - Clicado no campo de pesquisa.
+2025-09-29 15-53-37 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 15-53-38 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 15-53-38 - time.sleep(0.5)
+2025-09-29 15-53-38 - time.sleep(0.5)
+2025-09-29 15-53-39 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 15-53-39 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 15-53-39 - time.sleep(0.5)
+2025-09-29 15-53-40 - Localizando a caixa de texto do chat...
+2025-09-29 15-53-40 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 15-53-40 - Erro ao localizar ou interagir com a caixa de texto do chat: Message: unknown error: ChromeDriver only supports characters in the BMP
+  (Session info: chrome=140.0.7339.208)
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1f1272]
+	(No symbol) [0x0x1b1f0b]
+	(No symbol) [0x0x1b14aa]
+	(No symbol) [0x0x1d9dfc]
+	(No symbol) [0x0x1acbf4]
+	(No symbol) [0x0x1d9fb4]
+	(No symbol) [0x0x1fb606]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-53-40 - time.sleep(5)
+2025-09-29 15-53-50 - time.sleep(60)
+2025-09-29 15-55-01 - MAIN - INICIO
+2025-09-29 15-55-01 - def __init__ GUI - INICIO
+2025-09-29 15-55-01 - def __init__ GUI - FIM
+2025-09-29 15-55-02 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-55-02 - Iniciando análise dos tempos da emergência
+2025-09-29 15-55-02 - tempo_espera_emergencia - INICIO
+2025-09-29 15-55-02 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-55-02 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-55-02 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-55-02 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-55-02 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-55-03 - tempo_espera_emergencia - Query executada. Linhas retornadas: 34
+2025-09-29 15-55-03 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-55-03 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-55-03 - tempo_espera_emergencia - FIM
+2025-09-29 15-55-03 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-55-03 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-55-03 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-55-03 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-55-03 - time.sleep(4)
+2025-09-29 15-55-11 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6c5f]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-55-11 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-55-11 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-55-11 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-55-11 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-55-11 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-55-34 - MAIN - INICIO
+2025-09-29 15-55-34 - def __init__ GUI - INICIO
+2025-09-29 15-55-34 - def __init__ GUI - FIM
+2025-09-29 15-55-35 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-55-35 - Iniciando análise dos tempos da emergência
+2025-09-29 15-55-35 - tempo_espera_emergencia - INICIO
+2025-09-29 15-55-35 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-55-35 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-55-35 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-55-35 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-55-35 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-55-36 - tempo_espera_emergencia - Query executada. Linhas retornadas: 34
+2025-09-29 15-55-36 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-55-36 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-55-36 - tempo_espera_emergencia - FIM
+2025-09-29 15-55-36 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-55-36 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-55-36 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-55-36 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-55-36 - time.sleep(4)
+2025-09-29 15-55-44 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6c5f]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-55-44 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-55-44 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-55-44 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-55-44 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-55-44 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-55-54 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-55-54 - self.master.destroy()
+2025-09-29 15-55-54 - MAIN - FIM
+2025-09-29 15-56-28 - MAIN - INICIO
+2025-09-29 15-56-28 - def __init__ GUI - INICIO
+2025-09-29 15-56-28 - def __init__ GUI - FIM
+2025-09-29 15-56-30 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-56-30 - Iniciando análise dos tempos da emergência
+2025-09-29 15-56-30 - tempo_espera_emergencia - INICIO
+2025-09-29 15-56-30 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-56-30 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-56-30 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-56-30 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-56-30 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-56-31 - tempo_espera_emergencia - Query executada. Linhas retornadas: 34
+2025-09-29 15-56-31 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-56-31 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-56-31 - tempo_espera_emergencia - FIM
+2025-09-29 15-56-31 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-56-31 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-56-31 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-56-31 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-56-31 - time.sleep(4)
+2025-09-29 15-56-39 - Erro ao tentar enviar mensagem pelo WhatsApp Emergência: Message: session not created
+from unknown error: failed to write prefs file; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1a6a6c]
+	(No symbol) [0x0x1a6c5f]
+	(No symbol) [0x0x1a10e4]
+	(No symbol) [0x0x19db5a]
+	(No symbol) [0x0x1e5a50]
+	(No symbol) [0x0x1e534a]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 15-56-39 - enviar_whatsapp_emergencia - FIM
+2025-09-29 15-56-39 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 15-56-39 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-56-39 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-56-39 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-57-10 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-57-10 - self.master.destroy()
+2025-09-29 15-57-10 - MAIN - FIM
+2025-09-29 15-57-34 - MAIN - INICIO
+2025-09-29 15-57-34 - def __init__ GUI - INICIO
+2025-09-29 15-57-34 - def __init__ GUI - FIM
+2025-09-29 15-57-36 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-57-36 - Iniciando análise dos tempos da emergência
+2025-09-29 15-57-36 - tempo_espera_emergencia - INICIO
+2025-09-29 15-57-36 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-57-36 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-57-36 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-57-36 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-57-37 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-57-38 - tempo_espera_emergencia - Query executada. Linhas retornadas: 34
+2025-09-29 15-57-38 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-57-38 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-57-38 - tempo_espera_emergencia - FIM
+2025-09-29 15-57-38 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-57-38 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-57-38 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-57-38 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-57-38 - time.sleep(4)
+2025-09-29 15-57-38 - Erro ao processar alertas unificados: cannot access local variable 'time' where it is not associated with a value
+2025-09-29 15-57-38 - processar_alertas_tempo_unificado - FIM
+2025-09-29 15-57-38 - Alertas de emergência unificados processados com sucesso
+2025-09-29 15-57-38 - iniciar_alertas_emergencia - FIM
+2025-09-29 15-57-53 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-57-53 - self.master.destroy()
+2025-09-29 15-57-53 - MAIN - FIM
+2025-09-29 15-58-30 - MAIN - INICIO
+2025-09-29 15-58-30 - def __init__ GUI - INICIO
+2025-09-29 15-58-30 - def __init__ GUI - FIM
+2025-09-29 15-58-40 - Fechando janela. Sinalizando processo background para parar...
+2025-09-29 15-58-40 - self.master.destroy()
+2025-09-29 15-58-40 - MAIN - FIM
+2025-09-29 15-59-18 - MAIN - INICIO
+2025-09-29 15-59-18 - def __init__ GUI - INICIO
+2025-09-29 15-59-18 - def __init__ GUI - FIM
+2025-09-29 15-59-21 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 15-59-21 - Iniciando análise dos tempos da emergência
+2025-09-29 15-59-21 - tempo_espera_emergencia - INICIO
+2025-09-29 15-59-21 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 15-59-21 - encontrar_diretorio_instantclient - FIM
+2025-09-29 15-59-21 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 15-59-21 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 15-59-21 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 15-59-22 - tempo_espera_emergencia - Query executada. Linhas retornadas: 34
+2025-09-29 15-59-22 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 15-59-22 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 15-59-22 - tempo_espera_emergencia - FIM
+2025-09-29 15-59-22 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 15-59-22 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 15-59-22 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 15-59-22 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 15-59-22 - time.sleep(4)
+2025-09-29 15-59-29 - driver.get("https://web.whatsapp.com")
+2025-09-29 15-59-30 - time.sleep(15)
+2025-09-29 15-59-45 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 15-59-45 - time.sleep(3)
+2025-09-29 15-59-52 - Campo de pesquisa encontrado e clicável.
+2025-09-29 15-59-52 - Clicado no campo de pesquisa.
+2025-09-29 15-59-52 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 15-59-53 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 15-59-53 - time.sleep(0.5)
+2025-09-29 15-59-53 - time.sleep(0.5)
+2025-09-29 15-59-54 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 15-59-54 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 15-59-54 - time.sleep(0.5)
+2025-09-29 15-59-55 - Localizando a caixa de texto do chat...
+2025-09-29 15-59-55 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 15-59-55 - Linha enviada: *ALERTA TEMPO DE EMERGNCIA*
+2025-09-29 15-59-56 - Linha enviada: Prezados, informo a identificao de tempo(s) crtico(s) de atendimento(s) na EMERGNCIA
+2025-09-29 15-59-56 - Linha enviada: 29/09/2025 s 15h59m
+2025-09-29 15-59-57 - Linha enviada: TEMPOS ENCONTRADOS
+2025-09-29 15-59-57 - Linha enviada: *Atendimento:* 757765
+2025-09-29 15-59-58 - Linha enviada: *Paciente:* Ermelinda F G
+2025-09-29 15-59-58 - Linha enviada: *Incio Atendimento:* 29/09/2025 13:02:10
+2025-09-29 15-59-58 - Linha enviada: *Classificao:* Urgncia (Amarelo)
+2025-09-29 15-59-59 - Linha enviada: *Tempo Triagem:* 72 minutos
+2025-09-29 16-00-00 - Linha enviada: *Atendimento:* 757818
+2025-09-29 16-00-00 - Linha enviada: *Paciente:* Larissa R S S
+2025-09-29 16-00-01 - Linha enviada: *Incio Atendimento:* 29/09/2025 14:30:17
+2025-09-29 16-00-01 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-02 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-00-03 - Linha enviada: *Atendimento:* 757826
+2025-09-29 16-00-04 - Linha enviada: *Paciente:* Lorena D R
+2025-09-29 16-00-04 - Linha enviada: *Incio Atendimento:* 29/09/2025 15:35:09
+2025-09-29 16-00-05 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-05 - Linha enviada: *Tempo Recepo:* 22 minutos
+2025-09-29 16-00-07 - Linha enviada: *Atendimento:* 757824
+2025-09-29 16-00-07 - Linha enviada: *Paciente:* Antonia M B C
+2025-09-29 16-00-08 - Linha enviada: *Incio Atendimento:* 29/09/2025 15:23:06
+2025-09-29 16-00-10 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-10 - Linha enviada: *Tempo Recepo:* 31 minutos
+2025-09-29 16-00-12 - Linha enviada: *Atendimento:* 757805
+2025-09-29 16-00-12 - Linha enviada: *Paciente:* Stefhani D F
+2025-09-29 16-00-13 - Linha enviada: *Incio Atendimento:* 29/09/2025 13:57:31
+2025-09-29 16-00-14 - Linha enviada: *Classificao:* Emergncia (vermelho)
+2025-09-29 16-00-15 - Linha enviada: *Tempo Recepo:* 29 minutos
+2025-09-29 16-00-16 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-00-17 - Linha enviada: *Atendimento:* 757755
+2025-09-29 16-00-18 - Linha enviada: *Paciente:* Norma B
+2025-09-29 16-00-18 - Linha enviada: *Incio Atendimento:* 29/09/2025 12:41:28
+2025-09-29 16-00-19 - Linha enviada: *Classificao:* Muito Urgncia (Laranja)
+2025-09-29 16-00-19 - Linha enviada: *Tempo Recepo:* 25 minutos
+2025-09-29 16-00-21 - Linha enviada: *Atendimento:* 757748
+2025-09-29 16-00-21 - Linha enviada: *Paciente:* Fatima L C V
+2025-09-29 16-00-22 - Linha enviada: *Incio Atendimento:* 29/09/2025 12:32:49
+2025-09-29 16-00-22 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-23 - Linha enviada: *Tempo Recepo:* 27 minutos
+2025-09-29 16-00-24 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-00-25 - Linha enviada: *Atendimento:* 757724
+2025-09-29 16-00-26 - Linha enviada: *Paciente:* Jose M S C
+2025-09-29 16-00-27 - Linha enviada: *Incio Atendimento:* 29/09/2025 11:53:25
+2025-09-29 16-00-27 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-28 - Linha enviada: *Tempo Recepo:* 21 minutos
+2025-09-29 16-00-29 - Linha enviada: *Atendimento:* 757667
+2025-09-29 16-00-30 - Linha enviada: *Paciente:* Daniele C N
+2025-09-29 16-00-30 - Linha enviada: *Incio Atendimento:* 29/09/2025 10:30:39
+2025-09-29 16-00-31 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-32 - Linha enviada: *Tempo Recepo:* 25 minutos
+2025-09-29 16-00-34 - Linha enviada: *Atendimento:* 757627
+2025-09-29 16-00-34 - Linha enviada: *Paciente:* Maria F A G
+2025-09-29 16-00-35 - Linha enviada: *Incio Atendimento:* 29/09/2025 09:45:54
+2025-09-29 16-00-36 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-37 - Linha enviada: *Tempo Recepo:* 20 minutos
+2025-09-29 16-00-39 - Linha enviada: *Atendimento:* 757589
+2025-09-29 16-00-39 - Linha enviada: *Paciente:* Luiz P B G
+2025-09-29 16-00-40 - Linha enviada: *Incio Atendimento:* 29/09/2025 09:08:54
+2025-09-29 16-00-41 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-41 - Linha enviada: *Tempo Recepo:* 19 minutos
+2025-09-29 16-00-43 - Linha enviada: *Atendimento:* 757573
+2025-09-29 16-00-43 - Linha enviada: *Paciente:* Eduardo R S
+2025-09-29 16-00-44 - Linha enviada: *Incio Atendimento:* 29/09/2025 09:01:14
+2025-09-29 16-00-45 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-46 - Linha enviada: *Tempo Recepo:* 11 minutos
+2025-09-29 16-00-47 - Linha enviada: *Atendimento:* 757557
+2025-09-29 16-00-49 - Linha enviada: *Paciente:* Jose W M O
+2025-09-29 16-00-50 - Linha enviada: *Incio Atendimento:* 29/09/2025 08:38:24
+2025-09-29 16-00-51 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-52 - Linha enviada: *Tempo Recepo:* 16 minutos
+2025-09-29 16-00-53 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-00-54 - Linha enviada: *Atendimento:* 757499
+2025-09-29 16-00-55 - Linha enviada: *Paciente:* Andreia C V N
+2025-09-29 16-00-55 - Linha enviada: *Incio Atendimento:* 29/09/2025 08:08:34
+2025-09-29 16-00-56 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-00-57 - Linha enviada: *Tempo Recepo:* 14 minutos
+2025-09-29 16-00-58 - Linha enviada: *Atendimento:* 757381
+2025-09-29 16-00-59 - Linha enviada: *Paciente:* Luziney O R
+2025-09-29 16-01-00 - Linha enviada: *Incio Atendimento:* 29/09/2025 06:19:10
+2025-09-29 16-01-01 - Linha enviada: *Classificao:* Pouca Urgncia (Verde)
+2025-09-29 16-01-02 - Linha enviada: *Espera por mdico:* 6 minutos
+2025-09-29 16-01-04 - Linha enviada: *Atendimento:* 757370
+2025-09-29 16-01-05 - Linha enviada: *Paciente:* Sylvio J P H
+2025-09-29 16-01-06 - Linha enviada: *Incio Atendimento:* 29/09/2025 02:54:17
+2025-09-29 16-01-07 - Linha enviada: *Classificao:* Urgncia (Amarelo)
+2025-09-29 16-01-08 - Linha enviada: *Espera por mdico:* 6 minutos
+2025-09-29 16-01-09 - Mensagem completa enviada linha por linha
+2025-09-29 16-01-09 - time.sleep(0.5)
+2025-09-29 16-01-09 - Localizando e clicando no botão de enviar...
+2025-09-29 16-01-40 - Erro ao localizar ou interagir com a caixa de texto do chat: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x34c333+65459]
+	GetHandleVerifier [0x0x34c374+65524]
+	(No symbol) [0x0x16d973]
+	(No symbol) [0x0x1b76e7]
+	(No symbol) [0x0x1b7a8b]
+	(No symbol) [0x0x1fdea2]
+	(No symbol) [0x0x1d9e44]
+	(No symbol) [0x0x1fb606]
+	(No symbol) [0x0x1d9bf6]
+	(No symbol) [0x0x1ab38e]
+	(No symbol) [0x0x1ac274]
+	GetHandleVerifier [0x0x5ceda3+2697763]
+	GetHandleVerifier [0x0x5c9ec7+2677575]
+	GetHandleVerifier [0x0x374194+228884]
+	GetHandleVerifier [0x0x3649f8+165496]
+	GetHandleVerifier [0x0x36b18d+192013]
+	GetHandleVerifier [0x0x3547d8+99416]
+	GetHandleVerifier [0x0x354972+99826]
+	GetHandleVerifier [0x0x33ebea+10346]
+	BaseThreadInitThunk [0x0x75985d49+25]
+	RtlInitializeExceptionChain [0x0x77abd6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x77abd661+561]
+	(No symbol) [0x0]
+
+2025-09-29 16-01-40 - time.sleep(5)
+2025-09-29 16-01-50 - time.sleep(60)
+2025-09-29 16-02-20 - iniciar_alertas_emergencia - FIM
+2025-09-29 16-04-29 - MAIN - INICIO
+2025-09-29 16-04-29 - def __init__ GUI - INICIO
+2025-09-29 16-04-29 - def __init__ GUI - FIM
+2025-09-29 16-04-32 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 16-04-32 - Iniciando análise dos tempos da emergência
+2025-09-29 16-04-32 - tempo_espera_emergencia - INICIO
+2025-09-29 16-04-32 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 16-04-32 - encontrar_diretorio_instantclient - FIM
+2025-09-29 16-04-32 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 16-04-32 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 16-04-32 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 16-04-33 - tempo_espera_emergencia - Query executada. Linhas retornadas: 35
+2025-09-29 16-04-33 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 16-04-33 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 16-04-33 - tempo_espera_emergencia - FIM
+2025-09-29 16-04-33 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 16-04-33 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 16-04-33 - Encontrados 16 pacientes com tempos críticos
+2025-09-29 16-04-33 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 16-04-33 - time.sleep(4)
+2025-09-29 16-04-39 - driver.get("https://web.whatsapp.com")
+2025-09-29 16-04-43 - time.sleep(15)
+2025-09-29 16-04-58 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 16-04-58 - time.sleep(3)
+2025-09-29 16-05-06 - Campo de pesquisa encontrado e clicável.
+2025-09-29 16-05-07 - Clicado no campo de pesquisa.
+2025-09-29 16-05-07 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 16-05-08 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 16-05-08 - time.sleep(0.5)
+2025-09-29 16-05-08 - time.sleep(0.5)
+2025-09-29 16-05-09 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 16-05-09 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 16-05-09 - time.sleep(0.5)
+2025-09-29 16-05-10 - Localizando a caixa de texto do chat...
+2025-09-29 16-05-10 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 16-05-10 - Linha enviada: *ALERTA TEMPO DE EMERGÊNCIA*
+2025-09-29 16-05-11 - Linha enviada: Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA
+2025-09-29 16-05-11 - Linha enviada: 29/09/2025 às 16h04m
+2025-09-29 16-05-12 - Linha enviada: TEMPOS ENCONTRADOS
+2025-09-29 16-05-12 - Linha enviada: *Atendimento:* 757765
+2025-09-29 16-05-13 - Linha enviada: *Paciente:* Ermelinda F G
+2025-09-29 16-05-13 - Linha enviada: *Início Atendimento:* 29/09/2025 13:02:10
+2025-09-29 16-05-14 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-05-15 - Linha enviada: *Tempo Triagem:* 72 minutos
+2025-09-29 16-05-16 - Linha enviada: *Atendimento:* 757818
+2025-09-29 16-05-16 - Linha enviada: *Paciente:* Larissa R S S
+2025-09-29 16-05-17 - Linha enviada: *Início Atendimento:* 29/09/2025 14:30:17
+2025-09-29 16-05-17 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-18 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-05-19 - Linha enviada: *Atendimento:* 757826
+2025-09-29 16-05-19 - Linha enviada: *Paciente:* Lorena D R
+2025-09-29 16-05-20 - Linha enviada: *Início Atendimento:* 29/09/2025 15:35:09
+2025-09-29 16-05-20 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-21 - Linha enviada: *Tempo Recepção:* 22 minutos
+2025-09-29 16-05-22 - Linha enviada: *Atendimento:* 757824
+2025-09-29 16-05-23 - Linha enviada: *Paciente:* Antonia M B C
+2025-09-29 16-05-23 - Linha enviada: *Início Atendimento:* 29/09/2025 15:23:06
+2025-09-29 16-05-24 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-24 - Linha enviada: *Tempo Recepção:* 31 minutos
+2025-09-29 16-05-26 - Linha enviada: *Atendimento:* 757805
+2025-09-29 16-05-26 - Linha enviada: *Paciente:* Stefhani D F
+2025-09-29 16-05-27 - Linha enviada: *Início Atendimento:* 29/09/2025 13:57:31
+2025-09-29 16-05-28 - Linha enviada: *Classificação:* Emergência (vermelho)
+2025-09-29 16-05-28 - Linha enviada: *Tempo Recepção:* 29 minutos
+2025-09-29 16-05-29 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-05-30 - Linha enviada: *Atendimento:* 757755
+2025-09-29 16-05-31 - Linha enviada: *Paciente:* Norma B
+2025-09-29 16-05-31 - Linha enviada: *Início Atendimento:* 29/09/2025 12:41:28
+2025-09-29 16-05-32 - Linha enviada: *Classificação:* Muito Urgência (Laranja)
+2025-09-29 16-05-33 - Linha enviada: *Tempo Recepção:* 25 minutos
+2025-09-29 16-05-34 - Linha enviada: *Atendimento:* 757748
+2025-09-29 16-05-35 - Linha enviada: *Paciente:* Fatima L C V
+2025-09-29 16-05-35 - Linha enviada: *Início Atendimento:* 29/09/2025 12:32:49
+2025-09-29 16-05-36 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-36 - Linha enviada: *Tempo Recepção:* 27 minutos
+2025-09-29 16-05-37 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-05-38 - Linha enviada: *Atendimento:* 757724
+2025-09-29 16-05-39 - Linha enviada: *Paciente:* Jose M S C
+2025-09-29 16-05-40 - Linha enviada: *Início Atendimento:* 29/09/2025 11:53:25
+2025-09-29 16-05-41 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-41 - Linha enviada: *Tempo Recepção:* 21 minutos
+2025-09-29 16-05-43 - Linha enviada: *Atendimento:* 757667
+2025-09-29 16-05-43 - Linha enviada: *Paciente:* Daniele C N
+2025-09-29 16-05-44 - Linha enviada: *Início Atendimento:* 29/09/2025 10:30:39
+2025-09-29 16-05-45 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-46 - Linha enviada: *Tempo Recepção:* 25 minutos
+2025-09-29 16-05-47 - Linha enviada: *Atendimento:* 757627
+2025-09-29 16-05-48 - Linha enviada: *Paciente:* Maria F A G
+2025-09-29 16-05-49 - Linha enviada: *Início Atendimento:* 29/09/2025 09:45:54
+2025-09-29 16-05-49 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-50 - Linha enviada: *Tempo Recepção:* 20 minutos
+2025-09-29 16-05-52 - Linha enviada: *Atendimento:* 757589
+2025-09-29 16-05-53 - Linha enviada: *Paciente:* Luiz P B G
+2025-09-29 16-05-53 - Linha enviada: *Início Atendimento:* 29/09/2025 09:08:54
+2025-09-29 16-05-54 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-05-55 - Linha enviada: *Tempo Recepção:* 19 minutos
+2025-09-29 16-05-57 - Linha enviada: *Atendimento:* 757573
+2025-09-29 16-05-58 - Linha enviada: *Paciente:* Eduardo R S
+2025-09-29 16-05-58 - Linha enviada: *Início Atendimento:* 29/09/2025 09:01:14
+2025-09-29 16-05-59 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-06-00 - Linha enviada: *Tempo Recepção:* 11 minutos
+2025-09-29 16-06-01 - Linha enviada: *Atendimento:* 757557
+2025-09-29 16-06-03 - Linha enviada: *Paciente:* Jose W M O
+2025-09-29 16-06-04 - Linha enviada: *Início Atendimento:* 29/09/2025 08:38:24
+2025-09-29 16-06-05 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-06-06 - Linha enviada: *Tempo Recepção:* 16 minutos
+2025-09-29 16-06-06 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-06-08 - Linha enviada: *Atendimento:* 757499
+2025-09-29 16-06-09 - Linha enviada: *Paciente:* Andreia C V N
+2025-09-29 16-06-10 - Linha enviada: *Início Atendimento:* 29/09/2025 08:08:34
+2025-09-29 16-06-11 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-06-12 - Linha enviada: *Tempo Recepção:* 14 minutos
+2025-09-29 16-06-14 - Linha enviada: *Atendimento:* 757381
+2025-09-29 16-06-15 - Linha enviada: *Paciente:* Luziney O R
+2025-09-29 16-06-15 - Linha enviada: *Início Atendimento:* 29/09/2025 06:19:10
+2025-09-29 16-06-16 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-06-17 - Linha enviada: *Espera por médico:* 6 minutos
+2025-09-29 16-06-19 - Linha enviada: *Atendimento:* 757370
+2025-09-29 16-06-19 - Linha enviada: *Paciente:* Sylvio J P H
+2025-09-29 16-06-20 - Linha enviada: *Início Atendimento:* 29/09/2025 02:54:17
+2025-09-29 16-06-21 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-06-22 - Linha enviada: *Espera por médico:* 6 minutos
+2025-09-29 16-06-24 - Mensagem completa enviada linha por linha
+2025-09-29 16-06-24 - time.sleep(0.5)
+2025-09-29 16-06-24 - Localizando e clicando no botão de enviar...
+2025-09-29 16-08-37 - MAIN - INICIO
+2025-09-29 16-08-38 - def __init__ GUI - INICIO
+2025-09-29 16-08-38 - def __init__ GUI - FIM
+2025-09-29 16-08-42 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 16-08-42 - Iniciando análise dos tempos da emergência
+2025-09-29 16-08-42 - tempo_espera_emergencia - INICIO
+2025-09-29 16-08-42 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 16-08-42 - encontrar_diretorio_instantclient - FIM
+2025-09-29 16-08-42 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 16-08-42 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 16-08-42 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 16-08-43 - tempo_espera_emergencia - Query executada. Linhas retornadas: 36
+2025-09-29 16-08-43 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 16-08-43 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 16-08-43 - tempo_espera_emergencia - FIM
+2025-09-29 16-08-43 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 16-08-43 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 16-08-43 - Encontrados 17 pacientes com tempos críticos
+2025-09-29 16-08-43 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 16-08-43 - time.sleep(4)
+2025-09-29 16-08-50 - driver.get("https://web.whatsapp.com")
+2025-09-29 16-08-51 - time.sleep(15)
+2025-09-29 16-09-06 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 16-09-06 - time.sleep(3)
+2025-09-29 16-09-12 - Campo de pesquisa encontrado e clicável.
+2025-09-29 16-09-12 - Clicado no campo de pesquisa.
+2025-09-29 16-09-12 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 16-09-13 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 16-09-13 - time.sleep(0.5)
+2025-09-29 16-09-14 - time.sleep(0.5)
+2025-09-29 16-09-14 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 16-09-14 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 16-09-14 - time.sleep(0.5)
+2025-09-29 16-09-15 - Localizando a caixa de texto do chat...
+2025-09-29 16-09-15 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 16-09-15 - Linha enviada: *ALERTA TEMPO DE EMERGÊNCIA*
+2025-09-29 16-09-16 - Linha enviada: Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA
+2025-09-29 16-09-16 - Linha enviada: 29/09/2025 às 16h08m
+2025-09-29 16-09-17 - Linha enviada: TEMPOS ENCONTRADOS
+2025-09-29 16-09-18 - Linha enviada: *Atendimento:* 757765
+2025-09-29 16-09-18 - Linha enviada: *Paciente:* Ermelinda F G
+2025-09-29 16-09-18 - Linha enviada: *Início Atendimento:* 29/09/2025 13:02:10
+2025-09-29 16-09-19 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-09-19 - Linha enviada: *Tempo Triagem:* 72 minutos
+2025-09-29 16-09-21 - Linha enviada: *Atendimento:* 757818
+2025-09-29 16-09-21 - Linha enviada: *Paciente:* Larissa R S S
+2025-09-29 16-09-22 - Linha enviada: *Início Atendimento:* 29/09/2025 14:30:17
+2025-09-29 16-09-22 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-09-23 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-09-24 - Linha enviada: *Atendimento:* 757832
+2025-09-29 16-09-24 - Linha enviada: *Paciente:* Carlos A P N
+2025-09-29 16-09-25 - Linha enviada: *Início Atendimento:* 29/09/2025 15:52:41
+2025-09-29 16-09-25 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-09-26 - Linha enviada: *Tempo Recepção:* 31 minutos
+2025-09-29 16-09-27 - Linha enviada: *Atendimento:* 757826
+2025-09-29 16-09-28 - Linha enviada: *Paciente:* Lorena D R
+2025-09-29 16-09-28 - Linha enviada: *Início Atendimento:* 29/09/2025 15:35:09
+2025-09-29 16-09-29 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-09-29 - Linha enviada: *Tempo Recepção:* 22 minutos
+2025-09-29 16-09-31 - Linha enviada: *Atendimento:* 757824
+2025-09-29 16-09-31 - Linha enviada: *Paciente:* Antonia M B C
+2025-09-29 16-09-32 - Linha enviada: *Início Atendimento:* 29/09/2025 15:23:06
+2025-09-29 16-09-33 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-09-33 - Linha enviada: *Tempo Recepção:* 31 minutos
+2025-09-29 16-09-35 - Linha enviada: *Atendimento:* 757805
+2025-09-29 16-09-35 - Linha enviada: *Paciente:* Stefhani D F
+2025-09-29 16-09-36 - Linha enviada: *Início Atendimento:* 29/09/2025 13:57:31
+2025-09-29 16-09-37 - Linha enviada: *Classificação:* Emergência (vermelho)
+2025-09-29 16-09-38 - Linha enviada: *Tempo Recepção:* 29 minutos
+2025-09-29 16-09-39 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-09-40 - Linha enviada: *Atendimento:* 757755
+2025-09-29 16-09-41 - Linha enviada: *Paciente:* Norma B
+2025-09-29 16-09-42 - Linha enviada: *Início Atendimento:* 29/09/2025 12:41:28
+2025-09-29 16-09-42 - Linha enviada: *Classificação:* Muito Urgência (Laranja)
+2025-09-29 16-09-43 - Linha enviada: *Tempo Recepção:* 25 minutos
+2025-09-29 16-09-45 - Linha enviada: *Atendimento:* 757748
+2025-09-29 16-09-45 - Linha enviada: *Paciente:* Fatima L C V
+2025-09-29 16-09-46 - Linha enviada: *Início Atendimento:* 29/09/2025 12:32:49
+2025-09-29 16-09-47 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-09-47 - Linha enviada: *Tempo Recepção:* 27 minutos
+2025-09-29 16-09-48 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-09-50 - Linha enviada: *Atendimento:* 757724
+2025-09-29 16-09-50 - Linha enviada: *Paciente:* Jose M S C
+2025-09-29 16-09-51 - Linha enviada: *Início Atendimento:* 29/09/2025 11:53:25
+2025-09-29 16-09-52 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-09-52 - Linha enviada: *Tempo Recepção:* 21 minutos
+2025-09-29 16-09-54 - Linha enviada: *Atendimento:* 757667
+2025-09-29 16-09-55 - Linha enviada: *Paciente:* Daniele C N
+2025-09-29 16-09-56 - Linha enviada: *Início Atendimento:* 29/09/2025 10:30:39
+2025-09-29 16-09-56 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-09-57 - Linha enviada: *Tempo Recepção:* 25 minutos
+2025-09-29 16-09-59 - Linha enviada: *Atendimento:* 757627
+2025-09-29 16-09-59 - Linha enviada: *Paciente:* Maria F A G
+2025-09-29 16-10-00 - Linha enviada: *Início Atendimento:* 29/09/2025 09:45:54
+2025-09-29 16-10-01 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-10-02 - Linha enviada: *Tempo Recepção:* 20 minutos
+2025-09-29 16-10-04 - Linha enviada: *Atendimento:* 757589
+2025-09-29 16-10-04 - Linha enviada: *Paciente:* Luiz P B G
+2025-09-29 16-10-05 - Linha enviada: *Início Atendimento:* 29/09/2025 09:08:54
+2025-09-29 16-10-06 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-10-07 - Linha enviada: *Tempo Recepção:* 19 minutos
+2025-09-29 16-10-09 - Linha enviada: *Atendimento:* 757573
+2025-09-29 16-10-10 - Linha enviada: *Paciente:* Eduardo R S
+2025-09-29 16-10-10 - Linha enviada: *Início Atendimento:* 29/09/2025 09:01:14
+2025-09-29 16-10-11 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-10-12 - Linha enviada: *Tempo Recepção:* 11 minutos
+2025-09-29 16-10-14 - Linha enviada: *Atendimento:* 757557
+2025-09-29 16-10-14 - Linha enviada: *Paciente:* Jose W M O
+2025-09-29 16-10-15 - Linha enviada: *Início Atendimento:* 29/09/2025 08:38:24
+2025-09-29 16-10-16 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-10-17 - Linha enviada: *Tempo Recepção:* 16 minutos
+2025-09-29 16-10-17 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-10-19 - Linha enviada: *Atendimento:* 757499
+2025-09-29 16-10-20 - Linha enviada: *Paciente:* Andreia C V N
+2025-09-29 16-10-21 - Linha enviada: *Início Atendimento:* 29/09/2025 08:08:34
+2025-09-29 16-10-22 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-10-23 - Linha enviada: *Tempo Recepção:* 14 minutos
+2025-09-29 16-10-24 - Linha enviada: *Atendimento:* 757381
+2025-09-29 16-10-25 - Linha enviada: *Paciente:* Luziney O R
+2025-09-29 16-10-27 - Linha enviada: *Início Atendimento:* 29/09/2025 06:19:10
+2025-09-29 16-10-28 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-10-29 - Linha enviada: *Espera por médico:* 6 minutos
+2025-09-29 16-10-30 - Linha enviada: *Atendimento:* 757370
+2025-09-29 16-10-31 - Linha enviada: *Paciente:* Sylvio J P H
+2025-09-29 16-10-32 - Linha enviada: *Início Atendimento:* 29/09/2025 02:54:17
+2025-09-29 16-10-33 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-10-34 - Linha enviada: *Espera por médico:* 6 minutos
+2025-09-29 16-10-35 - Mensagem completa enviada linha por linha
+2025-09-29 16-10-35 - time.sleep(0.5)
+2025-09-29 16-10-36 - Localizando e clicando no botão de enviar...
+2025-09-29 16-12-10 - MAIN - INICIO
+2025-09-29 16-12-10 - def __init__ GUI - INICIO
+2025-09-29 16-12-10 - def __init__ GUI - FIM
+2025-09-29 16-12-13 - iniciar_alertas_emergencia - Botão Emergência clicado
+2025-09-29 16-12-13 - Iniciando análise dos tempos da emergência
+2025-09-29 16-12-13 - tempo_espera_emergencia - INICIO
+2025-09-29 16-12-13 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 16-12-13 - encontrar_diretorio_instantclient - FIM
+2025-09-29 16-12-13 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 16-12-13 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 16-12-13 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 16-12-14 - tempo_espera_emergencia - Query executada. Linhas retornadas: 36
+2025-09-29 16-12-14 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 16-12-14 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 16-12-14 - tempo_espera_emergencia - FIM
+2025-09-29 16-12-14 - DataFrame obtido com sucesso, processando alertas unificados
+2025-09-29 16-12-14 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 16-12-14 - Encontrados 17 pacientes com tempos críticos
+2025-09-29 16-12-14 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 16-12-14 - time.sleep(4)
+2025-09-29 16-12-21 - driver.get("https://web.whatsapp.com")
+2025-09-29 16-12-25 - time.sleep(15)
+2025-09-29 16-12-40 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 16-12-40 - time.sleep(3)
+2025-09-29 16-12-50 - Campo de pesquisa encontrado e clicável.
+2025-09-29 16-12-51 - Clicado no campo de pesquisa.
+2025-09-29 16-12-51 - Campo de input de pesquisa ativo encontrado.
+2025-09-29 16-12-52 - Texto 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' enviado para o campo de pesquisa.
+2025-09-29 16-12-52 - time.sleep(0.5)
+2025-09-29 16-12-52 - time.sleep(0.5)
+2025-09-29 16-12-53 - Resultado da pesquisa para 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' encontrado e clicável.
+2025-09-29 16-12-53 - Clicado no grupo 'HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA' na lista de resultados.
+2025-09-29 16-12-53 - time.sleep(0.5)
+2025-09-29 16-12-53 - Localizando a caixa de texto do chat...
+2025-09-29 16-12-53 - Caixa de texto localizada e clicável com sucesso!
+2025-09-29 16-12-54 - Linha enviada: *ALERTA TEMPO DE EMERGÊNCIA*
+2025-09-29 16-12-54 - Linha enviada: Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA
+2025-09-29 16-12-55 - Linha enviada: 29/09/2025 às 16h12m
+2025-09-29 16-12-56 - Linha enviada: TEMPOS ENCONTRADOS
+2025-09-29 16-12-56 - Linha enviada: *Atendimento:* 757765
+2025-09-29 16-12-56 - Linha enviada: *Paciente:* Ermelinda F G
+2025-09-29 16-12-57 - Linha enviada: *Início Atendimento:* 29/09/2025 13:02:10
+2025-09-29 16-12-57 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-12-58 - Linha enviada: *Tempo Triagem:* 72 minutos
+2025-09-29 16-12-59 - Linha enviada: *Atendimento:* 757818
+2025-09-29 16-12-59 - Linha enviada: *Paciente:* Larissa R S S
+2025-09-29 16-13-00 - Linha enviada: *Início Atendimento:* 29/09/2025 14:30:17
+2025-09-29 16-13-00 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-01 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-13-02 - Linha enviada: *Atendimento:* 757832
+2025-09-29 16-13-02 - Linha enviada: *Paciente:* Carlos A P N
+2025-09-29 16-13-03 - Linha enviada: *Início Atendimento:* 29/09/2025 15:52:41
+2025-09-29 16-13-03 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-13-04 - Linha enviada: *Tempo Recepção:* 31 minutos
+2025-09-29 16-13-05 - Linha enviada: *Atendimento:* 757826
+2025-09-29 16-13-05 - Linha enviada: *Paciente:* Lorena D R
+2025-09-29 16-13-06 - Linha enviada: *Início Atendimento:* 29/09/2025 15:35:09
+2025-09-29 16-13-07 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-07 - Linha enviada: *Tempo Recepção:* 22 minutos
+2025-09-29 16-13-08 - Linha enviada: *Atendimento:* 757824
+2025-09-29 16-13-09 - Linha enviada: *Paciente:* Antonia M B C
+2025-09-29 16-13-09 - Linha enviada: *Início Atendimento:* 29/09/2025 15:23:06
+2025-09-29 16-13-10 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-10 - Linha enviada: *Tempo Recepção:* 31 minutos
+2025-09-29 16-13-12 - Linha enviada: *Atendimento:* 757805
+2025-09-29 16-13-12 - Linha enviada: *Paciente:* Stefhani D F
+2025-09-29 16-13-13 - Linha enviada: *Início Atendimento:* 29/09/2025 13:57:31
+2025-09-29 16-13-13 - Linha enviada: *Classificação:* Emergência (vermelho)
+2025-09-29 16-13-14 - Linha enviada: *Tempo Recepção:* 29 minutos
+2025-09-29 16-13-14 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-13-16 - Linha enviada: *Atendimento:* 757755
+2025-09-29 16-13-16 - Linha enviada: *Paciente:* Norma B
+2025-09-29 16-13-17 - Linha enviada: *Início Atendimento:* 29/09/2025 12:41:28
+2025-09-29 16-13-18 - Linha enviada: *Classificação:* Muito Urgência (Laranja)
+2025-09-29 16-13-18 - Linha enviada: *Tempo Recepção:* 25 minutos
+2025-09-29 16-13-20 - Linha enviada: *Atendimento:* 757748
+2025-09-29 16-13-20 - Linha enviada: *Paciente:* Fatima L C V
+2025-09-29 16-13-21 - Linha enviada: *Início Atendimento:* 29/09/2025 12:32:49
+2025-09-29 16-13-23 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-24 - Linha enviada: *Tempo Recepção:* 27 minutos
+2025-09-29 16-13-24 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-13-26 - Linha enviada: *Atendimento:* 757724
+2025-09-29 16-13-26 - Linha enviada: *Paciente:* Jose M S C
+2025-09-29 16-13-27 - Linha enviada: *Início Atendimento:* 29/09/2025 11:53:25
+2025-09-29 16-13-28 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-28 - Linha enviada: *Tempo Recepção:* 21 minutos
+2025-09-29 16-13-30 - Linha enviada: *Atendimento:* 757667
+2025-09-29 16-13-30 - Linha enviada: *Paciente:* Daniele C N
+2025-09-29 16-13-31 - Linha enviada: *Início Atendimento:* 29/09/2025 10:30:39
+2025-09-29 16-13-32 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-33 - Linha enviada: *Tempo Recepção:* 25 minutos
+2025-09-29 16-13-35 - Linha enviada: *Atendimento:* 757627
+2025-09-29 16-13-35 - Linha enviada: *Paciente:* Maria F A G
+2025-09-29 16-13-36 - Linha enviada: *Início Atendimento:* 29/09/2025 09:45:54
+2025-09-29 16-13-37 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-38 - Linha enviada: *Tempo Recepção:* 20 minutos
+2025-09-29 16-13-39 - Linha enviada: *Atendimento:* 757589
+2025-09-29 16-13-40 - Linha enviada: *Paciente:* Luiz P B G
+2025-09-29 16-13-41 - Linha enviada: *Início Atendimento:* 29/09/2025 09:08:54
+2025-09-29 16-13-42 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-42 - Linha enviada: *Tempo Recepção:* 19 minutos
+2025-09-29 16-13-44 - Linha enviada: *Atendimento:* 757573
+2025-09-29 16-13-44 - Linha enviada: *Paciente:* Eduardo R S
+2025-09-29 16-13-46 - Linha enviada: *Início Atendimento:* 29/09/2025 09:01:14
+2025-09-29 16-13-47 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-48 - Linha enviada: *Tempo Recepção:* 11 minutos
+2025-09-29 16-13-50 - Linha enviada: *Atendimento:* 757557
+2025-09-29 16-13-51 - Linha enviada: *Paciente:* Jose W M O
+2025-09-29 16-13-52 - Linha enviada: *Início Atendimento:* 29/09/2025 08:38:24
+2025-09-29 16-13-53 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-54 - Linha enviada: *Tempo Recepção:* 16 minutos
+2025-09-29 16-13-54 - Linha enviada: *Tempo Triagem:* 6 minutos
+2025-09-29 16-13-56 - Linha enviada: *Atendimento:* 757499
+2025-09-29 16-13-56 - Linha enviada: *Paciente:* Andreia C V N
+2025-09-29 16-13-57 - Linha enviada: *Início Atendimento:* 29/09/2025 08:08:34
+2025-09-29 16-13-58 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-13-59 - Linha enviada: *Tempo Recepção:* 14 minutos
+2025-09-29 16-14-00 - Linha enviada: *Atendimento:* 757381
+2025-09-29 16-14-01 - Linha enviada: *Paciente:* Luziney O R
+2025-09-29 16-14-02 - Linha enviada: *Início Atendimento:* 29/09/2025 06:19:10
+2025-09-29 16-14-03 - Linha enviada: *Classificação:* Pouca Urgência (Verde)
+2025-09-29 16-14-04 - Linha enviada: *Espera por médico:* 6 minutos
+2025-09-29 16-14-06 - Linha enviada: *Atendimento:* 757370
+2025-09-29 16-14-06 - Linha enviada: *Paciente:* Sylvio J P H
+2025-09-29 16-14-08 - Linha enviada: *Início Atendimento:* 29/09/2025 02:54:17
+2025-09-29 16-14-09 - Linha enviada: *Classificação:* Urgência (Amarelo)
+2025-09-29 16-14-10 - Linha enviada: *Espera por médico:* 6 minutos
+2025-09-29 16-14-11 - Mensagem completa enviada linha por linha
+2025-09-29 16-14-11 - time.sleep(0.5)
+2025-09-29 16-14-12 - Localizando e clicando no botão de enviar...
+2025-09-29 16-14-32 - Botão de enviar encontrado com seletor: //div[@role='button'][contains(@aria-label, 'Enviar')]
+2025-09-29 16-14-32 - Botão de enviar clicado com sucesso!
+2025-09-29 16-14-32 - Mensagem enviada com sucesso!
+2025-09-29 16-14-32 - Processo de envio de mensagem concluído.
+2025-09-29 16-14-32 - time.sleep(5)
+2025-09-29 16-14-42 - time.sleep(60)
+2025-09-29 16-15-42 - driver.quit()
+2025-09-29 16-15-45 - driver.quit() - Navegador fechado.
+2025-09-29 16-15-45 - enviar_whatsapp_emergencia - FIM
+2025-09-29 16-15-45 - Alerta unificado de tempos críticos processado e enviado
+2025-09-29 16-15-45 - processar_alertas_tempo_unificado - FIM
+2025-09-29 16-15-45 - Alertas de emergência unificados processados com sucesso
+2025-09-29 16-15-45 - iniciar_alertas_emergencia - FIM

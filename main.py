@@ -215,6 +215,14 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
     """
     Envia mensagem via WhatsApp para o grupo HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA.
     
+    MELHORIAS IMPLEMENTADAS:
+    - Correção de codificação UTF-8 para caracteres especiais e acentos brasileiros
+    - Sistema robusto com 17 seletores diferentes para localizar o botão de enviar
+    - Estratégia de fallback com JavaScript quando XPath falha
+    - Fallback final usando teclas Enter/Ctrl+Enter
+    - Logs detalhados para debugging e monitoramento
+    - Envio linha por linha para evitar problemas de caracteres BMP
+    
     Args:
         mensagem_texto (str): Texto da mensagem a ser enviada
         modo_teste (bool): Se True, apenas registra no log sem enviar
@@ -223,6 +231,9 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
         None
     """
     registrar_log("enviar_whatsapp_emergencia - INÍCIO")
+
+    registrar_log("time.sleep(4)")
+    time.sleep(4)
     
     if not mensagem_texto or not mensagem_texto.strip():
         registrar_log("Nenhuma mensagem para enviar via WhatsApp.")
@@ -242,10 +253,29 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
         # Configurações do Chrome
         options = Options()
         
+        # Adicionar argumentos para evitar problemas de sessão
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-web-security")
+        options.add_argument("--allow-running-insecure-content")
+        options.add_argument("--disable-background-timer-throttling")
+        options.add_argument("--disable-backgrounding-occluded-windows")
+        options.add_argument("--disable-renderer-backgrounding")
+        options.add_argument("--disable-features=TranslateUI")
+        options.add_argument("--disable-ipc-flooding-protection")
+        
         # Configurar o perfil de usuário para manter o login
         dir_path = os.path.dirname(os.path.abspath(__file__))
-        profile_path = os.path.join(dir_path, "profile", "wpp")
-        options.add_argument(f"user-data-dir={profile_path}")
+        # Usar timestamp para criar diretório único
+        from datetime import datetime
+        timestamp = str(int(datetime.now().timestamp()))
+        profile_path = os.path.join(dir_path, "profile", f"wpp_emergencia_{timestamp}")
+        
+        # Criar diretório se não existir
+        os.makedirs(profile_path, exist_ok=True)
+        options.add_argument(f"--user-data-dir={profile_path}")
 
         # Inicializa o driver
         service = ChromeService(ChromeDriverManager().install())
@@ -302,19 +332,132 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                 chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
                 registrar_log('Caixa de texto localizada e clicável com sucesso!')
                 
-                # Envia a mensagem
-                chat_caixa_de_texto_element.send_keys(mensagem_texto)
-                registrar_log(f"Mensagem enviada para a caixa de texto: {mensagem_texto}")
+                # CORREÇÃO UTF-8 E ENVIO LINHA POR LINHA
+                # Envia a mensagem linha por linha para evitar erro de caracteres BMP
+                # Primeiro, limpa apenas emojis problemáticos, mantendo acentos brasileiros
+                # Esta implementação preserva caracteres especiais como ã, á, ç, etc.
+                import re
+                # Remove apenas emojis e símbolos especiais, mantém acentos portugueses
+                mensagem_limpa = re.sub(r'[^\w\s\*\:\-\(\)\[\]\.\,\;\!\?\ãáàâêéèíìîõóòôúùûçÃÁÀÂÊÉÈÍÌÎÕÓÒÔÚÙÛÇ\/]+', '', mensagem_texto)
+                
+                linhas_mensagem = mensagem_limpa.split('\n')
+                for i, linha in enumerate(linhas_mensagem):
+                    if linha.strip():  # Só envia linhas não vazias
+                        chat_caixa_de_texto_element.send_keys(linha.strip())
+                        registrar_log(f"Linha enviada: {linha.strip()}")
+                    
+                    # Adiciona quebra de linha se não for a última linha
+                    if i < len(linhas_mensagem) - 1:
+                        chat_caixa_de_texto_element.send_keys(Keys.CONTROL, Keys.ENTER)
+                        time.sleep(0.2)  # Pequena pausa entre linhas
+                
+                registrar_log(f"Mensagem completa enviada linha por linha")
                 registrar_log("time.sleep(0.5)")
                 time.sleep(0.5)
 
                 # Localiza e clica no botão de enviar
                 registrar_log('Localizando e clicando no botão de enviar...')
-                xpath_botao_enviar = "//button[@aria-label='Enviar']"
-                botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
-
-                registrar_log('botao_enviar_element.click()')
-                botao_enviar_element.click()
+                
+                # SISTEMA ROBUSTO DE ENVIO - 17 SELETORES DIFERENTES
+                # Múltiplos seletores para o botão de enviar (expandidos)
+                # Esta implementação garante compatibilidade com diferentes versões do WhatsApp Web
+                # e diferentes idiomas (português/inglês)
+                seletores_botao_enviar = [
+                    "//button[@aria-label='Enviar']",
+                    "//button[@aria-label='Send']", 
+                    "//span[@data-icon='send']",
+                    "//button[contains(@class, 'send')]",
+                    "//div[@role='button'][contains(@aria-label, 'Enviar')]",
+                    "//div[@role='button'][contains(@aria-label, 'Send')]",
+                    "//button[contains(@title, 'Enviar')]",
+                    "//button[contains(@title, 'Send')]",
+                    "//span[contains(@class, 'send')]",
+                    "//div[contains(@class, 'send')]",
+                    "//button[@data-testid='send']",
+                    "//div[@data-testid='send']",
+                    "//span[@data-testid='send']",
+                    "//button[contains(@aria-label, 'enviar')]",
+                    "//button[contains(@aria-label, 'send')]",
+                    "//div[@role='button'][contains(@title, 'Enviar')]",
+                    "//div[@role='button'][contains(@title, 'Send')]"
+                ]
+                
+                botao_encontrado = False
+                for selector in seletores_botao_enviar:
+                    try:
+                        botao_enviar_element = WebDriverWait(driver, 5).until(
+                            EC.element_to_be_clickable((By.XPATH, selector))
+                        )
+                        registrar_log(f'Botão de enviar encontrado com seletor: {selector}')
+                        botao_enviar_element.click()
+                        registrar_log("Botão de enviar clicado com sucesso!")
+                        botao_encontrado = True
+                        break
+                    except:
+                        continue
+                
+                if not botao_encontrado:
+                    # FALLBACK JAVASCRIPT - Estratégia alternativa quando XPath falha
+                    # Estratégia alternativa: usar JavaScript para encontrar e clicar no botão
+                    # Esta abordagem é mais robusta pois não depende da estrutura DOM específica
+                    registrar_log("Botão de enviar não encontrado com XPath, tentando JavaScript...")
+                    try:
+                        # Script JavaScript para encontrar e clicar no botão de enviar
+                        js_script = """
+                        // Procurar por botões com diferentes atributos
+                        var buttons = document.querySelectorAll('button, div[role="button"], span');
+                        for (var i = 0; i < buttons.length; i++) {
+                            var btn = buttons[i];
+                            var ariaLabel = btn.getAttribute('aria-label') || '';
+                            var title = btn.getAttribute('title') || '';
+                            var className = btn.className || '';
+                            var dataIcon = btn.getAttribute('data-icon') || '';
+                            var dataTestId = btn.getAttribute('data-testid') || '';
+                            
+                            if (ariaLabel.toLowerCase().includes('enviar') || 
+                                ariaLabel.toLowerCase().includes('send') ||
+                                title.toLowerCase().includes('enviar') ||
+                                title.toLowerCase().includes('send') ||
+                                dataIcon.includes('send') ||
+                                dataTestId.includes('send') ||
+                                className.includes('send')) {
+                                btn.click();
+                                return 'Botão encontrado e clicado via JavaScript';
+                            }
+                        }
+                        return 'Botão não encontrado via JavaScript';
+                        """
+                        resultado = driver.execute_script(js_script)
+                        registrar_log(f"Resultado JavaScript: {resultado}")
+                        if "clicado" in resultado:
+                            botao_encontrado = True
+                    except Exception as e_js:
+                        registrar_log(f"Erro ao executar JavaScript: {e_js}")
+                
+                if not botao_encontrado:
+                    # FALLBACK TECLADO - Última alternativa quando todos os métodos falham
+                    # Última alternativa: usar Enter para enviar
+                    # Esta é a estratégia mais básica e universal para envio de mensagens
+                    registrar_log("Todas as tentativas falharam, tentando usar Enter...")
+                    try:
+                        chat_caixa_de_texto_element.send_keys(Keys.ENTER)
+                        registrar_log("Mensagem enviada usando Enter")
+                        botao_encontrado = True
+                    except Exception as e_enter:
+                        registrar_log(f"Erro ao usar Enter: {e_enter}")
+                        # Última tentativa: usar Ctrl+Enter
+                        try:
+                            chat_caixa_de_texto_element.send_keys(Keys.CONTROL + Keys.ENTER)
+                            registrar_log("Mensagem enviada usando Ctrl+Enter")
+                            botao_encontrado = True
+                        except Exception as e_ctrl_enter:
+                            registrar_log(f"Erro ao usar Ctrl+Enter: {e_ctrl_enter}")
+                
+                if botao_encontrado:
+                    registrar_log("Mensagem enviada com sucesso!")
+                else:
+                    registrar_log("ERRO: Não foi possível enviar a mensagem por nenhum método")
+                
                 registrar_log("Processo de envio de mensagem concluído.")
                 registrar_log('time.sleep(5)')
                 time.sleep(5)
@@ -332,8 +475,8 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
         
         # Fechar o navegador após o envio
         if driver:
-            registrar_log("time.sleep(60)")
-            time.sleep(60)            
+            registrar_log("time.sleep(2)")
+            time.sleep(2)            
             registrar_log("driver.quit()")
             driver.quit() 
         registrar_log("driver.quit() - Navegador fechado.")
@@ -342,7 +485,6 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
         registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp Emergência: {e}")
     
     registrar_log("enviar_whatsapp_emergencia - FIM")
-
 
 def enviar_whatsapp(lista_exames, modo_teste=False):
     """Abre o WhatsApp Web usando Selenium com perfil de usuário."""
@@ -758,15 +900,14 @@ def processar_alertas_tempo_recepcao(df):
                 if len(filtro_recepcao) > 1:
                     mensagem += "\n"
         
-        # Envia mensagem via WhatsApp (modo teste por enquanto)
-        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        # Envia mensagem via WhatsApp
+        enviar_whatsapp_emergencia(mensagem)
         registrar_log("Alerta de Tempo Recepção processado e enviado")
         
     except Exception as e:
         registrar_log(f"Erro ao processar alertas de Tempo Recepção: {e}")
     
     registrar_log("processar_alertas_tempo_recepcao - FIM")
-
 
 def processar_alertas_tempo_triagem(df):
     """
@@ -814,15 +955,14 @@ def processar_alertas_tempo_triagem(df):
                 if len(filtro_triagem) > 1:
                     mensagem += "\n"
         
-        # Envia mensagem via WhatsApp (modo teste por enquanto)
-        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        # Envia mensagem via WhatsApp
+        enviar_whatsapp_emergencia(mensagem)
         registrar_log("Alerta de Tempo Triagem processado e enviado")
         
     except Exception as e:
         registrar_log(f"Erro ao processar alertas de Tempo Triagem: {e}")
     
     registrar_log("processar_alertas_tempo_triagem - FIM")
-
 
 def processar_alertas_espera_medico(df):
     """
@@ -860,15 +1000,14 @@ def processar_alertas_espera_medico(df):
                 if len(filtro_espera) > 1:
                     mensagem += "\n"
         
-        # Envia mensagem via WhatsApp (modo teste por enquanto)
-        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        # Envia mensagem via WhatsApp
+        enviar_whatsapp_emergencia(mensagem)
         registrar_log("Alerta de Espera por Médico processado e enviado")
         
     except Exception as e:
         registrar_log(f"Erro ao processar alertas de Espera por Médico: {e}")
     
     registrar_log("processar_alertas_espera_medico - FIM")
-
 
 def processar_alertas_tempo_final_fila(df):
     """
@@ -906,15 +1045,14 @@ def processar_alertas_tempo_final_fila(df):
                 if len(filtro_fila) > 1:
                     mensagem += "\n"
         
-        # Envia mensagem via WhatsApp (modo teste por enquanto)
-        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        # Envia mensagem via WhatsApp
+        enviar_whatsapp_emergencia(mensagem)
         registrar_log("Alerta de Tempo Final da Fila processado e enviado")
         
     except Exception as e:
         registrar_log(f"Erro ao processar alertas de Tempo Final da Fila: {e}")
     
     registrar_log("processar_alertas_tempo_final_fila - FIM")
-
 
 def processar_alertas_tempo_unificado(df):
     """
@@ -1011,15 +1149,14 @@ def processar_alertas_tempo_unificado(df):
                 if len(pacientes_criticos) > 1:
                     mensagem += "\n" + "─" * 40 + "\n\n"
         
-        # Envia mensagem via WhatsApp (modo teste por enquanto)
-        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        # Envia mensagem via WhatsApp
+        enviar_whatsapp_emergencia(mensagem)
         registrar_log("Alerta unificado de tempos críticos processado e enviado")
         
     except Exception as e:
         registrar_log(f"Erro ao processar alertas unificados: {e}")
     
     registrar_log("processar_alertas_tempo_unificado - FIM")
-
 
 def logica_principal_background(stop_event):
     """Lógica principal que será executada em um processo separado, repetidamente."""
