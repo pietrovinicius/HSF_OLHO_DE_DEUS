@@ -4643,3 +4643,24 @@ Stacktrace:
 2025-09-29 16-15-45 - processar_alertas_tempo_unificado - FIM
 2025-09-29 16-15-45 - Alertas de emergência unificados processados com sucesso
 2025-09-29 16-15-45 - iniciar_alertas_emergencia - FIM
+2025-09-29 16-25-27 - MAIN - INICIO - Execução automática iniciada
+2025-09-29 16-25-27 - === INICIANDO CICLO DE EXECUÇÃO ===
+2025-09-29 16-25-27 - Executando enviar_whatsapp_emergencia()
+2025-09-29 16-25-27 - tempo_espera_emergencia - INICIO
+2025-09-29 16-25-27 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 16-25-27 - encontrar_diretorio_instantclient - FIM
+2025-09-29 16-25-27 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 16-25-27 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 16-25-27 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 16-25-29 - tempo_espera_emergencia - Query executada. Linhas retornadas: 38
+2025-09-29 16-25-29 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2025-09-29 16-25-29 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 16-25-29 - tempo_espera_emergencia - FIM
+2025-09-29 16-25-29 - processar_alertas_tempo_unificado - INÍCIO
+2025-09-29 16-25-29 - Encontrados 18 pacientes com tempos críticos
+2025-09-29 16-25-29 - enviar_whatsapp_emergencia - INÍCIO
+2025-09-29 16-25-29 - time.sleep(4)
+2025-09-29 16-25-35 - driver.get("https://web.whatsapp.com")
+2025-09-29 16-25-36 - time.sleep(15)
+2025-09-29 16-25-51 - WhatsApp Web aberto. Aguardando o campo de pesquisa...
+2025-09-29 16-25-51 - time.sleep(3)

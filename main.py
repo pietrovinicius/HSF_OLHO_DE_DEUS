@@ -13,7 +13,7 @@
 import os
 import time
 from datetime import datetime
-import tkinter as tk
+# import tkinter as tk  # Removido - não precisamos mais da interface gráfica
 from multiprocessing import Process, Event # Importar Event
 import oracledb
 from selenium import webdriver
@@ -1838,108 +1838,53 @@ def exibir_colunas_especificas_tempo_espera(df):
     
     registrar_log("exibir_colunas_especificas_tempo_espera - FIM")
 
-class AppGUI:
-    def __init__(self, master):
-        registrar_log("def __init__ GUI - INICIO")
-        self.master = master
-        master.title("HSF Olho de Deus")
-        master.geometry("600x400") # Define o tamanho inicial da janela para 600x400
-        master.resizable(False, False) # Impede que o usuário redimensione a janela
-
-        self.process = None # Para armazenar a referência do processo
-        self.stop_event = None # Para armazenar o evento de parada
-        self.master.protocol("WM_DELETE_WINDOW", self.on_closing) # Captura o evento de fechar janela
-
-        self.label = tk.Label(master, text="Clique para começar...")
-        self.label.pack(pady=100)
-
-        self.start_button = tk.Button(master, text="LAB - Valores Críticos", command=self.iniciar_processo)
-        self.start_button.pack(pady=10)
-        
-        self.emergencia_button = tk.Button(master, text="EMERGÊNCIA - Tempos de Espera", command=self.iniciar_alertas_emergencia)
-        self.emergencia_button.pack(pady=10)
-        
-        registrar_log("def __init__ GUI - FIM")
-
-    def iniciar_alertas_emergencia(self):
-        """Inicia o processo de análise e envio de alertas de tempo da emergência."""
-        registrar_log("iniciar_alertas_emergencia - Botão Emergência clicado")
-        
-        # Desabilita o botão para evitar múltiplos cliques
-        self.emergencia_button.config(state=tk.DISABLED)
-        self.label.config(text="Processando alertas de emergência...")
-        
-        try:
-            # Executa a análise dos tempos da emergência
-            registrar_log("Iniciando análise dos tempos da emergência")
-            df = tempo_espera_emergencia()
-            
-            if df is not None:
-                registrar_log("DataFrame obtido com sucesso, processando alertas unificados")
-                
-                # Processa alertas unificados (nova função que agrupa todos os tempos por paciente)
-                processar_alertas_tempo_unificado(df)
-                
-                self.label.config(text="Alertas de emergência processados com sucesso!")
-                registrar_log("Alertas de emergência unificados processados com sucesso")
-            else:
-                self.label.config(text="Erro ao obter dados da emergência")
-                registrar_log("Erro: DataFrame da emergência retornou None")
-                
-        except Exception as e:
-            registrar_log(f"Erro ao processar alertas de emergência: {e}")
-            self.label.config(text="Erro ao processar alertas de emergência")
-        
-        finally:
-            # Reabilita o botão após o processamento
-            self.emergencia_button.config(state=tk.NORMAL)
-            registrar_log("iniciar_alertas_emergencia - FIM")
-
-    def iniciar_processo(self):
-        registrar_log("iniciar_processo - Botão Iniciar clicado")
-        # Desabilita o botão para evitar múltiplos cliques enquanto o processo está rodando
-        if self.process is None or not self.process.is_alive():
-            self.start_button.config(state=tk.DISABLED)
-            self.label.config(text="Processo em execução ...")
-
-            # Cria o evento de parada
-            registrar_log('Cria o evento de parada')
-            self.stop_event = Event()
-
-            # Cria e inicia o processo, passando o evento de parada
-            self.process = Process(target=logica_principal_background, args=(self.stop_event,))
-            registrar_log('self.process.start()')
-            self.process.start()
-            registrar_log(f"Processo background iniciado com PID: {self.process.pid}")
-        else:
-            registrar_log("Processo background já está rodando.")
-
-    def on_closing(self):
-        """Lida com o fechamento da janela, sinalizando o processo background para parar."""
-        registrar_log("Fechando janela. Sinalizando processo background para parar...")
-        if self.process and self.process.is_alive():
-        # Exemplo simples para reabilitar após um tempo (não ideal para processos longos):
-        # self.master.after(6000, self.reabilitar_botao) # 6000 ms = 6s
-
-    # def reabilitar_botao(self): # Exemplo de como poderia ser
-    #     self.start_button.config(state=tk.NORMAL)
-    #     self.label.config(text="Processo concluído. Clique para iniciar novamente.")
-
-            self.stop_event.set() # Sinaliza o evento de parada
-            self.process.join(timeout=5) # Espera o processo terminar por até 5 segundos
-            if self.process.is_alive():
-                registrar_log("Processo background não terminou, encerrando...")
-                self.process.terminate() # Encerra o processo se ele não terminar sozinho
-        registrar_log('self.master.destroy()')
-        self.master.destroy() # Adicionar esta linha para fechar a janela
+# Classe AppGUI removida - não precisamos mais da interface gráfica
+# A execução agora é automática através da função main()
 
 def main():
-    """Função principal que configura e inicia a GUI."""
-    registrar_log("MAIN - INICIO")
-    root = tk.Tk()
-    app = AppGUI(root)
-    root.mainloop()
-    registrar_log("MAIN - FIM")
+    """Função principal que executa as funções de WhatsApp em fila a cada hora."""
+    registrar_log("MAIN - INICIO - Execução automática iniciada")
+    
+    while True:
+        try:
+            registrar_log("=== INICIANDO CICLO DE EXECUÇÃO ===")
+            
+            # Primeira função: enviar_whatsapp_emergencia()
+            registrar_log("Executando enviar_whatsapp_emergencia()")
+            try:
+                df_emergencia = tempo_espera_emergencia()
+                if df_emergencia is not None:
+                    processar_alertas_tempo_unificado(df_emergencia)
+                    registrar_log("enviar_whatsapp_emergencia() concluída com sucesso")
+                else:
+                    registrar_log("Erro: DataFrame da emergência retornou None")
+            except Exception as e:
+                registrar_log(f"Erro em enviar_whatsapp_emergencia(): {e}")
+            
+            # Segunda função: enviar_whatsapp() (exames críticos)
+            registrar_log("Executando enviar_whatsapp() - exames críticos")
+            try:
+                stop_event = Event()  # Criar evento de parada para compatibilidade
+                logica_principal_background(stop_event)
+                registrar_log("enviar_whatsapp() concluída com sucesso")
+            except Exception as e:
+                registrar_log(f"Erro em enviar_whatsapp(): {e}")
+            
+            registrar_log("=== CICLO DE EXECUÇÃO CONCLUÍDO ===")
+            registrar_log("Aguardando 1 hora para próxima execução...")
+            
+            # Aguarda 1 hora (3600 segundos) antes da próxima execução
+            time.sleep(3600)
+            
+        except KeyboardInterrupt:
+            registrar_log("Execução interrompida pelo usuário (Ctrl+C)")
+            break
+        except Exception as e:
+            registrar_log(f"Erro inesperado no ciclo principal: {e}")
+            registrar_log("Aguardando 5 minutos antes de tentar novamente...")
+            time.sleep(300)  # Aguarda 5 minutos em caso de erro
+    
+    registrar_log("MAIN - FIM - Execução automática finalizada")
 
 if __name__ == "__main__":
     # Este bloco é crucial para o multiprocessing funcionar corretamente no Windows.
