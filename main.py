@@ -1158,21 +1158,21 @@ def processar_alertas_tempo_unificado(df):
     
     registrar_log("processar_alertas_tempo_unificado - FIM")
 
-def logica_principal_background(stop_event):
-    """Lógica principal que será executada em um processo separado, repetidamente."""
+def logica_principal_exames():
+    """Lógica principal que executa a verificação de todos os exames críticos."""
     registrar_log("logica_principal_background - INÍCIO")
     # Defina True para testar sem enviar mensagens reais, False para operação normal
     MODO_TESTE_WHATSAPP = False  
     
-    while not stop_event.is_set():
-        registrar_log("Executando ciclo da lógica principal...")
-        lista_de_resultados = resultados_exames_intervalo_58_min()
-        registrar_log(f"lista_de_resultados: {lista_de_resultados}")        
-        enviar_whatsapp(lista_de_resultados, modo_teste=MODO_TESTE_WHATSAPP)
-        
-        # --- INÍCIO DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
-        registrar_log("Iniciando processamento de hemogramas críticos...")
-        resultados_hemogramas = resultados_hemogramas_intervalo_58_min()
+    registrar_log("Executando ciclo da lógica principal...")
+    lista_de_resultados = resultados_exames_intervalo_58_min()
+    registrar_log(f"lista_de_resultados: {lista_de_resultados}")        
+    enviar_whatsapp(lista_de_resultados, modo_teste=MODO_TESTE_WHATSAPP)
+    
+    # --- INÍCIO DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
+    registrar_log("Iniciando processamento de hemogramas críticos...")
+    resultados_hemogramas = resultados_hemogramas_intervalo_58_min()
+    if resultados_hemogramas:
         mensagens_hemogramas_criticos_whatsapp = []
         ###################################################################################################
         #VERIFICACOES DOS EXAMES DE DENTRO D HEMOGRAMA:
@@ -1332,15 +1332,11 @@ def logica_principal_background(stop_event):
             enviar_whatsapp(mensagens_lipidogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum lipidograma crítico encontrado para enviar.")
-        # --- FIM DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
-        
-        # Espera 5 minutos (300 segundos) ou até o evento de parada ser setado
-        registrar_log("Aguardando 60 minutos para o próximo ciclo...")
-        registrar_log('stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado')
-        stop_event.wait(3480)
-
+    else:
+        registrar_log("Nenhum resultado de hemograma/exame bruto encontrado para processar.")
+    # --- FIM DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
+    
     registrar_log("logica_principal_background - FIM")
-    print("Processo em background concluído.") # Feedback no console
 
 def tempo_espera_emergencia():
     """Executa a query HSF - TODOS - TEMPO DE ESPERA EMERGENCIA.sql e retorna o dataframe."""
@@ -1880,9 +1876,8 @@ def main():
             # Segunda função: enviar_whatsapp() (exames críticos)
             registrar_log("Executando enviar_whatsapp() - exames críticos")
             try:
-                stop_event = Event()  # Criar evento de parada para compatibilidade
-                logica_principal_background(stop_event)
-                registrar_log("enviar_whatsapp() concluída com sucesso")
+                logica_principal_exames()
+                registrar_log("Lógica de exames concluída com sucesso")
             except Exception as e:
                 registrar_log(f"Erro em enviar_whatsapp(): {e}")
             
@@ -1930,4 +1925,3 @@ if __name__ == "__main__":
     #     exibir_colunas_especificas_tempo_espera(df)
     #     exibir_registros_filtrados_tempo_espera(df)
     #     exibir_filtros_individuais_tempo_espera(df)
-

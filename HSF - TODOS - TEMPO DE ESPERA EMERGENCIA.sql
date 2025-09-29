@@ -52,7 +52,7 @@ and EXTRACT(YEAR FROM a.dt_inicio_atendimento) = EXTRACT(YEAR FROM SYSDATE) --an
 and EXTRACT(MONTH FROM a.dt_inicio_atendimento) = EXTRACT(MONTH FROM SYSDATE) --{mes}
 and EXTRACT(DAY FROM a.dt_inicio_atendimento) = EXTRACT(DAY FROM SYSDATE) --{dia}
 --TODO: retornar apenas atendimentos da última hora
---and a.dt_inicio_atendimento >= sysdate - 1/24
+and a.dt_inicio_atendimento >= sysdate - 1/24
 
 order by a.dt_recebimento_senha desc
 --FETCH FIRST 100 ROWS ONLY
