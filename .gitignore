@@ -1,6 +1,30 @@
+# Ambiente virtual Python
 /.venv
+
+# Oracle Instant Client
 /instantclient-basiclite-windows.x64-23.6.0.24.10
+instantclient-basiclite-windows.x64-23.6.0.24.10.zip
+
+# Arquivos de configuração específicos
 /profile
+10_Indicadores_Emergencia.py
+
+# Logs
 log.txt
-log.txt
-log.txt
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

@@ -2311,4 +2311,43 @@ Nenhum hemograma com valor crítico de Hemoglobina encontrado nos critérios esp
 2025-06-23 17-27-24 - processar_coagulogramas_criticos - FIM
 2025-06-23 17-27-24 - Nenhum coagulograma crítico encontrado para enviar.
 2025-06-23 17-27-24 - Aguardando 58 minutos para o próximo ciclo...
-2025-06-23 17-27-24 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado
+2025-06-23 17-27-24 - stop_event.wait(3480) - Espera por 3480 segundos ou até stop_event ser setado2025-09-26 11-04-15 - MAIN - INICIO
+2025-09-26 11-04-15 - def __init__ GUI - INICIO
+2025-09-26 11-04-15 - def __init__ GUI - FIM
+2025-09-26 11-04-22 - Fechando janela. Sinalizando processo background para parar...
+2025-09-26 11-04-22 - self.master.destroy()
+2025-09-26 11-04-22 - MAIN - FIM
+2025-09-29 11-51-09 - tempo_espera_emergencia - INICIO
+2025-09-29 11-51-09 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 11-51-09 - A pasta 'instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6' não foi encontrada na raiz do aplicativo.
+2025-09-29 11-51-09 - encontrar_diretorio_instantclient - FIM
+2025-09-29 11-51-09 - tempo_espera_emergencia - ERRO: Diretório do Instant Client não encontrado
+2025-09-29 11-52-19 - tempo_espera_emergencia - INICIO
+2025-09-29 11-52-19 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 11-52-19 - encontrar_diretorio_instantclient - FIM
+2025-09-29 11-52-19 - tempo_espera_emergencia - Instant Client configurado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 11-52-19 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 11-52-21 - tempo_espera_emergencia - ERRO: ORA-12541: Cannot connect. No listener at host 10.1.1.11 port 1521.
+Help: https://docs.oracle.com/error-help/db/ora-12541/
+2025-09-29 11-52-44 - tempo_espera_emergencia - INICIO
+2025-09-29 11-52-44 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 11-52-44 - encontrar_diretorio_instantclient - FIM
+2025-09-29 11-52-44 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 11-52-44 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 11-52-47 - tempo_espera_emergencia - ERRO: ORA-12541: Cannot connect. No listener at host 10.1.1.11 port 1521.
+Help: https://docs.oracle.com/error-help/db/ora-12541/
+2025-09-29 11-55-27 - tempo_espera_emergencia - INICIO
+2025-09-29 11-55-27 - encontrar_diretorio_instantclient - Inicio
+2025-09-29 11-55-27 - encontrar_diretorio_instantclient - FIM
+2025-09-29 11-55-27 - tempo_espera_emergencia - Instant Client configurado: c:\Pietro\Projetos\HSF_OLHO_DE_DEUS\instantclient-basiclite-windows.x64-23.6.0.24.10\instantclient_23_6
+2025-09-29 11-55-27 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2025-09-29 11-55-27 - tempo_espera_emergencia - Conexão com banco estabelecida
+2025-09-29 11-55-30 - tempo_espera_emergencia - Query executada. Linhas retornadas: 19
+2025-09-29 11-55-30 - tempo_espera_emergencia - Conexão fechada
+2025-09-29 11-55-30 - tempo_espera_emergencia - FIM
+2025-09-29 11-55-30 - exibir_dataframe_tempo_espera - INICIO
+2025-09-29 11-55-30 - exibir_dataframe_tempo_espera - DataFrame exibido com 19 registros
+2025-09-29 11-55-30 - exibir_dataframe_tempo_espera - FIM
+2025-09-29 11-55-30 - exibir_colunas_especificas_tempo_espera - INICIO
+2025-09-29 11-55-30 - exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com 19 registros
+2025-09-29 11-55-30 - exibir_colunas_especificas_tempo_espera - FIM

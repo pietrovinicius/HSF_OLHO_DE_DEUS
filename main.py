@@ -26,6 +26,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import re
+import pandas as pd
 
 def agora():
     agora = datetime.now()
@@ -604,8 +605,8 @@ def logica_principal_background(stop_event):
         registrar_log("Iniciando processamento de hemogramas críticos...")
         resultados_hemogramas = resultados_hemogramas_intervalo_58_min()
         mensagens_hemogramas_criticos_whatsapp = []
-###################################################################################################
-#VERIFICACOES DOS EXAMES DE DENTRO D HEMOGRAMA:
+        ###################################################################################################
+        #VERIFICACOES DOS EXAMES DE DENTRO D HEMOGRAMA:
         if resultados_hemogramas is not None and resultados_hemogramas:
             hemogramas_criticos_encontrados = [] # Lista para dados brutos dos críticos
             for i, linha_completa in enumerate(resultados_hemogramas):
@@ -772,6 +773,147 @@ def logica_principal_background(stop_event):
     registrar_log("logica_principal_background - FIM")
     print("Processo em background concluído.") # Feedback no console
 
+def tempo_espera_emergencia():
+    """Executa a query HSF - TODOS - TEMPO DE ESPERA EMERGENCIA.sql e retorna o dataframe."""
+    registrar_log("tempo_espera_emergencia - INICIO")
+    
+    try:
+        # Configurar o diretório do Instant Client
+        diretorio_instantclient = encontrar_diretorio_instantclient()
+        if diretorio_instantclient:
+            oracledb.init_oracle_client(lib_dir=diretorio_instantclient)
+            registrar_log(f"tempo_espera_emergencia - Instant Client configurado: {diretorio_instantclient}")
+        else:
+            registrar_log("tempo_espera_emergencia - ERRO: Diretório do Instant Client não encontrado")
+            return None
+
+        # Ler a query do arquivo SQL
+        with open('HSF - TODOS - TEMPO DE ESPERA EMERGENCIA.sql', 'r', encoding='utf-8') as arquivo:
+            query = arquivo.read()
+        
+        registrar_log("tempo_espera_emergencia - Query carregada do arquivo SQL")
+
+        # Conectar ao banco de dados
+        connection = oracledb.connect(user="TASY", password="aloisk", dsn="192.168.5.9:1521/TASYPRD")
+
+        registrar_log("tempo_espera_emergencia - Conexão com banco estabelecida")
+
+        # Executar a query e criar dataframe
+        df = pd.read_sql(query, connection)
+        registrar_log(f"tempo_espera_emergencia - Query executada. Linhas retornadas: {len(df)}")
+
+        # Fechar conexão
+        connection.close()
+        registrar_log("tempo_espera_emergencia - Conexão fechada")
+        
+        registrar_log("tempo_espera_emergencia - FIM")
+        return df
+
+    except Exception as e:
+        registrar_log(f"tempo_espera_emergencia - ERRO: {str(e)}")
+        return None
+
+def exibir_dataframe_tempo_espera(df):
+    """Exibe o dataframe completo de tempo de espera da emergência no console."""
+    registrar_log("exibir_dataframe_tempo_espera - INICIO")
+    
+    if df is None or df.empty:
+        registrar_log("exibir_dataframe_tempo_espera - DataFrame vazio ou None")
+        print("DataFrame vazio ou não disponível")
+        return
+    
+    try:
+        print("\n" + "="*100)
+        print("DATAFRAME COMPLETO - TEMPO DE ESPERA EMERGÊNCIA")
+        print("="*100)
+        print(f"Total de registros: {len(df)}")
+        print(f"Colunas disponíveis: {list(df.columns)}")
+        print("\n")
+        print(df.to_string(index=False))
+        print("="*100 + "\n")
+        
+        registrar_log(f"exibir_dataframe_tempo_espera - DataFrame exibido com {len(df)} registros")
+        
+    except Exception as e:
+        registrar_log(f"exibir_dataframe_tempo_espera - ERRO: {str(e)}")
+        print(f"Erro ao exibir dataframe: {str(e)}")
+    
+    registrar_log("exibir_dataframe_tempo_espera - FIM")
+
+def exibir_colunas_especificas_tempo_espera(df):
+    """Exibe colunas específicas do dataframe e calcula Tempo Triagem."""
+    registrar_log("exibir_colunas_especificas_tempo_espera - INICIO")
+    
+    if df is None or df.empty:
+        registrar_log("exibir_colunas_especificas_tempo_espera - DataFrame vazio ou None")
+        print("DataFrame vazio ou não disponível")
+        return
+    
+    try:
+        # Criar uma cópia do dataframe para não modificar o original
+        df_copia = df.copy()
+        
+        # Calcular Tempo Triagem baseado em DT_INICIO_TRIAGEM e DT_FIM_TRIAGEM
+        if 'DT_INICIO_TRIAGEM' in df_copia.columns and 'DT_FIM_TRIAGEM' in df_copia.columns:
+            # Converter para datetime se necessário
+            df_copia['DT_INICIO_TRIAGEM'] = pd.to_datetime(df_copia['DT_INICIO_TRIAGEM'], errors='coerce')
+            df_copia['DT_FIM_TRIAGEM'] = pd.to_datetime(df_copia['DT_FIM_TRIAGEM'], errors='coerce')
+            
+            # Calcular diferença em minutos
+            df_copia['TEMPO_TRIAGEM'] = (df_copia['DT_FIM_TRIAGEM'] - df_copia['DT_INICIO_TRIAGEM']).dt.total_seconds() / 60
+            df_copia['TEMPO_TRIAGEM'] = df_copia['TEMPO_TRIAGEM'].round(2)
+        
+        # Definir as colunas que queremos exibir
+        colunas_desejadas = [
+            'NR_ATENDIMENTO',  # Atendimento
+            'TRIAGEM_CLASSIFICACAO',  # Triagem Classificacao
+            'TOTAL_RECEP',  # Tempo Recepcao
+            'PACIENTE_SENHA_FILA_FIM',  # Tempo Final da Fila
+            'TEMPO_ESPERA_ATEND',  # Espera por medico
+            'TEMPO_TRIAGEM'  # Tempo Triagem (calculado)
+        ]
+        
+        # Verificar quais colunas existem no dataframe
+        colunas_existentes = [col for col in colunas_desejadas if col in df_copia.columns]
+        colunas_faltantes = [col for col in colunas_desejadas if col not in df_copia.columns]
+        
+        if colunas_faltantes:
+            registrar_log(f"exibir_colunas_especificas_tempo_espera - Colunas não encontradas: {colunas_faltantes}")
+        
+        # Criar dataframe com as colunas disponíveis
+        df_filtrado = df_copia[colunas_existentes]
+        
+        print("\n" + "="*120)
+        print("COLUNAS ESPECÍFICAS - TEMPO DE ESPERA EMERGÊNCIA")
+        print("="*120)
+        print(f"Total de registros: {len(df_filtrado)}")
+        print(f"Colunas exibidas: {colunas_existentes}")
+        if colunas_faltantes:
+            print(f"Colunas não encontradas: {colunas_faltantes}")
+        print("\n")
+        
+        # Renomear colunas para nomes mais amigáveis
+        nomes_amigaveis = {
+            'NR_ATENDIMENTO': 'Atendimento',
+            'TRIAGEM_CLASSIFICACAO': 'Triagem Classificacao',
+            'TOTAL_RECEP': 'Tempo Recepcao',
+            'PACIENTE_SENHA_FILA_FIM': 'Tempo Final da Fila',
+            'TEMPO_ESPERA_ATEND': 'Espera por medico',
+            'TEMPO_TRIAGEM': 'Tempo Triagem (min)'
+        }
+        
+        df_filtrado_renomeado = df_filtrado.rename(columns=nomes_amigaveis)
+        print(df_filtrado_renomeado.to_string(index=False))
+        print("="*120 + "\n")
+        
+        registrar_log(f"exibir_colunas_especificas_tempo_espera - Colunas específicas exibidas com {len(df_filtrado)} registros")
+        
+    except Exception as e:
+        registrar_log(f"exibir_colunas_especificas_tempo_espera - ERRO: {str(e)}")
+        print(f"Erro ao exibir colunas específicas: {str(e)}")
+    
+    registrar_log("exibir_colunas_especificas_tempo_espera - FIM")
+
 class AppGUI:
     def __init__(self, master):
         registrar_log("def __init__ GUI - INICIO")
@@ -841,4 +983,11 @@ if __name__ == "__main__":
     # Este bloco é crucial para o multiprocessing funcionar corretamente no Windows.
     # Ele garante que o código de criação de processos só seja executado
     # quando o script é o principal, e não quando é importado por um processo filho.
-    main()
+    #main()
+
+    # Exemplo de uso:
+    df = tempo_espera_emergencia()
+    if df is not None:
+        exibir_dataframe_tempo_espera(df)
+        exibir_colunas_especificas_tempo_espera(df)
+
