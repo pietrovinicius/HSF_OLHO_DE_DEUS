@@ -840,6 +840,354 @@ def exibir_dataframe_tempo_espera(df):
     
     registrar_log("exibir_dataframe_tempo_espera - FIM")
 
+def formatar_minutos_para_hhmmss(minutos):
+    """
+    Converte minutos decimais para formato HH:MM:SS.
+    
+    Args:
+        minutos (float): Tempo em minutos decimais
+        
+    Returns:
+        str: Tempo formatado como HH:MM:SS ou "00:00:00" se None/inválido
+        
+    Exemplo:
+        >>> formatar_minutos_para_hhmmss(65.5)
+        "01:05:30"
+        >>> formatar_minutos_para_hhmmss(3.18)
+        "00:03:11"
+    """
+    if pd.isna(minutos) or minutos is None:
+        return "00:00:00"
+    
+    try:
+        # Converter para segundos totais
+        segundos_totais = int(round(float(minutos) * 60))
+        
+        # Calcular horas, minutos e segundos
+        horas = segundos_totais // 3600
+        minutos_restantes = (segundos_totais % 3600) // 60
+        segundos = segundos_totais % 60
+        
+        # Formatar como HH:MM:SS
+        return f"{horas:02d}:{minutos_restantes:02d}:{segundos:02d}"
+    except (ValueError, TypeError):
+        return "00:00:00"
+
+def converter_tempo_para_minutos(tempo_str):
+    """
+    Converte strings de tempo (HH:MM:SS ou HH:MM) para minutos decimais.
+    
+    Args:
+        tempo_str (str): String de tempo no formato HH:MM:SS ou HH:MM
+        
+    Returns:
+        float: Tempo convertido em minutos decimais, ou 0 se inválido/None
+        
+    Exemplo:
+        >>> converter_tempo_para_minutos("01:05:30")
+        65.5
+        >>> converter_tempo_para_minutos("00:03:11")
+        3.183333333333334
+        >>> converter_tempo_para_minutos("02:30")
+        150.0
+    """
+    if pd.isna(tempo_str) or tempo_str is None or tempo_str == '':
+        return 0
+    
+    try:
+        # Se já for um número, retorna como está
+        if isinstance(tempo_str, (int, float)):
+            return float(tempo_str)
+        
+        # Se for string no formato HH:MM:SS ou HH:MM
+        tempo_str = str(tempo_str).strip()
+        partes = tempo_str.split(':')
+        
+        if len(partes) == 3:  # HH:MM:SS
+            horas, minutos, segundos = map(int, partes)
+            return horas * 60 + minutos + segundos / 60
+        elif len(partes) == 2:  # HH:MM
+            horas, minutos = map(int, partes)
+            return horas * 60 + minutos
+        else:
+            # Tentar converter diretamente para float
+            return float(tempo_str)
+    except (ValueError, TypeError):
+        return 0
+
+def exibir_registros_filtrados_tempo_espera(df):
+    """
+    Exibe registros que atendem a TODOS os critérios de filtro simultaneamente.
+    
+    Critérios aplicados:
+    1) Atendimento > 0
+    2) Triagem Classificacao <> null
+    3) Tempo Recepcao maior do que 10 minutos
+    4) Tempo Triagem maior do que 5 minutos
+    5) Espera por Medico maior do que 5 minutos
+    6) Tempo Final da Fila diferente de None e maior do que 30 minutos
+    
+    Args:
+        df (pandas.DataFrame): DataFrame com dados de tempo de espera da emergência
+        
+    Returns:
+        None: Exibe os resultados filtrados no console
+    """
+    registrar_log("exibir_registros_filtrados_tempo_espera - INICIO")
+    
+    if df is None or df.empty:
+        registrar_log("exibir_registros_filtrados_tempo_espera - DataFrame vazio ou None")
+        print("DataFrame vazio ou não disponível")
+        return
+    
+    try:
+        # Criar uma cópia do dataframe para não modificar o original
+        df_copia = df.copy()
+        
+        # Calcular Tempo Triagem baseado em DT_INICIO_TRIAGEM e DT_FIM_TRIAGEM
+        if 'DT_INICIO_TRIAGEM' in df_copia.columns and 'DT_FIM_TRIAGEM' in df_copia.columns:
+            # Converter para datetime se necessário
+            df_copia['DT_INICIO_TRIAGEM'] = pd.to_datetime(df_copia['DT_INICIO_TRIAGEM'], errors='coerce')
+            df_copia['DT_FIM_TRIAGEM'] = pd.to_datetime(df_copia['DT_FIM_TRIAGEM'], errors='coerce')
+            
+            # Calcular diferença em minutos
+            df_copia['TEMPO_TRIAGEM'] = (df_copia['DT_FIM_TRIAGEM'] - df_copia['DT_INICIO_TRIAGEM']).dt.total_seconds() / 60
+            
+            # Formatar Tempo Triagem para HH:MM:SS
+            df_copia['TEMPO_TRIAGEM_FORMATADO'] = df_copia['TEMPO_TRIAGEM'].apply(formatar_minutos_para_hhmmss)
+        
+        # Aplicar filtros
+        print("\n" + "="*120)
+        print("APLICANDO FILTROS DE TEMPO DE ESPERA")
+        print("="*120)
+        
+        total_inicial = len(df_copia)
+        print(f"Total de registros inicial: {total_inicial}")
+        
+        # Filtro 1: Atendimento > 0
+        if 'NR_ATENDIMENTO' in df_copia.columns:
+            df_copia = df_copia[df_copia['NR_ATENDIMENTO'] > 0]
+            print(f"Após filtro Atendimento > 0: {len(df_copia)} registros")
+        
+        # Filtro 2: Triagem Classificacao <> null
+        if 'TRIAGEM_CLASSIFICACAO' in df_copia.columns:
+            df_copia = df_copia[df_copia['TRIAGEM_CLASSIFICACAO'].notna()]
+            df_copia = df_copia[df_copia['TRIAGEM_CLASSIFICACAO'] != '']
+            print(f"Após filtro Triagem Classificacao não nula: {len(df_copia)} registros")
+        
+        # Filtro 3: Tempo Recepcao maior do que 10 minutos
+        if 'TOTAL_RECEP' in df_copia.columns:
+            df_copia['TOTAL_RECEP_MINUTOS'] = df_copia['TOTAL_RECEP'].apply(converter_tempo_para_minutos)
+            df_copia = df_copia[df_copia['TOTAL_RECEP_MINUTOS'] > 10]
+            print(f"Após filtro Tempo Recepcao > 10 min: {len(df_copia)} registros")
+        
+        # Filtro 4: Tempo Triagem maior do que 5 minutos
+        if 'TEMPO_TRIAGEM' in df_copia.columns:
+            df_copia = df_copia[df_copia['TEMPO_TRIAGEM'] > 5]
+            print(f"Após filtro Tempo Triagem > 5 min: {len(df_copia)} registros")
+        
+        # Filtro 5: Espera por Medico maior do que 5 minutos
+        if 'TEMPO_ESPERA_ATEND' in df_copia.columns:
+            df_copia['TEMPO_ESPERA_ATEND_MINUTOS'] = df_copia['TEMPO_ESPERA_ATEND'].apply(converter_tempo_para_minutos)
+            df_copia = df_copia[df_copia['TEMPO_ESPERA_ATEND_MINUTOS'] > 5]
+            print(f"Após filtro Espera por Medico > 5 min: {len(df_copia)} registros")
+        
+        # Filtro 6: Tempo Final da Fila diferente de None e maior do que 30 minutos
+        if 'PACIENTE_SENHA_FILA_FIM' in df_copia.columns:
+            df_copia['PACIENTE_SENHA_FILA_FIM_MINUTOS'] = df_copia['PACIENTE_SENHA_FILA_FIM'].apply(converter_tempo_para_minutos)
+            df_copia = df_copia[df_copia['PACIENTE_SENHA_FILA_FIM'].notna()]
+            df_copia = df_copia[df_copia['PACIENTE_SENHA_FILA_FIM_MINUTOS'] > 30]
+            print(f"Após filtro Tempo Final da Fila > 30 min: {len(df_copia)} registros")
+        
+        print("="*120)
+        
+        if df_copia.empty:
+            print("NENHUM REGISTRO ATENDE A TODOS OS CRITÉRIOS DE FILTRO")
+            print("="*120 + "\n")
+            registrar_log("exibir_registros_filtrados_tempo_espera - Nenhum registro passou pelos filtros")
+            return
+        
+        # Definir as colunas que queremos exibir
+        colunas_desejadas = [
+            'NR_ATENDIMENTO',  # Atendimento
+            'TRIAGEM_CLASSIFICACAO',  # Triagem Classificacao
+            'TOTAL_RECEP',  # Tempo Recepcao
+            'PACIENTE_SENHA_FILA_FIM',  # Tempo Final da Fila
+            'TEMPO_ESPERA_ATEND',  # Espera por medico
+            'TEMPO_TRIAGEM_FORMATADO'  # Tempo Triagem (formatado como HH:MM:SS)
+        ]
+        
+        # Verificar quais colunas existem no dataframe
+        colunas_existentes = [col for col in colunas_desejadas if col in df_copia.columns]
+        
+        # Criar dataframe com as colunas disponíveis
+        df_filtrado = df_copia[colunas_existentes]
+        
+        print("\n" + "="*120)
+        print("REGISTROS FILTRADOS - TEMPO DE ESPERA EMERGÊNCIA")
+        print("="*120)
+        print(f"Total de registros que atendem aos critérios: {len(df_filtrado)}")
+        print("Critérios aplicados:")
+        print("1) Atendimento > 0")
+        print("2) Triagem Classificacao não nula")
+        print("3) Tempo Recepcao > 10 minutos")
+        print("4) Tempo Triagem > 5 minutos")
+        print("5) Espera por Medico > 5 minutos")
+        print("6) Tempo Final da Fila não nulo e > 30 minutos")
+        print("\n")
+        
+        # Renomear colunas para nomes mais amigáveis
+        nomes_amigaveis = {
+            'NR_ATENDIMENTO': 'Atendimento',
+            'TRIAGEM_CLASSIFICACAO': 'Triagem Classificacao',
+            'TOTAL_RECEP': 'Tempo Recepcao',
+            'PACIENTE_SENHA_FILA_FIM': 'Tempo Final da Fila',
+            'TEMPO_ESPERA_ATEND': 'Espera por medico',
+            'TEMPO_TRIAGEM_FORMATADO': 'Tempo Triagem'
+        }
+        
+        df_filtrado_renomeado = df_filtrado.rename(columns=nomes_amigaveis)
+        print(df_filtrado_renomeado.to_string(index=False))
+        print("="*120 + "\n")
+        
+        registrar_log(f"exibir_registros_filtrados_tempo_espera - {len(df_filtrado)} registros filtrados exibidos")
+        
+    except Exception as e:
+        registrar_log(f"exibir_registros_filtrados_tempo_espera - ERRO: {str(e)}")
+        print(f"Erro ao aplicar filtros: {str(e)}")
+    
+    registrar_log("exibir_registros_filtrados_tempo_espera - FIM")
+
+def exibir_filtros_individuais_tempo_espera(df):
+    """
+    Exibe registros filtrados individualmente para cada critério de tempo,
+    sempre incluindo as chaves únicas (Atendimento e Triagem Classificacao).
+    """
+    registrar_log("exibir_filtros_individuais_tempo_espera - INICIO")
+    
+    if df is None or df.empty:
+        registrar_log("exibir_filtros_individuais_tempo_espera - DataFrame vazio ou None")
+        print("DataFrame vazio ou não disponível")
+        return
+    
+    try:
+        # Criar uma cópia do dataframe para não modificar o original
+        df_copia = df.copy()
+        
+        # Calcular Tempo Triagem baseado em DT_INICIO_TRIAGEM e DT_FIM_TRIAGEM
+        if 'DT_INICIO_TRIAGEM' in df_copia.columns and 'DT_FIM_TRIAGEM' in df_copia.columns:
+            # Converter para datetime se necessário
+            df_copia['DT_INICIO_TRIAGEM'] = pd.to_datetime(df_copia['DT_INICIO_TRIAGEM'], errors='coerce')
+            df_copia['DT_FIM_TRIAGEM'] = pd.to_datetime(df_copia['DT_FIM_TRIAGEM'], errors='coerce')
+            
+            # Calcular diferença em minutos
+            df_copia['TEMPO_TRIAGEM'] = (df_copia['DT_FIM_TRIAGEM'] - df_copia['DT_INICIO_TRIAGEM']).dt.total_seconds() / 60
+            
+            # Formatar Tempo Triagem para HH:MM:SS
+            df_copia['TEMPO_TRIAGEM_FORMATADO'] = df_copia['TEMPO_TRIAGEM'].apply(formatar_minutos_para_hhmmss)
+        
+        print("\n" + "="*120)
+        print("FILTROS INDIVIDUAIS - TEMPO DE ESPERA EMERGÊNCIA")
+        print("="*120)
+        
+        # Filtros básicos (sempre aplicados)
+        df_base = df_copia.copy()
+        if 'NR_ATENDIMENTO' in df_base.columns:
+            df_base = df_base[df_base['NR_ATENDIMENTO'] > 0]
+        if 'TRIAGEM_CLASSIFICACAO' in df_base.columns:
+            df_base = df_base[df_base['TRIAGEM_CLASSIFICACAO'].notna()]
+            df_base = df_base[df_base['TRIAGEM_CLASSIFICACAO'] != '']
+        
+        # 1. FILTRO: Tempo Recepcao > 10 minutos
+        if 'TOTAL_RECEP' in df_base.columns:
+            df_tempo_recepcao = df_base.copy()
+            df_tempo_recepcao['TOTAL_RECEP_MINUTOS'] = df_tempo_recepcao['TOTAL_RECEP'].apply(converter_tempo_para_minutos)
+            df_tempo_recepcao = df_tempo_recepcao[df_tempo_recepcao['TOTAL_RECEP_MINUTOS'] > 10]
+            
+            if not df_tempo_recepcao.empty:
+                print(f"\n1) TEMPO RECEPCAO > 10 MINUTOS ({len(df_tempo_recepcao)} registros)")
+                print("-" * 80)
+                colunas_recepcao = ['NR_ATENDIMENTO', 'TRIAGEM_CLASSIFICACAO', 'TOTAL_RECEP']
+                colunas_existentes = [col for col in colunas_recepcao if col in df_tempo_recepcao.columns]
+                df_exibir = df_tempo_recepcao[colunas_existentes].rename(columns={
+                    'NR_ATENDIMENTO': 'Atendimento',
+                    'TRIAGEM_CLASSIFICACAO': 'Triagem Classificacao',
+                    'TOTAL_RECEP': 'Tempo Recepcao'
+                })
+                print(df_exibir.to_string(index=False))
+            else:
+                print(f"\n1) TEMPO RECEPCAO > 10 MINUTOS (0 registros)")
+        
+        # 2. FILTRO: Tempo Triagem > 5 minutos
+        if 'TEMPO_TRIAGEM' in df_base.columns:
+            df_tempo_triagem = df_base.copy()
+            df_tempo_triagem = df_tempo_triagem[df_tempo_triagem['TEMPO_TRIAGEM'] > 5]
+            
+            if not df_tempo_triagem.empty:
+                print(f"\n2) TEMPO TRIAGEM > 5 MINUTOS ({len(df_tempo_triagem)} registros)")
+                print("-" * 80)
+                colunas_triagem = ['NR_ATENDIMENTO', 'TRIAGEM_CLASSIFICACAO', 'TEMPO_TRIAGEM_FORMATADO']
+                colunas_existentes = [col for col in colunas_triagem if col in df_tempo_triagem.columns]
+                df_exibir = df_tempo_triagem[colunas_existentes].rename(columns={
+                    'NR_ATENDIMENTO': 'Atendimento',
+                    'TRIAGEM_CLASSIFICACAO': 'Triagem Classificacao',
+                    'TEMPO_TRIAGEM_FORMATADO': 'Tempo Triagem'
+                })
+                print(df_exibir.to_string(index=False))
+            else:
+                print(f"\n2) TEMPO TRIAGEM > 5 MINUTOS (0 registros)")
+        
+        # 3. FILTRO: Espera por Medico > 5 minutos
+        if 'TEMPO_ESPERA_ATEND' in df_base.columns:
+            df_espera_medico = df_base.copy()
+            df_espera_medico['TEMPO_ESPERA_ATEND_MINUTOS'] = df_espera_medico['TEMPO_ESPERA_ATEND'].apply(converter_tempo_para_minutos)
+            df_espera_medico = df_espera_medico[df_espera_medico['TEMPO_ESPERA_ATEND_MINUTOS'] > 5]
+            
+            if not df_espera_medico.empty:
+                print(f"\n3) ESPERA POR MEDICO > 5 MINUTOS ({len(df_espera_medico)} registros)")
+                print("-" * 80)
+                colunas_espera = ['NR_ATENDIMENTO', 'TRIAGEM_CLASSIFICACAO', 'TEMPO_ESPERA_ATEND']
+                colunas_existentes = [col for col in colunas_espera if col in df_espera_medico.columns]
+                df_exibir = df_espera_medico[colunas_existentes].rename(columns={
+                    'NR_ATENDIMENTO': 'Atendimento',
+                    'TRIAGEM_CLASSIFICACAO': 'Triagem Classificacao',
+                    'TEMPO_ESPERA_ATEND': 'Espera por Medico'
+                })
+                print(df_exibir.to_string(index=False))
+            else:
+                print(f"\n3) ESPERA POR MEDICO > 5 MINUTOS (0 registros)")
+        
+        # 4. FILTRO: Tempo Final da Fila > 30 minutos
+        if 'PACIENTE_SENHA_FILA_FIM' in df_base.columns:
+            df_fila_fim = df_base.copy()
+            df_fila_fim['PACIENTE_SENHA_FILA_FIM_MINUTOS'] = df_fila_fim['PACIENTE_SENHA_FILA_FIM'].apply(converter_tempo_para_minutos)
+            df_fila_fim = df_fila_fim[df_fila_fim['PACIENTE_SENHA_FILA_FIM'].notna()]
+            df_fila_fim = df_fila_fim[df_fila_fim['PACIENTE_SENHA_FILA_FIM_MINUTOS'] > 30]
+            
+            if not df_fila_fim.empty:
+                print(f"\n4) TEMPO FINAL DA FILA > 30 MINUTOS ({len(df_fila_fim)} registros)")
+                print("-" * 80)
+                colunas_fila = ['NR_ATENDIMENTO', 'TRIAGEM_CLASSIFICACAO', 'PACIENTE_SENHA_FILA_FIM']
+                colunas_existentes = [col for col in colunas_fila if col in df_fila_fim.columns]
+                df_exibir = df_fila_fim[colunas_existentes].rename(columns={
+                    'NR_ATENDIMENTO': 'Atendimento',
+                    'TRIAGEM_CLASSIFICACAO': 'Triagem Classificacao',
+                    'PACIENTE_SENHA_FILA_FIM': 'Tempo Final da Fila'
+                })
+                print(df_exibir.to_string(index=False))
+            else:
+                print(f"\n4) TEMPO FINAL DA FILA > 30 MINUTOS (0 registros)")
+        
+        print("\n" + "="*120 + "\n")
+        
+        registrar_log("exibir_filtros_individuais_tempo_espera - Filtros individuais exibidos")
+        
+    except Exception as e:
+        registrar_log(f"exibir_filtros_individuais_tempo_espera - ERRO: {str(e)}")
+        print(f"Erro ao exibir filtros individuais: {str(e)}")
+    
+    registrar_log("exibir_filtros_individuais_tempo_espera - FIM")
+
 def exibir_colunas_especificas_tempo_espera(df):
     """Exibe colunas específicas do dataframe e calcula Tempo Triagem."""
     registrar_log("exibir_colunas_especificas_tempo_espera - INICIO")
@@ -861,7 +1209,9 @@ def exibir_colunas_especificas_tempo_espera(df):
             
             # Calcular diferença em minutos
             df_copia['TEMPO_TRIAGEM'] = (df_copia['DT_FIM_TRIAGEM'] - df_copia['DT_INICIO_TRIAGEM']).dt.total_seconds() / 60
-            df_copia['TEMPO_TRIAGEM'] = df_copia['TEMPO_TRIAGEM'].round(2)
+            
+            # Formatar Tempo Triagem para HH:MM:SS
+            df_copia['TEMPO_TRIAGEM_FORMATADO'] = df_copia['TEMPO_TRIAGEM'].apply(formatar_minutos_para_hhmmss)
         
         # Definir as colunas que queremos exibir
         colunas_desejadas = [
@@ -870,7 +1220,7 @@ def exibir_colunas_especificas_tempo_espera(df):
             'TOTAL_RECEP',  # Tempo Recepcao
             'PACIENTE_SENHA_FILA_FIM',  # Tempo Final da Fila
             'TEMPO_ESPERA_ATEND',  # Espera por medico
-            'TEMPO_TRIAGEM'  # Tempo Triagem (calculado)
+            'TEMPO_TRIAGEM_FORMATADO'  # Tempo Triagem (formatado como HH:MM)
         ]
         
         # Verificar quais colunas existem no dataframe
@@ -899,7 +1249,7 @@ def exibir_colunas_especificas_tempo_espera(df):
             'TOTAL_RECEP': 'Tempo Recepcao',
             'PACIENTE_SENHA_FILA_FIM': 'Tempo Final da Fila',
             'TEMPO_ESPERA_ATEND': 'Espera por medico',
-            'TEMPO_TRIAGEM': 'Tempo Triagem (min)'
+            'TEMPO_TRIAGEM_FORMATADO': 'Tempo Triagem'
         }
         
         df_filtrado_renomeado = df_filtrado.rename(columns=nomes_amigaveis)
@@ -990,4 +1340,6 @@ if __name__ == "__main__":
     if df is not None:
         exibir_dataframe_tempo_espera(df)
         exibir_colunas_especificas_tempo_espera(df)
+        exibir_registros_filtrados_tempo_espera(df)
+        exibir_filtros_individuais_tempo_espera(df)
 

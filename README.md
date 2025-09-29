@@ -27,7 +27,17 @@ O **HSF Olho de Deus** é um sistema de monitoramento que acompanha continuament
   - Tempo Recepção
   - Tempo Final da Fila
   - Espera por médico
-  - **Tempo Triagem** (calculado automaticamente)
+  - **Tempo Triagem** (calculado automaticamente em formato HH:MM:SS)
+
+### 🔍 **NOVO: Sistema de Filtros Avançados**
+- **Filtro Combinado**: Aplica todos os critérios simultaneamente para identificar casos críticos
+- **Filtros Individuais**: Análise separada por critério específico
+  - Tempo Recepção > 10 minutos
+  - Tempo Triagem > 5 minutos  
+  - Espera por Médico > 5 minutos
+  - Tempo Final da Fila > 30 minutos
+- **Formatação Avançada**: Todos os tempos exibidos em formato HH:MM:SS
+- **Chaves Únicas**: Sempre inclui Atendimento e Triagem Classificação para rastreabilidade
 
 ### 🖥️ Interface Gráfica
 - Interface moderna desenvolvida em Tkinter
@@ -112,6 +122,32 @@ df = tempo_espera_emergencia()
 exibir_dataframe_tempo_espera(df)
 exibir_colunas_especificas_tempo_espera(df)
 ```
+
+### **NOVO: Sistema de Filtros de Tempo de Espera**
+```python
+# Filtro combinado - aplica todos os critérios simultaneamente
+exibir_registros_filtrados_tempo_espera(df)
+
+# Filtros individuais - análise separada por critério
+exibir_filtros_individuais_tempo_espera(df)
+```
+
+#### Funções de Formatação de Tempo
+```python
+# Converte minutos decimais para formato HH:MM:SS
+formatar_minutos_para_hhmmss(65.5)  # Retorna: "01:05:30"
+
+# Converte strings de tempo para minutos decimais
+converter_tempo_para_minutos("01:05:30")  # Retorna: 65.5
+```
+
+#### Critérios de Filtro Aplicados
+- **Atendimento** > 0 (sempre aplicado)
+- **Triagem Classificação** não nula (sempre aplicado)
+- **Tempo Recepção** > 10 minutos
+- **Tempo Triagem** > 5 minutos
+- **Espera por Médico** > 5 minutos
+- **Tempo Final da Fila** > 30 minutos e não nulo
 
 ### Processamento de Coagulogramas
 - Identifica automaticamente valores de INR > 5.0
