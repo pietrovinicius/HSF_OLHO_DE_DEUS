@@ -211,6 +211,139 @@ def limpar_rtf_para_texto(rtf_text):
 
     return text
 
+def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
+    """
+    Envia mensagem via WhatsApp para o grupo HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA.
+    
+    Args:
+        mensagem_texto (str): Texto da mensagem a ser enviada
+        modo_teste (bool): Se True, apenas registra no log sem enviar
+    
+    Returns:
+        None
+    """
+    registrar_log("enviar_whatsapp_emergencia - INÍCIO")
+    
+    if not mensagem_texto or not mensagem_texto.strip():
+        registrar_log("Nenhuma mensagem para enviar via WhatsApp.")
+        registrar_log("enviar_whatsapp_emergencia - FIM")
+        return
+
+    if modo_teste:
+        registrar_log("[MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:")
+        registrar_log(f"[MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA")
+        registrar_log(f"[MODO DE TESTE] Mensagem: {mensagem_texto}")
+        registrar_log("enviar_whatsapp_emergencia - FIM")
+        return
+    
+    driver = None
+    
+    try:        
+        # Configurações do Chrome
+        options = Options()
+        
+        # Configurar o perfil de usuário para manter o login
+        dir_path = os.path.dirname(os.path.abspath(__file__))
+        profile_path = os.path.join(dir_path, "profile", "wpp")
+        options.add_argument(f"user-data-dir={profile_path}")
+
+        # Inicializa o driver
+        service = ChromeService(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
+
+        registrar_log('driver.get("https://web.whatsapp.com")')
+        driver.get("https://web.whatsapp.com")
+
+        registrar_log("time.sleep(15)")
+        time.sleep(15) 
+
+        registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
+
+        # Espera explícita para o campo de pesquisa
+        xpath_campo_pesquisa = '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p'
+        
+        try:
+            wait = WebDriverWait(driver, 30)
+            registrar_log("time.sleep(3)")
+            time.sleep(3)
+            campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_campo_pesquisa)))
+            registrar_log("Campo de pesquisa encontrado e clicável.")
+            campo_pesquisa_element.click()
+            registrar_log("Clicado no campo de pesquisa.")
+
+            # Localiza o campo de input de texto ativo para a pesquisa
+            xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
+            input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
+            registrar_log("Campo de input de pesquisa ativo encontrado.")
+            
+            nome_grupo = "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
+            input_pesquisa_ativo.send_keys(nome_grupo)
+            registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
+            registrar_log("time.sleep(0.5)")
+            time.sleep(0.5) 
+
+            # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
+            xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
+            registrar_log("time.sleep(0.5)")
+            time.sleep(0.5) 
+
+            resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
+            registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
+            resultado_grupo_element.click()
+            registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
+            registrar_log("time.sleep(0.5)")
+            time.sleep(0.5)
+
+            # Localiza a caixa de texto do chat
+            registrar_log('Localizando a caixa de texto do chat...')
+            xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
+
+            try:
+                chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
+                registrar_log('Caixa de texto localizada e clicável com sucesso!')
+                
+                # Envia a mensagem
+                chat_caixa_de_texto_element.send_keys(mensagem_texto)
+                registrar_log(f"Mensagem enviada para a caixa de texto: {mensagem_texto}")
+                registrar_log("time.sleep(0.5)")
+                time.sleep(0.5)
+
+                # Localiza e clica no botão de enviar
+                registrar_log('Localizando e clicando no botão de enviar...')
+                xpath_botao_enviar = "//button[@aria-label='Enviar']"
+                botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
+
+                registrar_log('botao_enviar_element.click()')
+                botao_enviar_element.click()
+                registrar_log("Processo de envio de mensagem concluído.")
+                registrar_log('time.sleep(5)')
+                time.sleep(5)
+                
+            except Exception as e_chatbox:
+                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
+                registrar_log("time.sleep(5)")
+                time.sleep(5)
+
+            # Pausa breve para garantir que a mensagem seja processada
+            time.sleep(5)
+
+        except Exception as e_search:
+            registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
+        
+        # Fechar o navegador após o envio
+        if driver:
+            registrar_log("time.sleep(60)")
+            time.sleep(60)            
+            registrar_log("driver.quit()")
+            driver.quit() 
+        registrar_log("driver.quit() - Navegador fechado.")
+
+    except Exception as e:
+        registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp Emergência: {e}")
+    
+    registrar_log("enviar_whatsapp_emergencia - FIM")
+
+
 def enviar_whatsapp(lista_exames, modo_teste=False):
     """Abre o WhatsApp Web usando Selenium com perfil de usuário."""
     registrar_log("enviar_whatsapp - INÍCIO")
@@ -589,6 +722,305 @@ def processar_lipidogramas_criticos(resultados_exames_brutos):
     registrar_log('processar_lipidogramas_criticos - FIM')
     return lipidogramas_criticos_encontrados
 
+def processar_alertas_tempo_recepcao(df):
+    """
+    Processa e envia alertas para registros com Tempo Recepção > 10 minutos.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame com dados da emergência
+    
+    Returns:
+        None
+    """
+    registrar_log("processar_alertas_tempo_recepcao - INÍCIO")
+    
+    try:
+        # Filtra registros com Tempo Recepção > 10 minutos
+        filtro_recepcao = df[df['TOTAL_RECEP'].apply(converter_tempo_para_minutos) > 10].copy()
+        
+        if filtro_recepcao.empty:
+            registrar_log("Nenhum registro encontrado com Tempo Recepção > 10 minutos")
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Tempo de Recepção.\n\n"
+            mensagem += "✅ Situação Normal - Nenhum paciente com tempo de recepção superior a 10 minutos"
+        else:
+            registrar_log(f"Encontrados {len(filtro_recepcao)} registros com Tempo Recepção > 10 minutos")
+            
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
+            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            
+            for index, row in filtro_recepcao.iterrows():
+                tempo_recepcao_min = converter_tempo_para_minutos(row['TOTAL_RECEP'])
+                mensagem += f"Paciente: {row['PACIENTE']}\n"
+                mensagem += f"Triagem Classificação: {row['TRIAGEM_CLASSIFICACAO']}\n"
+                mensagem += f"Tempo Recepção: {tempo_recepcao_min} minutos\n"
+                if len(filtro_recepcao) > 1:
+                    mensagem += "\n"
+        
+        # Envia mensagem via WhatsApp (modo teste por enquanto)
+        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        registrar_log("Alerta de Tempo Recepção processado e enviado")
+        
+    except Exception as e:
+        registrar_log(f"Erro ao processar alertas de Tempo Recepção: {e}")
+    
+    registrar_log("processar_alertas_tempo_recepcao - FIM")
+
+
+def processar_alertas_tempo_triagem(df):
+    """
+    Processa e envia alertas para registros com Tempo Triagem > 5 minutos.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame com dados da emergência
+    
+    Returns:
+        None
+    """
+    registrar_log("processar_alertas_tempo_triagem - INÍCIO")
+    
+    try:
+        # Calcular Tempo Triagem baseado em DT_INICIO_TRIAGEM e DT_FIM_TRIAGEM
+        df_copia = df.copy()
+        if 'DT_INICIO_TRIAGEM' in df_copia.columns and 'DT_FIM_TRIAGEM' in df_copia.columns:
+            df_copia['DT_INICIO_TRIAGEM'] = pd.to_datetime(df_copia['DT_INICIO_TRIAGEM'], errors='coerce')
+            df_copia['DT_FIM_TRIAGEM'] = pd.to_datetime(df_copia['DT_FIM_TRIAGEM'], errors='coerce')
+            df_copia['TEMPO_TRIAGEM_MINUTOS'] = (df_copia['DT_FIM_TRIAGEM'] - df_copia['DT_INICIO_TRIAGEM']).dt.total_seconds() / 60
+        else:
+            registrar_log("Colunas de triagem não encontradas")
+            return
+        
+        # Filtra registros com Tempo Triagem > 5 minutos
+        filtro_triagem = df_copia[df_copia['TEMPO_TRIAGEM_MINUTOS'] > 5].copy()
+        
+        if filtro_triagem.empty:
+            registrar_log("Nenhum registro encontrado com Tempo Triagem > 5 minutos")
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Tempo de Triagem.\n\n"
+            mensagem += "✅ Situação Normal - Nenhum paciente com tempo de triagem superior a 5 minutos"
+        else:
+            registrar_log(f"Encontrados {len(filtro_triagem)} registros com Tempo Triagem > 5 minutos")
+            
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
+            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            
+            for index, row in filtro_triagem.iterrows():
+                tempo_triagem_min = int(row['TEMPO_TRIAGEM_MINUTOS'])
+                mensagem += f"Paciente: {row['PACIENTE']}\n"
+                mensagem += f"Triagem Classificação: {row['TRIAGEM_CLASSIFICACAO']}\n"
+                mensagem += f"Tempo Triagem: {tempo_triagem_min} minutos\n"
+                if len(filtro_triagem) > 1:
+                    mensagem += "\n"
+        
+        # Envia mensagem via WhatsApp (modo teste por enquanto)
+        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        registrar_log("Alerta de Tempo Triagem processado e enviado")
+        
+    except Exception as e:
+        registrar_log(f"Erro ao processar alertas de Tempo Triagem: {e}")
+    
+    registrar_log("processar_alertas_tempo_triagem - FIM")
+
+
+def processar_alertas_espera_medico(df):
+    """
+    Processa e envia alertas para registros com Espera por Médico > 5 minutos.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame com dados da emergência
+    
+    Returns:
+        None
+    """
+    registrar_log("processar_alertas_espera_medico - INÍCIO")
+    
+    try:
+        # Filtra registros com Espera por Médico > 5 minutos
+        filtro_espera = df[df['TEMPO_ESPERA_ATEND'].apply(converter_tempo_para_minutos) > 5].copy()
+        
+        if filtro_espera.empty:
+            registrar_log("Nenhum registro encontrado com Espera por Médico > 5 minutos")
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Espera por Médico.\n\n"
+            mensagem += "✅ Situação Normal - Nenhum paciente com espera por médico superior a 5 minutos"
+        else:
+            registrar_log(f"Encontrados {len(filtro_espera)} registros com Espera por Médico > 5 minutos")
+            
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
+            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            
+            for index, row in filtro_espera.iterrows():
+                tempo_espera_min = converter_tempo_para_minutos(row['TEMPO_ESPERA_ATEND'])
+                mensagem += f"Paciente: {row['PACIENTE']}\n"
+                mensagem += f"Triagem Classificação: {row['TRIAGEM_CLASSIFICACAO']}\n"
+                mensagem += f"Espera por médico: {tempo_espera_min} minutos\n"
+                if len(filtro_espera) > 1:
+                    mensagem += "\n"
+        
+        # Envia mensagem via WhatsApp (modo teste por enquanto)
+        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        registrar_log("Alerta de Espera por Médico processado e enviado")
+        
+    except Exception as e:
+        registrar_log(f"Erro ao processar alertas de Espera por Médico: {e}")
+    
+    registrar_log("processar_alertas_espera_medico - FIM")
+
+
+def processar_alertas_tempo_final_fila(df):
+    """
+    Processa e envia alertas para registros com Tempo Final da Fila > 30 minutos.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame com dados da emergência
+    
+    Returns:
+        None
+    """
+    registrar_log("processar_alertas_tempo_final_fila - INÍCIO")
+    
+    try:
+        # Filtra registros com Tempo Final da Fila > 30 minutos
+        filtro_fila = df[df['PACIENTE_SENHA_FILA_FIM'].apply(converter_tempo_para_minutos) > 30].copy()
+        
+        if filtro_fila.empty:
+            registrar_log("Nenhum registro encontrado com Tempo Final da Fila > 30 minutos")
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo que não foram identificados tempos críticos de atendimentos na Emergência para Tempo Final da Fila.\n\n"
+            mensagem += "✅ Situação Normal - Nenhum paciente com tempo final da fila superior a 30 minutos"
+        else:
+            registrar_log(f"Encontrados {len(filtro_fila)} registros com Tempo Final da Fila > 30 minutos")
+            
+            mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
+            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            
+            for index, row in filtro_fila.iterrows():
+                tempo_fila_min = converter_tempo_para_minutos(row['PACIENTE_SENHA_FILA_FIM'])
+                mensagem += f"Paciente: {row['PACIENTE']}\n"
+                mensagem += f"Triagem Classificação: {row['TRIAGEM_CLASSIFICACAO']}\n"
+                mensagem += f"Tempo Final da Fila: {tempo_fila_min} minutos\n"
+                if len(filtro_fila) > 1:
+                    mensagem += "\n"
+        
+        # Envia mensagem via WhatsApp (modo teste por enquanto)
+        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        registrar_log("Alerta de Tempo Final da Fila processado e enviado")
+        
+    except Exception as e:
+        registrar_log(f"Erro ao processar alertas de Tempo Final da Fila: {e}")
+    
+    registrar_log("processar_alertas_tempo_final_fila - FIM")
+
+
+def processar_alertas_tempo_unificado(df):
+    """
+    Processa e envia alertas unificados agrupando todos os tempos críticos por paciente.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame com dados da emergência
+    
+    Returns:
+        None
+    """
+    registrar_log("processar_alertas_tempo_unificado - INÍCIO")
+    
+    try:
+        # Criar uma cópia do dataframe para trabalhar
+        df_copia = df.copy()
+        
+        # Calcular Tempo Triagem baseado em DT_INICIO_TRIAGEM e DT_FIM_TRIAGEM
+        if 'DT_INICIO_TRIAGEM' in df_copia.columns and 'DT_FIM_TRIAGEM' in df_copia.columns:
+            df_copia['DT_INICIO_TRIAGEM'] = pd.to_datetime(df_copia['DT_INICIO_TRIAGEM'], errors='coerce')
+            df_copia['DT_FIM_TRIAGEM'] = pd.to_datetime(df_copia['DT_FIM_TRIAGEM'], errors='coerce')
+            df_copia['TEMPO_TRIAGEM_MINUTOS'] = (df_copia['DT_FIM_TRIAGEM'] - df_copia['DT_INICIO_TRIAGEM']).dt.total_seconds() / 60
+            df_copia['TEMPO_TRIAGEM_MINUTOS'] = df_copia['TEMPO_TRIAGEM_MINUTOS'].apply(lambda x: int(x) if pd.notna(x) else 0)
+        
+        # Calcular tempos em minutos para cada tipo
+        df_copia['TEMPO_RECEPCAO_MIN'] = df_copia['TOTAL_RECEP'].apply(converter_tempo_para_minutos)
+        df_copia['TEMPO_ESPERA_MEDICO_MIN'] = df_copia['TEMPO_ESPERA_ATEND'].apply(converter_tempo_para_minutos)
+        df_copia['TEMPO_FILA_MIN'] = df_copia['PACIENTE_SENHA_FILA_FIM'].apply(converter_tempo_para_minutos)
+        
+        # Dicionário para agrupar pacientes com tempos críticos
+        pacientes_criticos = {}
+        
+        # Verificar cada paciente e seus tempos críticos
+        for index, row in df_copia.iterrows():
+            nr_atendimento = row['NR_ATENDIMENTO']
+            paciente = row['PACIENTE']
+            classificacao = row['TRIAGEM_CLASSIFICACAO']
+            inicio_atendimento = row['ATENDIMENTO_PACIENTE_DT_INICIO']
+            
+            # Lista de tempos críticos para este paciente
+            tempos_criticos = []
+            
+            # Verificar Tempo Recepção > 10 minutos
+            if row['TEMPO_RECEPCAO_MIN'] > 10:
+                tempos_criticos.append(f"⏰ *Tempo Recepção:* {row['TEMPO_RECEPCAO_MIN']} minutos")
+            
+            # Verificar Tempo Triagem > 5 minutos
+            if 'TEMPO_TRIAGEM_MINUTOS' in row and row['TEMPO_TRIAGEM_MINUTOS'] > 5:
+                tempos_criticos.append(f"⏰ *Tempo Triagem:* {row['TEMPO_TRIAGEM_MINUTOS']} minutos")
+            
+            # Verificar Espera por Médico > 5 minutos
+            if row['TEMPO_ESPERA_MEDICO_MIN'] > 5:
+                tempos_criticos.append(f"⏰ *Espera por médico:* {row['TEMPO_ESPERA_MEDICO_MIN']} minutos")
+            
+            # Verificar Tempo Final da Fila > 30 minutos
+            if row['TEMPO_FILA_MIN'] > 30:
+                tempos_criticos.append(f"⏰ *Tempo Final da Fila:* {row['TEMPO_FILA_MIN']} minutos")
+            
+            # Se há tempos críticos, adicionar ao dicionário
+            if tempos_criticos:
+                pacientes_criticos[nr_atendimento] = {
+                    'paciente': paciente,
+                    'classificacao': classificacao,
+                    'inicio_atendimento': inicio_atendimento,
+                    'tempos_criticos': tempos_criticos
+                }
+        
+        # Gerar mensagem unificada
+        if not pacientes_criticos:
+            registrar_log("Nenhum paciente encontrado com tempos críticos")
+            mensagem = "🔴 *ALERTA TEMPO DE EMERGÊNCIA*\n\n"
+            mensagem += "Prezados, informo que não foram identificados tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA\n\n"
+            mensagem += f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "✅ Situação Normal - Nenhum paciente com tempos críticos"
+        else:
+            registrar_log(f"Encontrados {len(pacientes_criticos)} pacientes com tempos críticos")
+            
+            mensagem = "🔴 *ALERTA TEMPO DE EMERGÊNCIA*\n\n"
+            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA\n\n"
+            mensagem += f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
+            mensagem += "⚠️ TEMPOS ENCONTRADOS ⚠️\n"
+            
+            for nr_atendimento, dados in pacientes_criticos.items():
+                mensagem += f"🏥 *Atendimento:* {nr_atendimento}\n"
+                mensagem += f"✅ *Paciente:* {dados['paciente']}\n"
+                mensagem += f"📅 *Início Atendimento:* {dados['inicio_atendimento']}\n"
+                mensagem += f"🔍 *Classificação:* {dados['classificacao']}\n"
+                
+                # Adicionar todos os tempos críticos deste paciente
+                for tempo in dados['tempos_criticos']:
+                    mensagem += f"{tempo}\n"
+                
+                # Separador entre pacientes (se houver mais de um)
+                if len(pacientes_criticos) > 1:
+                    mensagem += "\n" + "─" * 40 + "\n\n"
+        
+        # Envia mensagem via WhatsApp (modo teste por enquanto)
+        enviar_whatsapp_emergencia(mensagem, modo_teste=True)
+        registrar_log("Alerta unificado de tempos críticos processado e enviado")
+        
+    except Exception as e:
+        registrar_log(f"Erro ao processar alertas unificados: {e}")
+    
+    registrar_log("processar_alertas_tempo_unificado - FIM")
+
+
 def logica_principal_background(stop_event):
     """Lógica principal que será executada em um processo separado, repetidamente."""
     registrar_log("logica_principal_background - INÍCIO")
@@ -801,6 +1233,9 @@ def tempo_espera_emergencia():
         # Executar a query e criar dataframe
         df = pd.read_sql(query, connection)
         registrar_log(f"tempo_espera_emergencia - Query executada. Linhas retornadas: {len(df)}")
+        
+        # Debug: Exibir colunas do DataFrame
+        registrar_log(f"tempo_espera_emergencia - Colunas do DataFrame: {list(df.columns)}")
 
         # Fechar conexão
         connection.close()
@@ -875,29 +1310,29 @@ def formatar_minutos_para_hhmmss(minutos):
 
 def converter_tempo_para_minutos(tempo_str):
     """
-    Converte strings de tempo (HH:MM:SS ou HH:MM) para minutos decimais.
+    Converte strings de tempo (HH:MM:SS ou HH:MM) para minutos inteiros.
     
     Args:
         tempo_str (str): String de tempo no formato HH:MM:SS ou HH:MM
         
     Returns:
-        float: Tempo convertido em minutos decimais, ou 0 se inválido/None
+        int: Tempo convertido em minutos inteiros, ou 0 se inválido/None
         
     Exemplo:
         >>> converter_tempo_para_minutos("01:05:30")
-        65.5
+        66
         >>> converter_tempo_para_minutos("00:03:11")
-        3.183333333333334
+        3
         >>> converter_tempo_para_minutos("02:30")
-        150.0
+        150
     """
     if pd.isna(tempo_str) or tempo_str is None or tempo_str == '':
         return 0
     
     try:
-        # Se já for um número, retorna como está
+        # Se já for um número, retorna como inteiro
         if isinstance(tempo_str, (int, float)):
-            return float(tempo_str)
+            return int(round(float(tempo_str)))
         
         # Se for string no formato HH:MM:SS ou HH:MM
         tempo_str = str(tempo_str).strip()
@@ -905,13 +1340,15 @@ def converter_tempo_para_minutos(tempo_str):
         
         if len(partes) == 3:  # HH:MM:SS
             horas, minutos, segundos = map(int, partes)
-            return horas * 60 + minutos + segundos / 60
+            # Converte tudo para minutos e arredonda para inteiro
+            total_minutos = horas * 60 + minutos + round(segundos / 60)
+            return int(total_minutos)
         elif len(partes) == 2:  # HH:MM
             horas, minutos = map(int, partes)
-            return horas * 60 + minutos
+            return int(horas * 60 + minutos)
         else:
-            # Tentar converter diretamente para float
-            return float(tempo_str)
+            # Tentar converter diretamente para inteiro
+            return int(round(float(tempo_str)))
     except (ValueError, TypeError):
         return 0
 
@@ -1281,7 +1718,45 @@ class AppGUI:
 
         self.start_button = tk.Button(master, text="LAB - Valores Críticos", command=self.iniciar_processo)
         self.start_button.pack(pady=10)
+        
+        self.emergencia_button = tk.Button(master, text="EMERGÊNCIA - Tempos de Espera", command=self.iniciar_alertas_emergencia)
+        self.emergencia_button.pack(pady=10)
+        
         registrar_log("def __init__ GUI - FIM")
+
+    def iniciar_alertas_emergencia(self):
+        """Inicia o processo de análise e envio de alertas de tempo da emergência."""
+        registrar_log("iniciar_alertas_emergencia - Botão Emergência clicado")
+        
+        # Desabilita o botão para evitar múltiplos cliques
+        self.emergencia_button.config(state=tk.DISABLED)
+        self.label.config(text="Processando alertas de emergência...")
+        
+        try:
+            # Executa a análise dos tempos da emergência
+            registrar_log("Iniciando análise dos tempos da emergência")
+            df = tempo_espera_emergencia()
+            
+            if df is not None:
+                registrar_log("DataFrame obtido com sucesso, processando alertas unificados")
+                
+                # Processa alertas unificados (nova função que agrupa todos os tempos por paciente)
+                processar_alertas_tempo_unificado(df)
+                
+                self.label.config(text="Alertas de emergência processados com sucesso!")
+                registrar_log("Alertas de emergência unificados processados com sucesso")
+            else:
+                self.label.config(text="Erro ao obter dados da emergência")
+                registrar_log("Erro: DataFrame da emergência retornou None")
+                
+        except Exception as e:
+            registrar_log(f"Erro ao processar alertas de emergência: {e}")
+            self.label.config(text="Erro ao processar alertas de emergência")
+        
+        finally:
+            # Reabilita o botão após o processamento
+            self.emergencia_button.config(state=tk.NORMAL)
+            registrar_log("iniciar_alertas_emergencia - FIM")
 
     def iniciar_processo(self):
         registrar_log("iniciar_processo - Botão Iniciar clicado")
@@ -1333,13 +1808,13 @@ if __name__ == "__main__":
     # Este bloco é crucial para o multiprocessing funcionar corretamente no Windows.
     # Ele garante que o código de criação de processos só seja executado
     # quando o script é o principal, e não quando é importado por um processo filho.
-    #main()
+    main()
 
-    # Exemplo de uso:
-    df = tempo_espera_emergencia()
-    if df is not None:
-        exibir_dataframe_tempo_espera(df)
-        exibir_colunas_especificas_tempo_espera(df)
-        exibir_registros_filtrados_tempo_espera(df)
-        exibir_filtros_individuais_tempo_espera(df)
+    # Exemplo de uso (comentado para usar a GUI):
+    # df = tempo_espera_emergencia()
+    # if df is not None:
+    #     exibir_dataframe_tempo_espera(df)
+    #     exibir_colunas_especificas_tempo_espera(df)
+    #     exibir_registros_filtrados_tempo_espera(df)
+    #     exibir_filtros_individuais_tempo_espera(df)
 

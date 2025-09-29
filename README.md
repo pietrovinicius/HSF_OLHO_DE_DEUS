@@ -39,6 +39,35 @@ O **HSF Olho de Deus** é um sistema de monitoramento que acompanha continuament
 - **Formatação Avançada**: Todos os tempos exibidos em formato HH:MM:SS
 - **Chaves Únicas**: Sempre inclui Atendimento e Triagem Classificação para rastreabilidade
 
+### 🚨 **NOVO: Sistema de Alertas Unificados**
+- **Mensagens Agrupadas por Paciente**: Todos os tempos críticos de um mesmo paciente são consolidados em uma única mensagem
+- **Formato Visual Moderno**: Utiliza emojis e formatação em negrito para melhor legibilidade
+- **Informações Completas**: Inclui número do atendimento, nome do paciente, data/hora de início e classificação de triagem
+- **Tempos Inteiros**: Correção do problema de dízimas periódicas - todos os tempos são exibidos como números inteiros
+- **Critérios de Alerta**:
+  - ⏰ Tempo Recepção > 10 minutos
+  - ⏰ Tempo Triagem > 5 minutos
+  - ⏰ Espera por médico > 5 minutos
+  - ⏰ Tempo Final da Fila > 30 minutos
+
+#### Exemplo de Mensagem Unificada:
+```
+🔴 *ALERTA TEMPO DE EMERGÊNCIA*
+
+Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA
+
+27/08/2025 às 10h03m
+
+⚠️ TEMPOS ENCONTRADOS ⚠️
+🏥 *Atendimento:* 12345
+✅ *Paciente:* João da Silva
+📅 *Início Atendimento:* 27/08/2025 10:00:00
+🔍 *Classificação:* Pouca Urgência (Verde)
+⏰ *Tempo Recepção:* 16 minutos
+⏰ *Tempo Triagem:* 6 minutos
+⏰ *Espera por médico:* 35 minutos
+```
+
 ### 🖥️ Interface Gráfica
 - Interface moderna desenvolvida em Tkinter
 - Logs detalhados de todas as operações
@@ -137,8 +166,21 @@ exibir_filtros_individuais_tempo_espera(df)
 # Converte minutos decimais para formato HH:MM:SS
 formatar_minutos_para_hhmmss(65.5)  # Retorna: "01:05:30"
 
-# Converte strings de tempo para minutos decimais
-converter_tempo_para_minutos("01:05:30")  # Retorna: 65.5
+# Converte strings de tempo para minutos inteiros (CORRIGIDO)
+converter_tempo_para_minutos("01:05:30")  # Retorna: 66 (inteiro, sem dízimas)
+converter_tempo_para_minutos("00:06:07")  # Retorna: 6 (inteiro, sem dízimas)
+```
+
+#### **NOVA: Função de Alertas Unificados**
+```python
+# Processa todos os alertas de tempo agrupados por paciente
+processar_alertas_tempo_unificado(df)
+
+# Substitui as funções individuais:
+# - processar_alertas_tempo_recepcao(df)
+# - processar_alertas_tempo_triagem(df) 
+# - processar_alertas_espera_medico(df)
+# - processar_alertas_tempo_final_fila(df)
 ```
 
 #### Critérios de Filtro Aplicados
