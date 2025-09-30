@@ -2,3 +2,4 @@ oracledb
 selenium
 webdriver-manager
 pandas
+pyautogui
