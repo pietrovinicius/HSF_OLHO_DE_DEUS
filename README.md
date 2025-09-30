@@ -285,6 +285,40 @@ Todos os eventos são registrados em `log.txt` com timestamps detalhados:
 - Resultados de queries
 - Alertas gerados
 
+## 🧪 Testes Automatizados
+
+O sistema inclui uma suíte completa de testes para validar a funcionalidade de inclusão da fila nas mensagens de alerta:
+
+### 📁 **Arquivo de Teste**: `test_fila_alertas.py`
+
+#### 🔍 **Testes Implementados:**
+- **Inclusão da Fila**: Verifica se `🎯 *Fila:* {nome_da_fila}` aparece corretamente na mensagem
+- **Tratamento de Valores Ausentes**: Valida o uso de `N/A` quando `DS_FILA` não existe
+- **Múltiplos Pacientes**: Testa o processamento de vários pacientes com filas diferentes
+- **Casos Extremos**: Verifica tratamento de valores vazios, `None` e colunas ausentes
+- **Função Auxiliar**: Testa a conversão de tempo para minutos
+
+#### 🚀 **Como Executar os Testes:**
+```bash
+python test_fila_alertas.py
+```
+
+#### ✅ **Cobertura de Testes:**
+- Mensagens com tempos críticos incluem informação da fila
+- Mensagens sem tempos críticos não incluem fila (situação normal)
+- Tratamento robusto de dados ausentes ou inválidos
+- Validação da estrutura e formatação das mensagens
+- Teste da função `converter_tempo_para_minutos`
+
+#### 📊 **Resultados Esperados:**
+```
+🧪 Iniciando testes para validação da funcionalidade de fila...
+✅ Testes executados: 6
+❌ Falhas: 0
+🚫 Erros: 0
+🎉 Todos os testes passaram com sucesso!
+```
+
 ## 🤝 Contribuição
 
 Para contribuir com o projeto:
