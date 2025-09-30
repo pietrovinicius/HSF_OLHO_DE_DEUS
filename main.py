@@ -1171,6 +1171,7 @@ def processar_alertas_tempo_unificado(df):
                     'paciente': paciente,
                     'classificacao': classificacao,
                     'inicio_atendimento': inicio_atendimento,
+                    'fila': row.get('DS_FILA', 'N/A'),  # Adiciona informação da fila
                     'tempos_criticos': tempos_criticos
                 }
         
@@ -1192,6 +1193,7 @@ def processar_alertas_tempo_unificado(df):
             for nr_atendimento, dados in pacientes_criticos.items():
                 mensagem += f"🏥 *Atendimento:* {nr_atendimento}\n"
                 mensagem += f"✅ *Paciente:* {dados['paciente']}\n"
+                mensagem += f"🎯 *Fila:* {dados['fila']}\n"
                 mensagem += f"📅 *Início Atendimento:* {dados['inicio_atendimento']}\n"
                 mensagem += f"🔍 *Classificação:* {dados['classificacao']}\n"
                 

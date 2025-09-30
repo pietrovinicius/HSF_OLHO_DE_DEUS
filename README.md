@@ -57,7 +57,8 @@ O **HSF Olho de Deus** é um sistema de monitoramento automatizado que executa c
 ### 🚨 **NOVO: Sistema de Alertas Unificados**
 - **Mensagens Agrupadas por Paciente**: Todos os tempos críticos de um mesmo paciente são consolidados em uma única mensagem
 - **Formato Visual Moderno**: Utiliza emojis e formatação em negrito para melhor legibilidade
-- **Informações Completas**: Inclui número do atendimento, nome do paciente, data/hora de início e classificação de triagem
+- **Informações Completas**: Inclui número do atendimento, nome do paciente, fila de atendimento, data/hora de início e classificação de triagem
+- **Identificação da Fila**: Exibe a fila específica onde o paciente está sendo atendido (DS_FILA)
 - **Tempos Inteiros**: Correção do problema de dízimas periódicas - todos os tempos são exibidos como números inteiros
 - **Critérios de Alerta**:
   - ⏰ Tempo Recepção > 10 minutos
@@ -108,6 +109,7 @@ Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na
 ⚠️ TEMPOS ENCONTRADOS ⚠️
 🏥 *Atendimento:* 12345
 ✅ *Paciente:* João da Silva
+🎯 *Fila:* Emergência Adulto
 📅 *Início Atendimento:* 27/08/2025 10:00:00
 🔍 *Classificação:* Pouca Urgência (Verde)
 ⏰ *Tempo Recepção:* 16 minutos
