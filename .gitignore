@@ -28,3 +28,4 @@ __pycache__/
 # Sistema operacional
 .DS_Store
 Thumbs.db
+log.txt
