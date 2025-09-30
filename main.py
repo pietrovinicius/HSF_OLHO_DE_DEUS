@@ -499,6 +499,8 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                         """
                         resultado = driver.execute_script(js_script)
                         registrar_log(f"Resultado JavaScript: {resultado}")
+                        registrar_log("time.sleep(1)")	
+                        time.sleep(1)
                         if "clicado" in resultado:
                             botao_encontrado = True
                     except Exception as e_js:
@@ -540,6 +542,8 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                 time.sleep(1)
                 registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
                 pyautogui.press('enter')
+                registrar_log("time.sleep(5)")	
+                time.sleep(5)
 
             # Pausa breve para garantir que a mensagem seja processada
             registrar_log("Pausa breve para garantir que a mensagem seja processada")	
@@ -728,8 +732,8 @@ def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=
 
             except Exception as e_chatbox:
                 registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                    
-                registrar_log("time.sleep(1)")	
-                time.sleep(1)
+                registrar_log("time.sleep(2)")	
+                time.sleep(2)
                 registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
                 pyautogui.press('enter')
                 registrar_log("time.sleep(5)")
