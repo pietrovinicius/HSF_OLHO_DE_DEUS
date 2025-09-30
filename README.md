@@ -25,6 +25,7 @@ O **HSF Olho de Deus** é um sistema de monitoramento automatizado que executa c
 - **Emergência**: Busca atendimentos da **última hora** (`sysdate - 1/24`)
 - **Laboratório**: Busca exames digitados nos **últimos 60 minutos** (`INTERVAL '60' MINUTE`)
 - **Sincronização Perfeita**: Dados sempre atualizados para o período mais recente
+- **Ordenação Alfabética**: Pacientes ordenados por nome em ordem alfabética crescente (`ORDER BY OBTER_NOME_PACIENTE(c.NR_ATENDIMENTO) ASC`) para melhor organização e localização
 
 ### 🔬 Monitoramento de Exames Críticos
 - Monitoramento automático de resultados de hemograma
