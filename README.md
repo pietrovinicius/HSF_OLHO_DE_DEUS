@@ -70,6 +70,25 @@ O **HSF Olho de Deus** é um sistema de monitoramento automatizado que executa c
 - **Fallback de Teclado**: Uso de teclas Enter/Ctrl+Enter como última alternativa
 - **Logs Detalhados**: Rastreamento completo do processo de envio para debugging
 
+### 🎯 **NOVO: Sistema Inteligente de Envio**
+- **Prevenção de Spam**: Sistema não envia mensagens desnecessárias quando não há alertas críticos
+- **Verificação Automática**: 
+  - ❌ Não envia mensagem de emergência se "Situação Normal - Nenhum paciente com tempos críticos"
+  - ❌ Não envia mensagem de laboratório se "Nenhum exame crítico encontrado para reportar"
+- **Aguardo Otimizado**: 30 segundos após cada envio para garantir processamento completo pelo WhatsApp Web
+- **Preservação de Sessão**: Driver mantido ativo entre envios para melhor performance
+- **Logs Informativos**: Registro detalhado de todas as ações e decisões do sistema
+
+### 🔄 **NOVO: Fluxo Integrado de Envio**
+- **Sessão Única**: Uma única sessão do WhatsApp Web para ambos os grupos (emergência e laboratório)
+- **Sequência Otimizada**: 
+  1. Abre WhatsApp Web uma vez
+  2. Envia mensagem para grupo de emergência (se necessário)
+  3. Reutiliza a mesma sessão para grupo do laboratório (se necessário)
+  4. Fecha WhatsApp Web apenas após todos os envios
+- **Economia de Recursos**: Reduz tempo de inicialização e uso de memória
+- **Maior Confiabilidade**: Menos pontos de falha no processo de envio
+
 ### 🔧 **Configuração de Produção**
 - **Modo Teste Removido**: Sistema configurado para envio real de mensagens WhatsApp
 - **Configurações Validadas**: Credenciais de banco de dados e URLs verificadas para ambiente de produção

@@ -27,6 +27,61 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import re
 import pandas as pd
+import pyautogui  # Para controle de teclado e fechamento de abas
+
+# VARIÁVEIS GLOBAIS PARA GERENCIAMENTO DO DRIVER
+# Mantém instâncias dos drivers para reutilização entre chamadas
+driver_whatsapp_global = None
+driver_emergencia_global = None
+
+def driver_is_alive(driver):
+    """
+    Verifica se o driver do Selenium ainda está ativo e funcional.
+    
+    Args:
+        driver: Instância do WebDriver
+        
+    Returns:
+        bool: True se o driver está ativo, False caso contrário
+    """
+    if driver is None:
+        return False
+    
+    try:
+        # Tenta acessar uma propriedade básica do driver
+        _ = driver.current_url
+        return True
+    except Exception:
+        return False
+
+def fechar_drivers_whatsapp():
+    """
+    Função para fechar todos os drivers do WhatsApp quando necessário.
+    Útil para limpeza manual ou reinicialização completa.
+    """
+    global driver_whatsapp_global, driver_emergencia_global
+    
+    registrar_log("Fechando drivers do WhatsApp...")
+    
+    if driver_whatsapp_global:
+        try:
+            driver_whatsapp_global.quit()
+            registrar_log("Driver WhatsApp principal fechado")
+        except Exception as e:
+            registrar_log(f"Erro ao fechar driver WhatsApp principal: {e}")
+        finally:
+            driver_whatsapp_global = None
+    
+    if driver_emergencia_global:
+        try:
+            driver_emergencia_global.quit()
+            registrar_log("Driver WhatsApp emergência fechado")
+        except Exception as e:
+            registrar_log(f"Erro ao fechar driver WhatsApp emergência: {e}")
+        finally:
+            driver_emergencia_global = None
+    
+    registrar_log("Limpeza de drivers concluída")
 
 def agora():
     agora = datetime.now()
@@ -222,6 +277,7 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
     - Fallback final usando teclas Enter/Ctrl+Enter
     - Logs detalhados para debugging e monitoramento
     - Envio linha por linha para evitar problemas de caracteres BMP
+    - DRIVER PERSISTENTE: Reutiliza driver global para manter sessão autenticada
     
     Args:
         mensagem_texto (str): Texto da mensagem a ser enviada
@@ -230,6 +286,7 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
     Returns:
         None
     """
+    global driver_emergencia_global
     registrar_log("enviar_whatsapp_emergencia - INÍCIO")
 
     registrar_log("time.sleep(4)")
@@ -238,7 +295,13 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
     if not mensagem_texto or not mensagem_texto.strip():
         registrar_log("Nenhuma mensagem para enviar via WhatsApp.")
         registrar_log("enviar_whatsapp_emergencia - FIM")
-        return
+        return driver_emergencia_global  # Retorna o driver para manter a sessão
+
+    # Verifica se a situação é normal e não envia mensagem
+    if "Situação Normal - Nenhum paciente com tempos críticos" in mensagem_texto:
+        registrar_log("Situação normal detectada - não enviando mensagem de emergência")
+        registrar_log("enviar_whatsapp_emergencia - FIM")
+        return driver_emergencia_global  # Retorna o driver para manter a sessão
 
     if modo_teste:
         registrar_log("[MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:")
@@ -247,45 +310,52 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
         registrar_log("enviar_whatsapp_emergencia - FIM")
         return
     
-    driver = None
+    driver = driver_emergencia_global  # Usa driver global se disponível
     
     try:        
-        # Configurações do Chrome
-        options = Options()
-        
-        # Adicionar argumentos para evitar problemas de sessão
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-web-security")
-        options.add_argument("--allow-running-insecure-content")
-        options.add_argument("--disable-background-timer-throttling")
-        options.add_argument("--disable-backgrounding-occluded-windows")
-        options.add_argument("--disable-renderer-backgrounding")
-        options.add_argument("--disable-features=TranslateUI")
-        options.add_argument("--disable-ipc-flooding-protection")
-        
-        # Configurar o perfil de usuário para manter o login
-        dir_path = os.path.dirname(os.path.abspath(__file__))
-        # Usar timestamp para criar diretório único
-        from datetime import datetime
-        timestamp = str(int(datetime.now().timestamp()))
-        profile_path = os.path.join(dir_path, "profile", f"wpp_emergencia_{timestamp}")
-        
-        # Criar diretório se não existir
-        os.makedirs(profile_path, exist_ok=True)
-        options.add_argument(f"--user-data-dir={profile_path}")
+        # Verifica se já existe um driver válido
+        if driver is None or not driver_is_alive(driver):
+            registrar_log("Inicializando novo driver para WhatsApp Emergência...")
+            # Configurações do Chrome
+            options = Options()
+            
+            # Adicionar argumentos para evitar problemas de sessão
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--disable-extensions")
+            options.add_argument("--disable-web-security")
+            options.add_argument("--allow-running-insecure-content")
+            options.add_argument("--disable-background-timer-throttling")
+            options.add_argument("--disable-backgrounding-occluded-windows")
+            options.add_argument("--disable-renderer-backgrounding")
+            options.add_argument("--disable-features=TranslateUI")
+            options.add_argument("--disable-ipc-flooding-protection")
+            
+            # Configurar o perfil de usuário para manter o login
+            dir_path = os.path.dirname(os.path.abspath(__file__))
+            profile_path = os.path.join(dir_path, "profile", "wpp_emergencia")
+            
+            # Criar diretório se não existir
+            os.makedirs(profile_path, exist_ok=True)
+            options.add_argument(f"--user-data-dir={profile_path}")
 
-        # Inicializa o driver
-        service = ChromeService(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+            # Inicializa o driver
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=options)
+            driver_emergencia_global = driver  # Armazena na variável global
+            
+            registrar_log('driver.get("https://web.whatsapp.com")')
+            driver.get("https://web.whatsapp.com")
 
-        registrar_log('driver.get("https://web.whatsapp.com")')
-        driver.get("https://web.whatsapp.com")
-
-        registrar_log("time.sleep(15)")
-        time.sleep(15) 
+            registrar_log("time.sleep(15)")
+            time.sleep(15) 
+        else:
+            registrar_log("Reutilizando driver existente para WhatsApp Emergência...")
+            # Verifica se ainda está na página do WhatsApp
+            if "web.whatsapp.com" not in driver.current_url:
+                driver.get("https://web.whatsapp.com")
+                time.sleep(10) 
 
         registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
 
@@ -455,6 +525,8 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                 
                 if botao_encontrado:
                     registrar_log("Mensagem enviada com sucesso!")
+                    registrar_log("Aguardando 30 segundos após envio da mensagem...")
+                    time.sleep(30)  # Aguarda 30 segundos após o envio
                 else:
                     registrar_log("ERRO: Não foi possível enviar a mensagem por nenhum método")
                 
@@ -464,78 +536,85 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                 
             except Exception as e_chatbox:
                 registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
-                registrar_log("time.sleep(5)")
-                time.sleep(5)
+                registrar_log("time.sleep(1)")	
+                time.sleep(1)
+                registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
+                pyautogui.press('enter')
 
             # Pausa breve para garantir que a mensagem seja processada
+            registrar_log("Pausa breve para garantir que a mensagem seja processada")	
             time.sleep(5)
 
         except Exception as e_search:
             registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
         
-        # Fechar o navegador após o envio
+        # MANTÉM O WHATSAPP ABERTO PARA ENVIAR MENSAGENS DE EXAMES NA SEQUÊNCIA
+        # Driver permanece ativo para próxima função (enviar_whatsapp)
         if driver:
             registrar_log("time.sleep(2)")
-            time.sleep(2)            
-            registrar_log("driver.quit()")
-            driver.quit() 
-        registrar_log("driver.quit() - Navegador fechado.")
+            time.sleep(2)
+            registrar_log("WhatsApp Web mantido aberto para envio de mensagens de exames críticos")
+            registrar_log("Driver mantido aberto para preservar sessão do WhatsApp")
+            # driver.quit() - REMOVIDO para manter perfil persistente
+        registrar_log("Sessão do WhatsApp preservada para próximo envio.")
 
     except Exception as e:
         registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp Emergência: {e}")
     
     registrar_log("enviar_whatsapp_emergencia - FIM")
+    return driver_emergencia_global  # Retorna o driver para manter a sessão
 
-def enviar_whatsapp(lista_exames, modo_teste=False):
-    """Abre o WhatsApp Web usando Selenium com perfil de usuário."""
-    registrar_log("enviar_whatsapp - INÍCIO")
-    if not lista_exames:
-        registrar_log("Nenhum exame crítico para enviar via WhatsApp.")
-        registrar_log("enviar_whatsapp - FIM")
-        return
-
-    if modo_teste:
-        registrar_log("[MODO DE TESTE] Simulação de envio de mensagens para o WhatsApp:")
-        if isinstance(lista_exames, list) and all(isinstance(sublist, list) for sublist in lista_exames):
-            for sublist in lista_exames:
-                for item_exame in sublist:
-                    registrar_log(f"[MODO DE TESTE] Linha a ser enviada: {item_exame}")
-        else:
-            registrar_log(f"[MODO DE TESTE] Dados a serem enviados (formato não esperado para iteração linha a linha): {lista_exames}")
-        return
+def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=False):
+    """
+    Envia mensagens de exames críticos para o grupo do laboratório usando driver existente
+    DRIVER PERSISTENTE: Reutiliza o driver global para manter a sessão autenticada
+    """
+    global driver_whatsapp_global
     
-    driver = None # Inicializa driver como None
+    registrar_log("enviar_whatsapp_laboratorio - INÍCIO")
+    
+    # Verifica se não há exames críticos para reportar
+    if not lista_exames or len(lista_exames) == 0:
+        registrar_log("Nenhum exame crítico encontrado - não enviando mensagem de laboratório")
+        registrar_log("enviar_whatsapp_laboratorio - FIM")
+        return driver_existente if driver_existente else driver_whatsapp_global
+    
+    try:
+        # Usa o driver passado como parâmetro ou o driver global
+        driver = driver_existente if driver_existente else driver_whatsapp_global
+        
+        # Verifica se já existe um driver válido
+        if driver is None or not driver_is_alive(driver):
+            registrar_log("Inicializando novo driver para WhatsApp Laboratório...")
+            # Configurações do Chrome
+            options = Options()
+            
+            # Configurar o perfil de usuário para manter o login
+            dir_path = os.path.dirname(os.path.abspath(__file__))
+            profile_path = os.path.join(dir_path, "profile", "wpp")
+            options.add_argument(f"user-data-dir={profile_path}")
 
-    try:        
-        # Configurações do Chrome
-        options = Options()
-        # Manter o navegador aberto após a execução do script (útil para depuração)
-        # options.add_experimental_option("detach", True)
+            # Inicializa o driver usando ChromeDriverManager
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=options)
+            driver_whatsapp_global = driver  # Armazena na variável global
 
-        # Configurar o perfil de usuário para manter o login
-        # O diretório "profile/wpp" será criado na pasta do seu projeto
-        dir_path = os.path.dirname(os.path.abspath(__file__))
-        profile_path = os.path.join(dir_path, "profile", "wpp")
-        options.add_argument(f"user-data-dir={profile_path}")
+            registrar_log('driver.get("https://web.whatsapp.com")')
+            driver.get("https://web.whatsapp.com")
 
-        # Inicializa o driver usando ChromeDriverManager
-        # Isso baixa e gerencia o chromedriver automaticamente
-        service = ChromeService(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+            registrar_log("time.sleep(15)")
+            time.sleep(15) 
+        else:
+            registrar_log("Reutilizando driver existente para WhatsApp Laboratório...")
+            # Verifica se ainda está na página do WhatsApp
+            if "web.whatsapp.com" not in driver.current_url:
+                driver.get("https://web.whatsapp.com")
+                time.sleep(10) 
 
-        registrar_log('driver.get("https://web.whatsapp.com")')
-        driver.get("https://web.whatsapp.com")
+        registrar_log("WhatsApp Web aberto. Procurando grupo do laboratório...")
 
-        registrar_log("time.sleep(15)")
-        time.sleep(15) 
-
-        registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
-
-        # Espera explícita para o campo de pesquisa (ou o contêiner dele)
-        # O XPath fornecido parece ser para o placeholder do campo de pesquisa
+        # Espera explícita para o campo de pesquisa
         xpath_campo_pesquisa = '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p'
-        # Um XPath mais robusto para o input de pesquisa pode ser: //div[@id='side']//div[@contenteditable='true'][@role='textbox']
-        # Por enquanto, usaremos o XPath fornecido.
         
         try:
             wait = WebDriverWait(driver, 30) # Espera até 30 segundos
@@ -546,9 +625,7 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
             campo_pesquisa_element.click()
             registrar_log("Clicado no campo de pesquisa.")
 
-            # Após clicar, o campo de pesquisa (ou um novo input) estará ativo.
-            # Localiza o campo de input de texto ativo para a pesquisa.
-            # Este XPath é comum para o campo de texto de pesquisa do WhatsApp Web.
+            # Localiza o campo de input de texto ativo para a pesquisa
             xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
             input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
             registrar_log("Campo de input de pesquisa ativo encontrado.")
@@ -571,25 +648,13 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
             registrar_log("time.sleep(0.5)")
             time.sleep(0.5)
 
-            # Agora que a conversa está aberta, localize a caixa de texto do chat.
+            # Localiza a caixa de texto do chat
             registrar_log('Localizando a caixa de texto do chat...')
-            # Usamos WebDriverWait para esperar que a caixa de texto esteja presente e clicável.
-
-            # O seletor abaixo é mais robusto para encontrar a caixa de texto do chat.
-            # Ele busca por um elemento <div> que seja editável (contenteditable="true")
-            # e tenha a função de uma caixa de texto (role="textbox"), dentro da área principal do chat (div com id="main").
-            # Este tipo de seletor é muito mais estável que um "Full XPath", pois não depende da estrutura exata da página.
-            # A linha que você adicionou com `driver.find_element` foi removida, pois o `wait.until` já faz a busca
-            # e precisa receber a string do XPath, não o elemento já encontrado.
             xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
 
             try:
                 chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
                 registrar_log('Caixa de texto localizada e clicável com sucesso!')
-                
-                # Opcional: Clicar na caixa de texto para garantir o foco (geralmente não é estritamente necessário para send_keys)
-                # chat_caixa_de_texto_element.click()
-                # registrar_log('Clicado na caixa de texto.')
                 
                 # Re-localiza a caixa de texto antes de cada envio principal
                 def get_chat_box():
@@ -644,54 +709,43 @@ def enviar_whatsapp(lista_exames, modo_teste=False):
                                 time.sleep(1) # Pequena pausa para não sobrecarregar
                     
                 else:
-                    get_chat_box().send_keys("Nenhum exame crítico encontrado para reportar.")
-                    get_chat_box().send_keys(Keys.ENTER)
-                    registrar_log("Mensagem de 'nenhum exame' enviada.")
+                    registrar_log("Nenhum exame crítico encontrado - não enviando mensagem")
+                    registrar_log("enviar_whatsapp_laboratorio - FIM")
+                    return driver  # Retorna o driver sem enviar mensagem
                 
                 registrar_log('time.sleep(0.5)')
                 time.sleep(0.5)
 
                 registrar_log('Localizando e clicando no botão de enviar...')
-                # O seletor abaixo é mais robusto para encontrar o botão de enviar.
-                # Ele busca pelo atributo 'aria-label', que descreve a função do botão ("Enviar").
-                # Isso é muito mais estável do que um XPath completo ou um seletor de classe.
-                # A espera explícita (wait.until) já aguarda o botão ficar clicável,
-                # tornando pausas com time.sleep() desnecessárias e ineficientes.
                 xpath_botao_enviar = "//button[@aria-label='Enviar']"
                 botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
 
                 registrar_log('botao_enviar_element.click()')
                 botao_enviar_element.click()
-                registrar_log("Processo de envio de mensagens concluído.")
-                registrar_log('time.sleep(5)')
-                time.sleep(5)
+                registrar_log("Processo de envio de mensagens do laboratório concluído.")
+                registrar_log("Aguardando 30 segundos após o envio...")
+                time.sleep(30)
+
             except Exception as e_chatbox:
-                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
+                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                    
+                registrar_log("time.sleep(1)")	
+                time.sleep(1)
+                registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
+                pyautogui.press('enter')
                 registrar_log("time.sleep(5)")
                 time.sleep(5)
-
-
-
-            # Pausa breve para garantir que a mensagem seja processada antes de fechar o navegador
-            time.sleep(5) # Ajuste conforme necessário para garantir o envio
-
 
         except Exception as e_search:
             registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
         
-        # Fechar o navegador após o envio para liberar recursos
-        if driver: # Garante que o driver foi inicializado antes de tentar fechar
-            registrar_log("time.sleep(60)")
-            time.sleep(60)            
-            registrar_log("driver.quit()")
-            driver.quit() 
-        registrar_log(" driver.quit() - Navegador fechado.")
+        # Mantém o driver aberto para preservar a sessão
+        registrar_log("Driver mantido aberto para preservar sessão do WhatsApp")
 
     except Exception as e:
-        registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp: {e}")
+        registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp Laboratório: {e}")
     
-    registrar_log("enviar_whatsapp - FIM")
-
+    registrar_log("enviar_whatsapp_laboratorio - FIM")
+    return driver  # Retorna o driver para uso posterior
 def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
     """
     Processa os resultados brutos de exames (incluindo RTF) para identificar
@@ -1158,7 +1212,7 @@ def processar_alertas_tempo_unificado(df):
     
     registrar_log("processar_alertas_tempo_unificado - FIM")
 
-def logica_principal_exames():
+def logica_principal_exames(driver_existente=None):
     """Lógica principal que executa a verificação de todos os exames críticos."""
     registrar_log("logica_principal_background - INÍCIO")
     # Defina True para testar sem enviar mensagens reais, False para operação normal
@@ -1167,7 +1221,7 @@ def logica_principal_exames():
     registrar_log("Executando ciclo da lógica principal...")
     lista_de_resultados = resultados_exames_intervalo_58_min()
     registrar_log(f"lista_de_resultados: {lista_de_resultados}")        
-    enviar_whatsapp(lista_de_resultados, modo_teste=MODO_TESTE_WHATSAPP)
+    driver = enviar_whatsapp_laboratorio(lista_de_resultados, driver_existente=driver_existente, modo_teste=MODO_TESTE_WHATSAPP)
     
     # --- INÍCIO DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
     registrar_log("Iniciando processamento de hemogramas críticos...")
@@ -1283,7 +1337,7 @@ def logica_principal_exames():
                     linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.1f} {critico['unidade']}."
                     mensagens_hemogramas_criticos_whatsapp.append([linha_mensagem]) # Cada linha como uma lista de um item
                 
-                enviar_whatsapp(mensagens_hemogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+                driver = enviar_whatsapp_laboratorio(mensagens_hemogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
             else:
                 registrar_log("Nenhum hemograma crítico encontrado para enviar.")
         else:
@@ -1299,7 +1353,7 @@ def logica_principal_exames():
             for critico in coagulogramas_criticos:
                 linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f}."
                 mensagens_coagulogramas_criticos_whatsapp.append([linha_mensagem])
-            enviar_whatsapp(mensagens_coagulogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+            driver = enviar_whatsapp_laboratorio(mensagens_coagulogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum coagulograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
@@ -1314,7 +1368,7 @@ def logica_principal_exames():
             for critico in hepatogramas_criticos:
                 linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f} {critico['unidade']}."
                 mensagens_hepatogramas_criticos_whatsapp.append([linha_mensagem])
-            enviar_whatsapp(mensagens_hepatogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+            driver = enviar_whatsapp_laboratorio(mensagens_hepatogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum hepatograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEPATOGRAMAS CRÍTICOS ---
@@ -1329,12 +1383,15 @@ def logica_principal_exames():
             for critico in lipidogramas_criticos:
                 linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f} {critico['unidade']}."
                 mensagens_lipidogramas_criticos_whatsapp.append([linha_mensagem])
-            enviar_whatsapp(mensagens_lipidogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
+            driver = enviar_whatsapp_laboratorio(mensagens_lipidogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum lipidograma crítico encontrado para enviar.")
     else:
         registrar_log("Nenhum resultado de hemograma/exame bruto encontrado para processar.")
     # --- FIM DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
+    
+    # Retorna o driver para fechamento posterior
+    return driver
     
     registrar_log("logica_principal_background - FIM")
 
@@ -1841,11 +1898,12 @@ def main():
     """
     Função principal que executa as funções de WhatsApp em fila a cada hora.
     
-    NOVA FUNCIONALIDADE - EXECUÇÃO AUTOMÁTICA:
+    NOVA FUNCIONALIDADE - EXECUÇÃO AUTOMÁTICA COM SESSÃO ÚNICA:
     - Removida interface gráfica (tkinter) - sistema roda em background
-    - Execução sequencial automática:
-      1. enviar_whatsapp_emergencia() - Processa tempos de espera da emergência
-      2. enviar_whatsapp() - Processa exames críticos do laboratório
+    - Execução sequencial automática em uma única sessão do WhatsApp:
+      1. enviar_whatsapp_emergencia() - Processa tempos de espera da emergência (grupo recepção)
+      2. enviar_whatsapp_laboratorio() - Processa exames críticos do laboratório (grupo laboratório)
+      3. Fecha WhatsApp Web apenas após enviar ambas as mensagens
     - Loop infinito com ciclo de 1 hora (3600 segundos)
     - Tratamento robusto de erros com fallback de 5 minutos
     - Logs detalhados de cada ciclo de execução
@@ -1855,31 +1913,48 @@ def main():
     - Emergência: última hora (sysdate - 1/24)
     - Laboratório: últimos 60 minutos (INTERVAL '60' MINUTE)
     """
+    global driver_emergencia_global, driver_whatsapp_global
     registrar_log("MAIN - INICIO - Execução automática iniciada")
     
     while True:
         try:
             registrar_log("=== INICIANDO CICLO DE EXECUÇÃO ===")
+            driver_whatsapp = None
             
-            # Primeira função: enviar_whatsapp_emergencia()
-            registrar_log("Executando enviar_whatsapp_emergencia()")
+            # Primeira função: enviar_whatsapp_emergencia() - Grupo da Recepção
+            registrar_log("Executando enviar_whatsapp_emergencia() - Grupo da Recepção")
             try:
                 df_emergencia = tempo_espera_emergencia()
                 if df_emergencia is not None:
                     processar_alertas_tempo_unificado(df_emergencia)
                     registrar_log("enviar_whatsapp_emergencia() concluída com sucesso")
+                    # Captura o driver global para reutilizar
+                    driver_whatsapp = driver_emergencia_global
                 else:
                     registrar_log("Erro: DataFrame da emergência retornou None")
             except Exception as e:
                 registrar_log(f"Erro em enviar_whatsapp_emergencia(): {e}")
             
-            # Segunda função: enviar_whatsapp() (exames críticos)
-            registrar_log("Executando enviar_whatsapp() - exames críticos")
+            # Segunda função: enviar_whatsapp_laboratorio() - Grupo do Laboratório
+            registrar_log("Executando enviar_whatsapp_laboratorio() - Grupo do Laboratório")
             try:
-                logica_principal_exames()
+                driver_whatsapp = logica_principal_exames(driver_existente=driver_whatsapp)
                 registrar_log("Lógica de exames concluída com sucesso")
             except Exception as e:
-                registrar_log(f"Erro em enviar_whatsapp(): {e}")
+                registrar_log(f"Erro em enviar_whatsapp_laboratorio(): {e}")
+            
+            # Fecha o WhatsApp Web após enviar ambas as mensagens
+            if driver_whatsapp and driver_is_alive(driver_whatsapp):
+                try:
+                    registrar_log("Fechando WhatsApp Web após envio de ambas as mensagens...")
+                    driver_whatsapp.quit()
+                    registrar_log("WhatsApp Web fechado com sucesso")
+                except Exception as e:
+                    registrar_log(f"Erro ao fechar WhatsApp Web: {e}")
+                finally:
+                    # Limpa as variáveis globais
+                    driver_emergencia_global = None
+                    driver_whatsapp_global = None
             
             registrar_log("=== CICLO DE EXECUÇÃO CONCLUÍDO ===")
             registrar_log("Aguardando 1 hora para próxima execução...")
