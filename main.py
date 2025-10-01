@@ -1984,16 +1984,18 @@ def main():
             registrar_log("=== CICLO DE EXECUÇÃO CONCLUÍDO ===")
             registrar_log("Aguardando 1 hora para próxima execução...")
             
-            # Aguarda 1 hora (3600 segundos) antes da próxima execução
+            # CORREÇÃO: Aguarda 1 hora SEMPRE, independente de erros nas funções internas
             time.sleep(3600)
             
         except KeyboardInterrupt:
             registrar_log("Execução interrompida pelo usuário (Ctrl+C)")
             break
         except Exception as e:
-            registrar_log(f"Erro inesperado no ciclo principal: {e}")
+            # CORREÇÃO: Apenas erros críticos que impedem o ciclo completo devem usar sleep de 5 minutos
+            # Erros nas funções internas já são tratados individualmente
+            registrar_log(f"Erro crítico no ciclo principal (falha na estrutura do loop): {e}")
             registrar_log("Aguardando 5 minutos antes de tentar novamente...")
-            time.sleep(300)  # Aguarda 5 minutos em caso de erro
+            time.sleep(300)  # Aguarda 5 minutos apenas para erros críticos estruturais
     
     registrar_log("MAIN - FIM - Execução automática finalizada")
 
