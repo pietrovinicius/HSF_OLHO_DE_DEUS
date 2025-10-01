@@ -1994,8 +1994,8 @@ def main():
             # CORREÇÃO: Apenas erros críticos que impedem o ciclo completo devem usar sleep de 5 minutos
             # Erros nas funções internas já são tratados individualmente
             registrar_log(f"Erro crítico no ciclo principal (falha na estrutura do loop): {e}")
-            registrar_log("Aguardando 5 minutos antes de tentar novamente...")
-            time.sleep(300)  # Aguarda 5 minutos apenas para erros críticos estruturais
+            registrar_log("Aguardando 1 hora antes de tentar novamente...")
+            time.sleep(3600)  
     
     registrar_log("MAIN - FIM - Execução automática finalizada")
 
