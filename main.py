@@ -499,8 +499,6 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                         """
                         resultado = driver.execute_script(js_script)
                         registrar_log(f"Resultado JavaScript: {resultado}")
-                        registrar_log("time.sleep(1)")	
-                        time.sleep(1)
                         if "clicado" in resultado:
                             botao_encontrado = True
                     except Exception as e_js:
@@ -535,6 +533,18 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                 registrar_log("Processo de envio de mensagem concluído.")
                 registrar_log('time.sleep(5)')
                 time.sleep(5)
+
+                #inserir pausa de 1 segundo
+                registrar_log("time.sleep(1)")	
+                time.sleep(1)
+
+                #inserir aperto de enter
+                registrar_log("pyautogui.press('enter')")
+                pyautogui.press('enter')
+
+                #inserir pausa de 15 segundos
+                registrar_log("time.sleep(15)")
+                time.sleep(15)
                 
             except Exception as e_chatbox:
                 registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
@@ -542,8 +552,6 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
                 time.sleep(1)
                 registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
                 pyautogui.press('enter')
-                registrar_log("time.sleep(5)")	
-                time.sleep(5)
 
             # Pausa breve para garantir que a mensagem seja processada
             registrar_log("Pausa breve para garantir que a mensagem seja processada")	
@@ -720,20 +728,31 @@ def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=
                 registrar_log('time.sleep(0.5)')
                 time.sleep(0.5)
 
-                registrar_log('Localizando e clicando no botão de enviar...')
-                xpath_botao_enviar = "//button[@aria-label='Enviar']"
-                botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
+                #registrar_log('Localizando e clicando no botão de enviar...')
+                #xpath_botao_enviar = "//button[@aria-label='Enviar']"
+                #botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
+                #
+                #registrar_log('botao_enviar_element.click()')
+                #botao_enviar_element.click()
+                #registrar_log("Processo de envio de mensagens do laboratório concluído.")
+                #registrar_log("Aguardando 30 segundos após o envio...")
+                #time.sleep(30)
 
-                registrar_log('botao_enviar_element.click()')
-                botao_enviar_element.click()
-                registrar_log("Processo de envio de mensagens do laboratório concluído.")
-                registrar_log("Aguardando 30 segundos após o envio...")
-                time.sleep(30)
+                #inserir pausa de 1 segundo
+                registrar_log("time.sleep(1)")	
+                time.sleep(1)
+
+                #inserir aperto de enter
+                registrar_log("pyautogui.press('enter')")
+                pyautogui.press('enter')
+
+                registrar_log("time.sleep(15)")
+                time.sleep(15)
 
             except Exception as e_chatbox:
                 registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                    
-                registrar_log("time.sleep(2)")	
-                time.sleep(2)
+                registrar_log("time.sleep(1)")	
+                time.sleep(1)
                 registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
                 pyautogui.press('enter')
                 registrar_log("time.sleep(5)")
