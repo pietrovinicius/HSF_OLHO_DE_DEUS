@@ -966,8 +966,8 @@ def processar_alertas_tempo_recepcao(df):
             registrar_log(f"Encontrados {len(filtro_recepcao)} registros com Tempo Recepção > 10 minutos")
             
             mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
-            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
-            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n"
+            mensagem += "\n*--- TEMPOS ENCONTRADOS ---*\n"
             
             for index, row in filtro_recepcao.iterrows():
                 tempo_recepcao_min = converter_tempo_para_minutos(row['TOTAL_RECEP'])
@@ -1022,7 +1022,7 @@ def processar_alertas_tempo_triagem(df):
             
             mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
             mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
-            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            mensagem += "\n*--- TEMPOS ENCONTRADOS ---*\n"
             
             for index, row in filtro_triagem.iterrows():
                 tempo_triagem_min = int(row['TEMPO_TRIAGEM_MINUTOS'])
@@ -1067,7 +1067,7 @@ def processar_alertas_espera_medico(df):
             
             mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
             mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
-            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            mensagem += "\n*--- TEMPOS ENCONTRADOS ---*\n"
             
             for index, row in filtro_espera.iterrows():
                 tempo_espera_min = converter_tempo_para_minutos(row['TEMPO_ESPERA_ATEND'])
@@ -1112,7 +1112,7 @@ def processar_alertas_tempo_final_fila(df):
             
             mensagem = f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
             mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na Emergência:\n\n"
-            mensagem += "--- TEMPOS ENCONTRADOS ---\n"
+            mensagem += "\n*--- TEMPOS ENCONTRADOS ---*\n"
             
             for index, row in filtro_fila.iterrows():
                 tempo_fila_min = converter_tempo_para_minutos(row['PACIENTE_SENHA_FILA_FIM'])
@@ -1211,7 +1211,7 @@ def processar_alertas_tempo_unificado(df):
             mensagem = "🔴 *ALERTA TEMPO DE EMERGÊNCIA*\n\n"
             mensagem += "Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na EMERGÊNCIA\n\n"
             mensagem += f"{datetime.now().strftime('%d/%m/%Y às %Hh%Mm')}\n\n"
-            mensagem += "⚠️ TEMPOS ENCONTRADOS ⚠️\n"
+            mensagem += "\n*--- TEMPOS ENCONTRADOS ---*\n"
             
             for nr_atendimento, dados in pacientes_criticos.items():
                 mensagem += f"🏥 *Atendimento:* {nr_atendimento}\n"
