@@ -319,6 +319,52 @@ python test_fila_alertas.py
 🎉 Todos os testes passaram com sucesso!
 ```
 
+## 🔧 Resolução de Problemas
+
+### Problema: Execução a Cada 2 Minutos em Vez de 1 Hora
+
+**Sintoma:** O sistema executava `enviar_whatsapp_emergencia()` novamente após 2 minutos em vez de aguardar 1 hora.
+
+**Causa Identificada:** 
+- Estrutura inadequada do `try/except` na função `main()`
+- Erros nas funções internas (`enviar_whatsapp_emergencia`, `logica_principal_exames`) eram capturados pelo `except` externo
+- Isso causava execução do `time.sleep(300)` (5 minutos) em vez do `time.sleep(3600)` (1 hora)
+
+**Solução Implementada:**
+1. **Separação de Tratamento de Erros:**
+   - Erros nas funções internas são tratados individualmente com `try/except` internos
+   - O `except` externo trata apenas erros críticos estruturais do loop principal
+
+2. **Garantia do Ciclo de 1 Hora:**
+   - `time.sleep(3600)` é executado **SEMPRE** após cada ciclo completo
+   - Apenas erros críticos que impedem a estrutura do loop usam `time.sleep(300)`
+
+3. **Comentários Explicativos:**
+   - Adicionados comentários claros sobre a correção implementada
+   - Documentação do comportamento esperado
+
+**Resultado:**
+- ✅ Sistema aguarda exatamente 1 hora entre cada execução
+- ✅ Erros nas funções internas não afetam o ciclo de tempo
+- ✅ Apenas falhas críticas estruturais usam tempo de espera de 5 minutos
+
+**Commit:** `676070b - Fix: Corrige problema de execução a cada 2 minutos`
+
+### Logs de Depuração
+
+Para monitorar o comportamento do sistema:
+
+```bash
+# Verificar logs de execução
+tail -f logs/sistema.log
+
+# Verificar horários de execução
+grep "INICIANDO CICLO" logs/sistema.log
+
+# Verificar erros
+grep "Erro" logs/sistema.log
+```
+
 ## 🤝 Contribuição
 
 Para contribuir com o projeto:
