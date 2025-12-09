@@ -614,8 +614,8 @@ def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=
             registrar_log('driver.get("https://web.whatsapp.com")')
             driver.get("https://web.whatsapp.com")
 
-            registrar_log("time.sleep(15)")
-            time.sleep(15) 
+            registrar_log("time.sleep(10)")
+            time.sleep(10) 
         else:
             registrar_log("Reutilizando driver existente para WhatsApp Laboratório...")
             # Verifica se ainda está na página do WhatsApp
