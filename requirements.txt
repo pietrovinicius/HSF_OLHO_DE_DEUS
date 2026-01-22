@@ -3,3 +3,6 @@ selenium
 webdriver-manager
 pandas
 pyautogui
+customtkinter
+pytest
+pytest-mock

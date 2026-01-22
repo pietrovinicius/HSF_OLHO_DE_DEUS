@@ -139,6 +139,29 @@ Prezados, informo a identificação de tempo(s) crítico(s) de atendimento(s) na
 - **Oracle Instant Client** para conectividade
 - **Sistema de Logs** para monitoramento contínuo
 
+## 🖥️ Interface Gráfica (Novo)
+
+O projeto agora conta com uma interface gráfica moderna para facilitar o monitoramento:
+
+### Funcionalidades da GUI:
+- **Executar Ciclo Completo**: Roda manualmente a verificação de emergência e laboratório.
+- **Parar Execução**: Interrompe o ciclo atual com segurança.
+- **Logs em Tempo Real**: Visualize o que está acontecendo diretamente na tela.
+
+### Como Executar:
+```bash
+python gui_app.py
+```
+
+## 🧪 Testes Unitários
+
+O projeto possui testes automatizados para garantir a qualidade do código:
+
+```bash
+# Executar testes
+pytest test_main.py -v
+```
+
 ## 📦 Instalação
 
 ### Pré-requisitos

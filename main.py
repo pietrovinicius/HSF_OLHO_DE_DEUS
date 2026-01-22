@@ -88,15 +88,36 @@ def agora():
     agora = agora.strftime("%Y-%m-%d %H-%M-%S")
     return str(agora)
 
+# Variável global para callback de logs (usado pela GUI)
+_log_callback = None
+
+def set_log_callback(callback):
+    """Define uma função de callback para receber logs em tempo real."""
+    global _log_callback
+    _log_callback = callback
+
 def registrar_log(texto):
     """Função para registrar um texto em um arquivo de log."""
     diretorio_atual = os.getcwd()
     caminho_arquivo = os.path.join(diretorio_atual, 'log.txt')
-    print(f"{agora()} - {texto}")
+    
+    # Timestamp formatado
+    timestamp = agora()
+    
+    # Print no console
+    print(f"{timestamp} - {texto}")
+    
+    # Enviar para callback se existir (para GUI)
+    if _log_callback:
+        try:
+            # Envia apenas o texto, a GUI adiciona seu próprio timestamp se necessário
+            _log_callback(texto)
+        except Exception:
+            pass
 
     # Abre o arquivo em modo de append (adiciona texto ao final)
-    with open(caminho_arquivo, 'a', encoding='utf-8') as arquivo:  # Especifica a codificação UTF-8
-        arquivo.write(f"{agora()} - {texto}\n")
+    with open(caminho_arquivo, 'a', encoding='utf-8') as arquivo:
+        arquivo.write(f"{timestamp} - {texto}\n")
 
 def encontrar_diretorio_instantclient(nome_pasta="instantclient-basiclite-windows.x64-23.6.0.24.10\\instantclient_23_6"):
   registrar_log(f'encontrar_diretorio_instantclient - Inicio')
@@ -1555,8 +1576,13 @@ def converter_tempo_para_minutos(tempo_str):
         
         if len(partes) == 3:  # HH:MM:SS
             horas, minutos, segundos = map(int, partes)
-            # Converte tudo para minutos e arredonda para inteiro
-            total_minutos = horas * 60 + minutos + round(segundos / 60)
+            # Converte tudo para minutos
+            # Correção para arredondamento tradicional (0.5 arredonda para cima)
+            # Python round() arredonda para o par mais próximo (bankers rounding)
+            val_segundos = segundos / 60
+            segundos_arredondados = int(val_segundos + 0.5)
+            
+            total_minutos = horas * 60 + minutos + segundos_arredondados
             return int(total_minutos)
         elif len(partes) == 2:  # HH:MM
             horas, minutos = map(int, partes)
@@ -1919,83 +1945,87 @@ def exibir_colunas_especificas_tempo_espera(df):
 # Classe AppGUI removida - não precisamos mais da interface gráfica
 # A execução agora é automática através da função main()
 
-def main():
+def executar_ciclo_completo():
     """
-    Função principal que executa as funções de WhatsApp em fila a cada hora.
+    Executa um ciclo completo de verificação (Emergência + Laboratório).
     
-    NOVA FUNCIONALIDADE - EXECUÇÃO AUTOMÁTICA COM SESSÃO ÚNICA:
-    - Removida interface gráfica (tkinter) - sistema roda em background
-    - Execução sequencial automática em uma única sessão do WhatsApp:
-      1. enviar_whatsapp_emergencia() - Processa tempos de espera da emergência (grupo recepção)
-      2. enviar_whatsapp_laboratorio() - Processa exames críticos do laboratório (grupo laboratório)
-      3. Fecha WhatsApp Web apenas após enviar ambas as mensagens
-    - Loop infinito com ciclo de 1 hora (3600 segundos)
-    - Tratamento robusto de erros com fallback de 5 minutos
-    - Logs detalhados de cada ciclo de execução
-    - Interrupção segura via Ctrl+C (KeyboardInterrupt)
-    
-    Queries otimizadas para tempo real:
-    - Emergência: última hora (sysdate - 1/24)
-    - Laboratório: últimos 60 minutos (INTERVAL '60' MINUTE)
+    Retorna:
+        bool: True se o ciclo foi concluído (mesmo com erros em etapas individuais),
+              False se houve erro crítico que impediu a execução.
     """
     global driver_emergencia_global, driver_whatsapp_global
-    registrar_log("MAIN - INICIO - Execução automática iniciada")
+    
+    try:
+        registrar_log("=== INICIANDO CICLO DE EXECUÇÃO ===")
+        driver_whatsapp = None
+        
+        # Primeira função: enviar_whatsapp_emergencia() - Grupo da Recepção
+        registrar_log("Executando enviar_whatsapp_emergencia() - Grupo da Recepção")
+        try:
+            df_emergencia = tempo_espera_emergencia()
+            if df_emergencia is not None:
+                processar_alertas_tempo_unificado(df_emergencia)
+                registrar_log("enviar_whatsapp_emergencia() concluída com sucesso")
+                # Captura o driver global para reutilizar
+                driver_whatsapp = driver_emergencia_global
+            else:
+                registrar_log("Erro: DataFrame da emergência retornou None")
+        except Exception as e:
+            registrar_log(f"Erro em enviar_whatsapp_emergencia(): {e}")
+        
+        # Segunda função: enviar_whatsapp_laboratorio() - Grupo do Laboratório
+        registrar_log("Executando enviar_whatsapp_laboratorio() - Grupo do Laboratório")
+        try:
+            driver_whatsapp = logica_principal_exames(driver_existente=driver_whatsapp)
+            registrar_log("Lógica de exames concluída com sucesso")
+        except Exception as e:
+            registrar_log(f"Erro em enviar_whatsapp_laboratorio(): {e}")
+        
+        # Fecha o WhatsApp Web após enviar ambas as mensagens
+        if driver_whatsapp and driver_is_alive(driver_whatsapp):
+            try:
+                registrar_log("Fechando WhatsApp Web após envio de ambas as mensagens...")
+                driver_whatsapp.quit()
+                registrar_log("WhatsApp Web fechado com sucesso")
+            except Exception as e:
+                registrar_log(f"Erro ao fechar WhatsApp Web: {e}")
+            finally:
+                # Limpa as variáveis globais
+                driver_emergencia_global = None
+                driver_whatsapp_global = None
+        
+        registrar_log("=== CICLO DE EXECUÇÃO CONCLUÍDO ===")
+        return True
+        
+    except Exception as e:
+        registrar_log(f"Erro crítico no ciclo principal: {e}")
+        return False
+
+def main():
+    """
+    Função principal que executa o loop infinito de verificação.
+    Agora utiliza executar_ciclo_completo() para modularidade.
+    """
+    registrar_log("MAIN - INICIO - Execução automática iniciada (Loop 1h)")
     
     while True:
         try:
-            registrar_log("=== INICIANDO CICLO DE EXECUÇÃO ===")
-            driver_whatsapp = None
+            sucesso = executar_ciclo_completo()
             
-            # Primeira função: enviar_whatsapp_emergencia() - Grupo da Recepção
-            registrar_log("Executando enviar_whatsapp_emergencia() - Grupo da Recepção")
-            try:
-                df_emergencia = tempo_espera_emergencia()
-                if df_emergencia is not None:
-                    processar_alertas_tempo_unificado(df_emergencia)
-                    registrar_log("enviar_whatsapp_emergencia() concluída com sucesso")
-                    # Captura o driver global para reutilizar
-                    driver_whatsapp = driver_emergencia_global
-                else:
-                    registrar_log("Erro: DataFrame da emergência retornou None")
-            except Exception as e:
-                registrar_log(f"Erro em enviar_whatsapp_emergencia(): {e}")
-            
-            # Segunda função: enviar_whatsapp_laboratorio() - Grupo do Laboratório
-            registrar_log("Executando enviar_whatsapp_laboratorio() - Grupo do Laboratório")
-            try:
-                driver_whatsapp = logica_principal_exames(driver_existente=driver_whatsapp)
-                registrar_log("Lógica de exames concluída com sucesso")
-            except Exception as e:
-                registrar_log(f"Erro em enviar_whatsapp_laboratorio(): {e}")
-            
-            # Fecha o WhatsApp Web após enviar ambas as mensagens
-            if driver_whatsapp and driver_is_alive(driver_whatsapp):
-                try:
-                    registrar_log("Fechando WhatsApp Web após envio de ambas as mensagens...")
-                    driver_whatsapp.quit()
-                    registrar_log("WhatsApp Web fechado com sucesso")
-                except Exception as e:
-                    registrar_log(f"Erro ao fechar WhatsApp Web: {e}")
-                finally:
-                    # Limpa as variáveis globais
-                    driver_emergencia_global = None
-                    driver_whatsapp_global = None
-            
-            registrar_log("=== CICLO DE EXECUÇÃO CONCLUÍDO ===")
-            registrar_log("Aguardando 1 hora para próxima execução...")
-            
-            # CORREÇÃO: Aguarda 1 hora SEMPRE, independente de erros nas funções internas
-            time.sleep(3600)
+            if sucesso:
+                registrar_log("Aguardando 1 hora para próxima execução...")
+                time.sleep(3600)  # 1 hora
+            else:
+                registrar_log("Erro crítico detectado. Aguardando 1 hora antes de tentar novamente...")
+                time.sleep(3600)
             
         except KeyboardInterrupt:
             registrar_log("Execução interrompida pelo usuário (Ctrl+C)")
             break
         except Exception as e:
-            # CORREÇÃO: Apenas erros críticos que impedem o ciclo completo devem usar sleep de 5 minutos
-            # Erros nas funções internas já são tratados individualmente
-            registrar_log(f"Erro crítico no ciclo principal (falha na estrutura do loop): {e}")
+            registrar_log(f"Erro não tratado no loop principal: {e}")
             registrar_log("Aguardando 1 hora antes de tentar novamente...")
-            time.sleep(3600)  
+            time.sleep(3600)
     
     registrar_log("MAIN - FIM - Execução automática finalizada")
 
