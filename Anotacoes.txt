@@ -1,0 +1,28 @@
+COMANDOS PARA INICIAR O APP NO WINDOWS
+
+1. Navegar até a pasta do projeto:
+cd c:\Pietro\Projetos\HSF_OLHO_DE_DEUS
+
+2. Criar ambiente virtual (se não existir):
+python -m venv .venv
+
+3. Configurar permissão de execução de scripts (uma única vez, como Administrador):
+Set-ExecutionPolicy RemoteSigned
+
+4. Ativar o ambiente virtual:
+.venv\Scripts\activate
+
+5. Instalar dependências (se necessário):
+pip install -r requirements.txt
+
+6. EXECUTAR O APLICATIVO (Modo Interface Gráfica):
+python gui_app.py
+
+---
+OUTROS COMANDOS ÚTEIS:
+
+Executar em modo servidor (sem janela):
+python main.py
+
+Executar testes unitários:
+pytest test_main.py -v
