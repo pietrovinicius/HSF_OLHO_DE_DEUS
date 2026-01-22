@@ -18,7 +18,8 @@ from main import (
     set_log_callback,
     driver_emergencia_global,
     driver_whatsapp_global,
-    driver_is_alive
+    driver_is_alive,
+    inicializar_oracle_client_global
 )
 
 
@@ -41,6 +42,10 @@ class HSFApp(ctk.CTk):
         self.executando = False
         self.thread_execucao = None
         self.parar_loop = False
+        
+        
+        # Inicializar Oracle Client Globalmente
+        inicializar_oracle_client_global()
         
         # Configurar callback de logos (conectar com main.py)
         set_log_callback(self.adicionar_log_callback)

@@ -3,6 +3,13 @@
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 
+
+## [2.1.3] - 2026-01-22
+
+### Corrigido
+- **Erro Oracle DPY-3015**: Corrigida falha de conexão com o banco de dados ("password verifier type 0x939 is not supported by python-oracledb in thin mode").
+  - Adicionada chamada explícita para `inicializar_oracle_client_global()` no construtor da classe `HSFApp` em `gui_app.py` para forçar o uso do modo "Thick" do driver.
+
 ## [2.1.2] - 2026-01-22
 
 ### Adicionado
