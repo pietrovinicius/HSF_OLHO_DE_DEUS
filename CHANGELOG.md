@@ -2,6 +2,15 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+
+## [2.1.2] - 2026-01-22
+
+### Adicionado
+- **Script de Execução**: Criado arquivo `executar_gui.bat` para facilitar a inicialização da aplicação, com ativação automática do ambiente virtual e tratamento de erros.
+
+### Corrigido
+- **Dependências**: Garantida a instalação de todas as dependências listadas em `requirements.txt` (incluindo `customtkinter`) no ambiente virtual.
+
 ## [2.1.1] - 2026-01-22
 
 ### Corrigido
