@@ -12,7 +12,7 @@
 
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 # import tkinter as tk  # Removido - não precisamos mais da interface gráfica
 from multiprocessing import Process, Event # Importar Event
 import oracledb
@@ -33,6 +33,47 @@ import pyautogui  # Para controle de teclado e fechamento de abas
 # Mantém instâncias dos drivers para reutilização entre chamadas
 driver_whatsapp_global = None
 driver_emergencia_global = None
+
+# Variável global para controlar inicialização do Oracle Client
+oracle_client_inicializado = False
+
+def inicializar_oracle_client_global():
+    """
+    Inicializa o Oracle Client uma única vez para toda a aplicação.
+    Deve ser chamado no início do programa.
+    """
+    global oracle_client_inicializado
+    
+    if oracle_client_inicializado:
+        registrar_log("Oracle Client já inicializado anteriormente.")
+        return True
+        
+    try:
+        registrar_log("Inicializando Oracle Client globalmente...")
+        caminho_instantclient = encontrar_diretorio_instantclient()
+        
+        if caminho_instantclient:
+            try:
+                oracledb.init_oracle_client(lib_dir=caminho_instantclient)
+                oracle_client_inicializado = True
+                registrar_log(f"Oracle Client inicializado com sucesso em: {caminho_instantclient}")
+                return True
+            except oracledb.Error as e:
+                # Se já estiver inicializado (erro comum se chamar 2x), apenas loga e segue
+                if "DPI-1047" in str(e): 
+                    registrar_log("Oracle Client já estava inicializado (DPI-1047).")
+                    oracle_client_inicializado = True
+                    return True
+                else:
+                    registrar_log(f"Erro ao inicializar Oracle Client: {e}")
+                    return False
+        else:
+            registrar_log("ERRO CRÍTICO: Diretório do Instant Client não encontrado.")
+            return False
+            
+    except Exception as e:
+        registrar_log(f"Erro inesperado ao inicializar Oracle Client: {e}")
+        return False
 
 def driver_is_alive(driver):
     """
@@ -140,12 +181,12 @@ def resultados_exames_intervalo_58_min():
     try:
         registrar_log(f'resultados_exames_intervalo_58_min - INICIO')
 
-        # Chamar a função para obter o caminho do Instant Client
-        caminho_instantclient = encontrar_diretorio_instantclient()
-        if caminho_instantclient:
-            oracledb.init_oracle_client(lib_dir=caminho_instantclient)
-        else:
-            registrar_log("Erro ao localizar o Instant Client. Verifique o nome da pasta e o caminho.")
+        # Inicialização do Oracle Client removida (agora é global)
+        # caminho_instantclient = encontrar_diretorio_instantclient()
+        # if caminho_instantclient:
+        #     oracledb.init_oracle_client(lib_dir=caminho_instantclient)
+        # else:
+        #     registrar_log("Erro ao localizar o Instant Client. Verifique o nome da pasta e o caminho.")
 
         connection = oracledb.connect(user="TASY", password="aloisk", dsn="192.168.5.9:1521/TASYPRD")
 
@@ -184,12 +225,12 @@ def resultados_hemogramas_intervalo_58_min():
     try:
         registrar_log(f'resultados_hemogramas_intervalo_58_min - INICIO')
 
-        # Chamar a função para obter o caminho do Instant Client
-        caminho_instantclient = encontrar_diretorio_instantclient()
-        if caminho_instantclient:
-            oracledb.init_oracle_client(lib_dir=caminho_instantclient)
-        else:
-            registrar_log("Erro ao localizar o Instant Client. Verifique o nome da pasta e o caminho.")
+        # Inicialização do Oracle Client removida (agora é global)
+        # caminho_instantclient = encontrar_diretorio_instantclient()
+        # if caminho_instantclient:
+        #     oracledb.init_oracle_client(lib_dir=caminho_instantclient)
+        # else:
+        #     registrar_log("Erro ao localizar o Instant Client. Verifique o nome da pasta e o caminho.")
 
         connection = oracledb.connect(user="TASY", password="aloisk", dsn="192.168.5.9:1521/TASYPRD")
 
@@ -1446,14 +1487,14 @@ def tempo_espera_emergencia():
     registrar_log("tempo_espera_emergencia - INICIO")
     
     try:
-        # Configurar o diretório do Instant Client
-        diretorio_instantclient = encontrar_diretorio_instantclient()
-        if diretorio_instantclient:
-            oracledb.init_oracle_client(lib_dir=diretorio_instantclient)
-            registrar_log(f"tempo_espera_emergencia - Instant Client configurado: {diretorio_instantclient}")
-        else:
-            registrar_log("tempo_espera_emergencia - ERRO: Diretório do Instant Client não encontrado")
-            return None
+        # Inicialização do Oracle Client removida (agora é global)
+        # diretorio_instantclient = encontrar_diretorio_instantclient()
+        # if diretorio_instantclient:
+        #     oracledb.init_oracle_client(lib_dir=diretorio_instantclient)
+        #     registrar_log(f"tempo_espera_emergencia - Instant Client configurado: {diretorio_instantclient}")
+        # else:
+        #     registrar_log("tempo_espera_emergencia - ERRO: Diretório do Instant Client não encontrado")
+        #     return None
 
         # Ler a query do arquivo SQL
         with open('HSF - TODOS - TEMPO DE ESPERA EMERGENCIA.sql', 'r', encoding='utf-8') as arquivo:
@@ -2006,18 +2047,39 @@ def main():
     Função principal que executa o loop infinito de verificação.
     Agora utiliza executar_ciclo_completo() para modularidade.
     """
-    registrar_log("MAIN - INICIO - Execução automática iniciada (Loop 1h)")
+    registrar_log("MAIN - INICIO - Execução automática iniciada (Loop Horário)")
     
+    # Inicializar Oracle Client uma única vez no início
+    if not inicializar_oracle_client_global():
+        registrar_log("FALHA CRÍTICA: Não foi possível inicializar o Oracle Client. Encerrando.")
+        return
+
     while True:
         try:
             sucesso = executar_ciclo_completo()
             
+            # Cálculo para executar na próxima hora cheia (ex: 10:00, 11:00, 12:00)
+            agora = datetime.now()
+            # Próxima hora redonda
+            proxima_hora = (agora + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
+            
+            # Se por acaso a execução foi muito rápida e ainda estamos na mesma hora (ex: 09:59 -> 10:00)
+            # o timedelta(hours=1) já garante que vamos para a próxima.
+            # Mas se a execução demorou e já passou da hora alvo, o timedelta ajusta.
+            
+            segundos_espera = (proxima_hora - agora).total_seconds()
+            
+            if segundos_espera < 0:
+                # Segurança: se o cálculo der negativo (algo estranho), espera 1 hora padrão
+                segundos_espera = 3600
+                proxima_hora = agora + timedelta(seconds=3600)
+
             if sucesso:
-                registrar_log("Aguardando 1 hora para próxima execução...")
-                time.sleep(3600)  # 1 hora
+                registrar_log(f"Ciclo concluído. Aguardando {int(segundos_espera)}s até a próxima execução às {proxima_hora.strftime('%H:%M:%S')}...")
+                time.sleep(segundos_espera)
             else:
                 registrar_log("Erro crítico detectado. Aguardando 1 hora antes de tentar novamente...")
-                time.sleep(3600)
+                time.sleep(3600) # Mantém 1h fixa em caso de erro crítico para evitar loop rápido de erro
             
         except KeyboardInterrupt:
             registrar_log("Execução interrompida pelo usuário (Ctrl+C)")

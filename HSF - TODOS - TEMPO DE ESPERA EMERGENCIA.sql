@@ -51,8 +51,13 @@ and   c.cd_setor_atendimento in (3,75,80,171)
 and EXTRACT(YEAR FROM a.dt_inicio_atendimento) = EXTRACT(YEAR FROM SYSDATE) --and--{ano}
 and EXTRACT(MONTH FROM a.dt_inicio_atendimento) = EXTRACT(MONTH FROM SYSDATE) --{mes}
 and EXTRACT(DAY FROM a.dt_inicio_atendimento) = EXTRACT(DAY FROM SYSDATE) --{dia}
---retornar apenas atendimentos da última hora
+--retornar apenas atendimentos da última hora (janela deslizante)
 and a.dt_inicio_atendimento >= sysdate - 1/24
+
+--RETORNAR APENAS ATENDIMENTO DE HOJE (COMENTADO PARA EVITAR DUPLICIDADE NO LOOP HORARIO)
+--and a.dt_inicio_atendimento >= trunc(sysdate)
+
+
 
 order by OBTER_NOME_PACIENTE(c.NR_ATENDIMENTO) ASC,a.dt_recebimento_senha desc
 --FETCH FIRST 100 ROWS ONLY
