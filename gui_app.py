@@ -12,7 +12,7 @@ import customtkinter as ctk
 import threading
 import sys
 import io
-from datetime import datetime
+from datetime import datetime, timedelta
 from main import (
     executar_ciclo_completo,
     set_log_callback,
@@ -46,6 +46,9 @@ class HSFApp(ctk.CTk):
         
         # Inicializar Oracle Client Globalmente
         inicializar_oracle_client_global()
+        
+        # Evento para controlar parada
+        self.stop_event = threading.Event()
         
         # Configurar callback de logos (conectar com main.py)
         set_log_callback(self.adicionar_log_callback)
@@ -195,7 +198,8 @@ class HSFApp(ctk.CTk):
         # Marcar como executando
         self.executando = True
         self.parar_loop = False
-        self.atualizar_status("Rodando", "#ffaa00")
+        self.stop_event.clear() # Limpa evento de parada
+        self.atualizar_status("Rodando - Monitoramento Contínuo", "#ffaa00")
         
         # Desabilitar botão executar e habilitar botão parar
         self.btn_executar.configure(state="disabled")
@@ -209,24 +213,49 @@ class HSFApp(ctk.CTk):
         self.thread_execucao.start()
         
     def _executar_logica(self):
-        """Lógica executada na thread."""
+        """Lógica executada na thread com loop contínuo."""
         try:
-            # Executa a função refatorada do main.py
-            # Isso garante que a GUI faça EXATAMENTE o mesmo que o CLI
             from main import executar_ciclo_completo
             
-            executar_ciclo_completo()
+            self.adicionar_log("🔄 Iniciando ciclo de monitoramento contínuo...")
+            
+            while not self.stop_event.is_set():
+                # Data/hora inicio do ciclo
+                inicio_ciclo = datetime.now()
+                
+                # Executa o ciclo
+                try:
+                    executar_ciclo_completo()
+                except Exception as e_ciclo:
+                     self.adicionar_log(f"⚠️ Erro ao executar ciclo: {e_ciclo}")
+                
+                if self.stop_event.is_set():
+                    self.adicionar_log("🛑 Execução interrompida pelo usuário.")
+                    break
+                
+                # Calcular tempo para a próxima hora cheia
+                agora = datetime.now()
+                proxima_hora = (agora + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
+                
+                # Se já passou da hora (ex: demorou muito), ajusta
+                if proxima_hora <= agora:
+                     proxima_hora += timedelta(hours=1)
+                
+                segundos_espera = (proxima_hora - agora).total_seconds()
+                
+                # Log de espera
+                self.adicionar_log(f"⏳ Aguardando {int(segundos_espera)}s até a próxima execução ({proxima_hora.strftime('%H:%M:%S')})...")
+                
+                # Espera interruptível
+                # wait() retorna True se a flag for setada (interrupção), False se der timeout (continuar)
+                if self.stop_event.wait(timeout=segundos_espera):
+                    self.adicionar_log("🛑 Espera interrompida pelo usuário.")
+                    break
             
         except Exception as e:
-            self.adicionar_log(f"❌ Erro crítico lançado para a GUI: {e}")
+            self.adicionar_log(f"❌ Erro crítico na thread: {e}")
             
         finally:
-            # Ao terminar (seja sucesso ou erro), reseta a interface
-            # Nota: Em um sistema de loop real, aqui poderíamos ter um loop while not self.parar_loop
-            # Mas como o pedido foi "botão executa UMA das tarefas" (ou ciclo), vamos manter execução única.
-            # Se o usuário quiser loop, ele pode clicar de novo ou implementamos um loop aqui.
-            # O main.py tem loop. Aqui, o botão chama "Executar Ciclo Completo" (singular).
-            
             # Resetar estado na main thread
             self.after(0, self._resetar_botoes)
 
@@ -241,14 +270,13 @@ class HSFApp(ctk.CTk):
     def parar_execucao(self):
         """Para a execução atual."""
         if not self.executando:
-            self.adicionar_log("⚠️ Nenhuma execução em andamento!")
             return
             
         self.adicionar_log("⏹️ Solicitando parada...")
         self.parar_loop = True
+        self.stop_event.set() # Sinaliza parada para sair do wait() imediatamente
         
-        # Tentar fechar drivers imediatamente (forçar parada)
-        # Atenção: Isso pode gerar exceções na thread de execução, que serão capturadas
+        # Tentar fechar drivers
         self._fechar_drivers_forca()
         
         # O reset dos botões acontecerá no finally da thread ou aqui?

@@ -1,56 +1,13 @@
 # Changelog
 
-Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
-
-
-
-## [2.1.3] - 2026-01-22
-
-### Corrigido
-- **Erro Oracle DPY-3015**: Corrigida falha de conexão com o banco de dados ("password verifier type 0x939 is not supported by python-oracledb in thin mode").
-  - Adicionada chamada explícita para `inicializar_oracle_client_global()` no construtor da classe `HSFApp` em `gui_app.py` para forçar o uso do modo "Thick" do driver.
-
-## [2.1.2] - 2026-01-22
+## [Unreleased]
 
 ### Adicionado
-- **Script de Execução**: Criado arquivo `executar_gui.bat` para facilitar a inicialização da aplicação, com ativação automática do ambiente virtual e tratamento de erros.
+- Implementado loop infinito na execução via interface gráfica (GUI).
+- O aplicativo agora executa o ciclo de monitoramento e aguarda a próxima hora cheia para executar novamente.
+- Adicionado botão "Parar Execução" que interrompe imediatamente a espera e o monitoramento.
+- Adicionados testes unitários para a lógica de loop da GUI (`test_gui_loop.py`).
 
 ### Corrigido
-- **Dependências**: Garantida a instalação de todas as dependências listadas em `requirements.txt` (incluindo `customtkinter`) no ambiente virtual.
-
-## [2.1.1] - 2026-01-22
-
-### Corrigido
-- **Erro Crítico DPI-1047**: Resolvido problema de inicialização múltipla do Oracle Client que causava falha na execução do script.
-  - Implementada inicialização global (`inicializar_oracle_client_global`) no início da execução.
-  - Removidas inicializações locais redundantes nas funções `tempo_espera_emergencia`, `resultados_exames_intervalo_58_min` e `resultados_hemogramas_intervalo_58_min`.
-
-## [2.1.0] - 2026-01-22
-
-### Alterado
-- **Agendamento de Execução**: Ajustado loop principal em `main.py` para sincronizar a execução com o início de cada hora (ex: 10h, 11h, 12h), em vez de intervalos fixos de 3600s.
-- **Query SQL**: Revertida a lógica de `HSF - TODOS - TEMPO DE ESPERA EMERGENCIA.sql` para buscar apenas dados da **última hora** (`sysdate - 1/24`), garantindo conformidade com a execução horária e evitando alertas duplicados do dia inteiro.
-
-## [2.0.0] - 2026-01-22
-
-### Adicionado
-- **Interface Gráfica (GUI)**: Nova interface moderna usando CustomTkinter (`gui_app.py`) com:
-  - Botão "Executar Ciclo Completo"
-  - Botão "Parar Execução"
-  - Área de logs em tempo real
-  - Indicadores de status
-- **Testes Unitários**: Suíte de testes com Pytest (`test_main.py`) cobrindo:
-  - Limpeza de RTF
-  - Conversão de tempo
-  - Validação de conexão e drivers
-- **Callback de Logs**: Sistema de hooks em `registrar_log` para integração com GUI.
-
-### Alterado
-- **Refatoração do Main**: Lógica de execução extraída para função `executar_ciclo_completo()`.
-- **Arquitetura**: Separação clara entre interface e lógica de negócio.
-- **Ambiente Virtual**: Recriado e atualizado com novas dependências (`customtkinter`, `pytest`).
-- **Arredondamento de Tempo**: Corrigido para arredondamento tradicional (0.5 arredonda para cima) em vez de "bankers rounding".
-
-### Dependências
-- Adicionado `customtkinter`
-- Adicionado `pytest` e `pytest-mock`
+- Ajustado o comportamento do botão "Executar" para iniciar o modo de monitoramento contínuo em vez de execução única.
+- Restaurado arquivo `HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql` que estava ausente, corrigindo erro de execução.
