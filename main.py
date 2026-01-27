@@ -474,194 +474,185 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
         campo_pesquisa_element.click()
         registrar_log("Clicado no campo de pesquisa.")
 
-            # Localiza o campo de input de texto ativo para a pesquisa
-            xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
-            input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
-            registrar_log("Campo de input de pesquisa ativo encontrado.")
+        # Localiza o campo de input de texto ativo para a pesquisa
+        xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
+        input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
+        registrar_log("Campo de input de pesquisa ativo encontrado.")
+        
+        nome_grupo = "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
+        input_pesquisa_ativo.send_keys(nome_grupo)
+        registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
+        registrar_log("time.sleep(0.5)")
+        time.sleep(0.5) 
+
+        # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
+        xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
+        registrar_log("time.sleep(0.5)")
+        time.sleep(0.5) 
+
+        resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
+        registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
+        resultado_grupo_element.click()
+        registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
+        registrar_log("time.sleep(0.5)")
+        time.sleep(0.5)
+
+        # Localiza a caixa de texto do chat
+        registrar_log('Localizando a caixa de texto do chat...')
+        xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
+
+        try:
+            chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
+            registrar_log('Caixa de texto localizada e clicável com sucesso!')
             
-            nome_grupo = "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
-            input_pesquisa_ativo.send_keys(nome_grupo)
-            registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
-            registrar_log("time.sleep(0.5)")
-            time.sleep(0.5) 
-
-            # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
-            xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
-            registrar_log("time.sleep(0.5)")
-            time.sleep(0.5) 
-
-            resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
-            registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
-            resultado_grupo_element.click()
-            registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
+            # CORREÇÃO UTF-8 E ENVIO LINHA POR LINHA
+            # Envia a mensagem linha por linha para evitar erro de caracteres BMP
+            # Primeiro, limpa apenas emojis problemáticos, mantendo acentos brasileiros
+            # Esta implementação preserva caracteres especiais como ã, á, ç, etc.
+            import re
+            # Remove apenas emojis e símbolos especiais, mantém acentos portugueses
+            mensagem_limpa = re.sub(r'[^\w\s\*\:\-\(\)\[\]\.\,\;\!\?\ãáàâêéèíìîõóòôúùûçÃÁÀÂÊÉÈÍÌÎÕÓÒÔÚÙÛÇ\/]+', '', mensagem_texto)
+            
+            linhas_mensagem = mensagem_limpa.split('\n')
+            for i, linha in enumerate(linhas_mensagem):
+                if linha.strip():  # Só envia linhas não vazias
+                    chat_caixa_de_texto_element.send_keys(linha.strip())
+                    registrar_log(f"Linha enviada: {linha.strip()}")
+                
+                # Adiciona quebra de linha se não for a última linha
+                if i < len(linhas_mensagem) - 1:
+                    chat_caixa_de_texto_element.send_keys(Keys.CONTROL, Keys.ENTER)
+                    time.sleep(0.2)  # Pequena pausa entre linhas
+            
+            registrar_log(f"Mensagem completa enviada linha por linha")
             registrar_log("time.sleep(0.5)")
             time.sleep(0.5)
 
-            # Localiza a caixa de texto do chat
-            registrar_log('Localizando a caixa de texto do chat...')
-            xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
-
-            try:
-                chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-                registrar_log('Caixa de texto localizada e clicável com sucesso!')
-                
-                # CORREÇÃO UTF-8 E ENVIO LINHA POR LINHA
-                # Envia a mensagem linha por linha para evitar erro de caracteres BMP
-                # Primeiro, limpa apenas emojis problemáticos, mantendo acentos brasileiros
-                # Esta implementação preserva caracteres especiais como ã, á, ç, etc.
-                import re
-                # Remove apenas emojis e símbolos especiais, mantém acentos portugueses
-                mensagem_limpa = re.sub(r'[^\w\s\*\:\-\(\)\[\]\.\,\;\!\?\ãáàâêéèíìîõóòôúùûçÃÁÀÂÊÉÈÍÌÎÕÓÒÔÚÙÛÇ\/]+', '', mensagem_texto)
-                
-                linhas_mensagem = mensagem_limpa.split('\n')
-                for i, linha in enumerate(linhas_mensagem):
-                    if linha.strip():  # Só envia linhas não vazias
-                        chat_caixa_de_texto_element.send_keys(linha.strip())
-                        registrar_log(f"Linha enviada: {linha.strip()}")
-                    
-                    # Adiciona quebra de linha se não for a última linha
-                    if i < len(linhas_mensagem) - 1:
-                        chat_caixa_de_texto_element.send_keys(Keys.CONTROL, Keys.ENTER)
-                        time.sleep(0.2)  # Pequena pausa entre linhas
-                
-                registrar_log(f"Mensagem completa enviada linha por linha")
-                registrar_log("time.sleep(0.5)")
-                time.sleep(0.5)
-
-                # Localiza e clica no botão de enviar
-                registrar_log('Localizando e clicando no botão de enviar...')
-                
-                # SISTEMA ROBUSTO DE ENVIO - 17 SELETORES DIFERENTES
-                # Múltiplos seletores para o botão de enviar (expandidos)
-                # Esta implementação garante compatibilidade com diferentes versões do WhatsApp Web
-                # e diferentes idiomas (português/inglês)
-                seletores_botao_enviar = [
-                    "//button[@aria-label='Enviar']",
-                    "//button[@aria-label='Send']", 
-                    "//span[@data-icon='send']",
-                    "//button[contains(@class, 'send')]",
-                    "//div[@role='button'][contains(@aria-label, 'Enviar')]",
-                    "//div[@role='button'][contains(@aria-label, 'Send')]",
-                    "//button[contains(@title, 'Enviar')]",
-                    "//button[contains(@title, 'Send')]",
-                    "//span[contains(@class, 'send')]",
-                    "//div[contains(@class, 'send')]",
-                    "//button[@data-testid='send']",
-                    "//div[@data-testid='send']",
-                    "//span[@data-testid='send']",
-                    "//button[contains(@aria-label, 'enviar')]",
-                    "//button[contains(@aria-label, 'send')]",
-                    "//div[@role='button'][contains(@title, 'Enviar')]",
-                    "//div[@role='button'][contains(@title, 'Send')]"
-                ]
-                
-                botao_encontrado = False
-                for selector in seletores_botao_enviar:
-                    try:
-                        botao_enviar_element = WebDriverWait(driver, 5).until(
-                            EC.element_to_be_clickable((By.XPATH, selector))
-                        )
-                        registrar_log(f'Botão de enviar encontrado com seletor: {selector}')
-                        botao_enviar_element.click()
-                        registrar_log("Botão de enviar clicado com sucesso!")
-                        botao_encontrado = True
-                        break
-                    except:
-                        continue
-                
-                if not botao_encontrado:
-                    # FALLBACK JAVASCRIPT - Estratégia alternativa quando XPath falha
-                    # Estratégia alternativa: usar JavaScript para encontrar e clicar no botão
-                    # Esta abordagem é mais robusta pois não depende da estrutura DOM específica
-                    registrar_log("Botão de enviar não encontrado com XPath, tentando JavaScript...")
-                    try:
-                        # Script JavaScript para encontrar e clicar no botão de enviar
-                        js_script = """
-                        // Procurar por botões com diferentes atributos
-                        var buttons = document.querySelectorAll('button, div[role="button"], span');
-                        for (var i = 0; i < buttons.length; i++) {
-                            var btn = buttons[i];
-                            var ariaLabel = btn.getAttribute('aria-label') || '';
-                            var title = btn.getAttribute('title') || '';
-                            var className = btn.className || '';
-                            var dataIcon = btn.getAttribute('data-icon') || '';
-                            var dataTestId = btn.getAttribute('data-testid') || '';
-                            
-                            if (ariaLabel.toLowerCase().includes('enviar') || 
-                                ariaLabel.toLowerCase().includes('send') ||
-                                title.toLowerCase().includes('enviar') ||
-                                title.toLowerCase().includes('send') ||
-                                dataIcon.includes('send') ||
-                                dataTestId.includes('send') ||
-                                className.includes('send')) {
-                                btn.click();
-                                return 'Botão encontrado e clicado via JavaScript';
-                            }
+            # Localiza e clica no botão de enviar
+            registrar_log('Localizando e clicando no botão de enviar...')
+            
+            # SISTEMA ROBUSTO DE ENVIO - 17 SELETORES DIFERENTES
+            seletores_botao_enviar = [
+                "//button[@aria-label='Enviar']",
+                "//button[@aria-label='Send']", 
+                "//span[@data-icon='send']",
+                "//button[contains(@class, 'send')]",
+                "//div[@role='button'][contains(@aria-label, 'Enviar')]",
+                "//div[@role='button'][contains(@aria-label, 'Send')]",
+                "//button[contains(@title, 'Enviar')]",
+                "//button[contains(@title, 'Send')]",
+                "//span[contains(@class, 'send')]",
+                "//div[contains(@class, 'send')]",
+                "//button[@data-testid='send']",
+                "//div[@data-testid='send']",
+                "//span[@data-testid='send']",
+                "//button[contains(@aria-label, 'enviar')]",
+                "//button[contains(@aria-label, 'send')]",
+                "//div[@role='button'][contains(@title, 'Enviar')]",
+                "//div[@role='button'][contains(@title, 'Send')]"
+            ]
+            
+            botao_encontrado = False
+            for selector in seletores_botao_enviar:
+                try:
+                    botao_enviar_element = WebDriverWait(driver, 5).until(
+                        EC.element_to_be_clickable((By.XPATH, selector))
+                    )
+                    registrar_log(f'Botão de enviar encontrado com seletor: {selector}')
+                    botao_enviar_element.click()
+                    registrar_log("Botão de enviar clicado com sucesso!")
+                    botao_encontrado = True
+                    break
+                except:
+                    continue
+            
+            if not botao_encontrado:
+                # FALLBACK JAVASCRIPT
+                registrar_log("Botão de enviar não encontrado com XPath, tentando JavaScript...")
+                try:
+                    js_script = """
+                    var buttons = document.querySelectorAll('button, div[role="button"], span');
+                    for (var i = 0; i < buttons.length; i++) {
+                        var btn = buttons[i];
+                        var ariaLabel = btn.getAttribute('aria-label') || '';
+                        var title = btn.getAttribute('title') || '';
+                        var className = btn.className || '';
+                        var dataIcon = btn.getAttribute('data-icon') || '';
+                        var dataTestId = btn.getAttribute('data-testid') || '';
+                        
+                        if (ariaLabel.toLowerCase().includes('enviar') || 
+                            ariaLabel.toLowerCase().includes('send') ||
+                            title.toLowerCase().includes('enviar') ||
+                            title.toLowerCase().includes('send') ||
+                            dataIcon.includes('send') ||
+                            dataTestId.includes('send') ||
+                            className.includes('send')) {
+                            btn.click();
+                            return 'Botão encontrado e clicado via JavaScript';
                         }
-                        return 'Botão não encontrado via JavaScript';
-                        """
-                        resultado = driver.execute_script(js_script)
-                        registrar_log(f"Resultado JavaScript: {resultado}")
-                        if "clicado" in resultado:
-                            botao_encontrado = True
-                    except Exception as e_js:
-                        registrar_log(f"Erro ao executar JavaScript: {e_js}")
-                
-                if not botao_encontrado:
-                    # FALLBACK TECLADO - Última alternativa quando todos os métodos falham
-                    # Última alternativa: usar Enter para enviar
-                    # Esta é a estratégia mais básica e universal para envio de mensagens
-                    registrar_log("Todas as tentativas falharam, tentando usar Enter...")
-                    try:
-                        chat_caixa_de_texto_element.send_keys(Keys.ENTER)
-                        registrar_log("Mensagem enviada usando Enter")
+                    }
+                    return 'Botão não encontrado via JavaScript';
+                    """
+                    resultado = driver.execute_script(js_script)
+                    registrar_log(f"Resultado JavaScript: {resultado}")
+                    if "clicado" in resultado:
                         botao_encontrado = True
-                    except Exception as e_enter:
-                        registrar_log(f"Erro ao usar Enter: {e_enter}")
-                        # Última tentativa: usar Ctrl+Enter
-                        try:
-                            chat_caixa_de_texto_element.send_keys(Keys.CONTROL + Keys.ENTER)
-                            registrar_log("Mensagem enviada usando Ctrl+Enter")
-                            botao_encontrado = True
-                        except Exception as e_ctrl_enter:
-                            registrar_log(f"Erro ao usar Ctrl+Enter: {e_ctrl_enter}")
-                
-                if botao_encontrado:
-                    registrar_log("Mensagem enviada com sucesso!")
-                    registrar_log("Aguardando 30 segundos após envio da mensagem...")
-                    time.sleep(30)  # Aguarda 30 segundos após o envio
-                else:
-                    registrar_log("ERRO: Não foi possível enviar a mensagem por nenhum método")
-                
-                registrar_log("Processo de envio de mensagem concluído.")
-                registrar_log('time.sleep(5)')
-                time.sleep(5)
-
-                #inserir pausa de 1 segundo
-                registrar_log("time.sleep(1)")	
-                time.sleep(1)
-
-                #inserir aperto de enter
-                registrar_log("pyautogui.press('enter')")
-                pyautogui.press('enter')
-
-                #inserir pausa de 15 segundos
-                registrar_log("time.sleep(15)")
-                time.sleep(15)
-                
-            except Exception as e_chatbox:
-                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
-                registrar_log("time.sleep(1)")	
-                time.sleep(1)
-                registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
-                pyautogui.press('enter')
-
-            # Pausa breve para garantir que a mensagem seja processada
-            registrar_log("Pausa breve para garantir que a mensagem seja processada")	
+                except Exception as e_js:
+                    registrar_log(f"Erro ao executar JavaScript: {e_js}")
+            
+            if not botao_encontrado:
+                # FALLBACK TECLADO
+                registrar_log("Todas as tentativas falharam, tentando usar Enter...")
+                try:
+                    chat_caixa_de_texto_element.send_keys(Keys.ENTER)
+                    registrar_log("Mensagem enviada usando Enter")
+                    botao_encontrado = True
+                except Exception as e_enter:
+                    registrar_log(f"Erro ao usar Enter: {e_enter}")
+                    # Última tentativa: usar Ctrl+Enter
+                    try:
+                        chat_caixa_de_texto_element.send_keys(Keys.CONTROL + Keys.ENTER)
+                        registrar_log("Mensagem enviada usando Ctrl+Enter")
+                        botao_encontrado = True
+                    except Exception as e_ctrl_enter:
+                        registrar_log(f"Erro ao usar Ctrl+Enter: {e_ctrl_enter}")
+            
+            if botao_encontrado:
+                registrar_log("Mensagem enviada com sucesso!")
+                registrar_log("Aguardando 30 segundos após envio da mensagem...")
+                time.sleep(30)  # Aguarda 30 segundos após o envio
+            else:
+                registrar_log("ERRO: Não foi possível enviar a mensagem por nenhum método")
+            
+            registrar_log("Processo de envio de mensagem concluído.")
+            registrar_log('time.sleep(5)')
             time.sleep(5)
 
-        except Exception as e_search:
-            registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
+            #inserir pausa de 1 segundo
+            registrar_log("time.sleep(1)")	
+            time.sleep(1)
+
+            #inserir aperto de enter
+            registrar_log("pyautogui.press('enter')")
+            pyautogui.press('enter')
+
+            #inserir pausa de 15 segundos
+            registrar_log("time.sleep(15)")
+            time.sleep(15)
+            
+        except Exception as e_chatbox:
+            registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
+            registrar_log("time.sleep(1)")	
+            time.sleep(1)
+            registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
+            pyautogui.press('enter')
+
+        # Pausa breve para garantir que a mensagem seja processada
+        registrar_log("Pausa breve para garantir que a mensagem seja processada")	
+        time.sleep(5)
+
+    except Exception as e_search:
+        registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
         
         # MANTÉM O WHATSAPP ABERTO PARA ENVIAR MENSAGENS DE EXAMES NA SEQUÊNCIA
         # Driver permanece ativo para próxima função (enviar_whatsapp)
@@ -781,129 +772,129 @@ def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=
         campo_pesquisa_element.click()
         registrar_log("Clicado no campo de pesquisa.")
 
-            # Localiza o campo de input de texto ativo para a pesquisa
-            xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
-            input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
-            registrar_log("Campo de input de pesquisa ativo encontrado.")
+        # Localiza o campo de input de texto ativo para a pesquisa
+        xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
+        input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
+        registrar_log("Campo de input de pesquisa ativo encontrado.")
+        
+        nome_grupo = "LAB - VALORES CRÍTICOS"
+        input_pesquisa_ativo.send_keys(nome_grupo)
+        registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
+        registrar_log("time.sleep(0.5)")
+        time.sleep(0.5) 
+
+        # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
+        xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
+        registrar_log("time.sleep(0.5)")
+        time.sleep(0.5) 
+
+        resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
+        registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
+        resultado_grupo_element.click()
+        registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
+        registrar_log("time.sleep(0.5)")
+        time.sleep(0.5)
+
+        # Localiza a caixa de texto do chat
+        registrar_log('Localizando a caixa de texto do chat...')
+        xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
+
+        try:
+            chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
+            registrar_log('Caixa de texto localizada e clicável com sucesso!')
             
-            nome_grupo = "LAB - VALORES CRÍTICOS"
-            input_pesquisa_ativo.send_keys(nome_grupo)
-            registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
-            registrar_log("time.sleep(0.5)")
-            time.sleep(0.5) 
+            # Re-localiza a caixa de texto antes de cada envio principal
+            def get_chat_box():
+                return wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
 
-            # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
-            xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
-            registrar_log("time.sleep(0.5)")
-            time.sleep(0.5) 
+            # Envia cada detalhe de cada exame como uma mensagem separada
+            if lista_exames:
+                # Envia um cabeçalho inicial
+                chat_caixa_de_texto_element.send_keys(" ")
+                chat_caixa_de_texto_element.send_keys(Keys.ENTER)
+                registrar_log("Cabeçalho da mensagem enviado.")
+                time.sleep(0.5) # Pequena pausa
 
-            resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
-            registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
-            resultado_grupo_element.click()
-            registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
-            registrar_log("time.sleep(0.5)")
-            time.sleep(0.5)
+                registrar_log("Separador entre exames enviado.")
+                current_chat_box = get_chat_box()
 
-            # Localiza a caixa de texto do chat
-            registrar_log('Localizando a caixa de texto do chat...')
-            xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
+                agora_atual = datetime.now()
+                data_hora_formatada = '*' + agora_atual.strftime("%d/%m/%Y às %Hh%Mm") + '*'
+                registrar_log(f'data_hora_formatada: {data_hora_formatada}')
 
-            try:
-                chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-                registrar_log('Caixa de texto localizada e clicável com sucesso!')
-                
-                # Re-localiza a caixa de texto antes de cada envio principal
-                def get_chat_box():
-                    return wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-
-                # Envia cada detalhe de cada exame como uma mensagem separada
-                if lista_exames:
-                    # Envia um cabeçalho inicial
-                    chat_caixa_de_texto_element.send_keys(" ")
-                    chat_caixa_de_texto_element.send_keys(Keys.ENTER)
-                    registrar_log("Cabeçalho da mensagem enviado.")
-                    time.sleep(0.5) # Pequena pausa
-
-                    registrar_log("Separador entre exames enviado.")
-                    current_chat_box = get_chat_box()
-
-                    agora_atual = datetime.now()
-                    data_hora_formatada = '*' + agora_atual.strftime("%d/%m/%Y às %Hh%Mm") + '*'
-                    registrar_log(f'data_hora_formatada: {data_hora_formatada}')
-
-                    textinho = f'{data_hora_formatada}'
-                    registrar_log(f'textinho: {textinho}')
-                    current_chat_box.send_keys(textinho)
-                    time.sleep(0.5)
-                    current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                    time.sleep(0.5)
-
-                    textinho2 = '*Analista Plantonista confirmar ciência do(s) resultado(s) crítico(s) encontrado(s):*'
-                    current_chat_box.send_keys(textinho2)
-                    time.sleep(0.5)
-                    current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                    time.sleep(0.5)
-
-                    current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                    time.sleep(0.5)
-
-                    for i, exame in enumerate(lista_exames):
-                        if i > 0: # Adiciona uma linha em branco (enviando um Enter) entre exames
-                            registrar_log('Envia uma "mensagem em branco" como separador')
-                            #get_chat_box().send_keys(Keys.ENTER) 
-                            current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-
-                            registrar_log('time.sleep(0.5)')
-                            time.sleep(0.5) # Pequena pausa
-
-                        for item_exame in exame: # item_exame é uma string como 'PRESCRICAO: 5977045'
-                            if item_exame.strip(): # Garante que não estamos enviando strings vazias
-                                current_chat_box = get_chat_box()
-                                current_chat_box.send_keys(item_exame)
-                                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                                registrar_log(f"Linha enviada: {item_exame}")
-                                time.sleep(1) # Pequena pausa para não sobrecarregar
-                    
-                else:
-                    registrar_log("Nenhum exame crítico encontrado - não enviando mensagem")
-                    registrar_log("enviar_whatsapp_laboratorio - FIM")
-                    return driver  # Retorna o driver sem enviar mensagem
-                
-                registrar_log('time.sleep(0.5)')
+                textinho = f'{data_hora_formatada}'
+                registrar_log(f'textinho: {textinho}')
+                current_chat_box.send_keys(textinho)
+                time.sleep(0.5)
+                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
                 time.sleep(0.5)
 
-                #registrar_log('Localizando e clicando no botão de enviar...')
-                #xpath_botao_enviar = "//button[@aria-label='Enviar']"
-                #botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
-                #
-                #registrar_log('botao_enviar_element.click()')
-                #botao_enviar_element.click()
-                #registrar_log("Processo de envio de mensagens do laboratório concluído.")
-                #registrar_log("Aguardando 30 segundos após o envio...")
-                #time.sleep(30)
+                textinho2 = '*Analista Plantonista confirmar ciência do(s) resultado(s) crítico(s) encontrado(s):*'
+                current_chat_box.send_keys(textinho2)
+                time.sleep(0.5)
+                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                time.sleep(0.5)
 
-                #inserir pausa de 1 segundo
-                registrar_log("time.sleep(1)")	
-                time.sleep(1)
+                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                time.sleep(0.5)
 
-                #inserir aperto de enter
-                registrar_log("pyautogui.press('enter')")
-                pyautogui.press('enter')
+                for i, exame in enumerate(lista_exames):
+                    if i > 0: # Adiciona uma linha em branco (enviando um Enter) entre exames
+                        registrar_log('Envia uma "mensagem em branco" como separador')
+                        #get_chat_box().send_keys(Keys.ENTER) 
+                        current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
 
-                registrar_log("time.sleep(15)")
-                time.sleep(15)
+                        registrar_log('time.sleep(0.5)')
+                        time.sleep(0.5) # Pequena pausa
 
-            except Exception as e_chatbox:
-                registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                    
-                registrar_log("time.sleep(1)")	
-                time.sleep(1)
-                registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
-                pyautogui.press('enter')
-                registrar_log("time.sleep(5)")
-                time.sleep(5)
+                    for item_exame in exame: # item_exame é uma string como 'PRESCRICAO: 5977045'
+                        if item_exame.strip(): # Garante que não estamos enviando strings vazias
+                            current_chat_box = get_chat_box()
+                            current_chat_box.send_keys(item_exame)
+                            current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                            registrar_log(f"Linha enviada: {item_exame}")
+                            time.sleep(1) # Pequena pausa para não sobrecarregar
+                
+            else:
+                registrar_log("Nenhum exame crítico encontrado - não enviando mensagem")
+                registrar_log("enviar_whatsapp_laboratorio - FIM")
+                return driver  # Retorna o driver sem enviar mensagem
+            
+            registrar_log('time.sleep(0.5)')
+            time.sleep(0.5)
 
-        except Exception as e_search:
-            registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
+            #registrar_log('Localizando e clicando no botão de enviar...')
+            #xpath_botao_enviar = "//button[@aria-label='Enviar']"
+            #botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
+            #
+            #registrar_log('botao_enviar_element.click()')
+            #botao_enviar_element.click()
+            #registrar_log("Processo de envio de mensagens do laboratório concluído.")
+            #registrar_log("Aguardando 30 segundos após o envio...")
+            #time.sleep(30)
+
+            #inserir pausa de 1 segundo
+            registrar_log("time.sleep(1)")	
+            time.sleep(1)
+
+            #inserir aperto de enter
+            registrar_log("pyautogui.press('enter')")
+            pyautogui.press('enter')
+
+            registrar_log("time.sleep(15)")
+            time.sleep(15)
+
+        except Exception as e_chatbox:
+            registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                    
+            registrar_log("time.sleep(1)")	
+            time.sleep(1)
+            registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
+            pyautogui.press('enter')
+            registrar_log("time.sleep(5)")
+            time.sleep(5)
+
+    except Exception as e_search:
+        registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
         
         # Mantém o driver aberto para preservar a sessão
         registrar_log("Driver mantido aberto para preservar sessão do WhatsApp")
