@@ -421,17 +421,58 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
 
         registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
 
-        # Espera explícita para o campo de pesquisa
-        xpath_campo_pesquisa = '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p'
+        registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
+
+        # Espera explícita para o campo de pesquisa com MÚLTIPLOS SELETORES
+        # Seletores robustos para encontrar o campo de pesquisa do WhatsApp
+        seletores_campo_pesquisa = [
+            '//div[@contenteditable="true"][@data-tab="3"]', # Seletor moderno (mais comum)
+            '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p', # Seletor antigo (específico)
+            '//div[@id="side"]//div[@contenteditable="true"]', # Seletor genérico painel lateral
+            '//div[@role="textbox"][@data-tab="3"]', # Variação acessibilidade
+            '//div[@id="side"]//p[contains(@class, "copyable-text")]' # Variação classe
+        ]
         
-        try:
-            wait = WebDriverWait(driver, 30)
-            registrar_log("time.sleep(3)")
-            time.sleep(3)
-            campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_campo_pesquisa)))
-            registrar_log("Campo de pesquisa encontrado e clicável.")
-            campo_pesquisa_element.click()
-            registrar_log("Clicado no campo de pesquisa.")
+        wait = WebDriverWait(driver, 30)
+        registrar_log("time.sleep(3)")
+        time.sleep(3)
+        
+        campo_encontrado = False
+        campo_pesquisa_element = None
+        
+        # Tentar cada seletor
+        for i, xpath in enumerate(seletores_campo_pesquisa):
+            try:
+                registrar_log(f"Tentando encontrar campo de pesquisa com seletor {i+1}: {xpath}")
+                # Wait curto para tentar cada um
+                wait_curto = WebDriverWait(driver, 5) 
+                campo_pesquisa_element = wait_curto.until(EC.element_to_be_clickable((By.XPATH, xpath)))
+                if campo_pesquisa_element:
+                    registrar_log(f"Campo de pesquisa encontrado com sucesso (seletor {i+1})")
+                    campo_encontrado = True
+                    break
+            except Exception:
+                continue
+                
+        if not campo_encontrado:
+             # Se falhar tudo, tenta um wait longo no seletor mais provável antes de desistir
+             try:
+                 registrar_log("Tentativa final com wait longo no seletor padrão...")
+                 campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@contenteditable="true"][@data-tab="3"]')))
+                 campo_encontrado = True
+             except Exception as e_final:
+                 registrar_log(f"Falha crítica ao encontrar campo de pesquisa: {e_final}")
+                 # Se estivermos reutilizando driver, pode ser necessário um refresh na próxima vez ou agora
+                 # Vamos tentar um truque: clicar no body e dar um ESC para limpar seleções
+                 try:
+                     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+                 except:
+                     pass
+                 return driver_emergencia_global # Retorna mesmo com erro para tentar novamente no prox ciclo
+
+        registrar_log("Campo de pesquisa encontrado e clicável.")
+        campo_pesquisa_element.click()
+        registrar_log("Clicado no campo de pesquisa.")
 
             # Localiza o campo de input de texto ativo para a pesquisa
             xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
@@ -687,17 +728,58 @@ def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=
 
         registrar_log("WhatsApp Web aberto. Procurando grupo do laboratório...")
 
-        # Espera explícita para o campo de pesquisa
-        xpath_campo_pesquisa = '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p'
+        registrar_log("WhatsApp Web aberto. Procurando grupo do laboratório...")
+
+        # Espera explícita para o campo de pesquisa com MÚLTIPLOS SELETORES
+        # Seletores robustos para encontrar o campo de pesquisa do WhatsApp
+        seletores_campo_pesquisa = [
+            '//div[@contenteditable="true"][@data-tab="3"]', # Seletor moderno (mais comum)
+            '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p', # Seletor antigo (específico)
+            '//div[@id="side"]//div[@contenteditable="true"]', # Seletor genérico painel lateral
+            '//div[@role="textbox"][@data-tab="3"]', # Variação acessibilidade
+            '//div[@id="side"]//p[contains(@class, "copyable-text")]' # Variação classe
+        ]
         
-        try:
-            wait = WebDriverWait(driver, 30) # Espera até 30 segundos
-            registrar_log("time.sleep(3)")
-            time.sleep(3)
-            campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_campo_pesquisa)))
-            registrar_log("Campo de pesquisa encontrado e clicável.")
-            campo_pesquisa_element.click()
-            registrar_log("Clicado no campo de pesquisa.")
+        wait = WebDriverWait(driver, 30) # Espera até 30 segundos
+        registrar_log("time.sleep(3)")
+        time.sleep(3)
+        
+        campo_encontrado = False
+        campo_pesquisa_element = None
+        
+        # Tentar cada seletor
+        for i, xpath in enumerate(seletores_campo_pesquisa):
+            try:
+                registrar_log(f"LAB: Tentando encontrar campo de pesquisa com seletor {i+1}: {xpath}")
+                # Wait curto para tentar cada um
+                wait_curto = WebDriverWait(driver, 5) 
+                campo_pesquisa_element = wait_curto.until(EC.element_to_be_clickable((By.XPATH, xpath)))
+                if campo_pesquisa_element:
+                    registrar_log(f"LAB: Campo de pesquisa encontrado com sucesso (seletor {i+1})")
+                    campo_encontrado = True
+                    break
+            except Exception:
+                continue
+                
+        if not campo_encontrado:
+             # Se falhar tudo, tenta um wait longo no seletor mais provável antes de desistir
+             try:
+                 registrar_log("LAB: Tentativa final com wait longo no seletor padrão...")
+                 campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@contenteditable="true"][@data-tab="3"]')))
+                 campo_encontrado = True
+             except Exception as e_final:
+                 registrar_log(f"LAB: Falha crítica ao encontrar campo de pesquisa: {e_final}")
+                 # Se falhar, tenta um refresh para limpar estado
+                 try:
+                     driver.refresh()
+                     time.sleep(5)
+                 except:
+                     pass
+                 return driver # Retorna
+        
+        registrar_log("Campo de pesquisa encontrado e clicável.")
+        campo_pesquisa_element.click()
+        registrar_log("Clicado no campo de pesquisa.")
 
             # Localiza o campo de input de texto ativo para a pesquisa
             xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
