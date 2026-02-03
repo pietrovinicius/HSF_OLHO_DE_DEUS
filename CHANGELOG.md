@@ -3,10 +3,15 @@
 ## [Unreleased]
 
 ### Adicionado
-- Implementado loop infinito na execução via interface gráfica (GUI).
-- O aplicativo agora executa o ciclo de monitoramento e aguarda a próxima hora cheia para executar novamente.
-- Adicionado botão "Parar Execução" que interrompe imediatamente a espera e o monitoramento.
-- Adicionados testes unitários para a lógica de loop da GUI (`test_gui_loop.py`).
+- **Documentação**: Criado arquivo `INTERFACE_GRAFICA.md` com guia completo de manutenção e extensão da GUI.
+- **Interface Gráfica**: Implementada interface moderna com CustomTkinter (`main_gui.py`) com logs em tempo real e controle de execução.
+- **Arquitetura**: Refatoração do `main.py` para separar lógica de negócio (backend) da interface.
+- **Testes**: Adicionados testes unitários robustos com Pytest cobrindo conexão de banco, envio de WhatsApp e lógica de loop.
+- **Monitoramento**: Implementada execução em thread separada (Worker) para não travar a interface.
+
+### Alterado
+- Refatorado `main.py` para ser importável como módulo.
+- Melhorada a gestão de conexão com banco de dados usando context managers.
 
 ### Corrigido
 - Ajustado o comportamento do botão "Executar" para iniciar o modo de monitoramento contínuo em vez de execução única.
