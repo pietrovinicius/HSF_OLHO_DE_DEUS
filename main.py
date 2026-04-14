@@ -1904,6 +1904,17 @@ def ordens_de_servico_com_mais_de_2_dias():
             detalhes.append(linha)
             registrar_log(f"Analista {analista}: {total} OS (Atrasadas: {atrasadas})")
 
+        # Adicionar "Sem Analista" (Solicitado v3.1.7)
+        df_sem = df[df['ANALISTA'].isna() | (df['ANALISTA'].astype(str).str.strip() == "")]
+        if not df_sem.empty:
+            total_sem = len(df_sem)
+            df_sem.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_sem['IDADE_DA_OS'], errors='coerce').fillna(0)
+            atrasadas_sem = len(df_sem[df_sem['IDADE_DA_OS'].astype(float) > 2])
+            
+            linha_sem = f"❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS"
+            detalhes.append(linha_sem)
+            registrar_log(f"Sem Analista: {total_sem} OS (Atrasadas: {atrasadas_sem})")
+
         if not detalhes:
             msg_corpo += "Nenhuma OS vinculada a analistas conhecidos."
         else:

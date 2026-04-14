@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.1.7] - 2026-04-14
+### Adicionado
+- **Categoria 'Sem Analista'**: O monitoramento de O.S. TI agora inclui uma seção específica para ordens pendentes sem analista atribuído, exibida após a lista de analistas ativos, garantindo cobertura total da fila.
+
 ## [3.1.6] - 2026-04-14
 ### Alterado
 - **Comportamento de Auto-start**: Removida a execução do ciclo completo (TI + Emergência + Lab) ao iniciar o app. Agora, apenas o fluxo de **O.S. TI** é disparado automaticamente para agilizar a primeira entrega sem prender o robô em ciclos longos desnecessários.
