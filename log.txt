@@ -1,78 +1,75 @@
-2026-04-14 15-24-53 - Log resetado na inicializacao
-2026-04-14 15-24-54 - ordens_de_servico_fechadas_hoje - INÍCIO
-2026-04-14 15-24-54 - fetch_ordens_servico_fechadas_hoje - INÍCIO
-2026-04-14 15-24-54 - Fetch OS Encerradas Hoje concluído: 21 registros.
-2026-04-14 15-24-54 - Analista Alex M C: 2 OS encerradas.
-2026-04-14 15-24-54 - Analista Carlos L A: 2 OS encerradas.
-2026-04-14 15-24-54 - Analista Daiana A F M A: 1 OS encerradas.
-2026-04-14 15-24-54 - Analista Ivan C R J: 1 OS encerradas.
-2026-04-14 15-24-54 - Analista Kevin L O: 2 OS encerradas.
-2026-04-14 15-24-54 - Analista Natalia M M L: 4 OS encerradas.
-2026-04-14 15-24-54 - Analista Severino M S F: 2 OS encerradas.
-2026-04-14 15-24-54 - Analista Thiago O P R G: 4 OS encerradas.
-2026-04-14 15-24-54 - Iniciando disparo do relatório de OS encerradas...
-2026-04-14 15-24-54 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
-2026-04-14 15-24-54 - Iniciando Playwright Sync Engine...
-2026-04-14 15-24-55 - Criando novo contexto persistente para WhatsApp (geral)...
-2026-04-14 15-24-56 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
-2026-04-14 15-25-26 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 1140 caracteres).
-2026-04-14 15-25-28 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
-2026-04-14 15-25-28 - ordens_de_servico_fechadas_hoje - FIM
-2026-04-14 15-25-28 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
-2026-04-14 15-25-28 - fetch_ordens_servico_ti - INÍCIO
-2026-04-14 15-25-28 - Fetch OS TI concluído: 36 registros.
-2026-04-14 15-25-28 - df:<bound method NDFrame.sample of     ORDEM_SERVICO  ...  EQUIPAMENTO
-0          204170  ...  INFORMÁTICA
-1          204206  ...  INFORMÁTICA
-2          204177  ...  INFORMÁTICA
-3          204123  ...  INFORMÁTICA
-4          204111  ...  INFORMÁTICA
-5          204175  ...  INFORMÁTICA
-6          204043  ...  INFORMÁTICA
-7          203764  ...         Tasy
-8          203802  ...  INFORMÁTICA
-9          203746  ...  INFORMÁTICA
-10         203534  ...  INFORMÁTICA
-11         203272  ...  INFORMÁTICA
-12         203272  ...  INFORMÁTICA
-13         203096  ...  INFORMÁTICA
-14         202878  ...  INFORMÁTICA
-15         202908  ...  INFORMÁTICA
-16         202752  ...         Tasy
-17         202756  ...  INFORMÁTICA
-18         202628  ...  INFORMÁTICA
-19         202599  ...         Tasy
-20         202149  ...  INFORMÁTICA
-21         201994  ...  INFORMÁTICA
-22         201994  ...  INFORMÁTICA
-23         202053  ...  INFORMÁTICA
-24         200837  ...  INFORMÁTICA
-25         199881  ...  INFORMÁTICA
-26         199798  ...  INFORMÁTICA
-27         199578  ...  INFORMÁTICA
-28         199661  ...  INFORMÁTICA
-29         199600  ...  INFORMÁTICA
-30         199358  ...  INFORMÁTICA
-31         197410  ...  INFORMÁTICA
-32         197347  ...  INFORMÁTICA
-33         197125  ...         Tasy
-34         195669  ...  INFORMÁTICA
-35         194632  ...         Tasy
+2026-04-14 15-46-10 - Log resetado na inicializacao
+2026-04-14 15-46-12 - ordens_de_servico_fechadas_hoje - INÍCIO
+2026-04-14 15-46-12 - fetch_ordens_servico_fechadas_hoje - INÍCIO
+2026-04-14 15-46-12 - Fetch OS Encerradas Hoje concluído: 25 registros.
+2026-04-14 15-46-12 - Analista Alex M C: 3 OS encerradas.
+2026-04-14 15-46-12 - Analista Carlos L A: 2 OS encerradas.
+2026-04-14 15-46-12 - Analista Daiana A F M A: 1 OS encerradas.
+2026-04-14 15-46-12 - Analista Ivan C R J: 1 OS encerradas.
+2026-04-14 15-46-12 - Analista Kevin L O: 5 OS encerradas.
+2026-04-14 15-46-12 - Analista Natalia M M L: 4 OS encerradas.
+2026-04-14 15-46-12 - Analista Severino M S F: 2 OS encerradas.
+2026-04-14 15-46-12 - Analista Thiago O P R G: 4 OS encerradas.
+2026-04-14 15-46-12 - Iniciando disparo do relatório de OS encerradas...
+2026-04-14 15-46-12 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 15-46-12 - Iniciando Playwright Sync Engine...
+2026-04-14 15-46-14 - Criando novo contexto persistente para WhatsApp (geral)...
+2026-04-14 15-46-17 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 15-46-49 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 1446 caracteres).
+2026-04-14 15-46-51 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 15-46-51 - ordens_de_servico_fechadas_hoje - FIM
+2026-04-14 15-46-51 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
+2026-04-14 15-46-51 - fetch_ordens_servico_ti - INÍCIO
+2026-04-14 15-46-52 - Fetch OS TI concluído: 33 registros.
+2026-04-14 15-46-52 - df:<bound method NDFrame.sample of     ORDEM_SERVICO                                          DESCRICAO  ...  NOME_RESPONSAVEL  EQUIPAMENTO
+0          204175     CONFIGURAÇÃO ROTEADOR INTELBRAS (WIFI JPSOLAR)  ...        Carlos L A  INFORMÁTICA
+1          204206                               BOA TARDE,PAZ E BEM!  ...       Fernanda L   INFORMÁTICA
+2          204111          SENHA NEURODIVERGENTE NAO ESTA IMPRIMINDO  ...        Ingrid F F  INFORMÁTICA
+3          204043  TRANSFERIR COMPUTADOR DA ENF IP FINAL 102.164 ...  ...         Kevin L O  INFORMÁTICA
+4          203802                              BOA TARDE! PAZ E BEM!  ...       Juliana M S  INFORMÁTICA
+5          203764                AJUSTE RELATORIO 1999 BUNDLE DE PAV  ...    Thiago O P R G         Tasy
+6          203746    INCLUIR CLINICA DE ATENDIMENTO NA ENTRADA ÚNICA  ...         Kevin L O  INFORMÁTICA
+7          203534   INCLUSÃO DO ÍNCONE  TRANSTORNO DO ESPECTRO AU...  ...       Isabela S C  INFORMÁTICA
+8          203272                                    AJUSTE DE PROXY  ...     Leandro G S P  INFORMÁTICA
+9          203272                                    AJUSTE DE PROXY  ...     Leandro G S P  INFORMÁTICA
+10         203096              IMPRESSORA COM PROBLEMAS DE IMPRESSÃO  ...        Ingrid F F  INFORMÁTICA
+11         202878  PARAMETRIZAÇÃO DE CAMPO: PADRÃO ALMOXARIFADO C...  ...       Pedro D S M  INFORMÁTICA
+12         202908  INCLUSÃO DE MAN (MINI AVALIAÇÃO NUTRICIONAL ) ...  ...    Andressa C F S  INFORMÁTICA
+13         202752  CRIAÇÃO DE TEMPLATE - BUNDLE DE MANUTENÇÃO DE CVC  ...        Ingrid F F         Tasy
+14         202756  TRANSFERIR O COMPUTADOR DA SUPERVISÃO DE ENFER...  ...    Wellington S S  INFORMÁTICA
+15         202628  INCLUIR PERFIL DA QUALIDADE ESPELHANDO O PERFI...  ...        Ingrid F F  INFORMÁTICA
+16         202599  ALTERAÇÕES E INCLUSÕES NOS TEMPLATES: EVOLUÇÃO...  ...        Ingrid F F         Tasy
+17         202149                                RECEPÇAO BARIATRICA  ...          Alex M C  INFORMÁTICA
+18         202053                               INSTALAÇÃO PROGRAMAS  ...         Ana L D S  INFORMÁTICA
+19         201994                              COMPUTADOR  SEM REDE   ...          Alex M C  INFORMÁTICA
+20         201994                              COMPUTADOR  SEM REDE   ...          Alex M C  INFORMÁTICA
+21         200837           LIBERAÇÃO DE IMPRESSÃO DE RELATÓRIO 1507  ...        João V S O  INFORMÁTICA
+22         199798                                    RELATORIO 1985.  ...    Daiana A F M A  INFORMÁTICA
+23         199881  SOLICITO REPARO NO TASY DO MEDICO, POIS NA HOR...  ...        Ingrid F F  INFORMÁTICA
+24         199661                                     RELATORIO 1961  ...        Ingrid F F  INFORMÁTICA
+25         199578                                   NÃO ESTA LIGANDO  ...     Gabriel G A P  INFORMÁTICA
+26         199600  ELABORAÇÃO DE PAINEL DE ACOMPANHAMENTO DAS SOL...  ...        Ivan C R J  INFORMÁTICA
+27         199358                               SETOR AMBULATORIO JP  ...        Maxiny G A  INFORMÁTICA
+28         197410                                      SUS SEM VALOR  ...    Thiago O P R G  INFORMÁTICA
+29         197347              ELABORAÇÃO DE FORMULARIO DE BATE MAPA  ...        Ingrid F F  INFORMÁTICA
+30         197125                                          RELATÓRIO  ...        Ingrid F F         Tasy
+31         195669                                          INCLUSÃO   ...        Ingrid F F  INFORMÁTICA
+32         194632        APROVAÇÃO DE DOCUMENTOS PELA DIREÇÃO MÉDICA  ...        Ingrid F F         Tasy
 
-[36 rows x 20 columns]>
-2026-04-14 15-25-28 - Identificados 4 analistas com OS pendentes.
-2026-04-14 15-25-28 - Calculando indicadores de atraso (>2 dias) por analista...
-2026-04-14 15-25-28 - Analista Alex M C: 2 OS (Atrasadas: 2)
-2026-04-14 15-25-28 - Analista Leandro G S P: 1 OS (Atrasadas: 1)
-2026-04-14 15-25-28 - Analista Severino M S F: 1 OS (Atrasadas: 1)
-2026-04-14 15-25-28 - Analista Thiago O P R G: 1 OS (Atrasadas: 1)
-2026-04-14 15-25-28 - Sem Analista: 31 OS (Atrasadas: 24)
-2026-04-14 15-25-28 - Corpo da mensagem TI gerado com sucesso.
-2026-04-14 15-25-28 - Iniciando interface Playwright para disparo TI...
-2026-04-14 15-25-28 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
-2026-04-14 15-25-28 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
-2026-04-14 15-26-10 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 2016 caracteres).
-2026-04-14 15-26-12 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
-2026-04-14 15-26-12 - ordens_de_servico_com_mais_de_2_dias - FIM
-2026-04-14 15-26-12 - Encerrando instâncias do Playwright...
-2026-04-14 15-26-12 - Playwright encerrado com sucesso.
+[33 rows x 20 columns]>
+2026-04-14 15-46-52 - Identificados 4 analistas com OS pendentes.
+2026-04-14 15-46-52 - Calculando indicadores de atraso (>2 dias) por analista...
+2026-04-14 15-46-52 - Analista Alex M C: 2 OS (Atrasadas: 2)
+2026-04-14 15-46-52 - Analista Leandro G S P: 1 OS (Atrasadas: 1)
+2026-04-14 15-46-52 - Analista Severino M S F: 1 OS (Atrasadas: 1)
+2026-04-14 15-46-52 - Analista Thiago O P R G: 1 OS (Atrasadas: 1)
+2026-04-14 15-46-52 - Sem Analista: 28 OS (Atrasadas: 24)
+2026-04-14 15-46-52 - Corpo da mensagem TI gerado com sucesso.
+2026-04-14 15-46-52 - Iniciando interface Playwright para disparo TI...
+2026-04-14 15-46-52 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 15-46-52 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 15-47-25 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 1645 caracteres).
+2026-04-14 15-47-27 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 15-47-27 - ordens_de_servico_com_mais_de_2_dias - FIM
+2026-04-14 15-47-27 - Encerrando instâncias do Playwright...
+2026-04-14 15-47-27 - Playwright encerrado com sucesso.

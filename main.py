@@ -1915,7 +1915,8 @@ def ordens_de_servico_com_mais_de_2_dias():
         analistas = sorted([str(a) for a in analistas_raw if pd.notna(a) and str(a).strip() != ""])
         registrar_log(f"Identificados {len(analistas)} analistas com OS pendentes.")
         
-        msg_corpo = "📊 *HSF - MONITORAMENTO O.S. TI*\n\n"
+        msg_corpo = "📊 *HSF - MONITORAMENTO O.S. TI*\n"
+        msg_corpo += "───────────────────\n\n"
         detalhes = []
 
         registrar_log("Calculando indicadores de atraso (>2 dias) por analista...")
@@ -1925,53 +1926,57 @@ def ordens_de_servico_com_mais_de_2_dias():
             df_analista.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_analista['IDADE_DA_OS'], errors='coerce').fillna(0)
             atrasadas = len(df_analista[df_analista['IDADE_DA_OS'].astype(float) > 2])
             
-            msg_analista = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)\n" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS\n"
+            # Cabeçalho do analista
+            resumo = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
             
-            # Listar apenas as OS que estão efetivamente em atraso (v3.2.3)
-            os_list = []
+            # Detalhes apenas se houver atraso (identidade v3.2.5)
             if atrasadas > 0:
+                os_list = []
                 df_atrasadas = df_analista[df_analista['IDADE_DA_OS'].astype(float) > 2]
                 for _, row in df_atrasadas.iterrows():
                     os_num = row['ORDEM_SERVICO']
                     desc = str(row['DESCRICAO']).strip()
                     desc_curta = (desc[:60] + '...') if len(desc) > 60 else desc
-                    os_list.append(f" OS {os_num}: {desc_curta}")
+                    os_list.append(f" 🔹 {os_num}: {desc_curta}")
                 
-                msg_analista += "\n".join(os_list)
-            
-            detalhes.append(msg_analista)
+                detalhes.append(resumo + "\n" + "\n".join(os_list))
+            else:
+                detalhes.append(resumo)
+                
             registrar_log(f"Analista {analista}: {total} OS (Atrasadas: {atrasadas})")
 
-        # Adicionar "Sem Analista" (Solicitado v3.1.7 / v3.2.2 / v3.2.4)
+        # Adicionar "Sem Analista" (Aesthetic Sync v3.2.5)
         df_sem = df[df['ANALISTA'].isna() | (df['ANALISTA'].astype(str).str.strip() == "")]
         if not df_sem.empty:
             total_sem = len(df_sem)
             df_sem.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_sem['IDADE_DA_OS'], errors='coerce').fillna(0)
             atrasadas_sem = len(df_sem[df_sem['IDADE_DA_OS'].astype(float) > 2])
             
-            msg_sem = f"❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)\n" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS\n"
+            resumo_sem = f"❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS"
             
-            # Listar apenas as OS sem analista que estão em atraso (v3.2.3)
-            os_list_sem = []
             if atrasadas_sem > 0:
+                os_list_sem = []
                 df_sem_atrasadas = df_sem[df_sem['IDADE_DA_OS'].astype(float) > 2]
                 for _, row in df_sem_atrasadas.iterrows():
                     os_num = row['ORDEM_SERVICO']
                     desc = str(row['DESCRICAO']).strip()
                     desc_curta = (desc[:60] + '...') if len(desc) > 60 else desc
-                    os_list_sem.append(f" OS {os_num}: {desc_curta}")
+                    os_list_sem.append(f" 🔹 {os_num}: {desc_curta}")
                 
-                msg_sem += "\n".join(os_list_sem)
-            
-            detalhes.append(msg_sem)
+                detalhes.append(resumo_sem + "\n" + "\n".join(os_list_sem))
+            else:
+                detalhes.append(resumo_sem)
+                
             registrar_log(f"Sem Analista: {total_sem} OS (Atrasadas: {atrasadas_sem})")
 
         if not detalhes:
             msg_corpo += "Nenhuma OS vinculada a analistas conhecidos."
         else:
+            # Join com \n garante separação de exatamente 1 enter entre blocos
             msg_corpo += "\n".join(detalhes)
             
-        msg_corpo += f"\n\n*Total Geral:* {len(df)} OS pendentes."
+        msg_corpo += "\n\n" + "─" * 20
+        msg_corpo += f"\n*Total Geral:* {len(df)} OS pendentes."
         
         registrar_log("Corpo da mensagem TI gerado com sucesso.")
 

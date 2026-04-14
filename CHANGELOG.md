@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.2.5] - 2026-04-14
+### Alterado
+- **Sincronização Estética (TI)**: Unificada a linguagem visual entre os relatórios de "Encerradas" e "Monitoramento/Pendências". Implementado cabeçalho comum, marcadores (🔹) e espaçamento de 1 enter entre analistas para máxima clareza e densidade.
+
 ## [3.2.4] - 2026-04-14
 ### Alterado
 - **Aprimoramento Estético (TI)**: Refatoração completa do layout de "O.S. Encerradas Hoje". Adicionados marcadores visuais (🔹), resumos de contagem por analista e separadores de bloco para melhorar a legibilidade e a experiência do usuário (UX), mantendo a paleta azul neutra sugerida.
