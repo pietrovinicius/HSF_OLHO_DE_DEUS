@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.0] - 2026-04-14
+
+### Adicionado
+- **Monitoramento TI**: Implementada funcionalidade para rastrear Ordens de Serviço (OS) com mais de 2 dias de atraso.
+- **Relatórios Automatizados**: Envio de indicadores de OS por analista via WhatsApp para o grupo "HSF - O.S. TI".
+- **Arquitetura**: Criada função genérica `enviar_whatsapp_grupo` para suporte a múltiplos grupos com alta resiliência.
+
+### Alterado
+- **WhatsApp**: Refatoração interna para centralizar lógica de envio e reduzir duplicidade de código.
+
 ## [2.1.0] - 2026-04-14
 
 ### Adicionado

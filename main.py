@@ -343,7 +343,7 @@ def limpar_rtf_para_texto(rtf_text):
         text = text.replace(rtf_code, char_code)
 
     # 3. Remover múltiplos espaços e linhas em branco
-    text = re.sub(r' +', ' ', text) # Substitui múltiplos espaços por um único espaço
+    text = re.sub(r' +', ' ', text) # Substitui múltiplos espaços por un único espaço
     text = re.sub(r'(\r\n|\r|\n){2,}', '\n', text).strip() # Remove linhas em branco excessivas
 
     return text
@@ -690,6 +690,129 @@ def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
     registrar_log("enviar_whatsapp_emergencia - FIM")
     return driver_emergencia_global  # Retorna o driver para manter a sessão
 
+def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str, driver_existente: webdriver.Chrome = None) -> webdriver.Chrome:
+    """
+    Função genérica e robusta para enviar mensagens via WhatsApp Web para qualquer grupo.
+    Baseada no protocolo de resiliência do GEMINI.md.
+    """
+    global driver_whatsapp_global
+    registrar_log(f"enviar_whatsapp_grupo({nome_grupo}) - INÍCIO")
+
+    if not mensagem_texto or not mensagem_texto.strip():
+        registrar_log("Nenhuma mensagem para enviar.")
+        return driver_existente if driver_existente else driver_whatsapp_global
+
+    driver = driver_existente if driver_existente else driver_whatsapp_global
+    
+    try:
+        # 1. Verificação/Inicialização do Driver
+        if driver is None or not driver_is_alive(driver):
+            registrar_log(f"Inicializando novo driver para {nome_grupo}...")
+            options = Options()
+            # Ocultar automação, sandbox, etc
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            
+            # Perfil persistente
+            dir_path = os.path.dirname(os.path.abspath(__file__))
+            profile_path = os.path.join(dir_path, "profile", "wpp_generic")
+            os.makedirs(profile_path, exist_ok=True)
+            options.add_argument(f"--user-data-dir={profile_path}")
+
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=options)
+            driver_whatsapp_global = driver
+            
+            driver.get("https://web.whatsapp.com")
+            time.sleep(15) 
+        else:
+            if "web.whatsapp.com" not in driver.current_url:
+                driver.get("https://web.whatsapp.com")
+                time.sleep(10)
+
+        wait = WebDriverWait(driver, 30)
+        
+        # 2. Localização do Campo de Pesquisa
+        seletores_pesquisa = [
+            '//div[@contenteditable="true"][@data-tab="3"]',
+            '//div[@id="side"]//div[@contenteditable="true"]',
+            '//div[@role="textbox"][@data-tab="3"]'
+        ]
+        
+        campo_pesquisa = None
+        for xpath in seletores_pesquisa:
+            try:
+                campo_pesquisa = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+                if campo_pesquisa: break
+            except: continue
+        
+        if not campo_pesquisa:
+            registrar_log("Falha ao localizar campo de pesquisa.")
+            return driver
+
+        campo_pesquisa.click()
+        time.sleep(1)
+        
+        # 3. Pesquisa do Grupo
+        xpath_input = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
+        input_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input)))
+        
+        # Limpa campo antes de digitar
+        input_ativo.send_keys(Keys.CONTROL + "a")
+        input_ativo.send_keys(Keys.BACKSPACE)
+        input_ativo.send_keys(nome_grupo)
+        time.sleep(2)
+
+        # 4. Seleção do Resultado
+        xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
+        resultado_grupo = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado)))
+        resultado_grupo.click()
+        time.sleep(1)
+
+        # 5. Envio da Mensagem
+        xpath_chat = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
+        chat_box = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat)))
+        
+        # Limpa emojis/caracteres BMP problemáticos e envia linha a linha
+        mensagem_limpa = re.sub(r'[^\w\s\*\:\-\(\)\[\]\.\,\;\!\?\ãáàâêéèíìîõóòôúùûçÃÁÀÂÊÉÈÍÌÎÕÓÒÔÚÙÛÇ\/]+', '', mensagem_texto)
+        linhas = mensagem_limpa.split('\n')
+        
+        for i, linha in enumerate(linhas):
+            if linha.strip():
+                chat_box.send_keys(linha.strip())
+            if i < len(linhas) - 1:
+                chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
+                time.sleep(0.2)
+        
+        # 6. Botão Enviar com Fallbacks
+        seletores_enviar = ["//button[@aria-label='Enviar']", "//span[@data-icon='send']", "//button[@data-testid='send']"]
+        enviado = False
+        for s in seletores_enviar:
+            try:
+                btn = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, s)))
+                btn.click()
+                enviado = True
+                break
+            except: continue
+        
+        if not enviado:
+            chat_box.send_keys(Keys.ENTER)
+            enviado = True
+
+        registrar_log(f"Mensagem enviada para {nome_grupo} com sucesso.")
+        time.sleep(5)
+
+    except Exception as e:
+        registrar_log(f"Erro ao enviar WhatsApp para {nome_grupo}: {e}")
+        # Screenshot para auditoria visual (GEMINI.md rule)
+        try:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            driver.save_screenshot(f"error_wpp_{timestamp}.png")
+        except: pass
+
+    registrar_log(f"enviar_whatsapp_grupo({nome_grupo}) - FIM")
+    return driver
+
 def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=False):
     """
     Envia mensagens de exames críticos para o grupo do laboratório usando driver existente
@@ -924,6 +1047,7 @@ def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=
     
     registrar_log("enviar_whatsapp_laboratorio - FIM")
     return driver  # Retorna o driver para uso posterior
+
 def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
     """
     Processa os resultados brutos de exames (incluindo RTF) para identificar
@@ -2076,6 +2200,78 @@ def exibir_colunas_especificas_tempo_espera(df):
     
     registrar_log("exibir_colunas_especificas_tempo_espera - FIM")
 
+def fetch_ordens_servico_ti() -> pd.DataFrame:
+    """Busca as ordens de serviço não encerradas da TI no Oracle DB."""
+    registrar_log("fetch_ordens_servico_ti - INÍCIO")
+    connection = None
+    try:
+        # Credenciais conforme padrão estabelecido em main.py
+        connection = oracledb.connect(user="TASY", password="aloisk", dsn="192.168.5.9:1521/TASYPRD")
+        
+        with connection:
+            sql_file = 'HSF - ORDENS DE SERVICO NAO ENCERRADAS PARA A TI.sql'
+            sql_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), sql_file)
+            
+            if not os.path.exists(sql_path):
+                registrar_log(f"Erro: SQL não encontrado em {sql_path}")
+                return pd.DataFrame()
+            
+            with open(sql_path, 'r', encoding='utf-8') as f:
+                query = f.read()
+            
+            df = pd.read_sql(query, connection)
+            registrar_log(f"Fetch OS TI concluído: {len(df)} registros.")
+            return df
+    except Exception as e:
+        registrar_log(f"Erro ao buscar OS TI: {e}")
+        return pd.DataFrame()
+
+def ordens_de_servico_com_mais_de_2_dias(driver_existente: webdriver.Chrome = None) -> webdriver.Chrome:
+    """
+    Processa ordens de serviço atrasadas e envia indicadores para o grupo de WhatsApp da TI.
+    """
+    registrar_log("ordens_de_servico_com_mais_de_2_dias - INÍCIO")
+    
+    try:
+        df = fetch_ordens_servico_ti()
+        if df.empty:
+            registrar_log("Nenhuma OS pendente encontrada.")
+            return driver_existente
+
+        # Agrupamento por ANALISTA (Nome abreviado retornado pela query)
+        analistas = df['ANALISTA'].unique()
+        
+        msg_corpo = "📊 *HSF - MONITORAMENTO O.S. TI*\n\n"
+        detalhes = []
+
+        for analista in sorted([a for a in analistas if a]):
+            df_analista = df[df['ANALISTA'] == analista].copy()
+            total = len(df_analista)
+            # Atraso se IDADE_DA_OS > 2
+            # Garantir que IDADE_DA_OS é numérico
+            df_analista['IDADE_DA_OS'] = pd.to_numeric(df_analista['IDADE_DA_OS'], errors='coerce').fillna(0)
+            atrasadas = len(df_analista[df_analista['IDADE_DA_OS'] > 2])
+            
+            linha = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
+            detalhes.append(linha)
+
+        if not detalhes:
+            msg_corpo += "Nenhuma OS vinculada a analistas conhecidos."
+        else:
+            msg_corpo += "\n".join(detalhes)
+            
+        msg_corpo += f"\n\n*Total Geral:* {len(df)} OS pendentes."
+
+        # Envio via WhatsApp
+        registrar_log("Enviando relatório TI para grupo: HSF - O.S. TI")
+        driver = enviar_whatsapp_grupo("HSF - O.S. TI", msg_corpo, driver_existente)
+        
+        registrar_log("ordens_de_servico_com_mais_de_2_dias - FIM")
+        return driver
+    except Exception as e:
+        registrar_log(f"Erro no processamento de OS TI: {e}")
+        return driver_existente
+
 # Classe AppGUI removida - não precisamos mais da interface gráfica
 # A execução agora é automática através da função main()
 
@@ -2114,6 +2310,14 @@ def executar_ciclo_completo():
             registrar_log("Lógica de exames concluída com sucesso")
         except Exception as e:
             registrar_log(f"Erro em enviar_whatsapp_laboratorio(): {e}")
+
+        # Terceira função: Monitoramento de OS TI
+        registrar_log("Executando ordens_de_servico_com_mais_de_2_dias() - Grupo TI")
+        try:
+            driver_whatsapp = ordens_de_servico_com_mais_de_2_dias(driver_existente=driver_whatsapp)
+            registrar_log("Monitoramento de OS TI concluído com sucesso")
+        except Exception as e:
+            registrar_log(f"Erro em monitoramento de OS TI: {e}")
         
         # Fecha o WhatsApp Web após enviar ambas as mensagens
         if driver_whatsapp and driver_is_alive(driver_whatsapp):
