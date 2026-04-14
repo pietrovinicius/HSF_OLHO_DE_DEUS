@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.4] - 2026-04-14
+### Alterado
+- **Aprimoramento Estético (TI)**: Refatoração completa do layout de "O.S. Encerradas Hoje". Adicionados marcadores visuais (🔹), resumos de contagem por analista e separadores de bloco para melhorar a legibilidade e a experiência do usuário (UX), mantendo a paleta azul neutra sugerida.
+
+## [3.2.3] - 2026-04-14
+### Adicionado
+- **Detalhamento de Pendências TI**: O relatório de monitoramento de O.S. TI agora exibe individualmente os números e descrições de cada ordem de serviço sob o analista responsável, atendendo solicitação da gerência para melhor visibilidade.
+
 ## [3.2.2] - 2026-04-14
 ### Adicionado
 - **Detalhamento de Pendências TI**: O relatório de monitoramento de O.S. TI agora exibe individualmente os números e descrições de cada ordem de serviço sob o analista responsável, atendendo solicitação da gerência para melhor visibilidade.

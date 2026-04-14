@@ -1942,7 +1942,7 @@ def ordens_de_servico_com_mais_de_2_dias():
             detalhes.append(msg_analista)
             registrar_log(f"Analista {analista}: {total} OS (Atrasadas: {atrasadas})")
 
-        # Adicionar "Sem Analista" (Solicitado v3.1.7 / v3.2.2)
+        # Adicionar "Sem Analista" (Solicitado v3.1.7 / v3.2.2 / v3.2.4)
         df_sem = df[df['ANALISTA'].isna() | (df['ANALISTA'].astype(str).str.strip() == "")]
         if not df_sem.empty:
             total_sem = len(df_sem)
@@ -2001,38 +2001,40 @@ def ordens_de_servico_fechadas_hoje():
         # Filtrar nulos/vazios e ordenar alfabeticamente
         analistas = sorted([str(a) for a in analistas_raw if pd.notna(a) and str(a).strip() != ""])
         
-        msg_corpo = "✅ *HSF - O.S. ENCERRADAS HOJE*\n\n"
+        msg_corpo = "✅ *HSF - O.S. ENCERRADAS HOJE*\n"
+        msg_corpo += "───────────────────\n\n"
         detalhes = []
 
         for analista in analistas:
             df_analista = df[df['ANALISTA'] == analista].copy()
             total_analista = len(df_analista)
             
-            msg_analista = f"👨‍💻 *{analista}*:\n"
+            msg_analista = f"👨‍💻 *{analista}* ({total_analista} encerradas)\n"
             os_list = []
             for _, row in df_analista.iterrows():
                 os_num = row['ORDEM_SERVICO']
                 desc = str(row['DESCRICAO']).strip()
-                # Cortar descrição muito longa para manter legibilidade
-                desc_curta = (desc[:80] + '...') if len(desc) > 80 else desc
-                os_list.append(f" OS {os_num}: {desc_curta}")
+                desc_curta = (desc[:65] + '...') if len(desc) > 65 else desc
+                os_list.append(f" 🔹 {os_num}: {desc_curta}")
             
             msg_analista += "\n".join(os_list)
             detalhes.append(msg_analista)
             registrar_log(f"Analista {analista}: {total_analista} OS encerradas.")
 
-        # Verificar se há registros sem analista (raro em encerradas, mas possível)
+        # Verificar se há registros sem analista
         df_sem = df[df['ANALISTA'].isna() | (df['ANALISTA'].astype(str).str.strip() == "")]
         if not df_sem.empty:
-            msg_sem = "❓ *Sem Analista Atribuído*:\n"
+            total_sem = len(df_sem)
+            msg_sem = f"❓ *Sem Analista Atribuído* ({total_sem})\n"
             os_list_sem = []
             for _, row in df_sem.iterrows():
-                os_list_sem.append(f" OS {row['ORDEM_SERVICO']}: {str(row['DESCRICAO'])[:80]}")
+                os_list_sem.append(f" 🔹 {row['ORDEM_SERVICO']}: {str(row['DESCRICAO'])[:65]}")
             msg_sem += "\n".join(os_list_sem)
             detalhes.append(msg_sem)
 
         msg_corpo += "\n\n".join(detalhes)
-        msg_corpo += f"\n\n*Total Encerradas Hoje:* {len(df)}"
+        msg_corpo += "\n\n" + "─" * 20
+        msg_corpo += f"\n🏆 *Total Encerradas Hoje:* {len(df)}"
 
         # Envio via WhatsApp
         registrar_log("Iniciando disparo do relatório de OS encerradas...")
