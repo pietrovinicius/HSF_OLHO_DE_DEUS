@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.2.0] - 2026-04-14
+### Adicionado
+- **Monitoramento de OS Encerradas Hoje (TI)**: Nova funcionalidade que reporta todas as ordens de serviço finalizadas no dia, agrupadas alfabeticamente por analista. Inclui descrições curtas e totais diários.
+- **Automação Inteligente**: Integração do novo fluxo no ciclo principal de disparo, garantindo visibilidade da produtividade diária no grupo de WhatsApp da TI.
+
 ## [3.1.7] - 2026-04-14
 ### Adicionado
 - **Categoria 'Sem Analista'**: O monitoramento de O.S. TI agora inclui uma seção específica para ordens pendentes sem analista atribuído, exibida após a lista de analistas ativos, garantindo cobertura total da fila.

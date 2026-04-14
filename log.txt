@@ -61,3 +61,28 @@
 2026-04-14 14-59-48 - ordens_de_servico_com_mais_de_2_dias - FIM
 2026-04-14 14-59-49 - Encerrando instâncias do Playwright...
 2026-04-14 14-59-49 - Playwright encerrado com sucesso.
+2026-04-14 15-14-36 - Inicializando Oracle Client globalmente...
+2026-04-14 15-14-36 - encontrar_diretorio_instantclient - INÍCIO
+2026-04-14 15-14-36 - Plataforma detectada: win32
+2026-04-14 15-14-36 - Diretório Instant Client encontrado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\util\instantclient-basiclite-windows
+2026-04-14 15-14-36 - encontrar_diretorio_instantclient - FIM
+2026-04-14 15-14-36 - Oracle Client inicializado com sucesso em: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\util\instantclient-basiclite-windows
+2026-04-14 15-14-36 - ordens_de_servico_fechadas_hoje - INÍCIO
+2026-04-14 15-14-36 - fetch_ordens_servico_fechadas_hoje - INÍCIO
+2026-04-14 15-14-36 - Fetch OS Encerradas Hoje concluído: 21 registros.
+2026-04-14 15-14-36 - Analista Alex M C: 2 OS encerradas.
+2026-04-14 15-14-36 - Analista Carlos L A: 2 OS encerradas.
+2026-04-14 15-14-36 - Analista Daiana A F M A: 1 OS encerradas.
+2026-04-14 15-14-36 - Analista Ivan C R J: 1 OS encerradas.
+2026-04-14 15-14-36 - Analista Kevin L O: 2 OS encerradas.
+2026-04-14 15-14-36 - Analista Natalia M M L: 4 OS encerradas.
+2026-04-14 15-14-36 - Analista Severino M S F: 2 OS encerradas.
+2026-04-14 15-14-36 - Analista Thiago O P R G: 4 OS encerradas.
+2026-04-14 15-14-36 - Iniciando disparo do relatório de OS encerradas...
+2026-04-14 15-14-36 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 15-14-36 - Iniciando Playwright Sync Engine...
+2026-04-14 15-14-37 - Criando novo contexto persistente para WhatsApp (geral)...
+2026-04-14 15-14-38 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 15-15-09 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 1158 caracteres).
+2026-04-14 15-15-11 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 15-15-11 - ordens_de_servico_fechadas_hoje - FIM

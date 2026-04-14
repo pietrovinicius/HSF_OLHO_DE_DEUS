@@ -1873,6 +1873,31 @@ def fetch_ordens_servico_ti() -> pd.DataFrame:
         registrar_log(f"Erro ao buscar OS TI: {e}")
         return pd.DataFrame()
 
+def fetch_ordens_servico_fechadas_hoje():
+    """Busca as ordens de serviço encerradas hoje para a TI no Oracle DB."""
+    registrar_log("fetch_ordens_servico_fechadas_hoje - INÍCIO")
+    connection = None
+    try:
+        connection = oracledb.connect(user="TASY", password="aloisk", dsn="192.168.5.9:1521/TASYPRD")
+        
+        with connection:
+            sql_file = 'HSF - ORDENS DE SERVICO ENCERRADAS HOJE PARA A TI.sql'
+            sql_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), sql_file)
+            
+            if not os.path.exists(sql_path):
+                registrar_log(f"Erro: SQL não encontrado em {sql_path}")
+                return pd.DataFrame()
+            
+            with open(sql_path, 'r', encoding='utf-8') as f:
+                query = f.read()
+            
+            df = pd.read_sql(query, connection)
+            registrar_log(f"Fetch OS Encerradas Hoje concluído: {len(df)} registros.")
+            return df
+    except Exception as e:
+        registrar_log(f"Erro ao buscar OS encerradas hoje: {e}")
+        return pd.DataFrame()
+
 def ordens_de_servico_com_mais_de_2_dias():
     """
     Processa ordens de serviço atrasadas e envia indicadores para o grupo de WhatsApp da TI.
@@ -1932,6 +1957,65 @@ def ordens_de_servico_com_mais_de_2_dias():
     except Exception as e:
         registrar_log(f"Erro no processamento de OS TI: {e}")
 
+def ordens_de_servico_fechadas_hoje():
+    """
+    Processa as OS encerradas hoje e envia para o grupo de WhatsApp da TI.
+    Agrupado por analista em ordem alfabética.
+    """
+    registrar_log("ordens_de_servico_fechadas_hoje - INÍCIO")
+    
+    try:
+        df = fetch_ordens_servico_fechadas_hoje()
+        if df.empty:
+            registrar_log("Nenhuma OS encerrada hoje encontrada.")
+            return
+
+        # Agrupamento por ANALISTA
+        analistas_raw = df['ANALISTA'].unique()
+        # Filtrar nulos/vazios e ordenar alfabeticamente
+        analistas = sorted([str(a) for a in analistas_raw if pd.notna(a) and str(a).strip() != ""])
+        
+        msg_corpo = "✅ *HSF - O.S. ENCERRADAS HOJE*\n\n"
+        detalhes = []
+
+        for analista in analistas:
+            df_analista = df[df['ANALISTA'] == analista].copy()
+            total_analista = len(df_analista)
+            
+            msg_analista = f"👨‍💻 *{analista}*:\n"
+            os_list = []
+            for _, row in df_analista.iterrows():
+                os_num = row['ORDEM_SERVICO']
+                desc = str(row['DESCRICAO']).strip()
+                # Cortar descrição muito longa para manter legibilidade
+                desc_curta = (desc[:80] + '...') if len(desc) > 80 else desc
+                os_list.append(f"- OS {os_num}: {desc_curta}")
+            
+            msg_analista += "\n".join(os_list)
+            detalhes.append(msg_analista)
+            registrar_log(f"Analista {analista}: {total_analista} OS encerradas.")
+
+        # Verificar se há registros sem analista (raro em encerradas, mas possível)
+        df_sem = df[df['ANALISTA'].isna() | (df['ANALISTA'].astype(str).str.strip() == "")]
+        if not df_sem.empty:
+            msg_sem = "❓ *Sem Analista Atribuído*:\n"
+            os_list_sem = []
+            for _, row in df_sem.iterrows():
+                os_list_sem.append(f"- OS {row['ORDEM_SERVICO']}: {str(row['DESCRICAO'])[:80]}")
+            msg_sem += "\n".join(os_list_sem)
+            detalhes.append(msg_sem)
+
+        msg_corpo += "\n\n".join(detalhes)
+        msg_corpo += f"\n\n*Total Encerradas Hoje:* {len(df)}"
+
+        # Envio via WhatsApp
+        registrar_log("Iniciando disparo do relatório de OS encerradas...")
+        enviar_whatsapp_grupo("HSF - O.S. TI", msg_corpo)
+        
+        registrar_log("ordens_de_servico_fechadas_hoje - FIM")
+    except Exception as e:
+        registrar_log(f"Erro no processamento de OS encerradas hoje: {e}")
+    
 
 # Classe AppGUI removida - não precisamos mais da interface gráfica
 # A execução agora é automática através da função main()
@@ -1944,9 +2028,13 @@ def executar_ciclo_completo():
     registrar_log("--- INICIANDO CICLO PLAYWRIGHT ---")
     
     try:
-        # 1. TI (Movido para primeira tarefa conforme solicitado)
-        registrar_log("Processando O.S. TI (Prioridade Máxima)...")
+        # 1. TI - Pendências (Prioridade Máxima)
+        registrar_log("Processando O.S. TI (Pendências)...")
         ordens_de_servico_com_mais_de_2_dias()
+
+        # 1.1 TI - Encerradas Hoje
+        registrar_log("Processando O.S. TI (Encerradas Hoje)...")
+        ordens_de_servico_fechadas_hoje()
 
         # 2. Emergência
         registrar_log("Processando Alertas Emergência...")
