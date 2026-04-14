@@ -11,6 +11,7 @@
 
 
 import os
+import sys
 import time
 from datetime import datetime, timedelta
 # import tkinter as tk  # Removido - não precisamos mais da interface gráfica
@@ -160,21 +161,40 @@ def registrar_log(texto):
     with open(caminho_arquivo, 'a', encoding='utf-8') as arquivo:
         arquivo.write(f"{timestamp} - {texto}\n")
 
-def encontrar_diretorio_instantclient(nome_pasta="instantclient-basiclite-windows.x64-23.6.0.24.10\\instantclient_23_6"):
-  registrar_log(f'encontrar_diretorio_instantclient - Inicio')
-  # Obtém o diretório do script atual
-  diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+def encontrar_diretorio_instantclient() -> str | None:
+    r"""
+    Localiza o diretório do Oracle Instant Client baseado no Sistema Operacional.
+    Caminhos esperados (dentro da pasta util):
+    - Windows: util\instantclient-basiclite-windows
+    - macOS: util\instantclient-basiclite-macos
+    """
+    registrar_log("encontrar_diretorio_instantclient - INÍCIO")
+    
+    # Obtém o diretório do script atual
+    diretorio_base = os.path.dirname(os.path.abspath(__file__))
+    
+    # Mapeamento por plataforma
+    plataforma = sys.platform
+    registrar_log(f"Plataforma detectada: {plataforma}")
+    
+    if plataforma == "win32":
+        sub_pasta = os.path.join("util", "instantclient-basiclite-windows")
+    elif plataforma == "darwin":
+        sub_pasta = os.path.join("util", "instantclient-basiclite-macos")
+    else:
+        registrar_log(f"Sistema operacional '{plataforma}' não suportado automaticamente.")
+        registrar_log("encontrar_diretorio_instantclient - FIM")
+        return None
 
-  # Constrói o caminho completo para a pasta do Instant Client
-  caminho_instantclient = os.path.join(diretorio_atual, nome_pasta)
+    caminho_completo = os.path.join(diretorio_base, sub_pasta)
 
-  # Verifica se a pasta existe
-  if os.path.exists(caminho_instantclient):
-    registrar_log(f'encontrar_diretorio_instantclient - FIM')
-    return caminho_instantclient
-  else:
-    registrar_log(f"A pasta '{nome_pasta}' não foi encontrada na raiz do aplicativo.")
-    registrar_log(f'encontrar_diretorio_instantclient - FIM')
+    if os.path.exists(caminho_completo):
+        registrar_log(f"Diretório Instant Client encontrado: {caminho_completo}")
+        registrar_log("encontrar_diretorio_instantclient - FIM")
+        return caminho_completo
+    
+    registrar_log(f"ERRO: Pasta não encontrada em: {caminho_completo}")
+    registrar_log("encontrar_diretorio_instantclient - FIM")
     return None
   
 def resultados_exames_intervalo_58_min():
