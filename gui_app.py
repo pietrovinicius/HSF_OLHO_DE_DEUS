@@ -13,6 +13,7 @@ import threading
 import sys
 import io
 from datetime import datetime, timedelta
+from version import __version__
 from main import (
     executar_ciclo_completo,
     set_log_callback,
@@ -147,6 +148,15 @@ class HSFApp(ctk.CTk):
             hover_color="#333333"
         )
         self.btn_limpar.pack(pady=(10, 0))
+        
+        # Versão no rodapé (lado direito)
+        self.version_label = ctk.CTkLabel(
+            self.main_frame,
+            text=f"v{__version__}",
+            font=ctk.CTkFont(size=10, weight="bold"),
+            text_color="#555555"
+        )
+        self.version_label.pack(side="bottom", anchor="e", pady=(5, 0))
     
     def adicionar_log_callback(self, mensagem):
         """Callback chamada pelo main.py quando um log é gerado."""
