@@ -1,63 +1,62 @@
-2026-04-14 13-22-23 - Log resetado na inicializacao
-2026-04-14 13-22-24 - --- INICIANDO CICLO PLAYWRIGHT ---
-2026-04-14 13-22-24 - Processando O.S. TI (Prioridade Máxima)...
-2026-04-14 13-22-24 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
-2026-04-14 13-22-24 - fetch_ordens_servico_ti - INÍCIO
-2026-04-14 13-22-24 - Fetch OS TI concluído: 144 registros.
-2026-04-14 13-22-24 - df:<bound method NDFrame.sample of      ORDEM_SERVICO  ...     EQUIPAMENTO
-0           204170  ...     INFORMÁTICA
-1           204195  ...            Tasy
-2           204180  ...     INFORMÁTICA
-3           204177  ...     INFORMÁTICA
-4           204182  ...     INFORMÁTICA
-..             ...  ...             ...
-139         114886  ...  CFTV - Cameras
-140         114885  ...  CFTV - Cameras
-141          95195  ...  CFTV - Cameras
-142          95196  ...  CFTV - Cameras
-143          94835  ...     INFORMÁTICA
+2026-04-14 14-51-05 - Log resetado na inicializacao
+2026-04-14 14-51-06 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
+2026-04-14 14-51-06 - fetch_ordens_servico_ti - INÍCIO
+2026-04-14 14-51-06 - Fetch OS TI concluído: 38 registros.
+2026-04-14 14-51-06 - df:<bound method NDFrame.sample of     ORDEM_SERVICO  ...  EQUIPAMENTO
+0          204170  ...  INFORMÁTICA
+1          204180  ...  INFORMÁTICA
+2          204171  ...  INFORMÁTICA
+3          204177  ...  INFORMÁTICA
+4          204123  ...  INFORMÁTICA
+5          204175  ...  INFORMÁTICA
+6          204111  ...  INFORMÁTICA
+7          204182  ...  INFORMÁTICA
+8          204043  ...  INFORMÁTICA
+9          203802  ...  INFORMÁTICA
+10         203746  ...  INFORMÁTICA
+11         203764  ...         Tasy
+12         203534  ...  INFORMÁTICA
+13         203272  ...  INFORMÁTICA
+14         203272  ...  INFORMÁTICA
+15         203096  ...  INFORMÁTICA
+16         202908  ...  INFORMÁTICA
+17         202878  ...  INFORMÁTICA
+18         202756  ...  INFORMÁTICA
+19         202752  ...         Tasy
+20         202599  ...         Tasy
+21         202628  ...  INFORMÁTICA
+22         202149  ...  INFORMÁTICA
+23         201994  ...  INFORMÁTICA
+24         202053  ...  INFORMÁTICA
+25         201994  ...  INFORMÁTICA
+26         200837  ...  INFORMÁTICA
+27         199798  ...  INFORMÁTICA
+28         199881  ...  INFORMÁTICA
+29         199600  ...  INFORMÁTICA
+30         199578  ...  INFORMÁTICA
+31         199661  ...  INFORMÁTICA
+32         199358  ...  INFORMÁTICA
+33         197410  ...  INFORMÁTICA
+34         197347  ...  INFORMÁTICA
+35         197125  ...         Tasy
+36         195669  ...  INFORMÁTICA
+37         194632  ...         Tasy
 
-[144 rows x 20 columns]>
-2026-04-14 13-22-24 - Identificados 4 analistas com OS pendentes.
-2026-04-14 13-22-24 - Calculando indicadores de atraso (>2 dias) por analista...
-2026-04-14 13-22-24 - Analista Alex M C: 5 OS (Atrasadas: 5)
-2026-04-14 13-22-24 - Analista Leandro G S P: 1 OS (Atrasadas: 1)
-2026-04-14 13-22-24 - Analista Severino M S F: 3 OS (Atrasadas: 3)
-2026-04-14 13-22-24 - Analista Thiago O P R G: 2 OS (Atrasadas: 2)
-2026-04-14 13-22-24 - Corpo da mensagem TI gerado com sucesso.
-2026-04-14 13-22-24 - Iniciando interface Playwright para disparo TI...
-2026-04-14 13-22-24 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
-2026-04-14 13-22-24 - Iniciando Playwright Sync Engine...
-2026-04-14 13-22-25 - Criando novo contexto persistente para WhatsApp (geral)...
-2026-04-14 13-22-26 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
-2026-04-14 13-22-26 - Busca demorando mais de 15s. Analisando tela...
-2026-04-14 13-22-26 - ERRO: Timeout na pesquisa do grupo HSF - O.S. TI.
-2026-04-14 13-22-28 - Erro em enviar_whatsapp_grupo(HSF - O.S. TI): Falha ao localizar campo de pesquisa (Timeout 120s)
-2026-04-14 13-22-28 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
-2026-04-14 13-22-28 - ordens_de_servico_com_mais_de_2_dias - FIM
-2026-04-14 13-22-28 - Processando Alertas Emergência...
-2026-04-14 13-22-28 - tempo_espera_emergencia - INICIO
-2026-04-14 13-22-28 - tempo_espera_emergencia - Query carregada do arquivo SQL
-2026-04-14 13-22-28 - tempo_espera_emergencia - Conexão com banco estabelecida
-2026-04-14 13-22-29 - tempo_espera_emergencia - Query executada. Linhas retornadas: 3
-2026-04-14 13-22-29 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
-2026-04-14 13-22-29 - tempo_espera_emergencia - Conexão fechada
-2026-04-14 13-22-29 - tempo_espera_emergencia - FIM
-2026-04-14 13-22-29 - processar_alertas_tempo_unificado - INÍCIO
-2026-04-14 13-22-29 - Encontrados 3 pacientes com tempos críticos
-2026-04-14 13-22-29 - enviar_whatsapp_emergencia (Playwright) - INÍCIO
-2026-04-14 13-22-29 - Criando novo contexto persistente para WhatsApp (geral)...
-2026-04-14 13-22-29 - Navegando para WhatsApp Web...
-2026-04-14 13-22-30 - Aguardando interface do WhatsApp (Sincronizando Mensagens)...
-2026-04-14 13-22-30 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
-2026-04-14 13-22-30 - Busca demorando mais de 15s. Analisando tela...
-2026-04-14 13-22-30 - ERRO: Timeout ao localizar barra de pesquisa do WhatsApp (Layout possivelmente alterado).
-2026-04-14 13-22-32 - ERRO CRÍTICO em enviar_whatsapp_emergencia: Falha ao localizar campo de pesquisa (Layout alterado ou rede lenta)
-2026-04-14 13-22-32 - enviar_whatsapp_emergencia - FIM
-2026-04-14 13-22-32 - Alerta unificado de tempos críticos processado e enviado
-2026-04-14 13-22-32 - processar_alertas_tempo_unificado - FIM
-2026-04-14 13-22-32 - Processando Exames Laboratório...
-2026-04-14 13-22-32 - logica_principal_background - INÍCIO
-2026-04-14 13-22-32 - Executando ciclo da lógica principal...
-2026-04-14 13-22-32 - resultados_exames_intervalo_58_min - INICIO
-2026-04-14 13-22-32 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+[38 rows x 20 columns]>
+2026-04-14 14-51-06 - Identificados 4 analistas com OS pendentes.
+2026-04-14 14-51-06 - Calculando indicadores de atraso (>2 dias) por analista...
+2026-04-14 14-51-06 - Analista Alex M C: 2 OS (Atrasadas: 2)
+2026-04-14 14-51-06 - Analista Leandro G S P: 1 OS (Atrasadas: 1)
+2026-04-14 14-51-06 - Analista Severino M S F: 1 OS (Atrasadas: 1)
+2026-04-14 14-51-06 - Analista Thiago O P R G: 1 OS (Atrasadas: 1)
+2026-04-14 14-51-06 - Corpo da mensagem TI gerado com sucesso.
+2026-04-14 14-51-06 - Iniciando interface Playwright para disparo TI...
+2026-04-14 14-51-06 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 14-51-06 - Iniciando Playwright Sync Engine...
+2026-04-14 14-51-07 - Criando novo contexto persistente para WhatsApp (geral)...
+2026-04-14 14-51-08 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 14-51-20 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 234 caracteres).
+2026-04-14 14-51-22 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 14-51-22 - ordens_de_servico_com_mais_de_2_dias - FIM
+2026-04-14 14-51-22 - Encerrando instâncias do Playwright...
+2026-04-14 14-51-22 - Playwright encerrado com sucesso.

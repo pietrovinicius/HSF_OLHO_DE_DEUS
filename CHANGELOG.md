@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.6] - 2026-04-14
+### Alterado
+- **Comportamento de Auto-start**: Removida a execução do ciclo completo (TI + Emergência + Lab) ao iniciar o app. Agora, apenas o fluxo de **O.S. TI** é disparado automaticamente para agilizar a primeira entrega sem prender o robô em ciclos longos desnecessários.
+- **Bumping de Versão**: Sincronização da versão interna para 3.1.6.
+
 ## [3.1.5] - 2026-04-14
 ### Adicionado
 - **Logs de Auditoria Elite**: Implementada a rastreabilidade completa na função de O.S. TI, com logs para contagem de analistas e extração de indicadores de atraso.
