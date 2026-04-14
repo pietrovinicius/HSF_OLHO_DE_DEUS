@@ -1927,7 +1927,7 @@ def ordens_de_servico_com_mais_de_2_dias():
             atrasadas = len(df_analista[df_analista['IDADE_DA_OS'].astype(float) > 2])
             
             # Cabeçalho do analista
-            resumo = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
+            resumo = f"\n👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
             
             # Detalhes apenas se houver atraso (identidade v3.2.5)
             if atrasadas > 0:
@@ -1952,7 +1952,7 @@ def ordens_de_servico_com_mais_de_2_dias():
             df_sem.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_sem['IDADE_DA_OS'], errors='coerce').fillna(0)
             atrasadas_sem = len(df_sem[df_sem['IDADE_DA_OS'].astype(float) > 2])
             
-            resumo_sem = f"❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS"
+            resumo_sem = f"\n❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS"
             
             if atrasadas_sem > 0:
                 os_list_sem = []
@@ -1967,7 +1967,7 @@ def ordens_de_servico_com_mais_de_2_dias():
             else:
                 detalhes.append(resumo_sem)
                 
-            registrar_log(f"Sem Analista: {total_sem} OS (Atrasadas: {atrasadas_sem})")
+            registrar_log(f"\nSem Analista: {total_sem} OS (Atrasadas: {atrasadas_sem})")
 
         if not detalhes:
             msg_corpo += "Nenhuma OS vinculada a analistas conhecidos."

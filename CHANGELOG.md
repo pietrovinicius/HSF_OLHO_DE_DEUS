@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.2.6] - 2026-04-14
+### Alterado
+- **Refinamento de Spacing (TI)**: Ajuste fino nos separadores de blocos de analistas para garantir exatamente 1 enter de separação, otimizando o scroll no WhatsApp e a densidade de leitura.
+- **Estabilização do Ciclo de TI**: Consolidação completa dos relatórios de Encerradas e Pendências em padrão premium.
+
 ## [3.2.5] - 2026-04-14
 ### Alterado
 - **Sincronização Estética (TI)**: Unificada a linguagem visual entre os relatórios de "Encerradas" e "Monitoramento/Pendências". Implementado cabeçalho comum, marcadores (🔹) e espaçamento de 1 enter entre analistas para máxima clareza e densidade.
