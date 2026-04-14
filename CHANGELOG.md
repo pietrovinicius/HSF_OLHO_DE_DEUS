@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.2] - 2026-04-14
+### Corrigido
+- **Hard-Ping Playwright (Worker Error)**: Correção de _TargetClosed Error_ (apontado como falso timeout) nas chamadas do Laboratório, trocando a verificação instável `.is_closed` por `page.title()` para acionar recreação compulsória do contexto caso o websocket tenha sido rompido pelo Chromium devido ao uso de queries agressivas em foreground.
+- **Double-Execution Glitch**: Corrigido salto impróprio na GUI que forçava um ciclo normal de Playwright colidindo com o loop forçado imediatamente após o Wake-Up.
+### Removido
+- **Avisos Pandas (Console Pollution)**: Adicionada tag de ignorância em bibliotecas de log para os _UserWarnings_ de depreciação de read_sql do `pandas` vs `SQLAlchemy`.
+
 ## [3.3.1] - 2026-04-14
 ### Adicionado
 - **Intercepção Wake-Up (TI)**: Novo botão "🚀 Forçar O.S. TI" permite despertar a *thread* que está em *sleep* de forma segura (thread-safe e sem ferir o Worker Isolation), disparando um ciclo de relatórios da TI de forma independente das restrições horárias e sem travar a interface.

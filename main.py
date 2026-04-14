@@ -20,6 +20,10 @@ import oracledb
 import re
 import pandas as pd
 from playwright.sync_api import sync_playwright, Page, Browser, BrowserContext
+import warnings
+
+# Ocultar alertas de depreciação do Pandas via SQL Alchemy
+warnings.filterwarnings('ignore', category=UserWarning, module='pandas')
 
 # VARIÁVEIS GLOBAIS PARA GERENCIAMENTO DO PLAYWRIGHT
 # Mantém instâncias para reutilização entre chamadas (Playwright Pro)
@@ -76,13 +80,21 @@ def inicializar_oracle_client_global():
 
 def page_is_alive(page: Page) -> bool:
     """
-    Verifica se a página do Playwright ainda está ativa e funcional.
+    Verifica se a página do Playwright ainda está ativa e funcional via Hard-Ping.
     """
     if page is None:
         return False
     try:
-        return not page.is_closed()
-    except Exception:
+        # A API is_closed do Playwright às vezes falha ao diagnosticar quedas no WS.
+        if page.is_closed():
+            return False
+            
+        # Hard-Ping: força uma requisição TCP de leitura que estoura TargetClosed imediatamente
+        # caso o browser engine tenha matado a janela local por Timeout de inatividade.
+        _ = page.title()
+        return True
+    except Exception as e:
+        registrar_log(f"Hard-Ping detectou falha na conexão do browser: {e}")
         return False
 
 def fechar_playwright():
@@ -136,9 +148,14 @@ def get_wa_page(tipo: str = "geral") -> Page:
     profile_dir = "wpp_geral"
     page_ref = page_whatsapp_global
         
-    # Verifica se a página ainda está viva
+    # Verifica se a página ainda está viva mediante Hard-Ping
     if page_is_alive(page_ref):
         return page_ref
+    else:
+        if page_ref is not None:
+             registrar_log("♻️ Reciclando infraestrutura morta (Conexão Playwright caiu)...")
+             fechar_playwright()
+             inicializar_playwright_engine()
         
     registrar_log(f"Criando novo contexto persistente para WhatsApp ({tipo})...")
     
@@ -628,7 +645,7 @@ def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
         registrar_log(f"[MODO TESTE] Enviando {len(lista_exames)} exames para Laboratório")
         return
 
-    page = get_wa_page()
+    page = get_wa_page("geral")
     
     try:
         # 1. Navegação

@@ -252,19 +252,14 @@ class HSFApp(ctk.CTk):
                 # Data/hora inicio do ciclo
                 inicio_ciclo = datetime.now()
                 
-                # Intercepção Forçada
-                if getattr(self, 'forcar_execucao_ti_flag', False):
-                    self.adicionar_log("⚡ Despachando Ciclo Forçado da TI (Ignorando Parâmetros de Hora)...")
+                # Resgata flag de forçar da memória
+                forcar_ti = getattr(self, 'forcar_execucao_ti_flag', False)
+                if forcar_ti:
                     self.forcar_execucao_ti_flag = False
-                    try:
-                        executar_ciclo_completo(forcar_ti=True)
-                    except Exception as e_ciclo:
-                        self.adicionar_log(f"⚠️ Erro ao executar ciclo forçado: {e_ciclo}")
-                    continue  # Refaz o loop para recalcular ou dormir
-
-                # Executa o ciclo completo normal
+                    
+                # Executa o ciclo completo uma única vez informando o estado
                 try:
-                    executar_ciclo_completo()
+                    executar_ciclo_completo(forcar_ti=forcar_ti)
                 except Exception as e_ciclo:
                      self.adicionar_log(f"⚠️ Erro ao executar ciclo completo: {e_ciclo}")
                 
