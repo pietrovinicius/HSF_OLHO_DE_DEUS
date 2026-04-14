@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.5] - 2026-04-14
+### Adicionado
+- **Logs de Auditoria Elite**: Implementada a rastreabilidade completa na função de O.S. TI, com logs para contagem de analistas e extração de indicadores de atraso.
+- **Confirmações Instantâneas**: Todas as interações com o WhatsApp agora registram o sucesso e o tamanho das mensagens enviadas para os grupos no `log.txt`.
+
+### Corrigido
+- **Bug de Escopo**: Corrigida a variável indefinida `atendimento` no log de emergência que causava falhas silenciosas.
+- **Gestão de Processos**: Implementada rotina de limpeza para evitar conflitos de instâncias do Chromium no Windows.
+
 ## [3.1.4] - 2026-04-14
 ### Alterado
 - **Unificação de Contexto**: Removido o isolamento entre "Geral" e "Emergência". O robô agora utiliza uma única instância e perfil do Chromium (`wpp_geral`) para todas as notificações, evitando a abertura de múltiplas janelas (Redução de overhead e melhora na UX).

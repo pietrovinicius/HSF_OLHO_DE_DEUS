@@ -518,7 +518,7 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
                 
         # 6. Botão Enviar com Fallbacks
         page.keyboard.press("Enter") # Playwright keyboard API é muito robusta
-        registrar_log("Mensagem enviada com sucesso (Enter).")
+        registrar_log(f"Sucesso: Alerta disparado para o grupo {nome_grupo} (Enter pressionado).")
         
         page.wait_for_timeout(3000) # Cooldown reduzido
         
@@ -598,8 +598,9 @@ def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str):
             if i < len(linhas) - 1:
                 page.keyboard.press("Shift+Enter")
         
+        # 5. Envio Final
         page.keyboard.press("Enter")
-        registrar_log(f"Mensagem enviada para {nome_grupo}.")
+        registrar_log(f"Sucesso: Mensagem enviada para o grupo {nome_grupo} (Payload: {len(mensagem_texto)} caracteres).")
         page.wait_for_timeout(2000)
 
     except Exception as e:
@@ -685,7 +686,7 @@ def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
             
         # 5. Envio Final
         page.keyboard.press("Enter")
-        registrar_log("Relatório de Laboratório enviado com sucesso.")
+        registrar_log(f"Sucesso: {len(lista_exames)} resultados críticos enviados para o Laboratório.")
         page.wait_for_timeout(3000)
 
     except Exception as e:
@@ -1887,10 +1888,12 @@ def ordens_de_servico_com_mais_de_2_dias():
         # Agrupamento por ANALISTA
         analistas_raw = df['ANALISTA'].unique()
         analistas = sorted([str(a) for a in analistas_raw if pd.notna(a) and str(a).strip() != ""])
+        registrar_log(f"Identificados {len(analistas)} analistas com OS pendentes.")
         
         msg_corpo = "📊 *HSF - MONITORAMENTO O.S. TI*\n\n"
         detalhes = []
 
+        registrar_log("Calculando indicadores de atraso (>2 dias) por analista...")
         for analista in analistas:
             df_analista = df[df['ANALISTA'] == analista].copy()
             total = len(df_analista)
@@ -1899,6 +1902,7 @@ def ordens_de_servico_com_mais_de_2_dias():
             
             linha = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
             detalhes.append(linha)
+            registrar_log(f"Analista {analista}: {total} OS (Atrasadas: {atrasadas})")
 
         if not detalhes:
             msg_corpo += "Nenhuma OS vinculada a analistas conhecidos."
@@ -1906,9 +1910,11 @@ def ordens_de_servico_com_mais_de_2_dias():
             msg_corpo += "\n".join(detalhes)
             
         msg_corpo += f"\n\n*Total Geral:* {len(df)} OS pendentes."
+        
+        registrar_log("Corpo da mensagem TI gerado com sucesso.")
 
         # Envio via WhatsApp (Playwright)
-        registrar_log("Enviando relatório TI para grupo: HSF - O.S. TI")
+        registrar_log("Iniciando interface Playwright para disparo TI...")
         enviar_whatsapp_grupo("HSF - O.S. TI", msg_corpo)
         
         registrar_log("ordens_de_servico_com_mais_de_2_dias - FIM")
