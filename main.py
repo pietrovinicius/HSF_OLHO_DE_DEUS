@@ -17,23 +17,16 @@ from datetime import datetime, timedelta
 # import tkinter as tk  # Removido - não precisamos mais da interface gráfica
 from multiprocessing import Process, Event # Importar Event
 import oracledb
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.chrome.options import Options # Para configurar opções do navegador
-from webdriver_manager.chrome import ChromeDriverManager # Para gerenciar o ChromeDriver
-# Imports para WebDriverWait
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import re
 import pandas as pd
-import pyautogui  # Para controle de teclado e fechamento de abas
+from playwright.sync_api import sync_playwright, Page, Browser, BrowserContext
 
-# VARIÁVEIS GLOBAIS PARA GERENCIAMENTO DO DRIVER
-# Mantém instâncias dos drivers para reutilização entre chamadas
-driver_whatsapp_global = None
-driver_emergencia_global = None
+# VARIÁVEIS GLOBAIS PARA GERENCIAMENTO DO PLAYWRIGHT
+# Mantém instâncias para reutilização entre chamadas (Playwright Pro)
+playwright_manager = None
+browser_instance = None
+page_whatsapp_global = None
+page_emergencia_global = None
 
 # Variável global para controlar inicialização do Oracle Client
 oracle_client_inicializado = False
@@ -76,54 +69,109 @@ def inicializar_oracle_client_global():
         registrar_log(f"Erro inesperado ao inicializar Oracle Client: {e}")
         return False
 
-def driver_is_alive(driver):
+def page_is_alive(page: Page) -> bool:
     """
-    Verifica se o driver do Selenium ainda está ativo e funcional.
-    
-    Args:
-        driver: Instância do WebDriver
-        
-    Returns:
-        bool: True se o driver está ativo, False caso contrário
+    Verifica se a página do Playwright ainda está ativa e funcional.
     """
-    if driver is None:
+    if page is None:
         return False
-    
     try:
-        # Tenta acessar uma propriedade básica do driver
-        _ = driver.current_url
-        return True
+        return not page.is_closed()
     except Exception:
         return False
 
-def fechar_drivers_whatsapp():
+def fechar_playwright():
     """
-    Função para fechar todos os drivers do WhatsApp quando necessário.
-    Útil para limpeza manual ou reinicialização completa.
+    Finaliza todas as instâncias do Playwright e fecha o navegador.
     """
-    global driver_whatsapp_global, driver_emergencia_global
+    global playwright_manager, browser_instance, page_whatsapp_global, page_emergencia_global
     
-    registrar_log("Fechando drivers do WhatsApp...")
+    registrar_log("Encerrando instâncias do Playwright...")
     
-    if driver_whatsapp_global:
-        try:
-            driver_whatsapp_global.quit()
-            registrar_log("Driver WhatsApp principal fechado")
-        except Exception as e:
-            registrar_log(f"Erro ao fechar driver WhatsApp principal: {e}")
-        finally:
-            driver_whatsapp_global = None
+    try:
+        if page_whatsapp_global:
+            page_whatsapp_global.context.close()
+        if page_emergencia_global:
+            page_emergencia_global.context.close()
+        if browser_instance:
+            browser_instance.close()
+        if playwright_manager:
+            playwright_manager.stop()
+            
+        registrar_log("Playwright encerrado com sucesso.")
+    except Exception as e:
+        registrar_log(f"Erro ao encerrar Playwright: {e}")
+    finally:
+        playwright_manager = None
+        browser_instance = None
+        page_whatsapp_global = None
+        page_emergencia_global = None
+
+def inicializar_browser_se_necessario():
+    """Garante que o browser do Playwright esteja rodando."""
+    global playwright_manager, browser_instance
     
-    if driver_emergencia_global:
-        try:
-            driver_emergencia_global.quit()
-            registrar_log("Driver WhatsApp emergência fechado")
-        except Exception as e:
-            registrar_log(f"Erro ao fechar driver WhatsApp emergência: {e}")
-        finally:
-            driver_emergencia_global = None
+    if playwright_manager is None:
+        registrar_log("Iniciando Playwright Sync Engine...")
+        playwright_manager = sync_playwright().start()
+        
+    if browser_instance is None:
+        registrar_log("Lançando Chromium Browser (Playwright)...")
+        browser_instance = playwright_manager.chromium.launch(
+            headless=False,
+            args=["--no-sandbox", "--disable-dev-shm-usage"]
+        )
+    return browser_instance
+
+def get_wa_page(tipo: str = "geral") -> Page:
+    """
+    Obtém ou cria uma página com contexto persistente para o WhatsApp.
+    Tipos: 'geral' ou 'emergencia'
+    """
+    global browser_instance, page_whatsapp_global, page_emergencia_global
     
-    registrar_log("Limpeza de drivers concluída")
+    inicializar_browser_se_necessario()
+    
+    # Seleção de variável e perfil
+    if tipo == "emergencia":
+        page_ref = page_emergencia_global
+        profile_dir = "wpp_emergencia"
+    else:
+        page_ref = page_whatsapp_global
+        profile_dir = "wpp_geral"
+        
+    # Verifica se a página ainda está viva
+    if page_is_alive(page_ref):
+        return page_ref
+        
+    registrar_log(f"Criando novo contexto persistente para WhatsApp ({tipo})...")
+    
+    # Caminho do perfil (Playwright Pro - Context Isolation)
+    dir_path = os.path.dirname(os.path.abspath(__file__))
+    user_data_dir = os.path.join(dir_path, "profile", profile_dir)
+    os.makedirs(user_data_dir, exist_ok=True)
+    
+    # No Playwright, launch_persistent_context cria o browser e o contexto ao mesmo tempo
+    # Mas como queremos gerenciar o browser globalmente, usamos contextos se possível.
+    # No entanto, persistência de dados no Playwright é mais fácil via launch_persistent_context.
+    # Para manter o padrão GEMINI (Zero-G e Elite), usaremos contextos isolados.
+    
+    context = playwright_manager.chromium.launch_persistent_context(
+        user_data_dir=user_data_dir,
+        headless=False,
+        no_viewport=True,
+        args=["--no-sandbox", "--disable-dev-shm-usage"]
+    )
+    
+    page = context.pages[0] if context.pages else context.new_page()
+    
+    # Armazena globalmente
+    if tipo == "emergencia":
+        page_emergencia_global = page
+    else:
+        page_whatsapp_global = page
+        
+    return page
 
 def agora():
     agora = datetime.now()
@@ -348,705 +396,249 @@ def limpar_rtf_para_texto(rtf_text):
 
     return text
 
-def enviar_whatsapp_emergencia(mensagem_texto, modo_teste=False):
+def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
     """
     Envia mensagem via WhatsApp para o grupo HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA.
-    
-    MELHORIAS IMPLEMENTADAS:
-    - Correção de codificação UTF-8 para caracteres especiais e acentos brasileiros
-    - Sistema robusto com 17 seletores diferentes para localizar o botão de enviar
-    - Estratégia de fallback com JavaScript quando XPath falha
-    - Fallback final usando teclas Enter/Ctrl+Enter
-    - Logs detalhados para debugging e monitoramento
-    - Envio linha por linha para evitar problemas de caracteres BMP
-    - DRIVER PERSISTENTE: Reutiliza driver global para manter sessão autenticada
-    
-    Args:
-        mensagem_texto (str): Texto da mensagem a ser enviada
-        modo_teste (bool): Se True, apenas registra no log sem enviar
-    
-    Returns:
-        None
+    Versão migrada para Playwright (Sync API) conforme GEMINI.md.
     """
-    global driver_emergencia_global
-    registrar_log("enviar_whatsapp_emergencia - INÍCIO")
-
-    registrar_log("time.sleep(4)")
-    time.sleep(4)
+    registrar_log("enviar_whatsapp_emergencia (Playwright) - INÍCIO")
     
-    if not mensagem_texto or not mensagem_texto.strip():
-        registrar_log("Nenhuma mensagem para enviar via WhatsApp.")
-        registrar_log("enviar_whatsapp_emergencia - FIM")
-        return driver_emergencia_global  # Retorna o driver para manter a sessão
-
-    # Verifica se a situação é normal e não envia mensagem
-    if "Situação Normal - Nenhum paciente com tempos críticos" in mensagem_texto:
-        registrar_log("Situação normal detectada - não enviando mensagem de emergência")
-        registrar_log("enviar_whatsapp_emergencia - FIM")
-        return driver_emergencia_global  # Retorna o driver para manter a sessão
-
-    if modo_teste:
-        registrar_log("[MODO DE TESTE] Simulação de envio de mensagem para WhatsApp Emergência:")
-        registrar_log(f"[MODO DE TESTE] Grupo: HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA")
-        registrar_log(f"[MODO DE TESTE] Mensagem: {mensagem_texto}")
-        registrar_log("enviar_whatsapp_emergencia - FIM")
-        return
-    
-    driver = driver_emergencia_global  # Usa driver global se disponível
-    
-    try:        
-        # Verifica se já existe um driver válido
-        if driver is None or not driver_is_alive(driver):
-            registrar_log("Inicializando novo driver para WhatsApp Emergência...")
-            # Configurações do Chrome
-            options = Options()
-            
-            # Adicionar argumentos para evitar problemas de sessão
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--disable-extensions")
-            options.add_argument("--disable-web-security")
-            options.add_argument("--allow-running-insecure-content")
-            options.add_argument("--disable-background-timer-throttling")
-            options.add_argument("--disable-backgrounding-occluded-windows")
-            options.add_argument("--disable-renderer-backgrounding")
-            options.add_argument("--disable-features=TranslateUI")
-            options.add_argument("--disable-ipc-flooding-protection")
-            
-            # Configurar o perfil de usuário para manter o login
-            dir_path = os.path.dirname(os.path.abspath(__file__))
-            profile_path = os.path.join(dir_path, "profile", "wpp_emergencia")
-            
-            # Criar diretório se não existir
-            os.makedirs(profile_path, exist_ok=True)
-            options.add_argument(f"--user-data-dir={profile_path}")
-
-            # Inicializa o driver
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service, options=options)
-            driver_emergencia_global = driver  # Armazena na variável global
-            
-            registrar_log('driver.get("https://web.whatsapp.com")')
-            driver.get("https://web.whatsapp.com")
-
-            registrar_log("time.sleep(15)")
-            time.sleep(15) 
-        else:
-            registrar_log("Reutilizando driver existente para WhatsApp Emergência...")
-            # Verifica se ainda está na página do WhatsApp
-            if "web.whatsapp.com" not in driver.current_url:
-                driver.get("https://web.whatsapp.com")
-                time.sleep(10) 
-
-        registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
-
-        registrar_log("WhatsApp Web aberto. Aguardando o campo de pesquisa...")
-
-        # Espera explícita para o campo de pesquisa com MÚLTIPLOS SELETORES
-        # Seletores robustos para encontrar o campo de pesquisa do WhatsApp
-        seletores_campo_pesquisa = [
-            '//div[@contenteditable="true"][@data-tab="3"]', # Seletor moderno (mais comum)
-            '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p', # Seletor antigo (específico)
-            '//div[@id="side"]//div[@contenteditable="true"]', # Seletor genérico painel lateral
-            '//div[@role="textbox"][@data-tab="3"]', # Variação acessibilidade
-            '//div[@id="side"]//p[contains(@class, "copyable-text")]' # Variação classe
-        ]
-        
-        wait = WebDriverWait(driver, 30)
-        registrar_log("time.sleep(3)")
-        time.sleep(3)
-        
-        campo_encontrado = False
-        campo_pesquisa_element = None
-        
-        # Tentar cada seletor
-        for i, xpath in enumerate(seletores_campo_pesquisa):
-            try:
-                registrar_log(f"Tentando encontrar campo de pesquisa com seletor {i+1}: {xpath}")
-                # Wait curto para tentar cada um
-                wait_curto = WebDriverWait(driver, 5) 
-                campo_pesquisa_element = wait_curto.until(EC.element_to_be_clickable((By.XPATH, xpath)))
-                if campo_pesquisa_element:
-                    registrar_log(f"Campo de pesquisa encontrado com sucesso (seletor {i+1})")
-                    campo_encontrado = True
-                    break
-            except Exception:
-                continue
-                
-        if not campo_encontrado:
-             # Se falhar tudo, tenta um wait longo no seletor mais provável antes de desistir
-             try:
-                 registrar_log("Tentativa final com wait longo no seletor padrão...")
-                 campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@contenteditable="true"][@data-tab="3"]')))
-                 campo_encontrado = True
-             except Exception as e_final:
-                 registrar_log(f"Falha crítica ao encontrar campo de pesquisa: {e_final}")
-                 # Se estivermos reutilizando driver, pode ser necessário um refresh na próxima vez ou agora
-                 # Vamos tentar um truque: clicar no body e dar um ESC para limpar seleções
-                 try:
-                     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
-                 except:
-                     pass
-                 return driver_emergencia_global # Retorna mesmo com erro para tentar novamente no prox ciclo
-
-        registrar_log("Campo de pesquisa encontrado e clicável.")
-        campo_pesquisa_element.click()
-        registrar_log("Clicado no campo de pesquisa.")
-
-        # Localiza o campo de input de texto ativo para a pesquisa
-        xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
-        input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
-        registrar_log("Campo de input de pesquisa ativo encontrado.")
-        
-        nome_grupo = "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
-        input_pesquisa_ativo.send_keys(nome_grupo)
-        registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
-        registrar_log("time.sleep(0.5)")
-        time.sleep(0.5) 
-
-        # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
-        xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
-        registrar_log("time.sleep(0.5)")
-        time.sleep(0.5) 
-
-        resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
-        registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
-        resultado_grupo_element.click()
-        registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
-        registrar_log("time.sleep(0.5)")
-        time.sleep(0.5)
-
-        # Localiza a caixa de texto do chat
-        registrar_log('Localizando a caixa de texto do chat...')
-        xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
-
-        try:
-            chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-            registrar_log('Caixa de texto localizada e clicável com sucesso!')
-            
-            # CORREÇÃO UTF-8 E ENVIO LINHA POR LINHA
-            # Envia a mensagem linha por linha para evitar erro de caracteres BMP
-            # Primeiro, limpa apenas emojis problemáticos, mantendo acentos brasileiros
-            # Esta implementação preserva caracteres especiais como ã, á, ç, etc.
-            import re
-            # Remove apenas emojis e símbolos especiais, mantém acentos portugueses
-            mensagem_limpa = re.sub(r'[^\w\s\*\:\-\(\)\[\]\.\,\;\!\?\ãáàâêéèíìîõóòôúùûçÃÁÀÂÊÉÈÍÌÎÕÓÒÔÚÙÛÇ\/]+', '', mensagem_texto)
-            
-            linhas_mensagem = mensagem_limpa.split('\n')
-            for i, linha in enumerate(linhas_mensagem):
-                if linha.strip():  # Só envia linhas não vazias
-                    chat_caixa_de_texto_element.send_keys(linha.strip())
-                    registrar_log(f"Linha enviada: {linha.strip()}")
-                
-                # Adiciona quebra de linha se não for a última linha
-                if i < len(linhas_mensagem) - 1:
-                    chat_caixa_de_texto_element.send_keys(Keys.CONTROL, Keys.ENTER)
-                    time.sleep(0.2)  # Pequena pausa entre linhas
-            
-            registrar_log(f"Mensagem completa enviada linha por linha")
-            registrar_log("time.sleep(0.5)")
-            time.sleep(0.5)
-
-            # Localiza e clica no botão de enviar
-            registrar_log('Localizando e clicando no botão de enviar...')
-            
-            # SISTEMA ROBUSTO DE ENVIO - 17 SELETORES DIFERENTES
-            seletores_botao_enviar = [
-                "//button[@aria-label='Enviar']",
-                "//button[@aria-label='Send']", 
-                "//span[@data-icon='send']",
-                "//button[contains(@class, 'send')]",
-                "//div[@role='button'][contains(@aria-label, 'Enviar')]",
-                "//div[@role='button'][contains(@aria-label, 'Send')]",
-                "//button[contains(@title, 'Enviar')]",
-                "//button[contains(@title, 'Send')]",
-                "//span[contains(@class, 'send')]",
-                "//div[contains(@class, 'send')]",
-                "//button[@data-testid='send']",
-                "//div[@data-testid='send']",
-                "//span[@data-testid='send']",
-                "//button[contains(@aria-label, 'enviar')]",
-                "//button[contains(@aria-label, 'send')]",
-                "//div[@role='button'][contains(@title, 'Enviar')]",
-                "//div[@role='button'][contains(@title, 'Send')]"
-            ]
-            
-            botao_encontrado = False
-            for selector in seletores_botao_enviar:
-                try:
-                    botao_enviar_element = WebDriverWait(driver, 5).until(
-                        EC.element_to_be_clickable((By.XPATH, selector))
-                    )
-                    registrar_log(f'Botão de enviar encontrado com seletor: {selector}')
-                    botao_enviar_element.click()
-                    registrar_log("Botão de enviar clicado com sucesso!")
-                    botao_encontrado = True
-                    break
-                except:
-                    continue
-            
-            if not botao_encontrado:
-                # FALLBACK JAVASCRIPT
-                registrar_log("Botão de enviar não encontrado com XPath, tentando JavaScript...")
-                try:
-                    js_script = """
-                    var buttons = document.querySelectorAll('button, div[role="button"], span');
-                    for (var i = 0; i < buttons.length; i++) {
-                        var btn = buttons[i];
-                        var ariaLabel = btn.getAttribute('aria-label') || '';
-                        var title = btn.getAttribute('title') || '';
-                        var className = btn.className || '';
-                        var dataIcon = btn.getAttribute('data-icon') || '';
-                        var dataTestId = btn.getAttribute('data-testid') || '';
-                        
-                        if (ariaLabel.toLowerCase().includes('enviar') || 
-                            ariaLabel.toLowerCase().includes('send') ||
-                            title.toLowerCase().includes('enviar') ||
-                            title.toLowerCase().includes('send') ||
-                            dataIcon.includes('send') ||
-                            dataTestId.includes('send') ||
-                            className.includes('send')) {
-                            btn.click();
-                            return 'Botão encontrado e clicado via JavaScript';
-                        }
-                    }
-                    return 'Botão não encontrado via JavaScript';
-                    """
-                    resultado = driver.execute_script(js_script)
-                    registrar_log(f"Resultado JavaScript: {resultado}")
-                    if "clicado" in resultado:
-                        botao_encontrado = True
-                except Exception as e_js:
-                    registrar_log(f"Erro ao executar JavaScript: {e_js}")
-            
-            if not botao_encontrado:
-                # FALLBACK TECLADO
-                registrar_log("Todas as tentativas falharam, tentando usar Enter...")
-                try:
-                    chat_caixa_de_texto_element.send_keys(Keys.ENTER)
-                    registrar_log("Mensagem enviada usando Enter")
-                    botao_encontrado = True
-                except Exception as e_enter:
-                    registrar_log(f"Erro ao usar Enter: {e_enter}")
-                    # Última tentativa: usar Ctrl+Enter
-                    try:
-                        chat_caixa_de_texto_element.send_keys(Keys.CONTROL + Keys.ENTER)
-                        registrar_log("Mensagem enviada usando Ctrl+Enter")
-                        botao_encontrado = True
-                    except Exception as e_ctrl_enter:
-                        registrar_log(f"Erro ao usar Ctrl+Enter: {e_ctrl_enter}")
-            
-            if botao_encontrado:
-                registrar_log("Mensagem enviada com sucesso!")
-                registrar_log("Aguardando 30 segundos após envio da mensagem...")
-                time.sleep(30)  # Aguarda 30 segundos após o envio
-            else:
-                registrar_log("ERRO: Não foi possível enviar a mensagem por nenhum método")
-            
-            registrar_log("Processo de envio de mensagem concluído.")
-            registrar_log('time.sleep(5)')
-            time.sleep(5)
-
-            #inserir pausa de 1 segundo
-            registrar_log("time.sleep(1)")	
-            time.sleep(1)
-
-            #inserir aperto de enter
-            registrar_log("pyautogui.press('enter')")
-            pyautogui.press('enter')
-
-            #inserir pausa de 15 segundos
-            registrar_log("time.sleep(15)")
-            time.sleep(15)
-            
-        except Exception as e_chatbox:
-            registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                
-            registrar_log("time.sleep(1)")	
-            time.sleep(1)
-            registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
-            pyautogui.press('enter')
-
-        # Pausa breve para garantir que a mensagem seja processada
-        registrar_log("Pausa breve para garantir que a mensagem seja processada")	
-        time.sleep(5)
-
-    except Exception as e_search:
-        registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
-        
-        # MANTÉM O WHATSAPP ABERTO PARA ENVIAR MENSAGENS DE EXAMES NA SEQUÊNCIA
-        # Driver permanece ativo para próxima função (enviar_whatsapp)
-        if driver:
-            registrar_log("time.sleep(2)")
-            time.sleep(2)
-            registrar_log("WhatsApp Web mantido aberto para envio de mensagens de exames críticos")
-            registrar_log("Driver mantido aberto para preservar sessão do WhatsApp")
-            # driver.quit() - REMOVIDO para manter perfil persistente
-        registrar_log("Sessão do WhatsApp preservada para próximo envio.")
-
-    except Exception as e:
-        registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp Emergência: {e}")
-    
-    registrar_log("enviar_whatsapp_emergencia - FIM")
-    return driver_emergencia_global  # Retorna o driver para manter a sessão
-
-def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str, driver_existente: webdriver.Chrome = None) -> webdriver.Chrome:
-    """
-    Função genérica e robusta para enviar mensagens via WhatsApp Web para qualquer grupo.
-    Baseada no protocolo de resiliência do GEMINI.md.
-    """
-    global driver_whatsapp_global
-    registrar_log(f"enviar_whatsapp_grupo({nome_grupo}) - INÍCIO")
-
     if not mensagem_texto or not mensagem_texto.strip():
         registrar_log("Nenhuma mensagem para enviar.")
-        return driver_existente if driver_existente else driver_whatsapp_global
+        return
+        
+    if "Situação Normal - Nenhum paciente com tempos críticos" in mensagem_texto:
+        registrar_log("Situação normal detectada - não enviando mensagem")
+        return
 
-    driver = driver_existente if driver_existente else driver_whatsapp_global
+    if modo_teste:
+        registrar_log(f"[MODO TESTE] Mensagem Emergência: {mensagem_texto}")
+        return
+
+    page = get_wa_page("emergencia")
     
     try:
-        # 1. Verificação/Inicialização do Driver
-        if driver is None or not driver_is_alive(driver):
-            registrar_log(f"Inicializando novo driver para {nome_grupo}...")
-            options = Options()
-            # Ocultar automação, sandbox, etc
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-dev-shm-usage")
-            
-            # Perfil persistente
-            dir_path = os.path.dirname(os.path.abspath(__file__))
-            profile_path = os.path.join(dir_path, "profile", "wpp_generic")
-            os.makedirs(profile_path, exist_ok=True)
-            options.add_argument(f"--user-data-dir={profile_path}")
-
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service, options=options)
-            driver_whatsapp_global = driver
-            
-            driver.get("https://web.whatsapp.com")
-            time.sleep(15) 
-        else:
-            if "web.whatsapp.com" not in driver.current_url:
-                driver.get("https://web.whatsapp.com")
-                time.sleep(10)
-
-        wait = WebDriverWait(driver, 30)
+        # 1. Navegação e Verificação de Estado
+        if "web.whatsapp.com" not in page.url:
+            registrar_log("Navegando para WhatsApp Web...")
+            page.goto("https://web.whatsapp.com")
+            page.wait_for_load_state("networkidle")
         
-        # 2. Localização do Campo de Pesquisa
+        registrar_log("Aguardando interface do WhatsApp...")
+        
+        # 2. Localização do Campo de Pesquisa (Multi-Seletor Resiliente)
         seletores_pesquisa = [
-            '//div[@contenteditable="true"][@data-tab="3"]',
-            '//div[@id="side"]//div[@contenteditable="true"]',
-            '//div[@role="textbox"][@data-tab="3"]'
+            'div[contenteditable="true"][data-tab="3"]',
+            '[data-testid="chat-list-search"]',
+            'div[role="textbox"][data-tab="3"]',
+            'div[title*="Pesquisar"]'
         ]
         
         campo_pesquisa = None
-        for xpath in seletores_pesquisa:
+        for selector in seletores_pesquisa:
             try:
-                campo_pesquisa = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, xpath)))
-                if campo_pesquisa: break
-            except: continue
-        
+                page.wait_for_selector(selector, state="visible", timeout=5000)
+                campo_pesquisa = page.locator(selector)
+                break
+            except Exception:
+                continue
+                
         if not campo_pesquisa:
-            registrar_log("Falha ao localizar campo de pesquisa.")
-            return driver
+            raise TimeoutError("Falha ao localizar campo de pesquisa do WhatsApp")
 
-        campo_pesquisa.click()
-        time.sleep(1)
-        
         # 3. Pesquisa do Grupo
-        xpath_input = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
-        input_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input)))
-        
-        # Limpa campo antes de digitar
-        input_ativo.send_keys(Keys.CONTROL + "a")
-        input_ativo.send_keys(Keys.BACKSPACE)
-        input_ativo.send_keys(nome_grupo)
-        time.sleep(2)
+        nome_grupo = "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
+        campo_pesquisa.click()
+        page.keyboard.press("Control+A")
+        page.keyboard.press("Backspace")
+        page.fill(seletores_pesquisa[0] if "[data-tab='3']" in seletores_pesquisa[0] else seletores_pesquisa[1], "") # Garante limpeza
+        page.keyboard.type(nome_grupo, delay=100)
+        page.wait_for_timeout(2000)
 
         # 4. Seleção do Resultado
         xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
-        resultado_grupo = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado)))
-        resultado_grupo.click()
-        time.sleep(1)
+        page.wait_for_selector(xpath_resultado, state="visible", timeout=10000)
+        page.click(xpath_resultado)
+        page.wait_for_timeout(1000)
 
         # 5. Envio da Mensagem
-        xpath_chat = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
-        chat_box = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat)))
+        xpath_chat = 'div[id="main"] div[contenteditable="true"][role="textbox"]'
+        page.wait_for_selector(xpath_chat, state="visible", timeout=5000)
         
-        # Limpa emojis/caracteres BMP problemáticos e envia linha a linha
-        mensagem_limpa = re.sub(r'[^\w\s\*\:\-\(\)\[\]\.\,\;\!\?\ãáàâêéèíìîõóòôúùûçÃÁÀÂÊÉÈÍÌÎÕÓÒÔÚÙÛÇ\/]+', '', mensagem_texto)
+        # Limpeza de caracteres não-BMP (emojis problemáticos) mantendo acentos
+        mensagem_limpa = re.sub(r'[^\x00-\x7F\u00C0-\u00FF\*\:\-\(\)\[\]\.\,\;\!\?\s\/]+', '', mensagem_texto)
         linhas = mensagem_limpa.split('\n')
         
         for i, linha in enumerate(linhas):
             if linha.strip():
-                chat_box.send_keys(linha.strip())
+                page.type(xpath_chat, linha.strip())
             if i < len(linhas) - 1:
-                chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                time.sleep(0.2)
-        
+                page.keyboard.press("Shift+Enter")
+                
         # 6. Botão Enviar com Fallbacks
-        seletores_enviar = ["//button[@aria-label='Enviar']", "//span[@data-icon='send']", "//button[@data-testid='send']"]
-        enviado = False
-        for s in seletores_enviar:
+        page.keyboard.press("Enter") # Playwright keyboard API é muito robusta
+        registrar_log("Mensagem enviada com sucesso (Enter).")
+        
+        page.wait_for_timeout(5000) # Cooldown
+        
+    except Exception as e:
+        registrar_log(f"ERRO CRÍTICO em enviar_whatsapp_emergencia: {e}")
+        # Auditoria Visual (GEMINI.md Rule)
+        try:
+            temp_dir = os.path.join(os.getcwd(), "temp")
+            os.makedirs(temp_dir, exist_ok=True)
+            screenshot_path = os.path.join(temp_dir, f"error_emergencia_{agora().replace(':', '-')}.png")
+            page.screenshot(path=screenshot_path)
+            registrar_log(f"Screenshot de erro salva em: {screenshot_path}")
+        except Exception as e_ss:
+            registrar_log(f"Falha ao capturar screenshot: {e_ss}")
+
+    registrar_log("enviar_whatsapp_emergencia - FIM")
+
+def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str):
+    """
+    Função genérica e robusta para enviar mensagens via WhatsApp Web para qualquer grupo.
+    Migrada para Playwright conforme GEMINI.md.
+    """
+    registrar_log(f"enviar_whatsapp_grupo({nome_grupo}) - INÍCIO")
+
+    if not mensagem_texto or not mensagem_texto.strip():
+        registrar_log("Nenhuma mensagem para enviar.")
+        return
+
+    page = get_wa_page("geral")
+    
+    try:
+        # 1. Navegação
+        if "web.whatsapp.com" not in page.url:
+            page.goto("https://web.whatsapp.com")
+            page.wait_for_load_state("networkidle")
+        
+        # 2. Pesquisa
+        seletores_pesquisa = [
+            'div[contenteditable="true"][data-tab="3"]',
+            '[data-testid="chat-list-search"]',
+            'div[role="textbox"][data-tab="3"]'
+        ]
+        
+        campo_pesquisa = None
+        for s in seletores_pesquisa:
             try:
-                btn = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, s)))
-                btn.click()
-                enviado = True
+                page.wait_for_selector(s, state="visible", timeout=5000)
+                campo_pesquisa = page.locator(s)
                 break
             except: continue
-        
-        if not enviado:
-            chat_box.send_keys(Keys.ENTER)
-            enviado = True
+            
+        if not campo_pesquisa:
+            raise TimeoutError("Falha ao localizar campo de pesquisa")
 
-        registrar_log(f"Mensagem enviada para {nome_grupo} com sucesso.")
-        time.sleep(5)
+        campo_pesquisa.click()
+        page.keyboard.press("Control+A")
+        page.keyboard.press("Backspace")
+        page.keyboard.type(nome_grupo, delay=100)
+        page.wait_for_timeout(2000)
+
+        # 3. Seleção do Grupo
+        xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
+        page.wait_for_selector(xpath_resultado, state="visible", timeout=8000)
+        page.click(xpath_resultado)
+        page.wait_for_timeout(1000)
+
+        # 4. Envio
+        xpath_chat = 'div[id="main"] div[contenteditable="true"][role="textbox"]'
+        page.wait_for_selector(xpath_chat, state="visible", timeout=5000)
+        
+        mensagem_limpa = re.sub(r'[^\x00-\x7F\u00C0-\u00FF\*\:\-\(\)\[\]\.\,\;\!\?\s\/]+', '', mensagem_texto)
+        linhas = mensagem_limpa.split('\n')
+        
+        for i, linha in enumerate(linhas):
+            if linha.strip():
+                page.type(xpath_chat, linha.strip())
+            if i < len(linhas) - 1:
+                page.keyboard.press("Shift+Enter")
+        
+        page.keyboard.press("Enter")
+        registrar_log(f"Mensagem enviada para {nome_grupo}.")
+        page.wait_for_timeout(2000)
 
     except Exception as e:
-        registrar_log(f"Erro ao enviar WhatsApp para {nome_grupo}: {e}")
-        # Screenshot para auditoria visual (GEMINI.md rule)
+        registrar_log(f"Erro em enviar_whatsapp_grupo({nome_grupo}): {e}")
         try:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            driver.save_screenshot(f"error_wpp_{timestamp}.png")
+            path = os.path.join("temp", f"error_{nome_grupo}_{agora().replace(':','-')}.png")
+            page.screenshot(path=path)
         except: pass
 
     registrar_log(f"enviar_whatsapp_grupo({nome_grupo}) - FIM")
-    return driver
 
-def enviar_whatsapp_laboratorio(lista_exames, driver_existente=None, modo_teste=False):
+def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
     """
-    Envia mensagens de exames críticos para o grupo do laboratório usando driver existente
-    DRIVER PERSISTENTE: Reutiliza o driver global para manter a sessão autenticada
+    Envia resultados críticos do laboratório via WhatsApp.
+    Migrada para Playwright conforme GEMINI.md.
     """
-    global driver_whatsapp_global
-    
     registrar_log("enviar_whatsapp_laboratorio - INÍCIO")
     
-    # Verifica se não há exames críticos para reportar
-    if not lista_exames or len(lista_exames) == 0:
-        registrar_log("Nenhum exame crítico encontrado - não enviando mensagem de laboratório")
-        registrar_log("enviar_whatsapp_laboratorio - FIM")
-        return driver_existente if driver_existente else driver_whatsapp_global
+    if not lista_exames:
+        registrar_log("Nenhum exame para enviar.")
+        return
+
+    if modo_teste:
+        registrar_log(f"[MODO TESTE] Enviando {len(lista_exames)} exames para Laboratório")
+        return
+
+    page = get_wa_page("geral")
     
     try:
-        # Usa o driver passado como parâmetro ou o driver global
-        driver = driver_existente if driver_existente else driver_whatsapp_global
-        
-        # Verifica se já existe um driver válido
-        if driver is None or not driver_is_alive(driver):
-            registrar_log("Inicializando novo driver para WhatsApp Laboratório...")
-            # Configurações do Chrome
-            options = Options()
+        # 1. Navegação
+        if "web.whatsapp.com" not in page.url:
+            page.goto("https://web.whatsapp.com")
+            page.wait_for_load_state("networkidle")
             
-            # Configurar o perfil de usuário para manter o login
-            dir_path = os.path.dirname(os.path.abspath(__file__))
-            profile_path = os.path.join(dir_path, "profile", "wpp")
-            options.add_argument(f"user-data-dir={profile_path}")
-
-            # Inicializa o driver usando ChromeDriverManager
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service, options=options)
-            driver_whatsapp_global = driver  # Armazena na variável global
-
-            registrar_log('driver.get("https://web.whatsapp.com")')
-            driver.get("https://web.whatsapp.com")
-
-            registrar_log("time.sleep(10)")
-            time.sleep(10) 
-        else:
-            registrar_log("Reutilizando driver existente para WhatsApp Laboratório...")
-            # Verifica se ainda está na página do WhatsApp
-            if "web.whatsapp.com" not in driver.current_url:
-                driver.get("https://web.whatsapp.com")
-                time.sleep(10) 
-
-        registrar_log("WhatsApp Web aberto. Procurando grupo do laboratório...")
-
-        registrar_log("WhatsApp Web aberto. Procurando grupo do laboratório...")
-
-        # Espera explícita para o campo de pesquisa com MÚLTIPLOS SELETORES
-        # Seletores robustos para encontrar o campo de pesquisa do WhatsApp
-        seletores_campo_pesquisa = [
-            '//div[@contenteditable="true"][@data-tab="3"]', # Seletor moderno (mais comum)
-            '//*[@id="side"]/div[1]/div/div[2]/div/div/div[1]/p', # Seletor antigo (específico)
-            '//div[@id="side"]//div[@contenteditable="true"]', # Seletor genérico painel lateral
-            '//div[@role="textbox"][@data-tab="3"]', # Variação acessibilidade
-            '//div[@id="side"]//p[contains(@class, "copyable-text")]' # Variação classe
-        ]
-        
-        wait = WebDriverWait(driver, 30) # Espera até 30 segundos
-        registrar_log("time.sleep(3)")
-        time.sleep(3)
-        
-        campo_encontrado = False
-        campo_pesquisa_element = None
-        
-        # Tentar cada seletor
-        for i, xpath in enumerate(seletores_campo_pesquisa):
-            try:
-                registrar_log(f"LAB: Tentando encontrar campo de pesquisa com seletor {i+1}: {xpath}")
-                # Wait curto para tentar cada um
-                wait_curto = WebDriverWait(driver, 5) 
-                campo_pesquisa_element = wait_curto.until(EC.element_to_be_clickable((By.XPATH, xpath)))
-                if campo_pesquisa_element:
-                    registrar_log(f"LAB: Campo de pesquisa encontrado com sucesso (seletor {i+1})")
-                    campo_encontrado = True
-                    break
-            except Exception:
-                continue
-                
-        if not campo_encontrado:
-             # Se falhar tudo, tenta um wait longo no seletor mais provável antes de desistir
-             try:
-                 registrar_log("LAB: Tentativa final com wait longo no seletor padrão...")
-                 campo_pesquisa_element = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@contenteditable="true"][@data-tab="3"]')))
-                 campo_encontrado = True
-             except Exception as e_final:
-                 registrar_log(f"LAB: Falha crítica ao encontrar campo de pesquisa: {e_final}")
-                 # Se falhar, tenta um refresh para limpar estado
-                 try:
-                     driver.refresh()
-                     time.sleep(5)
-                 except:
-                     pass
-                 return driver # Retorna
-        
-        registrar_log("Campo de pesquisa encontrado e clicável.")
-        campo_pesquisa_element.click()
-        registrar_log("Clicado no campo de pesquisa.")
-
-        # Localiza o campo de input de texto ativo para a pesquisa
-        xpath_input_pesquisa_ativo = "//div[@id='side']//div[@contenteditable='true'][@role='textbox']"
-        input_pesquisa_ativo = wait.until(EC.presence_of_element_located((By.XPATH, xpath_input_pesquisa_ativo)))
-        registrar_log("Campo de input de pesquisa ativo encontrado.")
-        
+        # 2. Pesquisa
         nome_grupo = "LAB - VALORES CRÍTICOS"
-        input_pesquisa_ativo.send_keys(nome_grupo)
-        registrar_log(f"Texto '{nome_grupo}' enviado para o campo de pesquisa.")
-        registrar_log("time.sleep(0.5)")
-        time.sleep(0.5) 
-
-        # Espera e clica no resultado da pesquisa correspondente ao nome do grupo
-        xpath_resultado_grupo = f"//span[@class='matched-text _ao3e' and text()='{nome_grupo}']"
-        registrar_log("time.sleep(0.5)")
-        time.sleep(0.5) 
-
-        resultado_grupo_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_resultado_grupo)))
-        registrar_log(f"Resultado da pesquisa para '{nome_grupo}' encontrado e clicável.")
-        resultado_grupo_element.click()
-        registrar_log(f"Clicado no grupo '{nome_grupo}' na lista de resultados.")
-        registrar_log("time.sleep(0.5)")
-        time.sleep(0.5)
-
-        # Localiza a caixa de texto do chat
-        registrar_log('Localizando a caixa de texto do chat...')
-        xpath_chat_caixa_de_texto = '//div[@id="main"]//div[@contenteditable="true"][@role="textbox"]'
-
-        try:
-            chat_caixa_de_texto_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-            registrar_log('Caixa de texto localizada e clicável com sucesso!')
-            
-            # Re-localiza a caixa de texto antes de cada envio principal
-            def get_chat_box():
-                return wait.until(EC.element_to_be_clickable((By.XPATH, xpath_chat_caixa_de_texto)))
-
-            # Envia cada detalhe de cada exame como uma mensagem separada
-            if lista_exames:
-                # Envia um cabeçalho inicial
-                chat_caixa_de_texto_element.send_keys(" ")
-                chat_caixa_de_texto_element.send_keys(Keys.ENTER)
-                registrar_log("Cabeçalho da mensagem enviado.")
-                time.sleep(0.5) # Pequena pausa
-
-                registrar_log("Separador entre exames enviado.")
-                current_chat_box = get_chat_box()
-
-                agora_atual = datetime.now()
-                data_hora_formatada = '*' + agora_atual.strftime("%d/%m/%Y às %Hh%Mm") + '*'
-                registrar_log(f'data_hora_formatada: {data_hora_formatada}')
-
-                textinho = f'{data_hora_formatada}'
-                registrar_log(f'textinho: {textinho}')
-                current_chat_box.send_keys(textinho)
-                time.sleep(0.5)
-                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                time.sleep(0.5)
-
-                textinho2 = '*Analista Plantonista confirmar ciência do(s) resultado(s) crítico(s) encontrado(s):*'
-                current_chat_box.send_keys(textinho2)
-                time.sleep(0.5)
-                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                time.sleep(0.5)
-
-                current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                time.sleep(0.5)
-
-                for i, exame in enumerate(lista_exames):
-                    if i > 0: # Adiciona uma linha em branco (enviando um Enter) entre exames
-                        registrar_log('Envia uma "mensagem em branco" como separador')
-                        #get_chat_box().send_keys(Keys.ENTER) 
-                        current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-
-                        registrar_log('time.sleep(0.5)')
-                        time.sleep(0.5) # Pequena pausa
-
-                    for item_exame in exame: # item_exame é uma string como 'PRESCRICAO: 5977045'
-                        if item_exame.strip(): # Garante que não estamos enviando strings vazias
-                            current_chat_box = get_chat_box()
-                            current_chat_box.send_keys(item_exame)
-                            current_chat_box.send_keys(Keys.CONTROL, Keys.ENTER)
-                            registrar_log(f"Linha enviada: {item_exame}")
-                            time.sleep(1) # Pequena pausa para não sobrecarregar
-                
-            else:
-                registrar_log("Nenhum exame crítico encontrado - não enviando mensagem")
-                registrar_log("enviar_whatsapp_laboratorio - FIM")
-                return driver  # Retorna o driver sem enviar mensagem
-            
-            registrar_log('time.sleep(0.5)')
-            time.sleep(0.5)
-
-            #registrar_log('Localizando e clicando no botão de enviar...')
-            #xpath_botao_enviar = "//button[@aria-label='Enviar']"
-            #botao_enviar_element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_botao_enviar)))
-            #
-            #registrar_log('botao_enviar_element.click()')
-            #botao_enviar_element.click()
-            #registrar_log("Processo de envio de mensagens do laboratório concluído.")
-            #registrar_log("Aguardando 30 segundos após o envio...")
-            #time.sleep(30)
-
-            #inserir pausa de 1 segundo
-            registrar_log("time.sleep(1)")	
-            time.sleep(1)
-
-            #inserir aperto de enter
-            registrar_log("pyautogui.press('enter')")
-            pyautogui.press('enter')
-
-            registrar_log("time.sleep(15)")
-            time.sleep(15)
-
-        except Exception as e_chatbox:
-            registrar_log(f"Erro ao localizar ou interagir com a caixa de texto do chat: {e_chatbox}")                    
-            registrar_log("time.sleep(1)")	
-            time.sleep(1)
-            registrar_log("Usando pyautogui.press('enter') para enviar mensagem")
-            pyautogui.press('enter')
-            registrar_log("time.sleep(5)")
-            time.sleep(5)
-
-    except Exception as e_search:
-        registrar_log(f"Erro ao tentar clicar no campo de pesquisa: {e_search}")
+        xpath_pesquisa = 'div[contenteditable="true"][data-tab="3"]'
+        page.wait_for_selector(xpath_pesquisa, state="visible", timeout=10000)
+        page.click(xpath_pesquisa)
+        page.keyboard.press("Control+A")
+        page.keyboard.press("Backspace")
+        page.keyboard.type(nome_grupo, delay=100)
         
-        # Mantém o driver aberto para preservar a sessão
-        registrar_log("Driver mantido aberto para preservar sessão do WhatsApp")
+        # 3. Seleção
+        xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
+        page.wait_for_selector(xpath_resultado, state="visible", timeout=8000)
+        page.click(xpath_resultado)
+        
+        # 4. Composição da Mensagem Complexa
+        xpath_chat = 'div[id="main"] div[contenteditable="true"][role="textbox"]'
+        page.wait_for_selector(xpath_chat, state="visible", timeout=5000)
+        
+        agora_str = datetime.now().strftime("%d/%m/%Y às %Hh%Mm")
+        cabecalho = f"*{agora_str}*\n\n*Analista Plantonista confirmar ciência do(s) resultado(s) crítico(s) encontrado(s):*\n"
+        
+        page.type(xpath_chat, cabecalho)
+        page.keyboard.press("Shift+Enter")
+        
+        for exame in lista_exames:
+            for item in exame:
+                if item.strip():
+                    item_limpo = re.sub(r'[^\x00-\x7F\u00C0-\u00FF\*\:\-\(\)\[\]\.\,\;\!\?\s\/]+', '', item)
+                    page.type(xpath_chat, item_limpo.strip())
+                    page.keyboard.press("Shift+Enter")
+            page.keyboard.press("Shift+Enter") # Separador entre exames
+            
+        # 5. Envio Final
+        page.keyboard.press("Enter")
+        registrar_log("Relatório de Laboratório enviado com sucesso.")
+        page.wait_for_timeout(3000)
 
     except Exception as e:
-        registrar_log(f"Erro ao tentar enviar mensagem pelo WhatsApp Laboratório: {e}")
-    
+        registrar_log(f"Erro em enviar_whatsapp_laboratorio: {e}")
+        try:
+            path = os.path.join("temp", f"error_lab_{agora().replace(':','-')}.png")
+            page.screenshot(path=path)
+        except: pass
+
     registrar_log("enviar_whatsapp_laboratorio - FIM")
-    return driver  # Retorna o driver para uso posterior
+    registrar_log("enviar_whatsapp_laboratorio - FIM")
 
 def processar_coagulogramas_criticos(resultados_hemogramas_brutos):
     """
@@ -1516,7 +1108,7 @@ def processar_alertas_tempo_unificado(df):
     
     registrar_log("processar_alertas_tempo_unificado - FIM")
 
-def logica_principal_exames(driver_existente=None):
+def logica_principal_exames():
     """Lógica principal que executa a verificação de todos os exames críticos."""
     registrar_log("logica_principal_background - INÍCIO")
     # Defina True para testar sem enviar mensagens reais, False para operação normal
@@ -1525,7 +1117,7 @@ def logica_principal_exames(driver_existente=None):
     registrar_log("Executando ciclo da lógica principal...")
     lista_de_resultados = resultados_exames_intervalo_58_min()
     registrar_log(f"lista_de_resultados: {lista_de_resultados}")        
-    driver = enviar_whatsapp_laboratorio(lista_de_resultados, driver_existente=driver_existente, modo_teste=MODO_TESTE_WHATSAPP)
+    enviar_whatsapp_laboratorio(lista_de_resultados, modo_teste=MODO_TESTE_WHATSAPP)
     
     # --- INÍCIO DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
     registrar_log("Iniciando processamento de hemogramas críticos...")
@@ -1641,7 +1233,7 @@ def logica_principal_exames(driver_existente=None):
                     linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.1f} {critico['unidade']}."
                     mensagens_hemogramas_criticos_whatsapp.append([linha_mensagem]) # Cada linha como uma lista de um item
                 
-                driver = enviar_whatsapp_laboratorio(mensagens_hemogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
+                enviar_whatsapp_laboratorio(mensagens_hemogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
             else:
                 registrar_log("Nenhum hemograma crítico encontrado para enviar.")
         else:
@@ -1657,7 +1249,7 @@ def logica_principal_exames(driver_existente=None):
             for critico in coagulogramas_criticos:
                 linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f}."
                 mensagens_coagulogramas_criticos_whatsapp.append([linha_mensagem])
-            driver = enviar_whatsapp_laboratorio(mensagens_coagulogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
+            enviar_whatsapp_laboratorio(mensagens_coagulogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum coagulograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEMOGRAMAS CRÍTICOS ---
@@ -1672,7 +1264,7 @@ def logica_principal_exames(driver_existente=None):
             for critico in hepatogramas_criticos:
                 linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f} {critico['unidade']}."
                 mensagens_hepatogramas_criticos_whatsapp.append([linha_mensagem])
-            driver = enviar_whatsapp_laboratorio(mensagens_hepatogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
+            enviar_whatsapp_laboratorio(mensagens_hepatogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum hepatograma crítico encontrado para enviar.")
         # --- FIM DO PROCESSAMENTO DE HEPATOGRAMAS CRÍTICOS ---
@@ -1687,16 +1279,11 @@ def logica_principal_exames(driver_existente=None):
             for critico in lipidogramas_criticos:
                 linha_mensagem = f"Prescrição {critico['prescricao']}: {critico['parametro']} com valor crítico de {critico['valor']:.2f} {critico['unidade']}."
                 mensagens_lipidogramas_criticos_whatsapp.append([linha_mensagem])
-            driver = enviar_whatsapp_laboratorio(mensagens_lipidogramas_criticos_whatsapp, driver_existente=driver, modo_teste=MODO_TESTE_WHATSAPP)
+            enviar_whatsapp_laboratorio(mensagens_lipidogramas_criticos_whatsapp, modo_teste=MODO_TESTE_WHATSAPP)
         else:
             registrar_log("Nenhum lipidograma crítico encontrado para enviar.")
     else:
         registrar_log("Nenhum resultado de hemograma/exame bruto encontrado para processar.")
-    # --- FIM DO PROCESSAMENTO DE LIPIDOGRAMAS CRÍTICOS ---
-    
-    # Retorna o driver para fechamento posterior
-    return driver
-    
     registrar_log("logica_principal_background - FIM")
 
 def tempo_espera_emergencia():
@@ -2226,7 +1813,7 @@ def fetch_ordens_servico_ti() -> pd.DataFrame:
         registrar_log(f"Erro ao buscar OS TI: {e}")
         return pd.DataFrame()
 
-def ordens_de_servico_com_mais_de_2_dias(driver_existente: webdriver.Chrome = None) -> webdriver.Chrome:
+def ordens_de_servico_com_mais_de_2_dias():
     """
     Processa ordens de serviço atrasadas e envia indicadores para o grupo de WhatsApp da TI.
     """
@@ -2236,11 +1823,10 @@ def ordens_de_servico_com_mais_de_2_dias(driver_existente: webdriver.Chrome = No
         df = fetch_ordens_servico_ti()
         if df.empty:
             registrar_log("Nenhuma OS pendente encontrada.")
-            return driver_existente
+            return
 
-        # Agrupamento por ANALISTA (Nome abreviado retornado pela query)
+        # Agrupamento por ANALISTA
         analistas_raw = df['ANALISTA'].unique()
-        # Filtra NaNs e valores vazios, convertendo para string
         analistas = sorted([str(a) for a in analistas_raw if pd.notna(a) and str(a).strip() != ""])
         
         msg_corpo = "📊 *HSF - MONITORAMENTO O.S. TI*\n\n"
@@ -2249,10 +1835,8 @@ def ordens_de_servico_com_mais_de_2_dias(driver_existente: webdriver.Chrome = No
         for analista in analistas:
             df_analista = df[df['ANALISTA'] == analista].copy()
             total = len(df_analista)
-            # Atraso se IDADE_DA_OS > 2
-            # Garantir que IDADE_DA_OS é numérico
-            df_analista['IDADE_DA_OS'] = pd.to_numeric(df_analista['IDADE_DA_OS'], errors='coerce').fillna(0)
-            atrasadas = len(df_analista[df_analista['IDADE_DA_OS'] > 2])
+            df_analista.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_analista['IDADE_DA_OS'], errors='coerce').fillna(0)
+            atrasadas = len(df_analista[df_analista['IDADE_DA_OS'].astype(float) > 2])
             
             linha = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
             detalhes.append(linha)
@@ -2264,131 +1848,78 @@ def ordens_de_servico_com_mais_de_2_dias(driver_existente: webdriver.Chrome = No
             
         msg_corpo += f"\n\n*Total Geral:* {len(df)} OS pendentes."
 
-        # Envio via WhatsApp
+        # Envio via WhatsApp (Playwright)
         registrar_log("Enviando relatório TI para grupo: HSF - O.S. TI")
-        driver = enviar_whatsapp_grupo("HSF - O.S. TI", msg_corpo, driver_existente)
+        enviar_whatsapp_grupo("HSF - O.S. TI", msg_corpo)
         
         registrar_log("ordens_de_servico_com_mais_de_2_dias - FIM")
-        return driver
     except Exception as e:
         registrar_log(f"Erro no processamento de OS TI: {e}")
-        return driver_existente
+
 
 # Classe AppGUI removida - não precisamos mais da interface gráfica
 # A execução agora é automática através da função main()
 
 def executar_ciclo_completo():
     """
-    Executa um ciclo completo de verificação (Emergência + Laboratório).
-    
-    Retorna:
-        bool: True se o ciclo foi concluído (mesmo com erros em etapas individuais),
-              False se houve erro crítico que impediu a execução.
+    Executa um ciclo completo de monitoramento usando Playwright.
+    Gerencia o ciclo de vida do browser conforme GEMINI.md.
     """
-    global driver_emergencia_global, driver_whatsapp_global
+    registrar_log("--- INICIANDO CICLO PLAYWRIGHT ---")
     
     try:
-        registrar_log("=== INICIANDO CICLO DE EXECUÇÃO ===")
-        driver_whatsapp = None
-        
-        # Primeira função: enviar_whatsapp_emergencia() - Grupo da Recepção
-        registrar_log("Executando enviar_whatsapp_emergencia() - Grupo da Recepção")
-        try:
-            df_emergencia = tempo_espera_emergencia()
-            if df_emergencia is not None:
-                processar_alertas_tempo_unificado(df_emergencia)
-                registrar_log("enviar_whatsapp_emergencia() concluída com sucesso")
-                # Captura o driver global para reutilizar
-                driver_whatsapp = driver_emergencia_global
-            else:
-                registrar_log("Erro: DataFrame da emergência retornou None")
-        except Exception as e:
-            registrar_log(f"Erro em enviar_whatsapp_emergencia(): {e}")
-        
-        # Segunda função: enviar_whatsapp_laboratorio() - Grupo do Laboratório
-        registrar_log("Executando enviar_whatsapp_laboratorio() - Grupo do Laboratório")
-        try:
-            driver_whatsapp = logica_principal_exames(driver_existente=driver_whatsapp)
-            registrar_log("Lógica de exames concluída com sucesso")
-        except Exception as e:
-            registrar_log(f"Erro em enviar_whatsapp_laboratorio(): {e}")
+        # 1. TI (Movido para primeira tarefa conforme solicitado)
+        registrar_log("Processando O.S. TI (Prioridade Máxima)...")
+        ordens_de_servico_com_mais_de_2_dias()
 
-        # Terceira função: Monitoramento de OS TI
-        registrar_log("Executando ordens_de_servico_com_mais_de_2_dias() - Grupo TI")
-        try:
-            driver_whatsapp = ordens_de_servico_com_mais_de_2_dias(driver_existente=driver_whatsapp)
-            registrar_log("Monitoramento de OS TI concluído com sucesso")
-        except Exception as e:
-            registrar_log(f"Erro em monitoramento de OS TI: {e}")
+        # 2. Emergência
+        registrar_log("Processando Alertas Emergência...")
+        df_emergencia = tempo_espera_emergencia()
+        if df_emergencia is not None:
+            processar_alertas_tempo_unificado(df_emergencia)
+            
+        # 3. Laboratório
+        registrar_log("Processando Exames Laboratório...")
+        logica_principal_exames()
         
-        # Fecha o WhatsApp Web após enviar ambas as mensagens
-        if driver_whatsapp and driver_is_alive(driver_whatsapp):
-            try:
-                registrar_log("Fechando WhatsApp Web após envio de ambas as mensagens...")
-                driver_whatsapp.quit()
-                registrar_log("WhatsApp Web fechado com sucesso")
-            except Exception as e:
-                registrar_log(f"Erro ao fechar WhatsApp Web: {e}")
-            finally:
-                # Limpa as variáveis globais
-                driver_emergencia_global = None
-                driver_whatsapp_global = None
-        
-        registrar_log("=== CICLO DE EXECUÇÃO CONCLUÍDO ===")
         return True
-        
     except Exception as e:
-        registrar_log(f"Erro crítico no ciclo principal: {e}")
+        registrar_log(f"Erro crítico no ciclo Playwright: {e}")
         return False
+    finally:
+        # Padrão GEMINI.md: Fechar e recriar entre ciclos críticos
+        fechar_playwright()
+        registrar_log("--- CICLO FINALIZADO E PLAYWRIGHT LIMPO ---")
 
 def main():
-    """
-    Função principal que executa o loop infinito de verificação.
-    Agora utiliza executar_ciclo_completo() para modularidade.
-    """
-    registrar_log("MAIN - INICIO - Execução automática iniciada (Loop Horário)")
+    """Loop principal de execução automática (HSF Olho de Deus v3.0)."""
+    registrar_log("INICIANDO SISTEMA - OLHO DE DEUS V3.0 (PLAYWRIGHT ENGINE)")
     
-    # Inicializar Oracle Client uma única vez no início
     if not inicializar_oracle_client_global():
-        registrar_log("FALHA CRÍTICA: Não foi possível inicializar o Oracle Client. Encerrando.")
+        registrar_log("ERRO FATAL: Oracle Client indisponível. Encerrando.")
         return
 
     while True:
         try:
             sucesso = executar_ciclo_completo()
             
-            # Cálculo para executar na próxima hora cheia (ex: 10:00, 11:00, 12:00)
+            # Cálculo de intervalo (1 hora cheia)
             agora = datetime.now()
-            # Próxima hora redonda
             proxima_hora = (agora + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
-            
-            # Se por acaso a execução foi muito rápida e ainda estamos na mesma hora (ex: 09:59 -> 10:00)
-            # o timedelta(hours=1) já garante que vamos para a próxima.
-            # Mas se a execução demorou e já passou da hora alvo, o timedelta ajusta.
-            
             segundos_espera = (proxima_hora - agora).total_seconds()
             
-            if segundos_espera < 0:
-                # Segurança: se o cálculo der negativo (algo estranho), espera 1 hora padrão
-                segundos_espera = 3600
-                proxima_hora = agora + timedelta(seconds=3600)
-
-            if sucesso:
-                registrar_log(f"Ciclo concluído. Aguardando {int(segundos_espera)}s até a próxima execução às {proxima_hora.strftime('%H:%M:%S')}...")
-                time.sleep(segundos_espera)
-            else:
-                registrar_log("Erro crítico detectado. Aguardando 1 hora antes de tentar novamente...")
-                time.sleep(3600) # Mantém 1h fixa em caso de erro crítico para evitar loop rápido de erro
+            if segundos_espera <= 0: segundos_espera = 3600
+            
+            registrar_log(f"Aguardando {int(segundos_espera)}s até a próxima execução às {proxima_hora.strftime('%H:%M:%S')}")
+            time.sleep(segundos_espera)
             
         except KeyboardInterrupt:
-            registrar_log("Execução interrompida pelo usuário (Ctrl+C)")
+            registrar_log("Encerrado pelo usuário.")
+            fechar_playwright()
             break
         except Exception as e:
-            registrar_log(f"Erro não tratado no loop principal: {e}")
-            registrar_log("Aguardando 1 hora antes de tentar novamente...")
-            time.sleep(3600)
-    
-    registrar_log("MAIN - FIM - Execução automática finalizada")
+            registrar_log(f"Erro no loop principal: {e}")
+            time.sleep(300) # Espera 5 min em caso de erro genérico
 
 if __name__ == "__main__":
     """

@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0] - 2026-04-14
+
+### Alterado
+- **Core Engine**: Migração completa de Selenium para **Playwright (Sync API)** conforme diretrizes `GEMINI.md`.
+- **Automação**: Implementada gestão de contextos persistentes para WhatsApp Web, eliminando dependência de `webdriver-manager` e `pyautogui`.
+- **Resiliência**: Adicionada função de Auditoria Visual (screenshots automáticos em erro).
+- **Performance**: Limpeza do ciclo de vida do navegador entre iterações do loop principal.
+- **Fluxo de Trabalho**: Reordenado ciclo de monitoramento para priorizar O.S. TI como primeira tarefa.
+- **Interface (GUI)**: Implementado auto-start do fluxo ao abrir o app e reset automático do `log.txt` na inicialização.
+
+## [2.2.1] - 2026-04-14
+
+### Corrigido
+- **Monitoramento TI**: Corrigido erro de tipagem (`TypeError: str vs float`) na comparação da idade das Ordens de Serviço.
+- **WhatsApp Web**: Atualizados seletores de busca para incluir `data-testid="chat-list-search"` e estratégias via CSS/XPah para maior resiliência no WhatsApp Business.
+
 ## [2.2.0] - 2026-04-14
 
 ### Adicionado

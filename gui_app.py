@@ -17,11 +17,9 @@ from version import __version__
 from main import (
     executar_ciclo_completo,
     set_log_callback,
-    driver_emergencia_global,
-    driver_whatsapp_global,
-    driver_is_alive,
     inicializar_oracle_client_global,
-    ordens_de_servico_com_mais_de_2_dias
+    ordens_de_servico_com_mais_de_2_dias,
+    fechar_playwright
 )
 
 
@@ -48,6 +46,13 @@ class HSFApp(ctk.CTk):
         
         # Inicializar Oracle Client Globalmente
         inicializar_oracle_client_global()
+        
+        # Resetar arquivo de log ao abrir o app
+        try:
+            with open('log.txt', 'w', encoding='utf-8') as f:
+                f.write(f"{datetime.now().strftime('%Y-%m-%d %H-%M-%S')} - Log resetado na inicializacao\n")
+        except Exception as e:
+            print(f"Erro ao resetar log: {e}")
         
         # Evento para controlar parada
         self.stop_event = threading.Event()
@@ -158,6 +163,9 @@ class HSFApp(ctk.CTk):
             text_color="#555555"
         )
         self.version_label.pack(side="bottom", anchor="e", pady=(5, 0))
+        
+        # Auto-start após 500ms
+        self.after(500, self.executar_ciclo)
     
     def adicionar_log_callback(self, mensagem):
         """Callback chamada pelo main.py quando um log é gerado."""
@@ -234,13 +242,11 @@ class HSFApp(ctk.CTk):
                 # Data/hora inicio do ciclo
                 inicio_ciclo = datetime.now()
                 
-                # Executa APENAS o ciclo de OS TI (Momentâneo para Validação)
+                # Executa o ciclo completo
                 try:
-                    # Capture o driver global para reutilizar se necessário
-                    global driver_whatsapp_global
-                    driver_whatsapp_global = ordens_de_servico_com_mais_de_2_dias(driver_existente=driver_whatsapp_global)
+                    executar_ciclo_completo()
                 except Exception as e_ciclo:
-                     self.adicionar_log(f"⚠️ Erro ao executar validação OS TI: {e_ciclo}")
+                     self.adicionar_log(f"⚠️ Erro ao executar ciclo completo: {e_ciclo}")
                 
                 if self.stop_event.is_set():
                     self.adicionar_log("🛑 Execução interrompida pelo usuário.")
@@ -299,18 +305,11 @@ class HSFApp(ctk.CTk):
         
     def _fechar_drivers_forca(self):
         """Fecha os drivers do WhatsApp Web globalmente."""
-        # Importar globais para fechar
-        from main import driver_emergencia_global, driver_whatsapp_global, driver_is_alive
+        from main import fechar_playwright
         
         try:
-            if driver_emergencia_global and driver_is_alive(driver_emergencia_global):
-                driver_emergencia_global.quit()
-                self.adicionar_log("🔒 Driver de emergência fechado forçosamente")
-                
-            if driver_whatsapp_global and driver_is_alive(driver_whatsapp_global):
-                driver_whatsapp_global.quit()
-                self.adicionar_log("🔒 Driver de laboratório fechado forçosamente")
-                
+            fechar_playwright()
+            self.adicionar_log("🔒 Playwright (Chromium) fechado forçosamente")
         except Exception as e:
             self.adicionar_log(f"⚠️ Erro ao fechar drivers: {e}")
 
