@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.2.1] - 2026-04-14
+### Alterado
+- **Ordem de Auto-start**: Ajustada a sequência de inicialização para enviar as **O.S. Encerradas Hoje** primeiro, seguidas pelas **O.S. Atrasadas (>2 dias)**.
+
 ## [3.2.0] - 2026-04-14
 ### Adicionado
 - **Monitoramento de OS Encerradas Hoje (TI)**: Nova funcionalidade que reporta todas as ordens de serviço finalizadas no dia, agrupadas alfabeticamente por analista. Inclui descrições curtas e totais diários.

@@ -318,10 +318,18 @@ class HSFApp(ctk.CTk):
         
         def _task():
             try:
-                from main import ordens_de_servico_com_mais_de_2_dias, fechar_playwright
-                self.adicionar_log("🚀 [AUTO-START] Iniciando Processamento de O.S. TI...")
+                from main import ordens_de_servico_com_mais_de_2_dias, ordens_de_servico_fechadas_hoje, fechar_playwright
+                self.adicionar_log("🚀 [AUTO-START] Iniciando Processamento de O.S. TI (Geral)...")
+                
+                # 1. Fechadas Hoje
+                self.adicionar_log("📥 Processando O.S. Encerradas Hoje...")
+                ordens_de_servico_fechadas_hoje()
+                
+                # 2. Atrasadas (>2 dias)
+                self.adicionar_log("⚠️ Processando O.S. Atrasadas (>2 dias)...")
                 ordens_de_servico_com_mais_de_2_dias()
-                self.adicionar_log("✅ [AUTO-START] Fluxo TI concluído com sucesso.")
+                
+                self.adicionar_log("✅ [AUTO-START] Concluído com sucesso.")
             except Exception as e:
                 self.adicionar_log(f"❌ [AUTO-START] Falha no fluxo TI: {e}")
             finally:
