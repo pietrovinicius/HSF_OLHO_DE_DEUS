@@ -3,4 +3,4 @@ Módulo centralizado de versionamento do projeto HSF Olho de Deus.
 Seguindo Semantic Versioning (SemVer).
 """
 
-__version__ = "3.3.0"
+__version__ = "3.3.1"

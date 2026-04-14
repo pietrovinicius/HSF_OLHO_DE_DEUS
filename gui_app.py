@@ -38,11 +38,13 @@ class HSFApp(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
         
-        # Estado da aplicação
+        # Controle de Threads / Eventos
         self.executando = False
         self.thread_execucao = None
         self.parar_loop = False
-        
+        self.stop_event = threading.Event()
+        self.wake_up_event = threading.Event()
+        self.forcar_execucao_ti_flag = False
         
         # Inicializar Oracle Client Globalmente
         inicializar_oracle_client_global()
@@ -53,9 +55,6 @@ class HSFApp(ctk.CTk):
                 f.write(f"{datetime.now().strftime('%Y-%m-%d %H-%M-%S')} - Log resetado na inicializacao\n")
         except Exception as e:
             print(f"Erro ao resetar log: {e}")
-        
-        # Evento para controlar parada
-        self.stop_event = threading.Event()
         
         # Configurar callback de logos (conectar com main.py)
         set_log_callback(self.adicionar_log_callback)
@@ -113,6 +112,18 @@ class HSFApp(ctk.CTk):
             hover_color="#144870"
         )
         self.btn_executar.pack(side="left", expand=True, padx=(10, 5))
+        
+        # Botão Forçar Execução TI
+        self.btn_forcar = ctk.CTkButton(
+            self.botoes_frame,
+            text="🚀 Forçar O.S. TI",
+            command=self.forcar_execucao_ti,
+            font=ctk.CTkFont(size=14, weight="bold"),
+            height=50,
+            fg_color="#e67e22",
+            hover_color="#d35400"
+        )
+        self.btn_forcar.pack(side="left", expand=True, padx=(5, 5))
         
         # Botão Parar Execução
         self.btn_parar = ctk.CTkButton(
@@ -215,6 +226,8 @@ class HSFApp(ctk.CTk):
         self.executando = True
         self.parar_loop = False
         self.stop_event.clear() # Limpa evento de parada
+        self.wake_up_event.clear()
+        self.forcar_execucao_ti_flag = False
         self.atualizar_status("Rodando - Monitoramento Contínuo", "#ffaa00")
         
         # Desabilitar botão executar e habilitar botão parar
@@ -239,7 +252,17 @@ class HSFApp(ctk.CTk):
                 # Data/hora inicio do ciclo
                 inicio_ciclo = datetime.now()
                 
-                # Executa o ciclo completo
+                # Intercepção Forçada
+                if getattr(self, 'forcar_execucao_ti_flag', False):
+                    self.adicionar_log("⚡ Despachando Ciclo Forçado da TI (Ignorando Parâmetros de Hora)...")
+                    self.forcar_execucao_ti_flag = False
+                    try:
+                        executar_ciclo_completo(forcar_ti=True)
+                    except Exception as e_ciclo:
+                        self.adicionar_log(f"⚠️ Erro ao executar ciclo forçado: {e_ciclo}")
+                    continue  # Refaz o loop para recalcular ou dormir
+
+                # Executa o ciclo completo normal
                 try:
                     executar_ciclo_completo()
                 except Exception as e_ciclo:
@@ -262,11 +285,16 @@ class HSFApp(ctk.CTk):
                 # Log de espera
                 self.adicionar_log(f"⏳ Aguardando {int(segundos_espera)}s até a próxima execução ({proxima_hora.strftime('%H:%M:%S')})...")
                 
-                # Espera interruptível
-                # wait() retorna True se a flag for setada (interrupção), False se der timeout (continuar)
-                if self.stop_event.wait(timeout=segundos_espera):
-                    self.adicionar_log("🛑 Espera interrompida pelo usuário.")
-                    break
+                # Espera interruptível por PARAR ou FORÇAR
+                self.wake_up_event.clear()
+                if self.wake_up_event.wait(timeout=segundos_espera):
+                    if self.stop_event.is_set():
+                        self.adicionar_log("🛑 Espera interrompida pelo usuário.")
+                        break
+                    
+                    if getattr(self, 'forcar_execucao_ti_flag', False):
+                        # Wake up acionado pelo botão forçar
+                        continue
             
         except Exception as e:
             self.adicionar_log(f"❌ Erro crítico na thread: {e}")
@@ -284,21 +312,22 @@ class HSFApp(ctk.CTk):
 
             
     def parar_execucao(self):
-        """Para a execução atual."""
+        """Interrompe a execução."""
+        if not self.executando: return
+        self.adicionar_log("🛑 Solicitando parada segura...")
+        self.btn_parar.configure(state="disabled") # Evita duplos cliques
+        self.stop_event.set()
+        self.wake_up_event.set()
+        
+    def forcar_execucao_ti(self):
+        """Dispara a execução forçada ignorando as restrições de hora."""
         if not self.executando:
+            self.adicionar_log("⚠️ O monitoramento contínuo deve estar rodando para forçar a execução.")
             return
             
-        self.adicionar_log("⏹️ Solicitando parada...")
-        self.parar_loop = True
-        self.stop_event.set() # Sinaliza parada para sair do wait() imediatamente
-        
-        # Tentar fechar drivers
-        self._fechar_drivers_forca()
-        
-        # O reset dos botões acontecerá no finally da thread ou aqui?
-        # É mais seguro deixar a thread morrer naturalmente ou forçar o reset se ela travar.
-        # Vamos forçar o reset visual.
-        self._resetar_botoes()
+        self.forcar_execucao_ti_flag = True
+        self.wake_up_event.set()
+        self.adicionar_log("⚡ Solicitando execução forçada imediata à thread principal...")
         
     def _fechar_drivers_forca(self):
         """Fecha os drivers do WhatsApp Web globalmente."""

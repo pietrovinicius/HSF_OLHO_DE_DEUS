@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.3.1] - 2026-04-14
+### Adicionado
+- **Intercepção Wake-Up (TI)**: Novo botão "🚀 Forçar O.S. TI" permite despertar a *thread* que está em *sleep* de forma segura (thread-safe e sem ferir o Worker Isolation), disparando um ciclo de relatórios da TI de forma independente das restrições horárias e sem travar a interface.
+
 ## [3.3.0] - 2026-04-14
 ### Adicionado
 - **Scheduler Condicional (TI)**: O sistema de monitoramento agora utiliza regras baseadas em horas para despachar as rotinas. O fluxo de Pendências (atrasadas) da TI ocorre incondicionalmente todos os dias às **07h**, enquanto o de Encerradas ocorre às **18h** e **21h**.

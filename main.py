@@ -2053,7 +2053,7 @@ def ordens_de_servico_fechadas_hoje():
 # Classe AppGUI removida - não precisamos mais da interface gráfica
 # A execução agora é automática através da função main()
 
-def executar_ciclo_completo():
+def executar_ciclo_completo(forcar_ti=False):
     """
     Executa um ciclo completo de monitoramento usando Playwright.
     Gerencia o ciclo de vida do browser conforme GEMINI.md.
@@ -2063,21 +2063,26 @@ def executar_ciclo_completo():
     
     try:
         hora_atual = datetime.now().hour
-        registrar_log(f"Iniciando execuções agendadas. Hora atual: {hora_atual}h")
+        
+        if forcar_ti:
+            registrar_log(f"⚡ Ciclo Forçado Iniciado (Ignorando scheduler da TI)")
+        else:
+            registrar_log(f"Iniciando execuções agendadas. Hora atual: {hora_atual}h")
 
-        # 1. TI - Pendências (Prioridade Máxima - Apenas as 07h)
-        if hora_atual == 7:
-            registrar_log("Processando O.S. TI (Pendências) - Horário Agendado: 07h...")
+        # 1. TI - Pendências (Prioridade Máxima - Apenas as 07h ou forçado)
+        if forcar_ti or hora_atual == 7:
+            registrar_log("Processando O.S. TI (Pendências)...")
             ordens_de_servico_com_mais_de_2_dias()
         else:
             registrar_log(f"Pulo: OS Pendentes de TI só executam às 07h.")
 
-        # 1.1 TI - Encerradas Hoje (Apenas as 18h e 21h)
-        if hora_atual in (18, 21):
-            registrar_log(f"Processando O.S. TI (Encerradas Hoje) - Horário Agendado: {hora_atual}h...")
+        # 1.1 TI - Encerradas Hoje (Apenas as 18h e 21h ou forçado)
+        if forcar_ti or hora_atual in (18, 21):
+            registrar_log("Processando O.S. TI (Encerradas Hoje)...")
             ordens_de_servico_fechadas_hoje()
         else:
             registrar_log(f"Pulo: OS Encerradas de TI só executam às 18h e 21h.")
+
 
         # 2. Emergência (Contínuo)
         registrar_log("Processando Alertas Emergência...")
