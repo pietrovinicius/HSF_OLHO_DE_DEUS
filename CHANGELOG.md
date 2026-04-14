@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.2.2] - 2026-04-14
+### Adicionado
+- **Detalhamento de Pendências TI**: O relatório de monitoramento de O.S. TI agora exibe individualmente os números e descrições de cada ordem de serviço sob o analista responsável, atendendo solicitação da gerência para melhor visibilidade.
+
 ## [3.2.1] - 2026-04-14
 ### Alterado
 - **Ordem de Auto-start**: Ajustada a sequência de inicialização para enviar as **O.S. Encerradas Hoje** primeiro, seguidas pelas **O.S. Atrasadas (>2 dias)**.

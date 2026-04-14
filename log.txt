@@ -1,88 +1,78 @@
-2026-04-14 14-59-31 - Log resetado na inicializacao
-2026-04-14 14-59-32 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
-2026-04-14 14-59-32 - fetch_ordens_servico_ti - INÍCIO
-2026-04-14 14-59-32 - Fetch OS TI concluído: 38 registros.
-2026-04-14 14-59-32 - df:<bound method NDFrame.sample of     ORDEM_SERVICO  ...  EQUIPAMENTO
+2026-04-14 15-24-53 - Log resetado na inicializacao
+2026-04-14 15-24-54 - ordens_de_servico_fechadas_hoje - INÍCIO
+2026-04-14 15-24-54 - fetch_ordens_servico_fechadas_hoje - INÍCIO
+2026-04-14 15-24-54 - Fetch OS Encerradas Hoje concluído: 21 registros.
+2026-04-14 15-24-54 - Analista Alex M C: 2 OS encerradas.
+2026-04-14 15-24-54 - Analista Carlos L A: 2 OS encerradas.
+2026-04-14 15-24-54 - Analista Daiana A F M A: 1 OS encerradas.
+2026-04-14 15-24-54 - Analista Ivan C R J: 1 OS encerradas.
+2026-04-14 15-24-54 - Analista Kevin L O: 2 OS encerradas.
+2026-04-14 15-24-54 - Analista Natalia M M L: 4 OS encerradas.
+2026-04-14 15-24-54 - Analista Severino M S F: 2 OS encerradas.
+2026-04-14 15-24-54 - Analista Thiago O P R G: 4 OS encerradas.
+2026-04-14 15-24-54 - Iniciando disparo do relatório de OS encerradas...
+2026-04-14 15-24-54 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 15-24-54 - Iniciando Playwright Sync Engine...
+2026-04-14 15-24-55 - Criando novo contexto persistente para WhatsApp (geral)...
+2026-04-14 15-24-56 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 15-25-26 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 1140 caracteres).
+2026-04-14 15-25-28 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 15-25-28 - ordens_de_servico_fechadas_hoje - FIM
+2026-04-14 15-25-28 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
+2026-04-14 15-25-28 - fetch_ordens_servico_ti - INÍCIO
+2026-04-14 15-25-28 - Fetch OS TI concluído: 36 registros.
+2026-04-14 15-25-28 - df:<bound method NDFrame.sample of     ORDEM_SERVICO  ...  EQUIPAMENTO
 0          204170  ...  INFORMÁTICA
-1          204180  ...  INFORMÁTICA
-2          204171  ...  INFORMÁTICA
-3          204177  ...  INFORMÁTICA
-4          204123  ...  INFORMÁTICA
+1          204206  ...  INFORMÁTICA
+2          204177  ...  INFORMÁTICA
+3          204123  ...  INFORMÁTICA
+4          204111  ...  INFORMÁTICA
 5          204175  ...  INFORMÁTICA
-6          204111  ...  INFORMÁTICA
-7          204182  ...  INFORMÁTICA
-8          204043  ...  INFORMÁTICA
-9          203802  ...  INFORMÁTICA
-10         203746  ...  INFORMÁTICA
-11         203764  ...         Tasy
-12         203534  ...  INFORMÁTICA
-13         203272  ...  INFORMÁTICA
-14         203272  ...  INFORMÁTICA
-15         203096  ...  INFORMÁTICA
-16         202908  ...  INFORMÁTICA
-17         202878  ...  INFORMÁTICA
-18         202756  ...  INFORMÁTICA
-19         202752  ...         Tasy
-20         202599  ...         Tasy
-21         202628  ...  INFORMÁTICA
-22         202149  ...  INFORMÁTICA
-23         201994  ...  INFORMÁTICA
-24         202053  ...  INFORMÁTICA
-25         201994  ...  INFORMÁTICA
-26         200837  ...  INFORMÁTICA
-27         199798  ...  INFORMÁTICA
-28         199881  ...  INFORMÁTICA
+6          204043  ...  INFORMÁTICA
+7          203764  ...         Tasy
+8          203802  ...  INFORMÁTICA
+9          203746  ...  INFORMÁTICA
+10         203534  ...  INFORMÁTICA
+11         203272  ...  INFORMÁTICA
+12         203272  ...  INFORMÁTICA
+13         203096  ...  INFORMÁTICA
+14         202878  ...  INFORMÁTICA
+15         202908  ...  INFORMÁTICA
+16         202752  ...         Tasy
+17         202756  ...  INFORMÁTICA
+18         202628  ...  INFORMÁTICA
+19         202599  ...         Tasy
+20         202149  ...  INFORMÁTICA
+21         201994  ...  INFORMÁTICA
+22         201994  ...  INFORMÁTICA
+23         202053  ...  INFORMÁTICA
+24         200837  ...  INFORMÁTICA
+25         199881  ...  INFORMÁTICA
+26         199798  ...  INFORMÁTICA
+27         199578  ...  INFORMÁTICA
+28         199661  ...  INFORMÁTICA
 29         199600  ...  INFORMÁTICA
-30         199578  ...  INFORMÁTICA
-31         199661  ...  INFORMÁTICA
-32         199358  ...  INFORMÁTICA
-33         197410  ...  INFORMÁTICA
-34         197347  ...  INFORMÁTICA
-35         197125  ...         Tasy
-36         195669  ...  INFORMÁTICA
-37         194632  ...         Tasy
+30         199358  ...  INFORMÁTICA
+31         197410  ...  INFORMÁTICA
+32         197347  ...  INFORMÁTICA
+33         197125  ...         Tasy
+34         195669  ...  INFORMÁTICA
+35         194632  ...         Tasy
 
-[38 rows x 20 columns]>
-2026-04-14 14-59-32 - Identificados 4 analistas com OS pendentes.
-2026-04-14 14-59-32 - Calculando indicadores de atraso (>2 dias) por analista...
-2026-04-14 14-59-32 - Analista Alex M C: 2 OS (Atrasadas: 2)
-2026-04-14 14-59-32 - Analista Leandro G S P: 1 OS (Atrasadas: 1)
-2026-04-14 14-59-32 - Analista Severino M S F: 1 OS (Atrasadas: 1)
-2026-04-14 14-59-32 - Analista Thiago O P R G: 1 OS (Atrasadas: 1)
-2026-04-14 14-59-32 - Sem Analista: 33 OS (Atrasadas: 24)
-2026-04-14 14-59-32 - Corpo da mensagem TI gerado com sucesso.
-2026-04-14 14-59-32 - Iniciando interface Playwright para disparo TI...
-2026-04-14 14-59-32 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
-2026-04-14 14-59-32 - Iniciando Playwright Sync Engine...
-2026-04-14 14-59-33 - Criando novo contexto persistente para WhatsApp (geral)...
-2026-04-14 14-59-34 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
-2026-04-14 14-59-46 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 276 caracteres).
-2026-04-14 14-59-48 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
-2026-04-14 14-59-48 - ordens_de_servico_com_mais_de_2_dias - FIM
-2026-04-14 14-59-49 - Encerrando instâncias do Playwright...
-2026-04-14 14-59-49 - Playwright encerrado com sucesso.
-2026-04-14 15-14-36 - Inicializando Oracle Client globalmente...
-2026-04-14 15-14-36 - encontrar_diretorio_instantclient - INÍCIO
-2026-04-14 15-14-36 - Plataforma detectada: win32
-2026-04-14 15-14-36 - Diretório Instant Client encontrado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\util\instantclient-basiclite-windows
-2026-04-14 15-14-36 - encontrar_diretorio_instantclient - FIM
-2026-04-14 15-14-36 - Oracle Client inicializado com sucesso em: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\util\instantclient-basiclite-windows
-2026-04-14 15-14-36 - ordens_de_servico_fechadas_hoje - INÍCIO
-2026-04-14 15-14-36 - fetch_ordens_servico_fechadas_hoje - INÍCIO
-2026-04-14 15-14-36 - Fetch OS Encerradas Hoje concluído: 21 registros.
-2026-04-14 15-14-36 - Analista Alex M C: 2 OS encerradas.
-2026-04-14 15-14-36 - Analista Carlos L A: 2 OS encerradas.
-2026-04-14 15-14-36 - Analista Daiana A F M A: 1 OS encerradas.
-2026-04-14 15-14-36 - Analista Ivan C R J: 1 OS encerradas.
-2026-04-14 15-14-36 - Analista Kevin L O: 2 OS encerradas.
-2026-04-14 15-14-36 - Analista Natalia M M L: 4 OS encerradas.
-2026-04-14 15-14-36 - Analista Severino M S F: 2 OS encerradas.
-2026-04-14 15-14-36 - Analista Thiago O P R G: 4 OS encerradas.
-2026-04-14 15-14-36 - Iniciando disparo do relatório de OS encerradas...
-2026-04-14 15-14-36 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
-2026-04-14 15-14-36 - Iniciando Playwright Sync Engine...
-2026-04-14 15-14-37 - Criando novo contexto persistente para WhatsApp (geral)...
-2026-04-14 15-14-38 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
-2026-04-14 15-15-09 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 1158 caracteres).
-2026-04-14 15-15-11 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
-2026-04-14 15-15-11 - ordens_de_servico_fechadas_hoje - FIM
+[36 rows x 20 columns]>
+2026-04-14 15-25-28 - Identificados 4 analistas com OS pendentes.
+2026-04-14 15-25-28 - Calculando indicadores de atraso (>2 dias) por analista...
+2026-04-14 15-25-28 - Analista Alex M C: 2 OS (Atrasadas: 2)
+2026-04-14 15-25-28 - Analista Leandro G S P: 1 OS (Atrasadas: 1)
+2026-04-14 15-25-28 - Analista Severino M S F: 1 OS (Atrasadas: 1)
+2026-04-14 15-25-28 - Analista Thiago O P R G: 1 OS (Atrasadas: 1)
+2026-04-14 15-25-28 - Sem Analista: 31 OS (Atrasadas: 24)
+2026-04-14 15-25-28 - Corpo da mensagem TI gerado com sucesso.
+2026-04-14 15-25-28 - Iniciando interface Playwright para disparo TI...
+2026-04-14 15-25-28 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 15-25-28 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 15-26-10 - Sucesso: Mensagem enviada para o grupo HSF - O.S. TI (Payload: 2016 caracteres).
+2026-04-14 15-26-12 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 15-26-12 - ordens_de_servico_com_mais_de_2_dias - FIM
+2026-04-14 15-26-12 - Encerrando instâncias do Playwright...
+2026-04-14 15-26-12 - Playwright encerrado com sucesso.

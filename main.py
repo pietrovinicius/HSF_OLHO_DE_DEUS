@@ -1925,19 +1925,45 @@ def ordens_de_servico_com_mais_de_2_dias():
             df_analista.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_analista['IDADE_DA_OS'], errors='coerce').fillna(0)
             atrasadas = len(df_analista[df_analista['IDADE_DA_OS'].astype(float) > 2])
             
-            linha = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS"
-            detalhes.append(linha)
+            msg_analista = f"👨‍💻 *{analista}*: {total} OS ({atrasadas} em atraso ⚠️)\n" if atrasadas > 0 else f"👨‍💻 *{analista}*: {total} OS\n"
+            
+            # Listar apenas as OS que estão efetivamente em atraso (v3.2.3)
+            os_list = []
+            if atrasadas > 0:
+                df_atrasadas = df_analista[df_analista['IDADE_DA_OS'].astype(float) > 2]
+                for _, row in df_atrasadas.iterrows():
+                    os_num = row['ORDEM_SERVICO']
+                    desc = str(row['DESCRICAO']).strip()
+                    desc_curta = (desc[:60] + '...') if len(desc) > 60 else desc
+                    os_list.append(f" OS {os_num}: {desc_curta}")
+                
+                msg_analista += "\n".join(os_list)
+            
+            detalhes.append(msg_analista)
             registrar_log(f"Analista {analista}: {total} OS (Atrasadas: {atrasadas})")
 
-        # Adicionar "Sem Analista" (Solicitado v3.1.7)
+        # Adicionar "Sem Analista" (Solicitado v3.1.7 / v3.2.2)
         df_sem = df[df['ANALISTA'].isna() | (df['ANALISTA'].astype(str).str.strip() == "")]
         if not df_sem.empty:
             total_sem = len(df_sem)
             df_sem.loc[:, 'IDADE_DA_OS'] = pd.to_numeric(df_sem['IDADE_DA_OS'], errors='coerce').fillna(0)
             atrasadas_sem = len(df_sem[df_sem['IDADE_DA_OS'].astype(float) > 2])
             
-            linha_sem = f"❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS"
-            detalhes.append(linha_sem)
+            msg_sem = f"❓ *Sem Analista*: {total_sem} OS ({atrasadas_sem} em atraso ⚠️)\n" if atrasadas_sem > 0 else f"❓ *Sem Analista*: {total_sem} OS\n"
+            
+            # Listar apenas as OS sem analista que estão em atraso (v3.2.3)
+            os_list_sem = []
+            if atrasadas_sem > 0:
+                df_sem_atrasadas = df_sem[df_sem['IDADE_DA_OS'].astype(float) > 2]
+                for _, row in df_sem_atrasadas.iterrows():
+                    os_num = row['ORDEM_SERVICO']
+                    desc = str(row['DESCRICAO']).strip()
+                    desc_curta = (desc[:60] + '...') if len(desc) > 60 else desc
+                    os_list_sem.append(f" OS {os_num}: {desc_curta}")
+                
+                msg_sem += "\n".join(os_list_sem)
+            
+            detalhes.append(msg_sem)
             registrar_log(f"Sem Analista: {total_sem} OS (Atrasadas: {atrasadas_sem})")
 
         if not detalhes:
@@ -1989,7 +2015,7 @@ def ordens_de_servico_fechadas_hoje():
                 desc = str(row['DESCRICAO']).strip()
                 # Cortar descrição muito longa para manter legibilidade
                 desc_curta = (desc[:80] + '...') if len(desc) > 80 else desc
-                os_list.append(f"- OS {os_num}: {desc_curta}")
+                os_list.append(f" OS {os_num}: {desc_curta}")
             
             msg_analista += "\n".join(os_list)
             detalhes.append(msg_analista)
@@ -2001,7 +2027,7 @@ def ordens_de_servico_fechadas_hoje():
             msg_sem = "❓ *Sem Analista Atribuído*:\n"
             os_list_sem = []
             for _, row in df_sem.iterrows():
-                os_list_sem.append(f"- OS {row['ORDEM_SERVICO']}: {str(row['DESCRICAO'])[:80]}")
+                os_list_sem.append(f" OS {row['ORDEM_SERVICO']}: {str(row['DESCRICAO'])[:80]}")
             msg_sem += "\n".join(os_list_sem)
             detalhes.append(msg_sem)
 
