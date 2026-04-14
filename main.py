@@ -28,6 +28,10 @@ browser_instance = None
 page_whatsapp_global = None
 page_emergencia_global = None
 
+# SELETORES WHATSAPP (LEXICAL/META COMPATIBLE)
+WPP_SEARCH_SELECTOR = 'div[title="Caixa de texto de pesquisa"], div[title="Search input textbox"], [data-testid="chat-list-search"]'
+WPP_MESSAGE_SELECTOR = 'div[title="Mensagem"], div[aria-placeholder="Digite uma mensagem"], [data-testid="conversation-compose-box-input"], div[contenteditable="true"][role="textbox"]'
+
 # Variável global para controlar inicialização do Oracle Client
 oracle_client_inicializado = False
 
@@ -424,36 +428,29 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
             page.goto("https://web.whatsapp.com")
             page.wait_for_load_state("networkidle")
         
-        registrar_log("Aguardando interface do WhatsApp...")
+        registrar_log("Aguardando interface do WhatsApp (Sincronizando Mensagens)...")
         
-        # 2. Localização do Campo de Pesquisa (Multi-Seletor Resiliente)
-        seletores_pesquisa = [
-            'div[contenteditable="true"][data-tab="3"]',
-            '[data-testid="chat-list-search"]',
-            'div[role="textbox"][data-tab="3"]',
-            'div[title*="Pesquisar"]'
-        ]
-        
-        campo_pesquisa = None
-        for selector in seletores_pesquisa:
+        # 2. Localização do Campo de Pesquisa - Unificada e Dinâmica (Lexical Support)
+        try:
+            page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=120000)
+            campo_pesquisa = page.locator(WPP_SEARCH_SELECTOR).first
+        except Exception:
+            registrar_log("ERRO: Timeout ao localizar barra de pesquisa do WhatsApp (Layout possivelmente alterado).")
             try:
-                page.wait_for_selector(selector, state="visible", timeout=5000)
-                campo_pesquisa = page.locator(selector)
-                break
-            except Exception:
-                continue
-                
-        if not campo_pesquisa:
-            raise TimeoutError("Falha ao localizar campo de pesquisa do WhatsApp")
+                import pyautogui
+                pyautogui.alert("O layout interno do WhatsApp da EMERGÊNCIA foi atualizado!\n\nO robô estourou o tempo limite de 2 minutos.\n\nContate a equipe Dev para manutenção.", "Aviso Crítico RPA")
+            except: pass
+            raise TimeoutError("Falha ao localizar campo de pesquisa (Layout alterado ou rede lenta)")
 
         # 3. Pesquisa do Grupo
         nome_grupo = "HSF - RECEPÇÃO - TEMPOS DA EMERGÊNCIA"
-        campo_pesquisa.click()
+        campo_pesquisa.focus()
+        campo_pesquisa.click(force=True)
+        # Limpeza agressiva para despertar o React
         page.keyboard.press("Control+A")
         page.keyboard.press("Backspace")
-        page.fill(seletores_pesquisa[0] if "[data-tab='3']" in seletores_pesquisa[0] else seletores_pesquisa[1], "") # Garante limpeza
-        page.keyboard.type(nome_grupo, delay=100)
-        page.wait_for_timeout(2000)
+        campo_pesquisa.fill(nome_grupo)
+        page.wait_for_timeout(2500)
 
         # 4. Seleção do Resultado
         xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
@@ -462,8 +459,8 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
         page.wait_for_timeout(1000)
 
         # 5. Envio da Mensagem
-        xpath_chat = 'div[id="main"] div[contenteditable="true"][role="textbox"]'
-        page.wait_for_selector(xpath_chat, state="visible", timeout=5000)
+        page.wait_for_selector(WPP_MESSAGE_SELECTOR, state="visible", timeout=15000)
+        campo_chat = page.locator(WPP_MESSAGE_SELECTOR).first
         
         # Limpeza de caracteres não-BMP (emojis problemáticos) mantendo acentos
         mensagem_limpa = re.sub(r'[^\x00-\x7F\u00C0-\u00FF\*\:\-\(\)\[\]\.\,\;\!\?\s\/]+', '', mensagem_texto)
@@ -471,7 +468,7 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
         
         for i, linha in enumerate(linhas):
             if linha.strip():
-                page.type(xpath_chat, linha.strip())
+                campo_chat.type(linha.strip(), delay=10)
             if i < len(linhas) - 1:
                 page.keyboard.press("Shift+Enter")
                 
@@ -514,29 +511,24 @@ def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str):
             page.goto("https://web.whatsapp.com")
             page.wait_for_load_state("networkidle")
         
-        # 2. Pesquisa
-        seletores_pesquisa = [
-            'div[contenteditable="true"][data-tab="3"]',
-            '[data-testid="chat-list-search"]',
-            'div[role="textbox"][data-tab="3"]'
-        ]
-        
-        campo_pesquisa = None
-        for s in seletores_pesquisa:
+        # 2. Pesquisa (Lexical Framework Support)
+        try:
+            page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=120000)
+            campo_pesquisa = page.locator(WPP_SEARCH_SELECTOR).first
+        except Exception:
+            registrar_log(f"ERRO: Timeout na pesquisa do grupo {nome_grupo}.")
             try:
-                page.wait_for_selector(s, state="visible", timeout=5000)
-                campo_pesquisa = page.locator(s)
-                break
-            except: continue
-            
-        if not campo_pesquisa:
-            raise TimeoutError("Falha ao localizar campo de pesquisa")
+                import pyautogui
+                pyautogui.alert(f"O WhatsApp atualizou o layout de pesquisa!\n\nImpossível localizar a barra para: {nome_grupo}.", "Aviso Crítico RPA")
+            except: pass
+            raise TimeoutError("Falha ao localizar campo de pesquisa (Timeout 120s)")
 
-        campo_pesquisa.click()
+        campo_pesquisa.focus()
+        campo_pesquisa.click(force=True)
         page.keyboard.press("Control+A")
         page.keyboard.press("Backspace")
-        page.keyboard.type(nome_grupo, delay=100)
-        page.wait_for_timeout(2000)
+        campo_pesquisa.fill(nome_grupo)
+        page.wait_for_timeout(2500)
 
         # 3. Seleção do Grupo
         xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
@@ -545,15 +537,15 @@ def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str):
         page.wait_for_timeout(1000)
 
         # 4. Envio
-        xpath_chat = 'div[id="main"] div[contenteditable="true"][role="textbox"]'
-        page.wait_for_selector(xpath_chat, state="visible", timeout=5000)
+        page.wait_for_selector(WPP_MESSAGE_SELECTOR, state="visible", timeout=15000)
+        campo_chat = page.locator(WPP_MESSAGE_SELECTOR).first
         
         mensagem_limpa = re.sub(r'[^\x00-\x7F\u00C0-\u00FF\*\:\-\(\)\[\]\.\,\;\!\?\s\/]+', '', mensagem_texto)
         linhas = mensagem_limpa.split('\n')
         
         for i, linha in enumerate(linhas):
             if linha.strip():
-                page.type(xpath_chat, linha.strip())
+                campo_chat.type(linha.strip(), delay=10)
             if i < len(linhas) - 1:
                 page.keyboard.press("Shift+Enter")
         
@@ -593,14 +585,25 @@ def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
             page.goto("https://web.whatsapp.com")
             page.wait_for_load_state("networkidle")
             
-        # 2. Pesquisa
+        # 2. Pesquisa (Lexical Framework Support)
         nome_grupo = "LAB - VALORES CRÍTICOS"
-        xpath_pesquisa = 'div[contenteditable="true"][data-tab="3"]'
-        page.wait_for_selector(xpath_pesquisa, state="visible", timeout=10000)
-        page.click(xpath_pesquisa)
+        try:
+            page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=120000)
+            campo_pesq_lab = page.locator(WPP_SEARCH_SELECTOR).first
+        except Exception:
+            registrar_log("ERRO: Timeout na pesquisa do Laboratório.")
+            try:
+                import pyautogui
+                pyautogui.alert("WhatsApp Lab report atualizou layout.\nBarra de pesquisa não encontrada no limite de 2 minutos.", "Falha Laboratório")
+            except: pass
+            raise TimeoutError("Timeout localizando busca do laboratório")
+            
+        campo_pesq_lab.focus()
+        campo_pesq_lab.click(force=True)
         page.keyboard.press("Control+A")
         page.keyboard.press("Backspace")
-        page.keyboard.type(nome_grupo, delay=100)
+        campo_pesq_lab.fill(nome_grupo)
+        page.wait_for_timeout(2500)
         
         # 3. Seleção
         xpath_resultado = f"//span[@title='{nome_grupo}'] | //span[text()='{nome_grupo}']"
@@ -608,20 +611,20 @@ def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
         page.click(xpath_resultado)
         
         # 4. Composição da Mensagem Complexa
-        xpath_chat = 'div[id="main"] div[contenteditable="true"][role="textbox"]'
-        page.wait_for_selector(xpath_chat, state="visible", timeout=5000)
+        page.wait_for_selector(WPP_MESSAGE_SELECTOR, state="visible", timeout=15000)
+        campo_chat_lab = page.locator(WPP_MESSAGE_SELECTOR).first
         
         agora_str = datetime.now().strftime("%d/%m/%Y às %Hh%Mm")
         cabecalho = f"*{agora_str}*\n\n*Analista Plantonista confirmar ciência do(s) resultado(s) crítico(s) encontrado(s):*\n"
         
-        page.type(xpath_chat, cabecalho)
+        campo_chat_lab.type(cabecalho, delay=10)
         page.keyboard.press("Shift+Enter")
         
         for exame in lista_exames:
             for item in exame:
                 if item.strip():
                     item_limpo = re.sub(r'[^\x00-\x7F\u00C0-\u00FF\*\:\-\(\)\[\]\.\,\;\!\?\s\/]+', '', item)
-                    page.type(xpath_chat, item_limpo.strip())
+                    campo_chat_lab.type(item_limpo.strip(), delay=10)
                     page.keyboard.press("Shift+Enter")
             page.keyboard.press("Shift+Enter") # Separador entre exames
             
@@ -1808,6 +1811,7 @@ def fetch_ordens_servico_ti() -> pd.DataFrame:
             
             df = pd.read_sql(query, connection)
             registrar_log(f"Fetch OS TI concluído: {len(df)} registros.")
+            registrar_log(f"df:{df.sample}")
             return df
     except Exception as e:
         registrar_log(f"Erro ao buscar OS TI: {e}")

@@ -305,13 +305,8 @@ class HSFApp(ctk.CTk):
         
     def _fechar_drivers_forca(self):
         """Fecha os drivers do WhatsApp Web globalmente."""
-        from main import fechar_playwright
-        
-        try:
-            fechar_playwright()
-            self.adicionar_log("🔒 Playwright (Chromium) fechado forçosamente")
-        except Exception as e:
-            self.adicionar_log(f"⚠️ Erro ao fechar drivers: {e}")
+        self.adicionar_log("🔒 Sinal de parada enviado ao Loop Principal.")
+        self.adicionar_log("⚠️ O ciclo será finalizado e o navegador limpo com segurança pela thread nativa.")
 
 
 def main():

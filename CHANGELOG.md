@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.0] - 2026-04-14
+### Adicionado
+- **Resiliência WhatsApp**: Implementação de constantes unificadas de seletores (`WPP_SEARCH_SELECTOR`, `WPP_MESSAGE_SELECTOR`) compatíveis com o framework Lexical da Meta.
+- **Lógica de Input**: Adotado uso de `.fill()` com pré-limpeza via `Control+A` + `Backspace` para garantir gatilhos de estado no React/Lexical.
+
+### Alterado
+- **Performance**: Redução de timeouts redundantes e otimização do tempo de espera de pesquisa para 120s globais.
+- **Logging**: Melhoria nas mensagens de erro e alertas de interface para falhas de layout.
+
 ## [3.0.0] - 2026-04-14
 
 ### Alterado
