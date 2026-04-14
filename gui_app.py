@@ -20,7 +20,8 @@ from main import (
     driver_emergencia_global,
     driver_whatsapp_global,
     driver_is_alive,
-    inicializar_oracle_client_global
+    inicializar_oracle_client_global,
+    ordens_de_servico_com_mais_de_2_dias
 )
 
 
@@ -96,10 +97,10 @@ class HSFApp(ctk.CTk):
         self.botoes_frame = ctk.CTkFrame(self.main_frame)
         self.botoes_frame.pack(fill="x", pady=(0, 20))
         
-        # Botão Executar Ciclo Completo
+        # Botão Executar Ciclo Completo (MOMENTANEAMENTE: VALIDAR OS TI)
         self.btn_executar = ctk.CTkButton(
             self.botoes_frame,
-            text="▶️ Executar Ciclo Completo",
+            text="🧪 Validar Fluxo O.S. TI",
             command=self.executar_ciclo,
             font=ctk.CTkFont(size=16, weight="bold"),
             height=50,
@@ -233,11 +234,13 @@ class HSFApp(ctk.CTk):
                 # Data/hora inicio do ciclo
                 inicio_ciclo = datetime.now()
                 
-                # Executa o ciclo
+                # Executa APENAS o ciclo de OS TI (Momentâneo para Validação)
                 try:
-                    executar_ciclo_completo()
+                    # Capture o driver global para reutilizar se necessário
+                    global driver_whatsapp_global
+                    driver_whatsapp_global = ordens_de_servico_com_mais_de_2_dias(driver_existente=driver_whatsapp_global)
                 except Exception as e_ciclo:
-                     self.adicionar_log(f"⚠️ Erro ao executar ciclo: {e_ciclo}")
+                     self.adicionar_log(f"⚠️ Erro ao executar validação OS TI: {e_ciclo}")
                 
                 if self.stop_event.is_set():
                     self.adicionar_log("🛑 Execução interrompida pelo usuário.")

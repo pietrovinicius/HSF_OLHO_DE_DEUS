@@ -2239,12 +2239,14 @@ def ordens_de_servico_com_mais_de_2_dias(driver_existente: webdriver.Chrome = No
             return driver_existente
 
         # Agrupamento por ANALISTA (Nome abreviado retornado pela query)
-        analistas = df['ANALISTA'].unique()
+        analistas_raw = df['ANALISTA'].unique()
+        # Filtra NaNs e valores vazios, convertendo para string
+        analistas = sorted([str(a) for a in analistas_raw if pd.notna(a) and str(a).strip() != ""])
         
         msg_corpo = "📊 *HSF - MONITORAMENTO O.S. TI*\n\n"
         detalhes = []
 
-        for analista in sorted([a for a in analistas if a]):
+        for analista in analistas:
             df_analista = df[df['ANALISTA'] == analista].copy()
             total = len(df_analista)
             # Atraso se IDADE_DA_OS > 2

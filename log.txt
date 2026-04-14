@@ -1,0 +1,10 @@
+2026-04-14 11-15-34 - Inicializando Oracle Client globalmente...
+2026-04-14 11-15-34 - encontrar_diretorio_instantclient - INÍCIO
+2026-04-14 11-15-34 - Plataforma detectada: win32
+2026-04-14 11-15-34 - Diretório Instant Client encontrado: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\util\instantclient-basiclite-windows
+2026-04-14 11-15-34 - encontrar_diretorio_instantclient - FIM
+2026-04-14 11-15-34 - Oracle Client inicializado com sucesso em: C:\Pietro\Projetos\HSF_OLHO_DE_DEUS\util\instantclient-basiclite-windows
+2026-04-14 11-15-38 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
+2026-04-14 11-15-38 - fetch_ordens_servico_ti - INÍCIO
+2026-04-14 11-15-39 - Fetch OS TI concluído: 145 registros.
+2026-04-14 11-15-39 - Erro no processamento de OS TI: '<' not supported between instances of 'str' and 'float'
