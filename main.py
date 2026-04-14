@@ -28,9 +28,10 @@ browser_instance = None
 page_whatsapp_global = None
 page_emergencia_global = None
 
-# SELETORES WHATSAPP (LEXICAL/META COMPATIBLE)
-WPP_SEARCH_SELECTOR = 'div[title="Caixa de texto de pesquisa"], div[title="Search input textbox"], [data-testid="chat-list-search"]'
-WPP_MESSAGE_SELECTOR = 'div[title="Mensagem"], div[aria-placeholder="Digite uma mensagem"], [data-testid="conversation-compose-box-input"], div[contenteditable="true"][role="textbox"]'
+# SELETORES WHATSAPP (LEXICAL/META COMPATIBLE & BUSINESS SUPPORT)
+WPP_SEARCH_SELECTOR = 'input[placeholder="Pesquisar ou começar uma nova conversa"], input[placeholder="Search or start new chat"], [data-testid="chat-list-search"], input[role="textbox"], div[role="textbox"]'
+WPP_MESSAGE_SELECTOR = 'div[role="textbox"][aria-label^="Digite uma mensagem"], div[role="textbox"][aria-label^="Type a message"], [data-testid="conversation-compose-box-input"], div[title="Mensagem"]'
+WPP_QRCODE_SELECTOR = 'canvas[aria-label="Scan me!"], [data-testid="qrcode"]'
 
 # Variável global para controlar inicialização do Oracle Client
 oracle_client_inicializado = False
@@ -111,38 +112,29 @@ def fechar_playwright():
         page_whatsapp_global = None
         page_emergencia_global = None
 
-def inicializar_browser_se_necessario():
-    """Garante que o browser do Playwright esteja rodando."""
-    global playwright_manager, browser_instance
+def inicializar_playwright_engine():
+    """Garante que o motor Playwright Sync esteja rodando."""
+    global playwright_manager
     
     if playwright_manager is None:
         registrar_log("Iniciando Playwright Sync Engine...")
         playwright_manager = sync_playwright().start()
-        
-    if browser_instance is None:
-        registrar_log("Lançando Chromium Browser (Playwright)...")
-        browser_instance = playwright_manager.chromium.launch(
-            headless=False,
-            args=["--no-sandbox", "--disable-dev-shm-usage"]
-        )
-    return browser_instance
+    return playwright_manager
 
 def get_wa_page(tipo: str = "geral") -> Page:
     """
-    Obtém ou cria uma página com contexto persistente para o WhatsApp.
-    Tipos: 'geral' ou 'emergencia'
+    Obtém ou cria uma página com contexto persistente único para o WhatsApp.
+    Unificado conforme solicitação do usuário (v3.1.4).
+    O parâmetro 'tipo' é mantido apenas para compatibilidade de assinatura.
     """
-    global browser_instance, page_whatsapp_global, page_emergencia_global
+    global page_whatsapp_global
     
-    inicializar_browser_se_necessario()
+    # 1. Garante motor rodando
+    inicializar_playwright_engine()
     
-    # Seleção de variável e perfil
-    if tipo == "emergencia":
-        page_ref = page_emergencia_global
-        profile_dir = "wpp_emergencia"
-    else:
-        page_ref = page_whatsapp_global
-        profile_dir = "wpp_geral"
+    # 2. Perfil Unificado (Entregando sempre o mesmo perfil independente do tipo)
+    profile_dir = "wpp_geral"
+    page_ref = page_whatsapp_global
         
     # Verifica se a página ainda está viva
     if page_is_alive(page_ref):
@@ -155,27 +147,72 @@ def get_wa_page(tipo: str = "geral") -> Page:
     user_data_dir = os.path.join(dir_path, "profile", profile_dir)
     os.makedirs(user_data_dir, exist_ok=True)
     
-    # No Playwright, launch_persistent_context cria o browser e o contexto ao mesmo tempo
-    # Mas como queremos gerenciar o browser globalmente, usamos contextos se possível.
-    # No entanto, persistência de dados no Playwright é mais fácil via launch_persistent_context.
-    # Para manter o padrão GEMINI (Zero-G e Elite), usaremos contextos isolados.
+    # Playwright Pro Arguments - Máxima Estabilidade em Windows
+    browser_args = [
+        "--no-sandbox", 
+        "--disable-dev-shm-usage",
+        "--disable-gpu", # Evita hangs em drivers de vídeo
+        "--disable-software-rasterizer",
+        "--disable-extensions",
+        "--no-first-run",
+        "--disable-notifications"
+    ]
     
-    context = playwright_manager.chromium.launch_persistent_context(
-        user_data_dir=user_data_dir,
-        headless=False,
-        no_viewport=True,
-        args=["--no-sandbox", "--disable-dev-shm-usage"]
-    )
-    
-    page = context.pages[0] if context.pages else context.new_page()
-    
-    # Armazena globalmente
-    if tipo == "emergencia":
-        page_emergencia_global = page
-    else:
-        page_whatsapp_global = page
+    try:
+        context = playwright_manager.chromium.launch_persistent_context(
+            user_data_dir=user_data_dir,
+            headless=False,
+            no_viewport=True,
+            args=browser_args,
+            slow_mo=50 # Pequeno delay para estabilidade de eventos
+        )
         
-    return page
+        page = context.pages[0] if context.pages else context.new_page()
+        
+        # Armazena globalmente
+        page_whatsapp_global = page
+            
+        return page
+    except Exception as e:
+        registrar_log(f"ERRO CRÍTICO ao lançar contexto persistente: {e}")
+        # Tentar limpar motor em caso de falha catastrófica
+        fechar_playwright()
+        raise
+
+def esperar_e_diagnosticar_whatsapp(page: Page, timeout: int = 120000) -> Page:
+    """
+    Aguarda a barra de pesquisa do WhatsApp com diagnóstico inteligente.
+    Se demorar, verifica QR Code e tira screenshot.
+    """
+    registrar_log("Aguardando barra de pesquisa (Diagnóstico Ativo)...")
+    
+    # Pasta de debug
+    temp_dir = os.path.join(os.getcwd(), "temp")
+    os.makedirs(temp_dir, exist_ok=True)
+    debug_path = os.path.join(temp_dir, "debug_whatsapp.png")
+
+    try:
+        # 1. Espera curta inicial (15s)
+        page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=15000)
+        return page
+    except Exception:
+        registrar_log("Busca demorando mais de 15s. Analisando tela...")
+        
+        # 2. Diagnóstico Visual
+        try:
+            page.screenshot(path=debug_path)
+            registrar_log(f"Screenshot de diagnóstico salvo em: {debug_path}")
+        except: pass
+
+        # 3. Verificar QR Code
+        if page.locator(WPP_QRCODE_SELECTOR).count() > 0:
+            registrar_log("⚠️ AVISO: WhatsApp está deslogado (QR Code detectado). Intervenção manual necessária.")
+        else:
+            registrar_log("QR Code não detectado. Aguardando carregamento total da interface...")
+
+        # 4. Espera o restante do tempo
+        page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=timeout - 15000)
+        return page
 
 def agora():
     agora = datetime.now()
@@ -419,7 +456,7 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
         registrar_log(f"[MODO TESTE] Mensagem Emergência: {mensagem_texto}")
         return
 
-    page = get_wa_page("emergencia")
+    page = get_wa_page()
     
     try:
         # 1. Navegação e Verificação de Estado
@@ -432,9 +469,16 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
         
         # 2. Localização do Campo de Pesquisa - Unificada e Dinâmica (Lexical Support)
         try:
-            page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=120000)
+            esperar_e_diagnosticar_whatsapp(page)
             campo_pesquisa = page.locator(WPP_SEARCH_SELECTOR).first
         except Exception:
+            # Auditoria Visual Imediata (Rule GEMINI.md)
+            try:
+                screenshot_path = os.path.join(os.getcwd(), "temp", f"error_search_{agora().replace(':', '-')}.png")
+                page.screenshot(path=screenshot_path)
+                registrar_log(f"Screenshot de erro salva em: {screenshot_path}")
+            except: pass
+
             registrar_log("ERRO: Timeout ao localizar barra de pesquisa do WhatsApp (Layout possivelmente alterado).")
             try:
                 import pyautogui
@@ -476,19 +520,19 @@ def enviar_whatsapp_emergencia(mensagem_texto: str, modo_teste: bool = False):
         page.keyboard.press("Enter") # Playwright keyboard API é muito robusta
         registrar_log("Mensagem enviada com sucesso (Enter).")
         
-        page.wait_for_timeout(5000) # Cooldown
+        page.wait_for_timeout(3000) # Cooldown reduzido
         
     except Exception as e:
-        registrar_log(f"ERRO CRÍTICO em enviar_whatsapp_emergencia: {e}")
-        # Auditoria Visual (GEMINI.md Rule)
+        # Auditoria Visual Imediata
         try:
             temp_dir = os.path.join(os.getcwd(), "temp")
             os.makedirs(temp_dir, exist_ok=True)
             screenshot_path = os.path.join(temp_dir, f"error_emergencia_{agora().replace(':', '-')}.png")
             page.screenshot(path=screenshot_path)
             registrar_log(f"Screenshot de erro salva em: {screenshot_path}")
-        except Exception as e_ss:
-            registrar_log(f"Falha ao capturar screenshot: {e_ss}")
+        except: pass
+
+        registrar_log(f"ERRO CRÍTICO em enviar_whatsapp_emergencia: {e}")
 
     registrar_log("enviar_whatsapp_emergencia - FIM")
 
@@ -513,9 +557,14 @@ def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str):
         
         # 2. Pesquisa (Lexical Framework Support)
         try:
-            page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=120000)
+            esperar_e_diagnosticar_whatsapp(page)
             campo_pesquisa = page.locator(WPP_SEARCH_SELECTOR).first
         except Exception:
+            try:
+                path = os.path.join("temp", f"error_search_{nome_grupo}_{agora().replace(':','-')}.png")
+                page.screenshot(path=path)
+            except: pass
+
             registrar_log(f"ERRO: Timeout na pesquisa do grupo {nome_grupo}.")
             try:
                 import pyautogui
@@ -554,11 +603,12 @@ def enviar_whatsapp_grupo(nome_grupo: str, mensagem_texto: str):
         page.wait_for_timeout(2000)
 
     except Exception as e:
-        registrar_log(f"Erro em enviar_whatsapp_grupo({nome_grupo}): {e}")
         try:
             path = os.path.join("temp", f"error_{nome_grupo}_{agora().replace(':','-')}.png")
             page.screenshot(path=path)
+            registrar_log(f"Screenshot de erro salva em: {path}")
         except: pass
+        registrar_log(f"Erro em enviar_whatsapp_grupo({nome_grupo}): {e}")
 
     registrar_log(f"enviar_whatsapp_grupo({nome_grupo}) - FIM")
 
@@ -577,7 +627,7 @@ def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
         registrar_log(f"[MODO TESTE] Enviando {len(lista_exames)} exames para Laboratório")
         return
 
-    page = get_wa_page("geral")
+    page = get_wa_page()
     
     try:
         # 1. Navegação
@@ -588,9 +638,14 @@ def enviar_whatsapp_laboratorio(lista_exames, modo_teste: bool = False):
         # 2. Pesquisa (Lexical Framework Support)
         nome_grupo = "LAB - VALORES CRÍTICOS"
         try:
-            page.wait_for_selector(WPP_SEARCH_SELECTOR, state="visible", timeout=120000)
+            esperar_e_diagnosticar_whatsapp(page)
             campo_pesq_lab = page.locator(WPP_SEARCH_SELECTOR).first
         except Exception:
+            try:
+                path = os.path.join("temp", f"error_search_lab_{agora().replace(':','-')}.png")
+                page.screenshot(path=path)
+            except: pass
+
             registrar_log("ERRO: Timeout na pesquisa do Laboratório.")
             try:
                 import pyautogui
@@ -1884,7 +1939,9 @@ def executar_ciclo_completo():
             
         # 3. Laboratório
         registrar_log("Processando Exames Laboratório...")
-        logica_principal_exames()
+        lista_exames = logica_principal_exames()
+        if not lista_exames:
+            registrar_log("Monitoramento Lab: Nenhum exame crítico detectado no banco.")
         
         return True
     except Exception as e:

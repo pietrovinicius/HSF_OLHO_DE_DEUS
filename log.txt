@@ -1,11 +1,416 @@
-2026-04-14 12-27-17 - Log resetado na inicializacao
-2026-04-14 12-27-18 - --- INICIANDO CICLO PLAYWRIGHT ---
-2026-04-14 12-27-18 - Processando O.S. TI (Prioridade Máxima)...
-2026-04-14 12-27-18 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
-2026-04-14 12-27-18 - fetch_ordens_servico_ti - INÍCIO
-2026-04-14 12-27-18 - Fetch OS TI concluído: 148 registros.
-2026-04-14 12-27-18 - Enviando relatório TI para grupo: HSF - O.S. TI
-2026-04-14 12-27-18 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
-2026-04-14 12-27-18 - Iniciando Playwright Sync Engine...
-2026-04-14 12-27-18 - Lançando Chromium Browser (Playwright)...
-2026-04-14 12-27-19 - Criando novo contexto persistente para WhatsApp (geral)...
+2026-04-14 13-10-12 - Log resetado na inicializacao
+2026-04-14 13-10-13 - --- INICIANDO CICLO PLAYWRIGHT ---
+2026-04-14 13-10-13 - Processando O.S. TI (Prioridade Máxima)...
+2026-04-14 13-10-13 - ordens_de_servico_com_mais_de_2_dias - INÍCIO
+2026-04-14 13-10-13 - fetch_ordens_servico_ti - INÍCIO
+2026-04-14 13-10-13 - Fetch OS TI concluído: 147 registros.
+2026-04-14 13-10-13 - df:<bound method NDFrame.sample of      ORDEM_SERVICO  ...     EQUIPAMENTO
+0           204170  ...     INFORMÁTICA
+1           204139  ...     INFORMÁTICA
+2           204139  ...     INFORMÁTICA
+3           204180  ...     INFORMÁTICA
+4           204177  ...     INFORMÁTICA
+..             ...  ...             ...
+142         114886  ...  CFTV - Cameras
+143         114885  ...  CFTV - Cameras
+144          95195  ...  CFTV - Cameras
+145          95196  ...  CFTV - Cameras
+146          94835  ...     INFORMÁTICA
+
+[147 rows x 20 columns]>
+2026-04-14 13-10-13 - Enviando relatório TI para grupo: HSF - O.S. TI
+2026-04-14 13-10-13 - enviar_whatsapp_grupo(HSF - O.S. TI) - INÍCIO
+2026-04-14 13-10-13 - Iniciando Playwright Sync Engine...
+2026-04-14 13-10-13 - Criando novo contexto persistente para WhatsApp (geral)...
+2026-04-14 13-10-15 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 13-10-26 - Mensagem enviada para HSF - O.S. TI.
+2026-04-14 13-10-28 - enviar_whatsapp_grupo(HSF - O.S. TI) - FIM
+2026-04-14 13-10-28 - ordens_de_servico_com_mais_de_2_dias - FIM
+2026-04-14 13-10-28 - Processando Alertas Emergência...
+2026-04-14 13-10-28 - tempo_espera_emergencia - INICIO
+2026-04-14 13-10-28 - tempo_espera_emergencia - Query carregada do arquivo SQL
+2026-04-14 13-10-28 - tempo_espera_emergencia - Conexão com banco estabelecida
+2026-04-14 13-10-29 - tempo_espera_emergencia - Query executada. Linhas retornadas: 3
+2026-04-14 13-10-29 - tempo_espera_emergencia - Colunas do DataFrame: ['ANO', 'MES', 'DIA', 'SETOR_ATENDIMENTO', 'INICIO', 'FIM', 'TOTAL_RECEP', 'NM_USUARIO_ATEND', 'NR_ATENDIMENTO', 'PACIENTE', 'STATUS', 'INTERNACAO', 'ALTA', 'NASCIMENTO', 'IDADE', 'IDADE_NR_ANOS', 'IE_SEXO', 'DS_FILA', 'DS_LOCAL', 'CD_SENHA', 'CONVENIO', 'ESPECIALIDADE', 'NM_MEDICO', 'PACIENTE_SENHA_FILA_FIM', 'ATENDIMENTO_PACIENTE_DT_INICIO', 'TEMPO_ESPERA_ATEND', 'INI_ATEND', 'FIM_ATEND', 'CD_CID_PRINCIPAL', 'TOTAL_MEDICO_ATEND', 'DT_INICIO_TRIAGEM', 'DT_FIM_TRIAGEM', 'TRIAGEM_CLASSIFICACAO', 'TRIAGEM_MINUTOS', 'NIVEL_URGENCIA']
+2026-04-14 13-10-29 - tempo_espera_emergencia - Conexão fechada
+2026-04-14 13-10-29 - tempo_espera_emergencia - FIM
+2026-04-14 13-10-29 - processar_alertas_tempo_unificado - INÍCIO
+2026-04-14 13-10-29 - Encontrados 3 pacientes com tempos críticos
+2026-04-14 13-10-29 - enviar_whatsapp_emergencia (Playwright) - INÍCIO
+2026-04-14 13-10-30 - Aguardando interface do WhatsApp (Sincronizando Mensagens)...
+2026-04-14 13-10-30 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 13-10-49 - Mensagem enviada com sucesso (Enter).
+2026-04-14 13-10-52 - enviar_whatsapp_emergencia - FIM
+2026-04-14 13-10-52 - Alerta unificado de tempos críticos processado e enviado
+2026-04-14 13-10-52 - processar_alertas_tempo_unificado - FIM
+2026-04-14 13-10-52 - Processando Exames Laboratório...
+2026-04-14 13-10-52 - logica_principal_background - INÍCIO
+2026-04-14 13-10-52 - Executando ciclo da lógica principal...
+2026-04-14 13-10-52 - resultados_exames_intervalo_58_min - INICIO
+2026-04-14 13-10-52 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES COM INTERVALO DE 58 MINUTOS.sql
+2026-04-14 13-11-08 - Query executada. 2 linhas retornadas.
+2026-04-14 13-11-08 - resultados_exames_intervalo_58_min - FIM
+2026-04-14 13-11-08 - lista_de_resultados: [('*Prescrição: 7024778*', 'Paciente: A O F', 'Ex: TROPONINA I', 'Resultado: 105,2', 'Col: 11:22', 'Dig: 12:10', 'Apr: 12:21'), ('*Prescrição: 7024811*', 'Paciente: M C A S', 'Ex: TROPONINA I', 'Resultado: 5,62', 'Col: 11:20', 'Dig: 12:11', 'Apr: 12:45')]
+2026-04-14 13-11-08 - enviar_whatsapp_laboratorio - INÍCIO
+2026-04-14 13-11-08 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 13-11-18 - Relatório de Laboratório enviado com sucesso.
+2026-04-14 13-11-21 - enviar_whatsapp_laboratorio - FIM
+2026-04-14 13-11-21 - enviar_whatsapp_laboratorio - FIM
+2026-04-14 13-11-21 - Iniciando processamento de hemogramas críticos...
+2026-04-14 13-11-21 - resultados_hemogramas_intervalo_58_min - INICIO
+2026-04-14 13-11-21 - Executando query SQL do arquivo: HSF - RESULTADOS EXAMES HEMOGRAMA COM INTERVALO DE 58 MINUTOS.sql
+2026-04-14 13-11-22 - Query executada. 66 linhas retornadas.
+2026-04-14 13-11-22 - resultados_hemogramas_intervalo_58_min - FIM
+2026-04-14 13-11-22 - Prescricao 7024815 (Hemograma): Valor de Hemoglobina: 13.4
+2026-04-14 13-11-22 - Prescricao 7024815 (Hemograma): Valor de Hematócrito: 41.3
+2026-04-14 13-11-22 - Prescricao 7024815 (Hemograma): Valor de Leucócitos: 6.33
+2026-04-14 13-11-22 - Prescricao 7024815 (Hemograma): Valor de Plaquetas: 73000.0
+2026-04-14 13-11-22 - Prescricao 7024756 (Hemograma): Valor de Hemoglobina: 17.3
+2026-04-14 13-11-22 - Prescricao 7024756 (Hemograma): Valor de Hematócrito: 50.0
+2026-04-14 13-11-22 - Prescricao 7024756 (Hemograma): Valor de Leucócitos: 4.74
+2026-04-14 13-11-22 - Prescricao 7024756 (Hemograma): Valor de Plaquetas: 298000.0
+2026-04-14 13-11-22 - Nenhum hemograma crítico encontrado para enviar.
+2026-04-14 13-11-22 - Iniciando processamento de coagulogramas críticos...
+2026-04-14 13-11-22 - processar_coagulogramas_criticos - INÍCIO
+2026-04-14 13-11-22 - texto_limpo: Microsoft New
+COAGULOGRAMA
+TEMPO E ATIVIDADE DE PROTROMBINA (TAP)
+ Tempo do Paciente: 14,90 Segundos
+ Atividade : 72 %
+ INR : 1,29
+: INR: 1,00 a 1,28
+TEMPO DE TROMBOPLASTINA PARCIAL ATIVADA (PTT)
+ Tempo do Paciente: 34 Segundos
+ Relação P/C : 1,01
+ : Relação até 1,30
+PLAQUETAS: 284 mil/mmb3
+: 150 a 450 mil/mmb3
+Observação: 
+Material: Plasma citratado 
+Metodo: Coagulometro 
+Data/Hora da coleta: 14/04/2026 11:29 
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - processar_coagulogramas_criticos - FIM
+2026-04-14 13-11-22 - Nenhum coagulograma crítico encontrado para enviar.
+2026-04-14 13-11-22 - Iniciando processamento de hepatogramas críticos...
+2026-04-14 13-11-22 - processar_hepatogramas_criticos - INÍCIO
+2026-04-14 13-11-22 - texto_limpo: New
+HEPATOGRAMA:
+ 
+BILIRRUBINA TOTAL : 1,06 mg/dL 
+ 
+Vr: 0,20 a 1,30 mg/dL 
+BILIRRUBINA DIRETA: 0,52 mg/dL 
+ 
+Vr: 0,01 a 0,30 mg/dL 
+BILIRRUBINA INDIRETA: 0,54 mg/dL 
+ 
+Vr: 0,30 a 1,10 mg/dL 
+TGO : 33 U/L 
+ 
+Vr: 15 a 46 U/L
+TGP : 56 U/L
+ 
+Vr: 13 a 69 U/L 
+FOSFATASE ALCALINA : 80 U/L
+ 
+Vr: 38 a 126 U/L
+GAMA GLUTAMIL TRANSFERASE: 14 U/L
+ 
+Vr: 12 a 58 U/L
+CONTAGEM DE PLAQUETAS: 267 mil/mmb3 
+Vr: 150 a 450 mil/mmb3
+ 
+FIB4 : 8093 
+Observação: 
+Material : SORO 
+Método: Química Seca 
+Data e Hora da Coleta: 14/04/2026 11:15 
+Data e Hora da Aprovação do Laudo: 14/04/2026 12:22
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - texto_limpo: New
+HEPATOGRAMA:
+ 
+BILIRRUBINA TOTAL : 1,16 mg/dL 
+Vr: 0,20 a 1,30 mg/dL 
+BILIRRUBINA DIRETA: 0,48 mg/dL 
+Vr: 0,01 a 0,30 mg/dL 
+BILIRRUBINA INDIRETA: 0,68 mg/dL 
+Vr: 0,30 a 1,10 mg/dL 
+TGO : 19 U/L 
+Vr: 15 a 46 U/L
+TGP : 18 U/L
+Vr: 13 a 69 U/L 
+FOSFATASE ALCALINA : 47 U/L
+Vr: 38 a 126 U/L
+GAMA GLUTAMIL TRANSFERASE: 54 U/L
+Vr: 12 a 58 U/L
+CONTAGEM DE PLAQUETAS: 245 mil/mmb3 
+Vr: 150 a 450 mil/mmb3
+ 
+FIB4 : 457 
+Observação: 
+Material : SORO 
+Método: Química Seca 
+Data e Hora da Coleta: 14/04/2026 11:15 
+Data e Hora da Aprovação do Laudo: 14/04/2026 12:23
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - processar_hepatogramas_criticos - FIM
+2026-04-14 13-11-22 - Nenhum hepatograma crítico encontrado para enviar.
+2026-04-14 13-11-22 - Iniciando processamento de lipidogramas críticos...
+2026-04-14 13-11-22 - processar_lipidogramas_criticos - INÍCIO
+2026-04-14 13-11-22 - texto_limpo: New
+LIPIDOGRAMA
+ 
+COLESTEROL TOTAL: 144 mg/dL
+TRIGLICERIDEOS : 60 mg/dL
+COLESTEROL HDL : 42 mg/dL
+COLESTEROL LDL : 90 mg/dL 
+COLESTEROL VLDL : 12 mg/dL 
+ VALORES REFERENCIAIS DESEJAVEIS:
+ PARA ADULTOS ACIMA 20 ANOS:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 190 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM): SUPERIOR A 40 mg/dL
+ TRIGLICc9RIDES (COM JEJUM): INFERIOR A 150 mg/dL
+ (SEM JEJUM): INFERIOR A 175 mg/dL
+ PARA CRIANc7AS E ADOLESCENTES:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 170 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM) : SUPERIOR A 45 mg/dL
+ COLESTEROL LDL (COM OU SEM JEJUM) : INFERIOR A 110 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 0 A 9 ANOS (COM JEJUM): INFERIOR A 75 mg/dL
+ (SEM JEJUM): INFERIOR A 85 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 10 A 19 ANOS (COM JEJUM): INFERIOR A 90 mg/dL
+ (SEM JEJUM): INFERIOR A 100 mg/dL
+ VALORES DE ALVO TERAPcaUTICO SUGERIDO PARA CATEGORIA DE RISCO CARDIOVASCULAR
+ ESTIMADO PELO Mc9DICO SOLICITANTE PARA ADULTOS ACIMA DE 20 ANOS:
+ +----------------------+--------------------------------------------------+
+ | RISCO | META (COM OU SEM JEJUM) mg/dL |
+ +----------------------+--------------------------------------------------+
+ | | COLESTEROL LDL |
+ +----------------------+--------------------------------------------------+
+ | RISCO BAIXO | INFERIOR A 130 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO INTERMEDIc1RIO | INFERIOR A 100 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO ALTO | INFERIOR A 70 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO MUITO ALTO | INFERIOR A 50 mg/dL |
+ +----------------------+--------------------------------------------------+
+ NOTA:
+ - Segundo o novo Consenso Brasileiro, não há mais valores de refer
+ para a fração VLDL do colesterol Os valores de refer para o
+ colesterol LDL foi substituído pelo valor de meta terapeautica,
+ estratificados de acordo com o risco cardiovascular calculado
+ - Valores de Colesterol Total maior ou igual a 310 mg/dL (para adultos)
+ ou Colesterol Total maior ou igual a 230 mg/dL (entre 2 e 19 anos)
+ podem ser indicativos de Hipercolesterolemia Familiar (Europen Heart
+ Journal, doi:101093/eurheartj/eht273)
+ - A interpretação clínica dos resultados deverá levar em consideração o
+ motivo da indicação do exame, o estado metabólico do paciente e
+ estratificação do risco para estabelecimento das metas terapeauticas
+ - Quando os níveis de triglicérides estiverem acima de 440 mg/dL (sem
+ jejum) sugere-se nova determinação do triglicérides com jejum de 12 horas
+ - LDL e VLDL calculados
+ - Fonte: Consenso Brasileiro para a Normatização da Determinação
+ Laboratorial do Perfil Lipídico
+ 
+Material : SORO 
+Método: Química Seca 
+Data e Hora da coleta: 14/04/2026 11:15 
+Data e hora da Aprovação do laudo : 14/04/2026 12:22
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - Lipidograma crítico encontrado: Prescrição 7024760, Colesterol Total: 144.0
+2026-04-14 13-11-22 - texto_limpo: New
+LIPIDOGRAMA
+ 
+COLESTEROL TOTAL: 223 mg/dL
+TRIGLICERIDEOS : 220 mg/dL
+COLESTEROL HDL : 72 mg/dL
+COLESTEROL LDL : 108 mg/dL 
+COLESTEROL VLDL : 44 mg/dL 
+ VALORES REFERENCIAIS DESEJAVEIS:
+ PARA ADULTOS ACIMA 20 ANOS:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 190 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM): SUPERIOR A 40 mg/dL
+ TRIGLICc9RIDES (COM JEJUM): INFERIOR A 150 mg/dL
+ (SEM JEJUM): INFERIOR A 175 mg/dL
+ PARA CRIANc7AS E ADOLESCENTES:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 170 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM) : SUPERIOR A 45 mg/dL
+ COLESTEROL LDL (COM OU SEM JEJUM) : INFERIOR A 110 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 0 A 9 ANOS (COM JEJUM): INFERIOR A 75 mg/dL
+ (SEM JEJUM): INFERIOR A 85 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 10 A 19 ANOS (COM JEJUM): INFERIOR A 90 mg/dL
+ (SEM JEJUM): INFERIOR A 100 mg/dL
+ VALORES DE ALVO TERAPcaUTICO SUGERIDO PARA CATEGORIA DE RISCO CARDIOVASCULAR
+ ESTIMADO PELO Mc9DICO SOLICITANTE PARA ADULTOS ACIMA DE 20 ANOS:
+ +----------------------+--------------------------------------------------+
+ | RISCO | META (COM OU SEM JEJUM) mg/dL |
+ +----------------------+--------------------------------------------------+
+ | | COLESTEROL LDL |
+ +----------------------+--------------------------------------------------+
+ | RISCO BAIXO | INFERIOR A 130 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO INTERMEDIc1RIO | INFERIOR A 100 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO ALTO | INFERIOR A 70 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO MUITO ALTO | INFERIOR A 50 mg/dL |
+ +----------------------+--------------------------------------------------+
+ NOTA:
+ - Segundo o novo Consenso Brasileiro, não há mais valores de refer
+ para a fração VLDL do colesterol Os valores de refer para o
+ colesterol LDL foi substituído pelo valor de meta terapeautica,
+ estratificados de acordo com o risco cardiovascular calculado
+ - Valores de Colesterol Total maior ou igual a 310 mg/dL (para adultos)
+ ou Colesterol Total maior ou igual a 230 mg/dL (entre 2 e 19 anos)
+ podem ser indicativos de Hipercolesterolemia Familiar (Europen Heart
+ Journal, doi:101093/eurheartj/eht273)
+ - A interpretação clínica dos resultados deverá levar em consideração o
+ motivo da indicação do exame, o estado metabólico do paciente e
+ estratificação do risco para estabelecimento das metas terapeauticas
+ - Quando os níveis de triglicérides estiverem acima de 440 mg/dL (sem
+ jejum) sugere-se nova determinação do triglicérides com jejum de 12 horas
+ - LDL e VLDL calculados
+ - Fonte: Consenso Brasileiro para a Normatização da Determinação
+ Laboratorial do Perfil Lipídico
+ 
+Material : SORO 
+Método: Química Seca 
+Data e Hora da coleta: 14/04/2026 11:15 
+Data e hora da Aprovação do laudo : 14/04/2026 12:23
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - Lipidograma crítico encontrado: Prescrição 7024773, Colesterol Total: 223.0
+2026-04-14 13-11-22 - texto_limpo: New
+LIPIDOGRAMA
+ 
+COLESTEROL TOTAL: 159 mg/dL
+TRIGLICERIDEOS : 94 mg/dL
+COLESTEROL HDL : 71 mg/dL
+COLESTEROL LDL : 69 mg/dL 
+COLESTEROL VLDL : 19 mg/dL 
+ VALORES REFERENCIAIS DESEJAVEIS:
+ PARA ADULTOS ACIMA 20 ANOS:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 190 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM): SUPERIOR A 40 mg/dL
+ TRIGLICc9RIDES (COM JEJUM): INFERIOR A 150 mg/dL
+ (SEM JEJUM): INFERIOR A 175 mg/dL
+ PARA CRIANc7AS E ADOLESCENTES:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 170 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM) : SUPERIOR A 45 mg/dL
+ COLESTEROL LDL (COM OU SEM JEJUM) : INFERIOR A 110 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 0 A 9 ANOS (COM JEJUM): INFERIOR A 75 mg/dL
+ (SEM JEJUM): INFERIOR A 85 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 10 A 19 ANOS (COM JEJUM): INFERIOR A 90 mg/dL
+ (SEM JEJUM): INFERIOR A 100 mg/dL
+ VALORES DE ALVO TERAPcaUTICO SUGERIDO PARA CATEGORIA DE RISCO CARDIOVASCULAR
+ ESTIMADO PELO Mc9DICO SOLICITANTE PARA ADULTOS ACIMA DE 20 ANOS:
+ +----------------------+--------------------------------------------------+
+ | RISCO | META (COM OU SEM JEJUM) mg/dL |
+ +----------------------+--------------------------------------------------+
+ | | COLESTEROL LDL |
+ +----------------------+--------------------------------------------------+
+ | RISCO BAIXO | INFERIOR A 130 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO INTERMEDIc1RIO | INFERIOR A 100 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO ALTO | INFERIOR A 70 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO MUITO ALTO | INFERIOR A 50 mg/dL |
+ +----------------------+--------------------------------------------------+
+ NOTA:
+ - Segundo o novo Consenso Brasileiro, não há mais valores de refer
+ para a fração VLDL do colesterol Os valores de refer para o
+ colesterol LDL foi substituído pelo valor de meta terapeautica,
+ estratificados de acordo com o risco cardiovascular calculado
+ - Valores de Colesterol Total maior ou igual a 310 mg/dL (para adultos)
+ ou Colesterol Total maior ou igual a 230 mg/dL (entre 2 e 19 anos)
+ podem ser indicativos de Hipercolesterolemia Familiar (Europen Heart
+ Journal, doi:101093/eurheartj/eht273)
+ - A interpretação clínica dos resultados deverá levar em consideração o
+ motivo da indicação do exame, o estado metabólico do paciente e
+ estratificação do risco para estabelecimento das metas terapeauticas
+ - Quando os níveis de triglicérides estiverem acima de 440 mg/dL (sem
+ jejum) sugere-se nova determinação do triglicérides com jejum de 12 horas
+ - LDL e VLDL calculados
+ - Fonte: Consenso Brasileiro para a Normatização da Determinação
+ Laboratorial do Perfil Lipídico
+ 
+Material : SORO 
+Método: Química Seca 
+Data e Hora da coleta: 14/04/2026 11:15 
+Data e hora da Aprovação do laudo : 14/04/2026 12:23
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - Lipidograma crítico encontrado: Prescrição 7024781, Colesterol Total: 159.0
+2026-04-14 13-11-22 - texto_limpo: New
+LIPIDOGRAMA
+ 
+COLESTEROL TOTAL: 276 mg/dL
+TRIGLICERIDEOS : 115 mg/dL
+COLESTEROL HDL : 106 mg/dL
+COLESTEROL LDL : 147 mg/dL 
+COLESTEROL VLDL : 23 mg/dL 
+ VALORES REFERENCIAIS DESEJAVEIS:
+ PARA ADULTOS ACIMA 20 ANOS:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 190 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM): SUPERIOR A 40 mg/dL
+ TRIGLICc9RIDES (COM JEJUM): INFERIOR A 150 mg/dL
+ (SEM JEJUM): INFERIOR A 175 mg/dL
+ PARA CRIANc7AS E ADOLESCENTES:
+ COLESTEROL TOTAL (COM OU SEM JEJUM): INFERIOR A 170 mg/dL
+ COLESTEROL HDL (COM OU SEM JEJUM) : SUPERIOR A 45 mg/dL
+ COLESTEROL LDL (COM OU SEM JEJUM) : INFERIOR A 110 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 0 A 9 ANOS (COM JEJUM): INFERIOR A 75 mg/dL
+ (SEM JEJUM): INFERIOR A 85 mg/dL
+ TRIGLICc9RIDES CRIANc7AS DE 10 A 19 ANOS (COM JEJUM): INFERIOR A 90 mg/dL
+ (SEM JEJUM): INFERIOR A 100 mg/dL
+ VALORES DE ALVO TERAPcaUTICO SUGERIDO PARA CATEGORIA DE RISCO CARDIOVASCULAR
+ ESTIMADO PELO Mc9DICO SOLICITANTE PARA ADULTOS ACIMA DE 20 ANOS:
+ +----------------------+--------------------------------------------------+
+ | RISCO | META (COM OU SEM JEJUM) mg/dL |
+ +----------------------+--------------------------------------------------+
+ | | COLESTEROL LDL |
+ +----------------------+--------------------------------------------------+
+ | RISCO BAIXO | INFERIOR A 130 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO INTERMEDIc1RIO | INFERIOR A 100 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO ALTO | INFERIOR A 70 mg/dL |
+ +----------------------+--------------------------------------------------+
+ | RISCO MUITO ALTO | INFERIOR A 50 mg/dL |
+ +----------------------+--------------------------------------------------+
+ NOTA:
+ - Segundo o novo Consenso Brasileiro, não há mais valores de refer
+ para a fração VLDL do colesterol Os valores de refer para o
+ colesterol LDL foi substituído pelo valor de meta terapeautica,
+ estratificados de acordo com o risco cardiovascular calculado
+ - Valores de Colesterol Total maior ou igual a 310 mg/dL (para adultos)
+ ou Colesterol Total maior ou igual a 230 mg/dL (entre 2 e 19 anos)
+ podem ser indicativos de Hipercolesterolemia Familiar (Europen Heart
+ Journal, doi:101093/eurheartj/eht273)
+ - A interpretação clínica dos resultados deverá levar em consideração o
+ motivo da indicação do exame, o estado metabólico do paciente e
+ estratificação do risco para estabelecimento das metas terapeauticas
+ - Quando os níveis de triglicérides estiverem acima de 440 mg/dL (sem
+ jejum) sugere-se nova determinação do triglicérides com jejum de 12 horas
+ - LDL e VLDL calculados
+ - Fonte: Consenso Brasileiro para a Normatização da Determinação
+ Laboratorial do Perfil Lipídico
+ 
+Material : SORO 
+Método: Química Seca 
+Data e Hora da coleta: 14/04/2026 11:15 
+Data e hora da Aprovação do laudo : 14/04/2026 12:24
+Resp pela aprovação: Leticia Cristina Barros de Andrade CRBIO 126236/02D
+2026-04-14 13-11-22 - Lipidograma crítico encontrado: Prescrição 7024783, Colesterol Total: 276.0
+2026-04-14 13-11-22 - processar_lipidogramas_criticos - FIM
+2026-04-14 13-11-22 - enviar_whatsapp_laboratorio - INÍCIO
+2026-04-14 13-11-22 - Aguardando barra de pesquisa (Diagnóstico Ativo)...
+2026-04-14 13-11-33 - Relatório de Laboratório enviado com sucesso.
+2026-04-14 13-11-36 - enviar_whatsapp_laboratorio - FIM
+2026-04-14 13-11-36 - enviar_whatsapp_laboratorio - FIM
+2026-04-14 13-11-36 - logica_principal_background - FIM
+2026-04-14 13-11-36 - Monitoramento Lab: Nenhum exame crítico detectado no banco.
+2026-04-14 13-11-36 - Encerrando instâncias do Playwright...
+2026-04-14 13-11-36 - Playwright encerrado com sucesso.
+2026-04-14 13-11-36 - --- CICLO FINALIZADO E PLAYWRIGHT LIMPO ---

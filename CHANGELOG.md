@@ -1,5 +1,29 @@
 # Changelog
 
+## [3.1.4] - 2026-04-14
+### Alterado
+- **Unificação de Contexto**: Removido o isolamento entre "Geral" e "Emergência". O robô agora utiliza uma única instância e perfil do Chromium (`wpp_geral`) para todas as notificações, evitando a abertura de múltiplas janelas (Redução de overhead e melhora na UX).
+- **Fluxo de Laboratório**: Adicionados logs de verificação explícita ("Nenhum exame crítico detectado") para garantir transparência quando a lista de exames vinda do banco está vazia.
+
+## [3.1.3] - 2026-04-14
+### Adicionado
+- **Suporte WhatsApp Business**: Implementados seletores específicos para a versão Business do WhatsApp Web, focando em elementos `input` para busca e filtros por `aria-label` para a caixa de mensagens.
+- **Robustez de Selectors**: Adicionados fallbacks idiomáticos (Inglês/Português) para placeholders e títulos.
+
+## [3.1.2] - 2026-04-14
+### Adicionado
+- **Diagnóstico Inteligente**: Nova função `esperar_e_diagnosticar_whatsapp` que captura screenshots automáticos em `temp/debug_whatsapp.png` caso a busca demore mais de 15s.
+- **Detecção de Estado**: Implementada verificação automática de QR Code para alertar sobre sessões deslogadas nos logs.
+
+### Alterado
+- **Resiliência de Busca**: Adicionado fallback para o seletor `div[role="textbox"]`, aumentando a compatibilidade com o framework Lexical.
+- **Auditoria Visual**: Refatorada a ordem de captura de screenshots em blocos de erro para garantir a gravação antes do fechamento do contexto.
+
+## [3.1.1] - 2026-04-14
+### Corrigido
+- **Playwright Hang**: Corrigido travamento na inicialização do contexto persistente através da remoção de inicialização dupla redundante do Chromium.
+- **Estabilidade Windows**: Adicionados argumentos de hardware (`--disable-gpu`, `--disable-software-rasterizer`) para prevenir deadlocks em drivers de vídeo durante o lançamento do navegador.
+
 ## [3.1.0] - 2026-04-14
 ### Adicionado
 - **Resiliência WhatsApp**: Implementação de constantes unificadas de seletores (`WPP_SEARCH_SELECTOR`, `WPP_MESSAGE_SELECTOR`) compatíveis com o framework Lexical da Meta.
