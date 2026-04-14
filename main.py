@@ -2057,25 +2057,35 @@ def executar_ciclo_completo():
     """
     Executa um ciclo completo de monitoramento usando Playwright.
     Gerencia o ciclo de vida do browser conforme GEMINI.md.
+    Implementa agendamento condicional para as tarefas de TI.
     """
     registrar_log("--- INICIANDO CICLO PLAYWRIGHT ---")
     
     try:
-        # 1. TI - Pendências (Prioridade Máxima)
-        registrar_log("Processando O.S. TI (Pendências)...")
-        ordens_de_servico_com_mais_de_2_dias()
+        hora_atual = datetime.now().hour
+        registrar_log(f"Iniciando execuções agendadas. Hora atual: {hora_atual}h")
 
-        # 1.1 TI - Encerradas Hoje
-        registrar_log("Processando O.S. TI (Encerradas Hoje)...")
-        ordens_de_servico_fechadas_hoje()
+        # 1. TI - Pendências (Prioridade Máxima - Apenas as 07h)
+        if hora_atual == 7:
+            registrar_log("Processando O.S. TI (Pendências) - Horário Agendado: 07h...")
+            ordens_de_servico_com_mais_de_2_dias()
+        else:
+            registrar_log(f"Pulo: OS Pendentes de TI só executam às 07h.")
 
-        # 2. Emergência
+        # 1.1 TI - Encerradas Hoje (Apenas as 18h e 21h)
+        if hora_atual in (18, 21):
+            registrar_log(f"Processando O.S. TI (Encerradas Hoje) - Horário Agendado: {hora_atual}h...")
+            ordens_de_servico_fechadas_hoje()
+        else:
+            registrar_log(f"Pulo: OS Encerradas de TI só executam às 18h e 21h.")
+
+        # 2. Emergência (Contínuo)
         registrar_log("Processando Alertas Emergência...")
         df_emergencia = tempo_espera_emergencia()
         if df_emergencia is not None:
             processar_alertas_tempo_unificado(df_emergencia)
             
-        # 3. Laboratório
+        # 3. Laboratório (Contínuo)
         registrar_log("Processando Exames Laboratório...")
         lista_exames = logica_principal_exames()
         if not lista_exames:

@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.0] - 2026-04-14
+### Adicionado
+- **Scheduler Condicional (TI)**: O sistema de monitoramento agora utiliza regras baseadas em horas para despachar as rotinas. O fluxo de Pendências (atrasadas) da TI ocorre incondicionalmente todos os dias às **07h**, enquanto o de Encerradas ocorre às **18h** e **21h**.
+### Removido
+- **Auto-start**: O disparo intempestivo de monitoramento ao abrir o aplicativo foi retirado, respeitando a ativação manual ("Iniciar Monitoramento Contínuo") seguida pela vigência do agendamento horário.
+
 ## [3.2.6] - 2026-04-14
 ### Alterado
 - **Refinamento de Spacing (TI)**: Ajuste fino nos separadores de blocos de analistas para garantir exatamente 1 enter de separação, otimizando o scroll no WhatsApp e a densidade de leitura.

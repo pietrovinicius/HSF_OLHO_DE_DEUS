@@ -102,10 +102,10 @@ class HSFApp(ctk.CTk):
         self.botoes_frame = ctk.CTkFrame(self.main_frame)
         self.botoes_frame.pack(fill="x", pady=(0, 20))
         
-        # Botão Executar Ciclo Completo (MOMENTANEAMENTE: VALIDAR OS TI)
+        # Botão Iniciar Monitoramento Contínuo
         self.btn_executar = ctk.CTkButton(
             self.botoes_frame,
-            text="🧪 Validar Fluxo O.S. TI",
+            text="▶️ Iniciar Monitoramento Contínuo",
             command=self.executar_ciclo,
             font=ctk.CTkFont(size=16, weight="bold"),
             height=50,
@@ -163,9 +163,6 @@ class HSFApp(ctk.CTk):
             text_color="#555555"
         )
         self.version_label.pack(side="bottom", anchor="e", pady=(5, 0))
-        
-        # Auto-start: Apenas TI (conforme solicitado v3.1.6)
-        self.after(1000, self.auto_start_ti_only)
     
     def adicionar_log_callback(self, mensagem):
         """Callback chamada pelo main.py quando um log é gerado."""
@@ -307,42 +304,6 @@ class HSFApp(ctk.CTk):
         """Fecha os drivers do WhatsApp Web globalmente."""
         self.adicionar_log("🔒 Sinal de parada enviado ao Loop Principal.")
         self.adicionar_log("⚠️ O ciclo será finalizado e o navegador limpo com segurança pela thread nativa.")
-
-    def auto_start_ti_only(self):
-        """Inicia apenas o envio de OS da TI automaticamente na inicialização."""
-        if self.executando:
-            return
-            
-        self.executando = True
-        self.atualizar_status("Auto-start: O.S. TI...", "#ffaa00")
-        
-        def _task():
-            try:
-                from main import ordens_de_servico_com_mais_de_2_dias, ordens_de_servico_fechadas_hoje, fechar_playwright
-                self.adicionar_log("🚀 [AUTO-START] Iniciando Processamento de O.S. TI (Geral)...")
-                
-                # 1. Fechadas Hoje
-                self.adicionar_log("📥 Processando O.S. Encerradas Hoje...")
-                ordens_de_servico_fechadas_hoje()
-                
-                # 2. Atrasadas (>2 dias)
-                self.adicionar_log("⚠️ Processando O.S. Atrasadas (>2 dias)...")
-                ordens_de_servico_com_mais_de_2_dias()
-                
-                self.adicionar_log("✅ [AUTO-START] Concluído com sucesso.")
-            except Exception as e:
-                self.adicionar_log(f"❌ [AUTO-START] Falha no fluxo TI: {e}")
-            finally:
-                fechar_playwright() # Limpa recursos do browser
-                self.executando = False
-                self.after(0, lambda: self.atualizar_status("Pronto", "#00ff00"))
-                self.after(0, lambda: self.btn_executar.configure(state="normal"))
-                self.after(0, lambda: self.btn_parar.configure(state="disabled"))
-
-        self.thread_execucao = threading.Thread(target=_task, daemon=True)
-        self.btn_executar.configure(state="disabled")
-        self.btn_parar.configure(state="normal")
-        self.thread_execucao.start()
 
 
 def main():
